@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { bachConicsChallenges, bachConicsDiagnostic, bachConicsExerciseBank, bachConicsPractice } from './content'
 import { BachConicsHeroArt } from './figures'
+import { BachConicsGames } from './games'
+import { BACH_CONICS_GAME_RECORDS_KEY, bachConicsGameProgressIds } from './games/info'
 import { BachConicsLaboratory } from './lab'
 import { bachConicsLabChallengeIds, bachConicsLabToolForTopic, bachConicsLabTools } from './lab/labTools'
 import { bachConicsStages, bachConicsTopics } from './lessons'
@@ -37,6 +39,17 @@ const konikakBatx1zUnit: UnitDefinition = {
         progressIds: bachConicsLabChallengeIds,
         toolForTopic: bachConicsLabToolForTopic,
         render: (props) => <BachConicsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bost joko: lasterketa, zein konika da?, antena, koniken detektibea eta memoria.',
+            es: 'Cinco juegos: carrera, ¿qué cónica es?, la antena, detective de cónicas y memoria.',
+            en: 'Five games: race, which conic is it?, the antenna, conics detective and memory.',
+            ar: 'خمس ألعاب: السباق، وأي قطع مخروطي هو؟، والهوائي، ومخبر القطوع المخروطية، والذاكرة.'
+        },
+        progressIds: bachConicsGameProgressIds,
+        recordsKey: BACH_CONICS_GAME_RECORDS_KEY,
+        render: (props) => <BachConicsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koefizientea, koordenatua, erradioa, ardatzerdia, distantzia, eszentrikotasuna edo parametroa. Adibidez 5, −3, 0,6 edo 3/4.', es: 'Escribe un solo número: el coeficiente, la coordenada, el radio, el semieje, la distancia, la excentricidad o el parámetro que se pide. Por ejemplo 5, −3, 0,6 o 3/4.', en: 'Write a single number: the coefficient, coordinate, radius, semi-axis, distance, eccentricity or parameter that is asked for. For example 5, −3, 0.6 or 3/4.', ar: 'اكتب عددًا واحدًا: المعامل أو الإحداثي أو نصف القطر أو نصف المحور أو المسافة أو الاختلاف المركزي أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 0.6 أو 3/4.' },

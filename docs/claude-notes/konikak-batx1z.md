@@ -48,6 +48,15 @@ Tercera unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 - Comparaciones exactas con enteros: b²x² + a²y² − a²b² (elipse) e y² − 2px (parábola); los tests comprueban que coinciden con las distancias en toda la pizarra. Test `tests/konikak-batx1z-lab.test.ts`.
 - Pizarras de 14 casillas con `cell={22}`: con 24 la «x» del eje se salía 1 px. Las etiquetas de los focos van encima del eje para no tapar los números.
 
+### Fase 4 · juegos (2026-11-06)
+
+- **Propios** (`games/`): `conic.ts` J1 «¿Qué cónica es?» (primero el tipo, luego un elemento; niveles: en el origen, trasladadas, ecuación general; progreso 107501–107503), `antenna.ts` J3 «La antena» (y² = 2px → p/2; ancho y profundidad → p; sala elíptica → c; 107601–107603), `detective.ts` J4 (12 errores en 3 niveles; 107701–107703). Pantallas en `ConicsGames.tsx` (+ `ConicsGames.css`).
+- **Carrera** `race.ts`: 5 circuitos × 3 tipos (107401–107405). **Memoria** `boards.ts`: centro, focos de la elipse, foco de la parábola (107801–107803).
+- `conicLatex.ts` reúne la escritura común (cuadrados con el signo bien, polinomios, ternas pitagóricas de elipse e hipérbola).
+- Juego por rondas en dos pasos: si falla el tipo de cónica, la ronda acaba (`onAnswer(false)`) y no se pregunta el elemento.
+- A 375 px: la ecuación grande usa `font-size: clamp(17px, 5.2vw, 24px)` (si no, la general se partía) y las tarjetas de la memoria parten la ecuación en dos renglones con `gathered`.
+- Test `tests/konikak-batx1z-games.test.ts` (comprueba con cuentas propias cada respuesta de la carrera, de la antena, de la memoria y el centro de las ecuaciones generales).
+
 ## En curso
 
-- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos: J1 «¿Qué cónica es?», J3 «La antena», J4 detective de cónicas (12 errores), J5 carrera, J6 memoria (ids 107401–107899).
+- Fases 1+2, 3 y 4 hechas. Siguiente: cierre (inventario, revisión a 375 px de ejercicios en eu/es/ar, hoja de revisión del euskera, nota final).
