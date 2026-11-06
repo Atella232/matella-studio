@@ -83,4 +83,6 @@ Es la séptima unidad de Bachillerato y la cuarta del bloque Análisis: curso `b
 - **Revisión a 375 px en eu, es y ar:** lecciones (con las figuras ampliadas), diagnóstico, práctica, retos, banco, las 6 herramientas y los 6 juegos.
 - **Hoja de euskera:** `aplikazioak-batx1z-euskera.html` en la carpeta de notas compartidas de la sesión principal, con `--herramientas sign,curvature,box,layers --juegos updown,extrema,shape,detective`. Como en las anteriores, no lleva los retos fijos del laboratorio ni `content.ts`.
 - **Pendiente del dueño:** confirmar ahurra (∪) y ganbila (∩) en euskera. Si es al revés, basta cambiar `ahur|ganbil` en la carpeta (lecciones, contenido, laboratorio y juegos).
-- **Commits:** 7e9127a (fases 1+2), 62bb3e7 (fase 3), 233f490 (fase 4).
+- **Portada:** los puntos rojo y verde están en la cima y el valle exactos de la curva; la tarjeta dice «f″ > 0 → ∪» y «f″ < 0 → ∩» por separado (antes parecía una unión de conjuntos).
+- **Derivadas, arreglado aquí:** el detective de Derivadas también se salía a 375 px; se acortaron sus líneas (ver su nota).
+- **Commits:** 7e9127a (fases 1+2), 62bb3e7 (fase 3), 233f490 (fase 4), 8ec84ac (nota) y el de la portada y el detective de Derivadas.

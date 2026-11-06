@@ -39,7 +39,6 @@ export const BACH_DERIVATIVES_DETECTIVE_CASES = 6
 
 const line = (label: LocalizedText, latex: string): WorkedLine => ({ label, latex })
 const signed = (value: number) => (value === 0 ? '' : value > 0 ? `+${value}` : `-${-value}`)
-const paren = (value: number) => (value < 0 ? `(${value})` : String(value))
 const LABELS = {
     substitute: say('Ordezkatu', 'Sustituye', 'عوّض', 'Substitute'),
     step: say('Urratsa', 'Paso', 'الخطوة', 'Step'),
@@ -87,7 +86,7 @@ function build(random: Random, error: BachDerivativesDetectiveError): Built | nu
             const b = randomInt(random, a + 2, 5)
             return {
                 problem: say(`Kalkulatu $f(x)=x^2$ funtzioaren T.V.M. $[${a},${b}]$ tartean.`, `Halla la T.V.M. de $f(x)=x^2$ en $[${a},${b}]$.`, `أوجد معدل التغير المتوسط لـ $f(x)=x^2$ في $[${a},${b}]$.`, `Find the average rate of $f(x)=x^2$ on $[${a},${b}]$.`),
-                lines: [line(LABELS.substitute, `f(${a})=${a * a}\\qquad f(${b})=${b * b}`), line(LABELS.step, `${b * b}-${a * a}=${b * b - a * a}`), line(LABELS.result, String(b * b - a * a))],
+                lines: [line(LABELS.substitute, `f(${a})=${a * a}\\quad f(${b})=${b * b}`), line(LABELS.step, `${b * b}-${a * a}=${b * b - a * a}`), line(LABELS.result, String(b * b - a * a))],
                 wrong: 2, error, fix: `\\frac{${b * b - a * a}}{${b}-${a}}=${a + b}`, right: a + b, reached: b * b - a * a
             }
         }
@@ -103,8 +102,8 @@ function build(random: Random, error: BachDerivativesDetectiveError): Built | nu
             const a = pick(random, [-2, -1, 1, 2, 3])
             return {
                 problem: say(`Idatzi $f(x)=x^2$ funtzioaren zuzen ukitzailea $x=${a}$ puntuan.`, `Escribe la tangente a $f(x)=x^2$ en $x=${a}$.`, `اكتب مماس $f(x)=x^2$ عند $x=${a}$.`, `Write the tangent to $f(x)=x^2$ at $x=${a}$.`),
-                lines: [line(LABELS.substitute, `f(${a})=${a * a}\\qquad f'(x)=2x`), line(LABELS.step, `y-${a * a}=2x(x${signed(-a)})`), line(LABELS.result, `y=2x^2${signed(-2 * a)}x+${a * a}`)],
-                wrong: 1, error, fix: `f'(${a})=${2 * a}\\ \\to\\ y=${2 * a}x${signed(-a * a)}`, right: 2 * a, reached: 0.5
+                lines: [line(LABELS.substitute, `f(${a})=${a * a}`), line(LABELS.step, `y-${a * a}=2x(x${signed(-a)})`), line(LABELS.result, `y=2x^2${signed(-2 * a)}x+${a * a}`)],
+                wrong: 1, error, fix: `y=${2 * a}x${signed(-a * a)}`, right: 2 * a, reached: 0.5
             }
         }
         case 'normal-sign': {
@@ -119,8 +118,8 @@ function build(random: Random, error: BachDerivativesDetectiveError): Built | nu
             const c = pick(random, [-3, -2, -1, 1, 2, 3])
             return {
                 problem: derive(`f(x)=x^2(x${signed(c)})`),
-                lines: [line(LABELS.step, `(x^2)'=2x\\qquad (x${signed(c)})'=1`), line(LABELS.rule, "f'(x)=2x\\cdot 1"), line(LABELS.result, "f'(x)=2x")],
-                wrong: 1, error, fix: `2x(x${signed(c)})+x^2\\cdot 1=3x^2${signed(2 * c)}x`, right: 3 + 2 * c, reached: 2
+                lines: [line(LABELS.step, "(x^2)'=2x"), line(LABELS.rule, "f'(x)=2x\\cdot 1"), line(LABELS.result, "f'(x)=2x")],
+                wrong: 1, error, fix: `f'(x)=3x^2${signed(2 * c)}x`, right: 3 + 2 * c, reached: 2
             }
         }
         case 'quotient-order': {
@@ -129,7 +128,7 @@ function build(random: Random, error: BachDerivativesDetectiveError): Built | nu
             if (p === q) return null
             return {
                 problem: derive(`f(x)=\\frac{x${signed(p)}}{x${signed(q)}}`),
-                lines: [line(LABELS.step, `(x${signed(p)})'=1\\qquad (x${signed(q)})'=1`), line(LABELS.rule, `f'(x)=\\frac{(x${signed(p)})\\cdot 1-1\\cdot(x${signed(q)})}{(x${signed(q)})^2}`), line(LABELS.result, `f'(x)=\\frac{${p - q}}{(x${signed(q)})^2}`)],
+                lines: [line(LABELS.step, `(x${signed(p)})'=(x${signed(q)})'=1`), line(LABELS.rule, `f'(x)=\\frac{(x${signed(p)})\\cdot 1-1\\cdot(x${signed(q)})}{(x${signed(q)})^2}`), line(LABELS.result, `f'(x)=\\frac{${p - q}}{(x${signed(q)})^2}`)],
                 wrong: 1, error, fix: `\\frac{1\\cdot(x${signed(q)})-(x${signed(p)})\\cdot 1}{(x${signed(q)})^2}=\\frac{${q - p}}{(x${signed(q)})^2}`, right: q - p, reached: p - q
             }
         }
@@ -149,7 +148,7 @@ function build(random: Random, error: BachDerivativesDetectiveError): Built | nu
             return {
                 problem: derive(`f(x)=\\frac{${k}}{x^2}`),
                 lines: [line(LABELS.step, `f(x)=${k}x^{-2}`), line(LABELS.rule, `f'(x)=-${2 * k}x^{-1}`), line(LABELS.result, `f'(x)=-\\frac{${2 * k}}{x}`)],
-                wrong: 1, error, fix: `f'(x)=-${2 * k}x^{-3}=-\\frac{${2 * k}}{x^3}`, right: -3, reached: -1
+                wrong: 1, error, fix: `f'(x)=-\\frac{${2 * k}}{x^3}`, right: -3, reached: -1
             }
         }
         case 'exp-inner': {
@@ -157,7 +156,7 @@ function build(random: Random, error: BachDerivativesDetectiveError): Built | nu
             return {
                 problem: derive(`f(x)=e^{${k}x}`),
                 lines: [line(LABELS.rule, "(e^{u})'=e^{u}"), line(LABELS.step, `f'(x)=e^{${k}x}`), line(LABELS.result, "f'(0)=1")],
-                wrong: 0, error, fix: `(e^{u})'=e^{u}\\cdot u'\\ \\to\\ f'(x)=${k}e^{${k}x}`, right: k, reached: 1
+                wrong: 0, error, fix: `f'(x)=${k}e^{${k}x}`, right: k, reached: 1
             }
         }
         case 'exp-power': {
@@ -173,15 +172,15 @@ function build(random: Random, error: BachDerivativesDetectiveError): Built | nu
             return {
                 problem: derive(`f(x)=\\ln(x^2+${c})`),
                 lines: [line(LABELS.rule, "(\\ln u)'=\\frac{1}{u}"), line(LABELS.step, `f'(x)=\\frac{1}{x^2+${c}}`), line(LABELS.result, `f'(1)=\\frac{1}{${1 + c}}`)],
-                wrong: 0, error, fix: `(\\ln u)'=\\frac{u'}{u}\\ \\to\\ f'(x)=\\frac{2x}{x^2+${c}}`, right: 2 / (1 + c), reached: 1 / (1 + c)
+                wrong: 0, error, fix: `f'(x)=\\frac{2x}{x^2+${c}}`, right: 2 / (1 + c), reached: 1 / (1 + c)
             }
         }
         case 'continuous-derivable': {
             const a = pick(random, [-2, -1, 1, 2, 3])
             return {
                 problem: say(`Deribagarria al da $f(x)=|x${signed(-a)}|$ funtzioa $x=${a}$ puntuan?`, `¿Es derivable $f(x)=|x${signed(-a)}|$ en $x=${a}$?`, `هل $f(x)=|x${signed(-a)}|$ قابلة للاشتقاق عند $x=${a}$؟`, `Is $f(x)=|x${signed(-a)}|$ differentiable at $x=${a}$?`),
-                lines: [line(LABELS.substitute, `\\lim_{x\\to ${paren(a)}}f(x)=0=f(${paren(a)})`), line(LABELS.step, `\\Rightarrow\\ \\exists\\,f'(${paren(a)})`), line(LABELS.result, `f'(${paren(a)})=0`)],
-                wrong: 1, error, fix: `f'(${paren(a)}^-)=-1\\neq f'(${paren(a)}^+)=1`, right: 1, reached: 0
+                lines: [line(LABELS.substitute, `\\lim_{x\\to ${a}}f(x)=f(${a})`), line(LABELS.step, `\\Rightarrow\\ \\exists\\,f'(${a})`), line(LABELS.result, `f'(${a})=0`)],
+                wrong: 1, error, fix: "f'_-=-1\\neq f'_+=1", right: 1, reached: 0
             }
         }
     }

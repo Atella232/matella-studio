@@ -448,10 +448,10 @@ export function BachApplicationsHeroArt() {
                     <rect width={270} height={210} rx={16} fill={PAPER} stroke={INK} strokeWidth={2} />
                     <line x1={20} y1={150} x2={255} y2={150} stroke={INK} strokeWidth={2} />
                     <path d="M30 190 C 60 40, 110 40, 135 110 S 210 200, 250 30" fill="none" stroke="#2f6fdb" strokeWidth={4} strokeLinecap="round" />
-                    <line x1={58} y1={73} x2={118} y2={73} stroke="#c4432a" strokeWidth={3.4} strokeLinecap="round" />
-                    <circle cx={88} cy={73} r={7} fill="#c4432a" />
-                    <line x1={160} y1={153} x2={220} y2={153} stroke="#267b53" strokeWidth={3.4} strokeLinecap="round" />
-                    <circle cx={190} cy={153} r={7} fill="#267b53" />
+                    <line x1={65} y1={64.7} x2={125} y2={64.7} stroke="#c4432a" strokeWidth={3.4} strokeLinecap="round" />
+                    <circle cx={95.2} cy={64.7} r={7} fill="#c4432a" />
+                    <line x1={149} y1={161.4} x2={209} y2={161.4} stroke="#267b53" strokeWidth={3.4} strokeLinecap="round" />
+                    <circle cx={178.9} cy={161.4} r={7} fill="#267b53" />
                 </g>
                 <g transform="translate(316 52) rotate(5)">
                     <rect width={180} height={120} rx={16} fill="#d9efe2" stroke={INK} strokeWidth={2} />
@@ -459,7 +459,8 @@ export function BachApplicationsHeroArt() {
                 </g>
                 <g transform="translate(60 272) rotate(2)">
                     <rect width={400} height={88} rx={16} fill="#f6d8cf" stroke={INK} strokeWidth={2} />
-                    <text x={200} y={58} textAnchor="middle" fontSize={28} fontWeight={700} fill={INK} fontFamily={SERIF}>f″ &gt; 0  ∪      f″ &lt; 0  ∩</text>
+                    <text x={110} y={58} textAnchor="middle" fontSize={28} fontWeight={700} fill={INK} fontFamily={SERIF}>f″ &gt; 0 → ∪</text>
+                    <text x={290} y={58} textAnchor="middle" fontSize={28} fontWeight={700} fill={INK} fontFamily={SERIF}>f″ &lt; 0 → ∩</text>
                 </g>
             </svg>
         </div>

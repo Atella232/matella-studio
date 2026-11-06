@@ -87,3 +87,8 @@ Es la sexta unidad de Bachillerato y la tercera del bloque Análisis: curso `bat
 - **Hoja de euskera:** `hoja-revision.mjs` con `--herramientas secant,smooth,slope-graph,chain --juegos slopes,match,tangent,detective`, enviada al dueño. Como en Funciones y Limiteak, no trae los retos fijos del laboratorio ni los ejercicios de `content.ts`.
 - **Motor común:** sin cambios, salvo el registro en `paths.ts`. En Limiteak solo cambia `export` en `PlotFigure`.
 - **Sin publicar:** la rama es `feat/deribatuak-batx1z`; publicar lo decide el dueño desde la sesión principal.
+
+**Arreglos hechos desde Aplicaciones de la derivada (rama `feat/aplikazioak-batx1z`, 2026-11-06):**
+- **Detective a 375 px:** varias líneas se salían de la pantalla (hasta 323 px, y caben unos 255). Ahora ninguna pasa de 250 px: `\quad` en vez de `\qquad`, sin derivadas repetidas en la primera línea del producto y del cociente, arreglos cortos y sin `f((−2))` (ya no se usa `paren` dentro de `f(…)`).
+- **Herramienta `secant`, frase en euskera:** decía «Ganbila den kurban… konkaboan», con ganbila = ∪, al revés que la unidad de Aplicaciones. Ahora dice «gorantz / beherantz irekitzen den», como el castellano. La hoja de euskera enviada para Derivadas tiene todavía la frase vieja.
+
