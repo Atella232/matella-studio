@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachIntegralsChallenges, bachIntegralsDiagnostic, bachIntegralsExerciseBank, bachIntegralsPractice } from './content'
 import { BachIntegralsHeroArt } from './figures'
+import { BachIntegralsGames } from './games'
+import { BACH_INTEGRALS_GAME_RECORDS_KEY, bachIntegralsGameProgressIds } from './games/info'
 import { BachIntegralsLaboratory } from './lab'
 import { bachIntegralsLabChallengeIds, bachIntegralsLabToolForTopic, bachIntegralsLabTools } from './lab/labTools'
 import { bachIntegralsStages, bachIntegralsTopics } from './lessons'
@@ -36,6 +38,17 @@ const integralakBatx1zUnit: UnitDefinition = {
         progressIds: bachIntegralsLabChallengeIds,
         toolForTopic: bachIntegralsLabToolForTopic,
         render: (props) => <BachIntegralsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, noren jatorrizkoa da?, doitu konstantea, azalera begiz, integralen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿de quién es la primitiva?, ajusta la constante, área a ojo, detective de integrales y memoria.',
+            en: 'Six games: race, whose antiderivative is it?, adjust the constant, area by eye, integrals detective and memory.',
+            ar: 'ست ألعاب: السباق، ولمن هذه الدالة الأصلية؟، واضبط الثابت، والمساحة بالعين، ومخبر التكاملات، والذاكرة.'
+        },
+        progressIds: bachIntegralsGameProgressIds,
+        recordsKey: BACH_INTEGRALS_GAME_RECORDS_KEY,
+        render: (props) => <BachIntegralsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },

@@ -55,6 +55,18 @@ Es la octava unidad de Bachillerato y la quinta y última del bloque Análisis: 
 - **Test:** `tests/integralak-batx1z-lab.test.ts`: cada primitiva cerrada se compara con Simpson; las predicciones no cambian al mover n, los límites o x; retos fijos con su solución e infinitos.
 - **Revisión a 375 px:** las 6 herramientas, cada función, en eu, es y ar, antes y después de predecir: sin desbordes.
 
+**Fase 4, juegos (`games/`):**
+- **Juegos propios (3 + detective):**
+  - `primitive` «¿De quién es la primitiva?» (`primitive.ts`, ids 112501–112503): la gráfica de f y tres gráficas; ¿cuál es F? Nivel 1, f recta y opciones parábolas; nivel 2, f parábola y opciones cúbicas (o f misma); nivel 3, cos, sen, eˣ, e⁻ˣ y 1/x. Las malas son F dada la vuelta, F movida a un lado o f: nunca F + k. Usa `Graph`, `graphValue`, `derivativeOf` y `graphLatex` de Derivadas (`match.ts`). Las fórmulas de las cúbicas no caben en una tarjeta: salen solo en la explicación.
+  - `adjust` «Ajusta la constante» (`adjust.ts`, ids 112551–112553): tres primitivas que solo cambian en el número de delante (la buena, la que no ajustó y la que multiplicó). Nivel 1, dentro lineal (e^(kx), cos(kx), sen(kx), (kx + b)ⁿ); nivel 2, u′·uⁿ; nivel 3, u′/u y u′·eᵘ. El test deriva cada opción.
+  - `estimate` «Área a ojo» (`estimate.ts`, ids 112601–112603): una región sombreada en la cuadrícula y tres números. Nivel 1, bajo rectas; nivel 2, bajo parábolas; nivel 3, la integral con signo (opciones: la integral, el área y la integral cambiada de signo). Las malas de los niveles 1 y 2 están al menos ×1,4 lejos y la buena no siempre es la del medio.
+  - `detective` (`detective.ts`, ids 112701–112703): 12 errores en 3 niveles (no dividir, olvidar k, k = y del punto, eˣ como potencia; multiplicar al ajustar, no ajustar u′, ln del numerador, uⁿ⁺¹ sin dividir; F(a) − F(b), área negativa, no partir en el corte, la de abajo menos la de arriba). Líneas sin sen ni tg y de 245 px como mucho a 21 px.
+- **Carrera** (`race.ts`, ids 112401–112405): 15 tipos en 5 circuitos; cada respuesta se comprueba en el test con pendientes e integrales numéricas.
+- **Memoria** (`boards.ts`, ids 112801–112803): potencias (6x² ↔ 2x³), inmediatas (1/x ↔ ln |x|) e integrales definidas. Ninguna tarjeta repite otra, ni siquiera la pregunta de una pareja con la respuesta de otra; tarjetas de 77 px como mucho a 18 px.
+- **Componentes:** `BachIntegralsGames.tsx` (+ `.css`), `GameArt.tsx`, `RaceGame.tsx`, `info.ts`, `index.tsx`.
+- **Test:** `tests/integralak-batx1z-games.test.ts`.
+- **Revisión a 375 px:** los tres juegos propios (los tres niveles, antes y después de responder), el detective y la memoria, en eu, es y ar: sin desbordes. La carrera no se pudo mirar con el panel oculto (la cuenta atrás no corre); la cubren los tests.
+
 ## Trucos
 
 - En el navegador, los botones de predicción no responden a `dispatchEvent`; sí a llamar a `onClick` desde `__reactProps…` del botón (o a un clic real).
@@ -65,4 +77,4 @@ Es la octava unidad de Bachillerato y la quinta y última del bloque Análisis: 
 
 ## En curso
 
-- **Siguiente paso:** fase 4, los juegos (J1 «¿De quién es la primitiva?», J2 «Ajusta la constante», J3 «Área a ojo», detective, carrera y memoria; ids 112401–112899), y después el cierre.
+- **Siguiente paso:** el cierre: hoja de euskera para el dueño (`hoja-revision.mjs`), repaso final a 375 px y sección «Cierre» en esta nota.
