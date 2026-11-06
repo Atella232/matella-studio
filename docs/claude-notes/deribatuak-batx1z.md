@@ -63,7 +63,23 @@ Es la sexta unidad de Bachillerato y la tercera del bloque Análisis: curso `bat
 - **Test:** `tests/deribatuak-batx1z-lab.test.ts` (además comprueba numéricamente que cada derivada es la pendiente de su función y que la regla de la cadena coincide con la pendiente de la compuesta).
 - **Revisión a 375 px:** las 6 herramientas en eu, es y ar, antes y después de predecir: sin desbordes ni textos fuera del tablero (en árabe, el falso aviso del título «y» de la herramienta prestada de 4.º).
 
+**Fase 4, juegos (`games/`):**
+- **Juegos propios (3 + detective):**
+  - `slopes` «¿Qué pendiente?» (`slopes.ts`, ids 110501–110503): una gráfica (parábola o cúbica de `curves.ts`) y tres puntos A, B, C; nivel 1, dónde f′ = 0, > 0 o < 0; nivel 2, la pendiente mayor o menor; nivel 3, la tangente paralela a una recta (la recta se aleja al menos 1,5 de los tres puntos para no parecer la tangente de uno).
+  - `match` «Empareja f y f′» (`match.ts`, ids 110601–110603): la gráfica de f y tres gráficas pequeñas; parábolas → rectas, cúbicas → parábolas, y sin, cos, eˣ, e⁻ˣ, ln x. Errores: f′ dada la vuelta, el cero en otro sitio, la propia f.
+  - `tangent` «Tangente exacta» (`tangent.ts`, ids 110651–110653): se construye y = mx + n con dos botones ± y se ve la recta sobre la gráfica; m y n enteros entre −9 y 9, nunca y = 0 (es el punto de partida).
+  - `detective` (`detective.ts`, ids 110701–110703): 12 errores en 3 niveles (T.V.M. sin dividir, h = 0, f′(x) en la tangente, −f′ en la normal; (fg)′ = f′g′, el orden del cociente, la cadena sin la de dentro, x⁻ⁿ; (eᵏˣ)′ = eᵏˣ, la regla de la potencia en aˣ, (ln u)′ = 1/u, «continua ⇒ derivable»).
+- **Carrera** (`race.ts`, ids 110401–110405): 15 tipos en 5 circuitos, uno por etapa; cada pregunta lleva `meta` y el test la recalcula con una derivada numérica.
+- **Memoria** (`boards.ts`, ids 110801–110803): función ↔ derivada en potencias, reglas y exponenciales/logaritmos.
+- **Hub:** `index.tsx` con `BachDerivativesGames`; `info.ts` (slugs `lasterketa`, `maldak`, `parekatu`, `ukitzailea`, `detektibea`, `memoria`); `GameArt.tsx`; `BachDerivativesGames.css`.
+- **Test:** `tests/deribatuak-batx1z-games.test.ts` (respuestas comprobadas con derivadas numéricas; en «Empareja», las opciones malas no son la derivada).
+- **Revisión a 375 px:** los seis juegos en eu, es y ar sin desbordes; cartas de memoria de 81 px como mucho (las cartas miden 106).
+
+**Trucos de los juegos:**
+- **Nombres trigonométricos:** la memoria, las líneas del detective y las opciones de la carrera son LaTeX sin traducir, así que no llevan sin ni tan (en castellano saldría «sin»). Los juegos propios sí los traducen con `localize` de `text.ts`, y los enunciados con `say`.
+- **Dos binomios no caben en una carta** a 375 px: (x + 4)(x − 5) mide 111 px; la memoria usa x(x + p) y x²(x + p).
+- **Etiquetas de los coches de la carrera:** en árabe, «f′» sale «′f»; usa una sola letra.
+
 ## En curso
 
-- Fases 1+2 y 3 terminadas (commits en esta rama). Siguiente: fase 4, los juegos (J1 «¿Qué pendiente?», J2 «Empareja f y f′», J4 «Tangente exacta», J5 detective, carrera y memoria; ids 110401–110899).
-- Después: el cierre (inventario, hoja de euskera, nota sin «En curso»).
+- Fases 1+2, 3 y 4 terminadas (commits en esta rama). Falta el cierre: inventario, hoja de euskera, nota final sin «En curso» y el mensaje al dueño.

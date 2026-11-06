@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachDerivativesChallenges, bachDerivativesDiagnostic, bachDerivativesExerciseBank, bachDerivativesPractice } from './content'
 import { BachDerivativesHeroArt } from './figures'
+import { BachDerivativesGames } from './games'
+import { BACH_DERIVATIVES_GAME_RECORDS_KEY, bachDerivativesGameProgressIds } from './games/info'
 import { BachDerivativesLaboratory } from './lab'
 import { bachDerivativesLabChallengeIds, bachDerivativesLabToolForTopic, bachDerivativesLabTools } from './lab/labTools'
 import { bachDerivativesStages, bachDerivativesTopics } from './lessons'
@@ -36,6 +38,17 @@ const deribatuakBatx1zUnit: UnitDefinition = {
         progressIds: bachDerivativesLabChallengeIds,
         toolForTopic: bachDerivativesLabToolForTopic,
         render: (props) => <BachDerivativesLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, zer malda?, parekatu f eta f′, zuzen ukitzaile zehatza, deribatuen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿qué pendiente?, empareja f y f′, tangente exacta, detective de derivadas y memoria.',
+            en: 'Six games: race, which slope?, match f and f′, the exact tangent, derivatives detective and memory.',
+            ar: 'ست ألعاب: السباق، وأي ميل؟، وطابِق f وf′، والمماس الدقيق، ومخبر المشتقات، والذاكرة.'
+        },
+        progressIds: bachDerivativesGameProgressIds,
+        recordsKey: BACH_DERIVATIVES_GAME_RECORDS_KEY,
+        render: (props) => <BachDerivativesGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },

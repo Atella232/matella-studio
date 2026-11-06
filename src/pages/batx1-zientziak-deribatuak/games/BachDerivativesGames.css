@@ -1,0 +1,27 @@
+/* ¿Qué pendiente?, Empareja f y f′ and Tangente exacta (Deribatuak, Batxilergoa 1 · Zientziak) */
+.fraction-v2-games-card[data-game="slopes"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="match"] { --game-tint: var(--coral-tint, #f6d5cc); }
+.fraction-v2-games-card[data-game="tangent"] { --game-tint: var(--success-tint, #d9efe2); }
+
+.bach-der-big { text-align: center; font-size: 22px; overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+.bach-der-plane { width: 100%; max-width: 320px; margin: 8px auto 0; }
+.bach-der-plane svg { display: block; width: 100%; height: auto; }
+
+.bach-der-points button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 20px; font-weight: 700; }
+.bach-der-dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--card, #fffcf6); box-shadow: 0 0 0 1px var(--ink); }
+
+.bach-der-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.bach-der-option { display: flex; flex-direction: column; align-items: stretch; gap: 4px; min-width: 0; padding: 6px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; color: var(--ink); cursor: pointer; }
+.bach-der-option svg { display: block; width: 100%; height: auto; }
+.bach-der-option-name { font-weight: 700; font-size: 16px; }
+.bach-der-option-formula { font-size: 13px; overflow-x: auto; overflow-y: hidden; }
+.bach-der-option.right { background: var(--success-tint, #d9efe2); border-color: var(--success, #267b53); }
+.bach-der-option.wrong { background: var(--coral-tint, #f6d5cc); border-color: var(--error, #c4432a); }
+.bach-der-option:disabled { cursor: default; box-shadow: none; }
+
+.bach-der-picks { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 10px; }
+.bach-der-pick { display: inline-flex; align-items: center; gap: 6px; }
+.bach-der-pick-name { font-weight: 700; font-style: italic; font-size: 20px; min-width: 20px; text-align: center; }
+.bach-der-pick button { width: 40px; height: 40px; border: 2px solid var(--ink); border-radius: 10px; background: var(--paper-deep, #f1e8d6); font: inherit; font-size: 20px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.bach-der-pick button:disabled { cursor: default; opacity: 0.5; }
+.bach-der-pick-value { min-width: 36px; text-align: center; font-size: 20px; font-weight: 700; }
