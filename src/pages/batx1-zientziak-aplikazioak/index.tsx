@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachApplicationsChallenges, bachApplicationsDiagnostic, bachApplicationsExerciseBank, bachApplicationsPractice } from './content'
 import { BachApplicationsHeroArt } from './figures'
+import { BachApplicationsLaboratory } from './lab'
+import { bachApplicationsLabChallengeIds, bachApplicationsLabToolForTopic, bachApplicationsLabTools } from './lab/labTools'
 import { bachApplicationsStages, bachApplicationsTopics } from './lessons'
 
 const aplikazioakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const aplikazioakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachApplicationsPractice,
     exerciseBank: bachApplicationsExerciseBank,
     challenges: bachApplicationsChallenges,
+    lab: {
+        description: {
+            eu: `${bachApplicationsLabTools.length} tresna, erronkekin: f′ deribatuaren semaforoa, kurbadura zuzen ukitzailearekin, estalkirik gabeko kutxa eta muntatu grafikoa, berriak; Deribatuetako f′ funtzioaren grafikoa; eta 4. DBHko grafiko baten bidaia.`,
+            es: `${bachApplicationsLabTools.length} herramientas con retos: el semáforo de f′, curvatura con la tangente, la caja sin tapa y monta la gráfica, nuevas; la gráfica de f′ de Derivadas; y recorre una gráfica de 4.º ESO.`,
+            en: `${bachApplicationsLabTools.length} tools with challenges: the traffic light of f′, concavity with the tangent, the box without a lid and build the graph, new; the graph of f′ from Derivatives; and travel along a graph from 4th ESO.`,
+            ar: `${bachApplicationsLabTools.length} أدوات مع تحديات: إشارة f′ الضوئية، والتقعّر بالمماس، والعلبة بلا غطاء، وابنِ الرسم، وهي جديدة؛ ورسم f′ من المشتقات؛ والتجوّل في رسم من الصف الرابع.`
+        },
+        progressIds: bachApplicationsLabChallengeIds,
+        toolForTopic: bachApplicationsLabToolForTopic,
+        render: (props) => <BachApplicationsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',
