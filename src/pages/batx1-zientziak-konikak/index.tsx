@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { bachConicsChallenges, bachConicsDiagnostic, bachConicsExerciseBank, bachConicsPractice } from './content'
 import { BachConicsHeroArt } from './figures'
+import { BachConicsLaboratory } from './lab'
+import { bachConicsLabChallengeIds, bachConicsLabToolForTopic, bachConicsLabTools } from './lab/labTools'
 import { bachConicsStages, bachConicsTopics } from './lessons'
 
 const konikakBatx1zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const konikakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachConicsPractice,
     exerciseBank: bachConicsExerciseBank,
     challenges: bachConicsChallenges,
+    lab: {
+        description: {
+            eu: `${bachConicsLabTools.length} tresna, erronkekin: lorazainaren elipsea, fokua eta zuzentzailea eta eszentrikotasuna, berriak; eta 4. DBHko zuzenkiaren erdibitzailea eta zirkunferentzia.`,
+            es: `${bachConicsLabTools.length} herramientas con retos: el jardinero, foco y directriz y la excentricidad, nuevas; y de 4.º ESO, la mediatriz del segmento y la circunferencia.`,
+            en: `${bachConicsLabTools.length} tools with challenges: the gardener's ellipse, focus and directrix and the eccentricity, new; and from 4th ESO, the perpendicular bisector and the circle.`,
+            ar: `${bachConicsLabTools.length} أدوات مع تحديات: قطع البستاني والبؤرة والدليل والاختلاف المركزي، وهي جديدة؛ ومن الصف الرابع: محور القطعة والدائرة.`
+        },
+        progressIds: bachConicsLabChallengeIds,
+        toolForTopic: bachConicsLabToolForTopic,
+        render: (props) => <BachConicsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koefizientea, koordenatua, erradioa, ardatzerdia, distantzia, eszentrikotasuna edo parametroa. Adibidez 5, −3, 0,6 edo 3/4.', es: 'Escribe un solo número: el coeficiente, la coordenada, el radio, el semieje, la distancia, la excentricidad o el parámetro que se pide. Por ejemplo 5, −3, 0,6 o 3/4.', en: 'Write a single number: the coefficient, coordinate, radius, semi-axis, distance, eccentricity or parameter that is asked for. For example 5, −3, 0.6 or 3/4.', ar: 'اكتب عددًا واحدًا: المعامل أو الإحداثي أو نصف القطر أو نصف المحور أو المسافة أو الاختلاف المركزي أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 0.6 أو 3/4.' },
         defaultForm: 'any',

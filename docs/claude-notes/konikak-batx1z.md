@@ -41,6 +41,13 @@ Tercera unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 - **«Por qué funciona»** en 5 lecciones: bisectrices (±), ecuación general (A = −2a), elementos de la elipse (a² = b² + c²), asíntotas, parábola (y² = 2px). Casos en `distance-loci`, `two-circles`, `parabola-positions` y `recognize-conic`.
 - **Figuras:** planos con `oy={20}` y pie centrado debajo (con `oy={8}` la «y» del eje se cortaba arriba). En las notas de las figuras, el hueco entre fórmulas es un espacio largo (U+2003): el SVG junta los espacios normales.
 
+### Fase 3 · laboratorio (2026-11-06)
+
+- **Propias** (`lab/`): `gardener.ts` L1 «El jardinero» (focos (±c, 0) con c 0…4, cuerda 2a con a ≥ c + 1, P entero; predice PF + PF′ frente a 2a; ▶ dibuja con la cuerda; retos 107101–107105), `directrix.ts` L2 «Foco y directriz» (y² = 2px, p 1…6; predice PF frente a PH; ▶ construye la parábola punto a punto; retos 107201–107205), `eccentricity.ts` L3 «La excentricidad» (foco en el origen, r = 2 / (1 + e·cos θ), e de cuarto en cuarto hasta 2, θ cada 30°; predice elipse, parábola o hipérbola; retos 107301–107305). Pantallas en `ConicsTools.tsx`.
+- **Prestadas de 4.º:** `bisector` (etapa loci) y `circle` (etapa circle), con sus retos e ids.
+- Comparaciones exactas con enteros: b²x² + a²y² − a²b² (elipse) e y² − 2px (parábola); los tests comprueban que coinciden con las distancias en toda la pizarra. Test `tests/konikak-batx1z-lab.test.ts`.
+- Pizarras de 14 casillas con `cell={22}`: con 24 la «x» del eje se salía 1 px. Las etiquetas de los focos van encima del eje para no tapar los números.
+
 ## En curso
 
-- Fase 1+2 hecha (commit en esta rama). Siguiente: fase 3, laboratorio: L1 «El jardinero», L2 «Foco y directriz», L3 «La excentricidad» (ids 107101–107399) y las prestadas de 4.º `circle` y `bisector`.
+- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos: J1 «¿Qué cónica es?», J3 «La antena», J4 detective de cónicas (12 errores), J5 carrera, J6 memoria (ids 107401–107899).
