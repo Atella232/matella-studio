@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachIntegralsChallenges, bachIntegralsDiagnostic, bachIntegralsExerciseBank, bachIntegralsPractice } from './content'
 import { BachIntegralsHeroArt } from './figures'
+import { BachIntegralsLaboratory } from './lab'
+import { bachIntegralsLabChallengeIds, bachIntegralsLabToolForTopic, bachIntegralsLabTools } from './lab/labTools'
 import { bachIntegralsStages, bachIntegralsTopics } from './lessons'
 
 const integralakBatx1zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const integralakBatx1zUnit: UnitDefinition = {
     guidedPractice: bachIntegralsPractice,
     exerciseBank: bachIntegralsExerciseBank,
     challenges: bachIntegralsChallenges,
+    lab: {
+        description: {
+            eu: `${bachIntegralsLabTools.length} tresna, erronkekin: laukizuzenak kurbaren azpian, azalera-funtzioa, zeinudun azalera eta bi kurben arteko azalera, berriak; eta Deribatuetako f′ funtzioaren grafikoa eta makinen katea.`,
+            es: `${bachIntegralsLabTools.length} herramientas con retos: rectángulos bajo la curva, la función área, área con signo y área entre dos curvas, nuevas; y la gráfica de f′ y la cadena de máquinas de Derivadas.`,
+            en: `${bachIntegralsLabTools.length} tools with challenges: rectangles under the curve, the area function, signed area and the area between two curves, new; and the graph of f′ and the chain of machines from Derivatives.`,
+            ar: `${bachIntegralsLabTools.length} أدوات مع تحديات: مستطيلات تحت المنحنى، ودالة المساحة، والمساحة ذات الإشارة، والمساحة بين منحنيين، وهي جديدة؛ ورسم f′ وسلسلة الآلات من المشتقات.`
+        },
+        progressIds: bachIntegralsLabChallengeIds,
+        toolForTopic: bachIntegralsLabToolForTopic,
+        render: (props) => <BachIntegralsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',

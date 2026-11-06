@@ -44,7 +44,20 @@ Es la octava unidad de Bachillerato y la quinta y última del bloque Análisis: 
 - **Registro:** `courses.ts` (solo la fila de 1.º Ciencias), router y `paths.ts`.
 - **Revisión a 375 px:** las 15 lecciones en eu, es y ar sin desbordes ni fórmulas encogidas; las 15 figuras ampliadas (también en árabe); a 1024 px ningún paso deja menos de 90 px al texto. Las fórmulas de contenido de más de unos 250 px van en filas `aligned`.
 
+**Fase 3, laboratorio (`lab/`):**
+- **Herramientas propias (4):**
+  - `rectangles` «Rectángulos bajo la curva» (`rectangles.ts`, ids 112101–112105): x², 4 − x², x + 1, √x y eˣ en su intervalo; n de 1 a 24 y la altura a la izquierda, en el medio o a la derecha. Antes de predecir se ven las barras y su suma; después, el área exacta en verde. Predicción: ¿la suma es menor, igual o mayor que el área? (depende de la función y la altura, no de n; la recta con la altura del medio da «igual»). ▶ estrecha los rectángulos.
+  - `area-function` «La función área» (`accumulate.ts`, ids 112351–112355): 2 − x, x² − 1, x² − 4x + 3 y cos x; arriba la región de 0 a x (azul o roja), abajo A(x). Predicción: en el punto marcado, ¿A crece, se queda quieta o decrece? (el signo de f(p); x² − 1 en 1 da «quieta»). ▶ llena la región desde 0.
+  - `signed` «Área con signo» (`signed.ts`, ids 112201–112205): x² − 2x, x − 1, x³ − 4x y x² − 4 con límites a y b de −3 a 3 (a puede ser mayor que b). Cada función abre en su intervalo; la predicción es el signo de la integral en él (x² − 2x en [0, 3] da 0). ▶ mueve b.
+  - `between` «Área entre dos curvas» (`between.ts`, ids 112301–112305): cinco parejas (x² y 2x, x + 2 y x², x³ y x, 6 − x² y x² − 2, x y 2 − x²); azul donde f va arriba y violeta donde va g. Predicción en el intervalo propio de la pareja: ¿g arriba, se cruzan o f arriba?
+- **Prestadas (2), con sus ids:** `slope-graph` (110201–110205) y `chain` de Derivadas.
+- **Componentes:** `BachIntegralsTools.tsx` (copia `curvePath`, `Grid` y `useClip` de Aplicaciones, con `regionPath` para las áreas), `numbers.ts` (`exact` redondea a 9 decimales para que «=» salga exacto; `numberLatex` escribe fracciones), `index.tsx` con `BachIntegralsLaboratory`, `labTools.ts`.
+- **Test:** `tests/integralak-batx1z-lab.test.ts`: cada primitiva cerrada se compara con Simpson; las predicciones no cambian al mover n, los límites o x; retos fijos con su solución e infinitos.
+- **Revisión a 375 px:** las 6 herramientas, cada función, en eu, es y ar, antes y después de predecir: sin desbordes.
+
 ## Trucos
+
+- En el navegador, los botones de predicción no responden a `dispatchEvent`; sí a llamar a `onClick` desde `__reactProps…` del botón (o a un clic real).
 
 - Las fórmulas largas de pasos, ejemplos, soluciones y errores típicos van en `\begin{aligned}&…\\ &=…\end{aligned}`: a 375 px el banco tiene unos 257 px y los pasos unos 237 px.
 - El SVG de una figura se puede mirar grande en el navegador fijándolo arriba a la izquierda con 720 px de ancho (`position: fixed`) y haciendo zoom de esa zona; el modal «Ampliar» gira la figura en el móvil.
@@ -52,4 +65,4 @@ Es la octava unidad de Bachillerato y la quinta y última del bloque Análisis: 
 
 ## En curso
 
-- **Siguiente paso:** fase 3, el laboratorio (L2–L5 propias y `slope-graph` y `chain` prestadas), y después la fase 4 (J1, J2, J3, detective, carrera y memoria) y el cierre.
+- **Siguiente paso:** fase 4, los juegos (J1 «¿De quién es la primitiva?», J2 «Ajusta la constante», J3 «Área a ojo», detective, carrera y memoria; ids 112401–112899), y después el cierre.
