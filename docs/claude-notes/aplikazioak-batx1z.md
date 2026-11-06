@@ -77,6 +77,10 @@ Es la séptima unidad de Bachillerato y la cuarta del bloque Análisis: curso `b
 - **Memoria:** sin término independiente (x² − 6x, no x² − 6x + 5); con él, la carta llegaba a 104 px.
 - **Colores en el laboratorio:** en la etapa verde (`graphs`) los mínimos van en violeta propio, porque la curva ya es verde.
 
-## En curso
+## Cierre (2026-11-06)
 
-- Fases 1+2, 3 y 4 hechas. Siguiente: cierre (commit de la fase 4, inventario, hoja de euskera, nota).
+- **Comprobado:** 2318 tests, lint y build en verde; inventario OK (3 juegos propios más el detective; 4 herramientas propias: el script cuenta 5 porque toma como propia la gráfica de f′, que viene de Derivadas).
+- **Revisión a 375 px en eu, es y ar:** lecciones (con las figuras ampliadas), diagnóstico, práctica, retos, banco, las 6 herramientas y los 6 juegos.
+- **Hoja de euskera:** `aplikazioak-batx1z-euskera.html` en la carpeta de notas compartidas de la sesión principal, con `--herramientas sign,curvature,box,layers --juegos updown,extrema,shape,detective`. Como en las anteriores, no lleva los retos fijos del laboratorio ni `content.ts`.
+- **Pendiente del dueño:** confirmar ahurra (∪) y ganbila (∩) en euskera. Si es al revés, basta cambiar `ahur|ganbil` en la carpeta (lecciones, contenido, laboratorio y juegos).
+- **Commits:** 7e9127a (fases 1+2), 62bb3e7 (fase 3), 233f490 (fase 4).
