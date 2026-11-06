@@ -5,7 +5,7 @@
 
 .trig-build-formula,
 .trig-hunt-equation,
-.trig-exact-asked { text-align: center; font-size: 20px; overflow-x: auto; overflow-y: hidden; padding: 6px 0; }
+.trig-exact-asked { text-align: center; font-size: 20px; padding: 6px 0; }
 .prop3-options.trig-two { grid-template-columns: repeat(2, 1fr); }
 .prop3-options.trig-three { grid-template-columns: 1fr; }
 .prop3-options.trig-two button,
