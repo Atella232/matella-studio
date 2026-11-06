@@ -183,7 +183,7 @@ export const bivarLessonChecks: Record<BivarTopicId, { mistake: LessonMistake; c
             prompt: say('Erregresio-zuzenak $y=0{,}5x+3$ eta $x=0{,}5y+1{,}5$ dira. Zenbat da r?', 'Las rectas de regresión son $y=0{,}5x+3$ y $x=0{,}5y+1{,}5$. ¿Cuánto vale r?', 'مستقيما الانحدار هما $y=0{,}5x+3$ و$x=0{,}5y+1{,}5$. كم r؟', 'The regression lines are $y=0{,}5x+3$ and $x=0{,}5y+1{,}5$. What is r?'),
             options: [same('$0{,}25$'), same('$0{,}5$'), same('$1$')],
             correctIndex: 1,
-            explanation: same('$r^2=0{,}5\\cdot 0{,}5=0{,}25\\qquad r=0{,}5$')
+            explanation: same('$\\begin{gathered}r^2=0{,}5\\cdot 0{,}5=0{,}25\\\\ r=0{,}5\\end{gathered}$')
         }
     },
 

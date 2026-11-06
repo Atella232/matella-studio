@@ -38,7 +38,8 @@ function checkTexts(texts: LocalizedText[]) {
 function checkWorked(latex: string, where: string) {
     let read = 0
     // The evaluator does not read \frac{…{,}…}: the decimal point first
-    for (const part of latex.replace(/\{,\}/g, '.').split(/\\qquad|\\quad|\\ \\to\\ |\\to|,\\ /)) {
+    // Rows of a gathered block are equalities of their own
+    for (const part of latex.replace(/\{,\}/g, '.').replace(/\\(?:begin|end)\{gathered\}/g, '').split(/\\\\|\\qquad|\\quad|\\ \\to\\ |\\to|,\\ /)) {
         const values = part.split(/\\le|\\ge|\\neq|<|>|\\approx/)[0].split('=').map((side) => evaluate(side)).filter((value): value is number => value !== null)
         if (values.length < 2) continue
         assert.ok(values.every((value) => near(value, values[0])), `${where}: ${part} → ${values.join(' / ')}`)
@@ -99,7 +100,7 @@ test('bidimentsionala batx1 z games: every race question has one right option, w
             if (question.kind === 'r') assert.ok(near(value, m.cxy / (m.sx * m.sy)) && Math.abs(value) <= 1)
             if (question.kind === 'units') assert.ok(near(value, m.factor * m.cxy))
             if (question.kind === 'slope') assert.ok(near(value, m.cxy / m.vx))
-            if (question.kind === 'estimate') assert.ok(near(value, 0) || Number.isFinite(value))
+            if (question.kind === 'estimate') assert.ok(near(value, m.my + m.slope * (m.x - m.mx)))
             if (question.kind === 'lines') assert.ok(near(value * value, m.a * m.c) && Math.sign(value) === Math.sign(m.a))
             if (question.kind === 'cell') assert.ok(near(value, m.f * m.x * m.y))
             if (question.kind === 'variance') assert.ok(near(value, m.squares / m.n - (m.sum / m.n) ** 2))

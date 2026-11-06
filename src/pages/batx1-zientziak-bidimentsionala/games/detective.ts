@@ -229,7 +229,7 @@ function build(random: Random, error: BivarDetectiveError): Built | null {
             return {
                 problem: say(`Y-ren X-rekiko zuzena $${lineText}$ da, $\\bar{x}=${mx}$ eta $r^2=${tex(r2)}$ izanik. Zer x estimatzen da $y=${tex(y)}$ denean?`, `La recta de Y sobre X es $${lineText}$, con $\\bar{x}=${mx}$ y $r^2=${tex(r2)}$. ¿Qué x se estima para $y=${tex(y)}$?`, `مستقيم انحدار Y على X هو $${lineText}$، مع $\\bar{x}=${mx}$ و$r^2=${tex(r2)}$. ما قيمة x المقدّرة عندما $y=${tex(y)}$؟`, `The line of Y on X is $${lineText}$, with $\\bar{x}=${mx}$ and $r^2=${tex(r2)}$. What x is estimated for $y=${tex(y)}$?`),
                 lines: [line(LABELS.data, `\\bar{y}=${tex(slope)}\\cdot ${mx}+${b}=${tex(my)}`), line(LABELS.step, `${tex(y)}=${tex(slope)}x+${b}\\ \\to\\ x=${tex(reached)}`), line(LABELS.result, `x=${tex(reached)}`)],
-                wrong: 1, error, fix: `m_{xy}=\\frac{${tex(r2)}}{${tex(slope)}}=${tex(coefficient)}\\ \\to\\ x=${mx}+${tex(coefficient)}\\cdot(${tex(y)}-${tex(my)})=${tex(right)}`, right, reached
+                wrong: 1, error, fix: `\\begin{gathered}m_{xy}=\\frac{${tex(r2)}}{${tex(slope)}}=${tex(coefficient)}\\\\ x=${mx}+${tex(coefficient)}\\cdot ${tex(y - my)}=${tex(right)}\\end{gathered}`, right, reached
             }
         }
         case 'r-product': {
@@ -238,7 +238,7 @@ function build(random: Random, error: BivarDetectiveError): Built | null {
             const right = Math.sign(a) * Math.sqrt(a * c)
             return {
                 problem: say(`Erregresio-zuzenen koefizienteak $m_{yx}=${tex(a)}$ eta $m_{xy}=${tex(c)}$ dira. Zenbat da r?`, `Los coeficientes de las rectas de regresión son $m_{yx}=${tex(a)}$ y $m_{xy}=${tex(c)}$. ¿Cuánto vale r?`, `معاملا مستقيمي الانحدار $m_{yx}=${tex(a)}$ و$m_{xy}=${tex(c)}$. كم r؟`, `The coefficients of the regression lines are $m_{yx}=${tex(a)}$ and $m_{xy}=${tex(c)}$. What is r?`),
-                lines: [line(LABELS.data, `m_{yx}=${tex(a)}\\qquad m_{xy}=${tex(c)}`), line(LABELS.result, `r=${paren(a)}\\cdot ${paren(c)}=${tex(reached)}`), line(LABELS.compare, `|r|<1`)],
+                lines: [line(LABELS.data, `m_{yx}=${tex(a)}\\quad m_{xy}=${tex(c)}`), line(LABELS.result, `r=${paren(a)}\\cdot ${paren(c)}=${tex(reached)}`), line(LABELS.compare, `|r|<1`)],
                 wrong: 1, error, fix: `r=${right < 0 ? '-' : ''}\\sqrt{${tex(reached)}}=${tex(right)}`, right, reached
             }
         }

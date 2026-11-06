@@ -125,9 +125,11 @@ function centreQuestion(random: Random): BivarRaceQuestion | null {
     if (sum % 4 !== 0) return null
     const answer = fraction(sum / 4)
     const xMean = xs.reduce((total, value) => total + value, 0) / 4
-    const points = xs.map((x, index) => `(${x},\\,${ys[index]})`).join(',\\ ')
+    // One formula per point, so the prompt can wrap between them
+    const point = (index: number) => `$(${xs[index]},\\,${ys[index]})$`
+    const points = (and: string, comma = ', ') => `${[0, 1, 2].map(point).join(comma)} ${and} ${point(3)}`
     const choices = options(random, answer, [exact(xMean, 'calculation'), exact(sum, 'divide'), exact(sum / 3, 'count')])
-    return choices && build(1, 'centre', say(`Zenbat da $${points}$ puntuen $\\bar{y}$?`, `¿Cuánto vale $\\bar{y}$ en $${points}$?`, `كم $\\bar{y}$ للنقاط $${points}$؟`, `What is $\\bar{y}$ for $${points}$?`), choices, answer, all(`\\bar{y}=\\frac{${ys.join('+')}}{4}=${sum / 4}`), { sum })
+    return choices && build(1, 'centre', say(`Zenbat da ${points('eta')} puntuen $\\bar{y}$?`, `¿Cuánto vale $\\bar{y}$ en ${points('y')}?`, `كم $\\bar{y}$ للنقاط ${points('و', '، ')}؟`, `What is $\\bar{y}$ for ${points('and')}?`), choices, answer, all(`\\bar{y}=\\frac{${ys.join('+')}}{4}=${sum / 4}`), { sum })
 }
 
 /** (x − x̄)(y − ȳ) of one point */
@@ -140,7 +142,7 @@ function productQuestion(random: Random): BivarRaceQuestion | null {
     if (product === 0 || x === mx || y === my) return null
     const answer = fraction(product)
     const choices = options(random, answer, [exact(-product, 'sign'), exact(x - mx + y - my, 'calculation'), exact(x * y - mx * my, 'means')])
-    return choices && build(1, 'product', say(`Zentroa $(${mx},\\,${my})$ da. Zenbat da $(${x},\\,${y})$ puntuaren $(x-\\bar{x})(y-\\bar{y})$?`, `El centro es $(${mx},\\,${my})$. ¿Cuánto vale $(x-\\bar{x})(y-\\bar{y})$ en $(${x},\\,${y})$?`, `المركز $(${mx},\\,${my})$. كم $(x-\\bar{x})(y-\\bar{y})$ للنقطة $(${x},\\,${y})$؟`, `The centre is $(${mx},\\,${my})$. What is $(x-\\bar{x})(y-\\bar{y})$ at $(${x},\\,${y})$?`), choices, answer, all(`(${x}-${mx})(${y}-${my})=${paren(x - mx)}\\cdot ${paren(y - my)}=${product}`), { mx, my, x, y })
+    return choices && build(1, 'product', say(`Zentroa $(${mx},\\,${my})$ da. Zenbat da $(${x},\\,${y})$ puntuaren $(x-\\bar{x})(y-\\bar{y})$?`, `El centro es $(${mx},\\,${my})$. ¿Cuánto vale $(x-\\bar{x})(y-\\bar{y})$ en $(${x},\\,${y})$?`, `المركز $(${mx},\\,${my})$. كم $(x-\\bar{x})(y-\\bar{y})$ للنقطة $(${x},\\,${y})$؟`, `The centre is $(${mx},\\,${my})$. What is $(x-\\bar{x})(y-\\bar{y})$ at $(${x},\\,${y})$?`), choices, answer, all(`${paren(x - mx)}\\cdot ${paren(y - my)}=${product}`), { mx, my, x, y })
 }
 
 /** σxy from five products (x − x̄)(y − ȳ) */
@@ -223,7 +225,7 @@ function linesQuestion(random: Random): BivarRaceQuestion | null {
     const r = sign * Math.sqrt(product)
     const answer = decimal(r)
     const choices = options(random, answer, [exact(product, 'root'), exact(-r, 'sign'), exact((a + c) / 2, 'calculation')])
-    return choices && build(3, 'lines', say(`$m_{yx}=${tex(sign * a)}$ eta $m_{xy}=${tex(sign * c)}$. Zenbat da r?`, `$m_{yx}=${tex(sign * a)}$ y $m_{xy}=${tex(sign * c)}$. ¿Cuánto vale r?`, `$m_{yx}=${tex(sign * a)}$ و$m_{xy}=${tex(sign * c)}$. كم r؟`, `If $m_{yx}=${tex(sign * a)}$ and $m_{xy}=${tex(sign * c)}$, what is r?`), choices, answer, all(`r^2=${paren(sign * a)}\\cdot ${paren(sign * c)}=${tex(product)}\\ \\to\\ r=${tex(r)}`), { a: sign * a, c: sign * c })
+    return choices && build(3, 'lines', say(`$m_{yx}=${tex(sign * a)}$ eta $m_{xy}=${tex(sign * c)}$. Zenbat da r?`, `$m_{yx}=${tex(sign * a)}$ y $m_{xy}=${tex(sign * c)}$. ¿Cuánto vale r?`, `$m_{yx}=${tex(sign * a)}$ و$m_{xy}=${tex(sign * c)}$. كم r؟`, `If $m_{yx}=${tex(sign * a)}$ and $m_{xy}=${tex(sign * c)}$, what is r?`), choices, answer, all(`\\begin{gathered}r^2=${sign < 0 ? `(${tex(-a)})(${tex(-c)})` : `${tex(a)}\\cdot ${tex(c)}`}=${tex(product)}\\\\ r=${tex(r)}\\end{gathered}`), { a: sign * a, c: sign * c })
 }
 
 /* ---------- Circuit 4: full problems ---------- */
