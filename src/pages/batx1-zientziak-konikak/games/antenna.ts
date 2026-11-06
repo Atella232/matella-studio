@@ -71,7 +71,7 @@ function fromRim(random: Random): AntennaRound | null {
     return choices && {
         prompt: say(`Antena paraboliko batek $${width}$ cm-ko zabalera eta $${depth}$ cm-ko sakonera ditu. Erpinetik zenbat zentimetrora doa hargailua?`, `Una antena parabólica mide $${width}$ cm de ancho y $${depth}$ cm de profundidad. ¿A cuántos centímetros del vértice va el receptor?`, `هوائي مقعّر عرضه $${width}$ سم وعمقه $${depth}$ سم. على كم سنتيمترًا من الرأس يوضع المستقبِل؟`, `A satellite dish is $${width}$ cm wide and $${depth}$ cm deep. How many centimetres from the vertex does the receiver go?`),
         options: choices,
-        working: `${10 * r}^2=2p\\cdot ${depth}\\ \\to\\ p=${2 * focus}\\qquad\\frac{p}{2}=${focus}`,
+        working: `\\begin{gathered}${10 * r}^2=2p\\cdot ${depth}\\\\ \\to\\ p=${2 * focus}\\qquad\\frac{p}{2}=${focus}\\end{gathered}`,
         shape: { kind: 'parabola', focus: f, rim: r, depth: d }
     }
 }

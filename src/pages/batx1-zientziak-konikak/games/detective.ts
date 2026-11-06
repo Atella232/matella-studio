@@ -78,6 +78,9 @@ export const bachConicsDetectiveTips: Record<BachConicsDetectiveError, Localized
 
 type Built = Omit<WorkedCase<BachConicsDetectiveError>, 'options'>
 
+/** A fix in rows, so that it fits a phone */
+const rows = (...lines: string[]) => `\\begin{gathered}${lines.join('\\\\ ')}\\end{gathered}`
+
 /** «… of r: Ax + By + C = 0» problems */
 const named = (name: string, latex: string) => `$${name}$: $${latex}$`
 const NORMALS: Array<[number, number, number]> = [[3, 4, 5], [4, 3, 5], [3, -4, 5], [4, -3, 5], [5, 12, 13], [12, 5, 13]]
@@ -93,7 +96,7 @@ function build(random: Random, error: BachConicsDetectiveError): Built | null {
             return {
                 problem: say(`Idatzi $${equation}$ zirkunferentzia forma orokorrean.`, `Escribe en forma general la circunferencia $${equation}$.`, `اكتب الدائرة $${equation}$ بالصيغة العامة.`, `Write the circle $${equation}$ in general form.`),
                 lines: [line(LABELS.data, equation), line(LABELS.step, `x^2-${h * h}+y^2-${k * k}=${r * r}`), line(LABELS.result, `${polynomial([[1, 'x^2'], [1, 'y^2'], [-(h * h + k * k + r * r), '']])}=0`)],
-                wrong: 1, error, fix: `${polynomial([[1, 'x^2'], [-2 * h, 'x'], [h * h, '']])}+${polynomial([[1, 'y^2'], [-2 * k, 'y'], [k * k, '']])}=${r * r}`, right: -2 * h, reached: 0
+                wrong: 1, error, fix: rows(polynomial([[1, 'x^2'], [-2 * h, 'x'], [h * h, '']]), `+${polynomial([[1, 'y^2'], [-2 * k, 'y'], [k * k, '']])}=${r * r}`), right: -2 * h, reached: 0
             }
         }
         case 'centre-sign': {
@@ -127,7 +130,7 @@ function build(random: Random, error: BachConicsDetectiveError): Built | null {
             return {
                 problem: say(`Aurkitu ${named('r', `${lineLatex}=0`)} zuzenetik $${d}$ distantziara dauden puntuak.`, `Halla los puntos que están a distancia $${d}$ de ${named('r', `${lineLatex}=0`)}.`, `أوجد النقاط التي تبعد $${d}$ عن ${named('r', `${lineLatex}=0`)}.`, `Find the points at distance $${d}$ from ${named('r', `${lineLatex}=0`)}.`),
                 lines: [line(LABELS.step, `\\frac{|${lineLatex}|}{${length}}=${d}`), line(LABELS.step, `${lineLatex}=${d * length}`), line(LABELS.result, `${polynomial([[A, 'x'], [B, 'y'], [C - d * length, '']])}=0`)],
-                wrong: 1, error, fix: `${lineLatex}=\\pm ${d * length}\\ \\to\\ ${polynomial([[A, 'x'], [B, 'y'], [C - d * length, '']])}=0\\quad ${polynomial([[A, 'x'], [B, 'y'], [C + d * length, '']])}=0`, right: 2, reached: 1
+                wrong: 1, error, fix: rows(`${lineLatex}=\\pm ${d * length}`, `\\to\\ ${polynomial([[A, 'x'], [B, 'y'], [C - d * length, '']])}=0`, `${polynomial([[A, 'x'], [B, 'y'], [C + d * length, '']])}=0`), right: 2, reached: 1
             }
         }
         case 'ellipse-c-sum': {
@@ -136,7 +139,7 @@ function build(random: Random, error: BachConicsDetectiveError): Built | null {
             return {
                 problem: say(`Aurkitu $${equation}$ elipsearen fokuak.`, `Halla los focos de la elipse $${equation}$.`, `أوجد بؤرتي القطع الناقص $${equation}$.`, `Find the foci of the ellipse $${equation}$.`),
                 lines: [line(LABELS.data, `a=${a}\\quad b=${b}`), line(LABELS.step, `c^2=${a * a}+${b * b}=${a * a + b * b}`), line(LABELS.result, `F(\\pm\\sqrt{${a * a + b * b}},0)`)],
-                wrong: 1, error, fix: `c^2=${a * a}-${b * b}=${c * c}\\ \\to\\ F(\\pm ${c},0)`, right: c, reached: Math.sqrt(a * a + b * b)
+                wrong: 1, error, fix: rows(`c^2=${a * a}-${b * b}=${c * c}`, `\\to\\ F(\\pm ${c},0)`), right: c, reached: Math.sqrt(a * a + b * b)
             }
         }
         case 'hyperbola-c-difference': {
@@ -145,7 +148,7 @@ function build(random: Random, error: BachConicsDetectiveError): Built | null {
             return {
                 problem: say(`Aurkitu $${equation}$ hiperbolaren fokuak.`, `Halla los focos de la hipérbola $${equation}$.`, `أوجد بؤرتي القطع الزائد $${equation}$.`, `Find the foci of the hyperbola $${equation}$.`),
                 lines: [line(LABELS.data, `a=${a}\\quad b=${b}`), line(LABELS.step, `c^2=${a * a}-${b * b}=${a * a - b * b}`), line(LABELS.result, `F(\\pm\\sqrt{${a * a - b * b}},0)`)],
-                wrong: 1, error, fix: `c^2=${a * a}+${b * b}=${c * c}\\ \\to\\ F(\\pm ${c},0)`, right: c, reached: Math.sqrt(a * a - b * b)
+                wrong: 1, error, fix: rows(`c^2=${a * a}+${b * b}=${c * c}`, `\\to\\ F(\\pm ${c},0)`), right: c, reached: Math.sqrt(a * a - b * b)
             }
         }
         case 'asymptote-inverted': {

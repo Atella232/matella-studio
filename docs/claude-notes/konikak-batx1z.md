@@ -62,6 +62,7 @@ Tercera unidad del bloque Geometría (reparto en paralelo de 1.º Ciencias, ver 
 - `npm test` (todas), `npm run lint` y `npm run build` en verde; inventario OK (juegos propios: conic, antenna, más el detective; herramientas propias: gardener, eccentricity, directrix).
 - Revisión a 375 px en eu, es y ar: lecciones con todos los pasos abiertos, figuras (sin textos fuera del dibujo), laboratorio, juegos, práctica, retos y banco con todas las soluciones abiertas. Sin desbordes, sin errores de KaTeX y sin fórmulas por debajo de 13 px.
 - Para que nada se desplace de lado en el móvil: `rows()` en `content.ts` parte en renglones (`gathered`) las explicaciones y soluciones largas (en cada `\qquad`/`\quad`, y en las flechas de las líneas de más de 28 caracteres); tres explicaciones van partidas a mano en el signo igual; en las lecciones, seis ejemplos y cuatro pasos van en renglones. El test de contenido revisa cada renglón por separado.
+- Fórmulas que solo salen al responder (corrección del detective, explicación de la antena y de «¿Qué cónica es?», solución de la carrera): medidas en una caja de 256 px; las del detective (4 errores) y la de la antena (nivel 2) van en renglones.
 - Hoja de revisión del euskera: `konikak-batx1z-revision.html` en la carpeta compartida de la sesión (enviada al dueño).
 
 ## Publicación
