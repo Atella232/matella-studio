@@ -78,7 +78,7 @@ function pieces(fn: (x: number) => number, from: number, to: number, box: PlaneB
  * One plane with curves, dots, dashed asymptotes (x = a, y = b or y = mx + n) and a column of notes. The box is
  * in grid squares; `units` says what a square is worth on each axis, and everything else is in real values.
  */
-function PlotFigure({ language, height, label, box, cell, units = [1, 1], labels = true, ox = 36, oy = 32, curves, dots = [], verticals = [], horizontals = [], obliques = [], notes = [], notesX = 420, caption }: {
+export function PlotFigure({ language, height, label, box, cell, units = [1, 1], labels = true, ox = 36, oy = 32, curves, dots = [], verticals = [], horizontals = [], obliques = [], notes = [], notesX = 420, caption }: {
     language: UnitLanguage
     height: number
     label: LocalizedText

@@ -172,7 +172,7 @@ export const courses: Course[] = [
       { id: 'conicas', name: 'Lugares Geométricos y Cónicas', nameEu: 'Leku Geometrikoak eta Konikak', nameAr: 'المحلات الهندسية والقطوع المخروطية', nameEn: 'Loci and Conic Sections', icon: '⭕' },
       { id: 'funciones', name: 'Funciones Elementales', nameEu: 'Funtzio Elementalak', nameAr: 'الدوال الأساسية', nameEn: 'Elementary Functions', icon: '📈', active: true },
       { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→', active: true },
-      { id: 'derivadas', name: 'Derivadas', nameEu: 'Deribatuak', nameAr: 'المشتقات', nameEn: 'Derivatives', icon: '📉' },
+      { id: 'derivadas', name: 'Derivadas', nameEu: 'Deribatuak', nameAr: 'المشتقات', nameEn: 'Derivatives', icon: '📉', active: true },
       { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️' },
       { id: 'integrales', name: 'Integrales', nameEu: 'Integralak', nameAr: 'التكاملات', nameEn: 'Integrals', icon: '∫' },
       { id: 'estadistica', name: 'Estadística Unidimensional', nameEu: 'Estatistika Unidimentsionala', nameAr: 'الإحصاء أحادي المتغير', nameEn: 'One-Variable Statistics', icon: '📊' },
