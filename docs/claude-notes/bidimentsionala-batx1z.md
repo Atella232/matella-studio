@@ -37,7 +37,7 @@ Sexta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `estadistica-bidime
 - **Trucos:** las dos rectas de las tijeras llevan colores fijos (azul Y sobre X, rojo X sobre Y): `STAGE` y `SECOND` cambian con la etapa y la leyenda no cuadraría. En árabe, el r de las fórmulas tiene que llevar punto (`tenthsLatex` da `{,}`: se cambia antes de MathText). La lectura en varias líneas, no con `\qquad`, para que quepa a 375 px.
 - **Revisión:** a 375 px en eu, es y ar, las cinco herramientas antes y después de predecir: sin desbordes, sin textos fuera del tablero y sin fórmulas que se deslicen. De paso, en las lecciones se partieron en filas (`gathered`) seis fórmulas de pasos que pasaban del ancho de su caja.
 
-## Fase 4: juegos
+## Fase 4: juegos (commit 702c12b7)
 
 - **Propios:**
   - `sign` «El signo de la covarianza» (`games/covarianceSign.ts`, niveles 115501–115503): una nube de seis puntos con el centro de gravedad dibujado (positiva, casi cero o negativa; |r| ≥ 0,6 o ≤ 0,15); cinco puntos numerados: cuál suma o resta más (gana por 2 o más y hay de los dos signos); y cuatro pares con σxy en cuartos, con «sin restar x̄ȳ» y «sin dividir entre N» como opciones falsas. Al responder salen los rectángulos verdes y corales.
@@ -50,6 +50,4 @@ Sexta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `estadistica-bidime
 - **Ancho a 375 px:** se midieron con KaTeX en la página (importando `katex.mjs` y `content.ts` desde Vite) todas las fórmulas de práctica, retos, ejercicios y diagnóstico; 25 que pasaban de unos 235 px se partieron en filas (`gathered`) o se acortaron. El test de contenido lee cada fila de un `gathered` como una igualdad.
 - **Revisión:** a 375 px en eu, es y ar, el centro de juegos y los seis juegos con sus niveles (respondiendo), las cinco secciones (portada, diagnóstico, práctica, ejercicios con todas las resoluciones abiertas y retos): sin desbordes ni fórmulas que se deslicen.
 
-## En curso
-
-- Fases 1+2, 3 y 4 hechas. Siguiente: hoja de revisión del euskera y cierre de la nota.
+**Cierre:** 2289 tests, lint y build en verde; inventario OK (3 juegos y 3 herramientas propios). Revisado a 375 px en eu, es y ar: las 16 lecciones con todos los pasos abiertos, las 5 herramientas antes y después de predecir, los 6 juegos respondiendo, portada, diagnóstico, práctica, ejercicios (con todas las resoluciones) y retos. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio) y mandada al dueño. Pendiente para más adelante: la versión de Sociales del tema (línea de `batx1-gizarte` en `courses.ts`, sin tocar).
