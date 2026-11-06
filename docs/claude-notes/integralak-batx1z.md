@@ -13,7 +13,7 @@ Es la octava unidad de Bachillerato y la quinta y última del bloque Análisis: 
 - **Libros:** Santillana 1.º Bach Ciencias U12 «Integral» (solucionario). Anaya Matemáticas I no tiene tema de integrales; Anaya Matemáticas II (2.º) U11–U12 solo se ha mirado como referencia de la parte común. Del libro solo se ha sacado el alcance; textos y ejercicios son propios.
 - **Orden de Santillana:** primitivas (F′ = f, la constante, la primitiva por un punto) → inmediatas (potencias, eˣ, 1/x, seno, coseno, 1 + tg², arcoseno, arcotangente) → compuestas (u′·uⁿ, u′·eᵘ, u′/u, ajustar constantes, arcotangente completando el cuadrado) → integral definida y Barrow → área con signo → área entre dos curvas.
 - **Fuera:** integración por partes, cambio de variable general y fracciones simples (son de 2.º).
-- **Euskera:** jatorrizkoa (primitiva), integral mugagabea / mugatua, Barrow-ren erregela, azalera, ebaki-puntuak. Pendiente de que el dueño confirme los nombres que usa en clase.
+- **Euskera:** jatorrizkoa (primitiva), integral mugagabea / mugatua, Barrow-ren erregela, azalera, ebaki-puntuak. El dueño los confirmó el 2026-11-06.
 
 **Etapas y lecciones (ids):**
 
@@ -80,4 +80,4 @@ Es la octava unidad de Bachillerato y la quinta y última del bloque Análisis: 
 - **Comprobado:** 2354 tests, lint y build en verde; inventario OK (3 juegos propios + detective; 4 herramientas propias más las 2 prestadas de Derivadas, que el script cuenta como propias).
 - **Hoja de euskera** para el dueño: `integralak-batx1z-euskera.html` en las notas compartidas de la sesión principal (enviada).
 - **Sin publicar:** la publicación la decide el dueño desde la sesión principal.
-- **Pendiente del dueño:** confirmar los nombres en euskera (jatorrizkoa, integral mugagabea / mugatua, Barrow-ren erregela, azalera, ebaki-puntuak).
+- **Euskera confirmado por el dueño (2026-11-06):** jatorrizkoa, integral mugagabea / mugatua, Barrow-ren erregela, azalera, ebaki-puntuak.
