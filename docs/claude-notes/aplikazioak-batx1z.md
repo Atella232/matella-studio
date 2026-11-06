@@ -55,14 +55,28 @@ Es la séptima unidad de Bachillerato y la cuarta del bloque Análisis: curso `b
 - **Test:** `tests/aplikazioak-batx1z-lab.test.ts` (además comprueba con derivadas numéricas f′ y f″ de cada función, que las marcas de «Monta la gráfica» son lo que dicen y que las asíntotas lo son).
 - **Revisión a 375 px:** las 6 herramientas en eu, es y ar, antes y después de predecir, sin desbordes; tableros mirados en capturas.
 
+**Fase 4, juegos (`games/`):**
+- **Juegos propios (3 + detective):**
+  - `updown` «Sube o baja» (`updown.ts`, ids 111501–111503): la tabla de signos de f′ (tira verde/roja con puntos ámbar y huecos) y tres gráficas pequeñas; ¿cuál es f? Nivel 1, parábolas; nivel 2, cúbicas; nivel 3, también un punto plano (a(x − h)³) y una hipérbola con hueco. Las malas son la misma curva dada la vuelta y la curva movida al menos 2 unidades.
+  - `extrema` «Caza los extremos» (`extrema.ts`, ids 111601–111603): la gráfica es f′; tres puntos A, B y C en el eje; ¿dónde tiene f un máximo, un mínimo o un punto con f′ = 0 sin extremo? Nivel 1, f′ parábola (el vértice como señuelo); nivel 2, tres ceros simples igual de separados; nivel 3, un cero doble (f′ toca el eje). f′ se escala para que la zona de los ceros llene el plano; fuera puede salirse.
+  - `shape` «¿∪ o ∩?» (`shape.ts`, ids 111651–111653): ∪, ∩ o inflexión en un punto; nivel 1 desde una gráfica (parábolas y cúbicas de `curves.ts` de Derivadas), nivel 2 desde f″ (incluida la trampa (x − r)²), nivel 3 desde f (incluida la trampa x⁴ + c).
+  - `detective` (`detective.ts`, ids 111701–111703): 12 errores en 3 niveles (signo de f en vez de f′, un intervalo que salta un hueco, «f′ = 0 ⇒ extremo», f″ > 0 como máximo; «f″ = 0 ⇒ inflexión», f′ para la inflexión, la altura en f′, f′ > 0 como ∪; los bordes de [a, b], x en vez del valor, el perímetro entero, un hueco como extremo). Las líneas no llevan palabras: ↗↘ y ∪∩.
+- **Carrera** (`race.ts`, ids 111401–111405): 15 tipos en 5 circuitos, uno por etapa; cada pregunta lleva `meta` y el test la recalcula numéricamente.
+- **Memoria** (`boards.ts`, ids 111801–111803): función ↔ x del vértice, función ↔ x de la inflexión, x(S − x) ↔ valor máximo.
+- **Hub:** `index.tsx` con `BachApplicationsGames`; `info.ts` (slugs `lasterketa`, `gora-behera`, `muturrak`, `kurbadura`, `detektibea`, `memoria`); `GameArt.tsx`; `BachApplicationsGames.css`.
+- **Test:** `tests/aplikazioak-batx1z-games.test.ts`.
+- **Revisión a 375 px:** los seis juegos en eu, es y ar sin desbordes; cartas de memoria de 75 px como mucho (miden 106); líneas del detective de 245 px como mucho (caben unos 255).
+
 ## Trucos
 
 - **Fórmulas largas:** a 375 px el banco tiene 257 px de ancho; todo lo que lleva `\qquad` con dos partes va en filas con `\begin{aligned}`. En pantalla ancha (1024), un paso con fórmula muy larga deja el texto del paso en una columna estrechísima (el diseño común pone la fórmula a la derecha); también pasa en Derivadas. Aquí se parten las que dejaban menos de 60 px.
 - **Revisar figuras:** con el panel oculto, lo más fiable es abrir la figura con «Ampliar» y hacer captura de la ventana.
 - **Las soluciones del banco** solo se abren después de escribir un intento; para revisarlas a 375 px hay que rellenar los campos.
 - **Predicciones del laboratorio desde JS:** `button.click()` no las marca; `dispatchEvent(new MouseEvent('click', { bubbles: true }))` sí.
+- **Ancho de las líneas del detective:** se puede medir sin jugar, importando en la consola del navegador `/node_modules/katex/dist/katex.mjs` y el módulo `games/detective.ts?t=…` (con `?t=` para no leer el módulo viejo) y dibujando cada línea a 21 px.
+- **Memoria:** sin término independiente (x² − 6x, no x² − 6x + 5); con él, la carta llegaba a 104 px.
 - **Colores en el laboratorio:** en la etapa verde (`graphs`) los mínimos van en violeta propio, porque la curva ya es verde.
 
 ## En curso
 
-- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos (J1 «Sube o baja», J2 «Caza los extremos», J4 «¿∪ o ∩?», detective, carrera y memoria).
+- Fases 1+2, 3 y 4 hechas. Siguiente: cierre (commit de la fase 4, inventario, hoja de euskera, nota).

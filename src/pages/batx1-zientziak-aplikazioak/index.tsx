@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bachApplicationsChallenges, bachApplicationsDiagnostic, bachApplicationsExerciseBank, bachApplicationsPractice } from './content'
 import { BachApplicationsHeroArt } from './figures'
+import { BachApplicationsGames } from './games'
+import { BACH_APPLICATIONS_GAME_RECORDS_KEY, bachApplicationsGameProgressIds } from './games/info'
 import { BachApplicationsLaboratory } from './lab'
 import { bachApplicationsLabChallengeIds, bachApplicationsLabToolForTopic, bachApplicationsLabTools } from './lab/labTools'
 import { bachApplicationsStages, bachApplicationsTopics } from './lessons'
@@ -36,6 +38,17 @@ const aplikazioakBatx1zUnit: UnitDefinition = {
         progressIds: bachApplicationsLabChallengeIds,
         toolForTopic: bachApplicationsLabToolForTopic,
         render: (props) => <BachApplicationsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, igo ala jaitsi, ehizatu muturrak, ∪ ala ∩?, aplikazioen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, sube o baja, caza los extremos, ¿∪ o ∩?, detective de aplicaciones y memoria.',
+            en: 'Six games: race, up or down, hunt the extrema, ∪ or ∩?, applications detective and memory.',
+            ar: 'ست ألعاب: السباق، وتصعد أم تنزل، واصطد القيم القصوى، و∪ أم ∩؟، ومخبر التطبيقات، والذاكرة.'
+        },
+        progressIds: bachApplicationsGameProgressIds,
+        recordsKey: BACH_APPLICATIONS_GAME_RECORDS_KEY,
+        render: (props) => <BachApplicationsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
