@@ -80,6 +80,10 @@ Es la sexta unidad de Bachillerato y la tercera del bloque Análisis: curso `bat
 - **Dos binomios no caben en una carta** a 375 px: (x + 4)(x − 5) mide 111 px; la memoria usa x(x + p) y x²(x + p).
 - **Etiquetas de los coches de la carrera:** en árabe, «f′» sale «′f»; usa una sola letra.
 
-## En curso
+## Cierre (2026-11-06)
 
-- Fases 1+2, 3 y 4 terminadas (commits en esta rama). Falta el cierre: inventario, hoja de euskera, nota final sin «En curso» y el mensaje al dueño.
+- **Comprobado:** 2282 tests, lint y build en verde; revisión a 375 px en eu, es y ar de las 15 lecciones, las 6 herramientas y los 6 juegos.
+- **Inventario:** OK (3 juegos propios más el detective; el script cuenta 5 herramientas propias porque `composition` está definida dentro de esta unidad, pero es la de Funciones: las propias de verdad son 4).
+- **Hoja de euskera:** `hoja-revision.mjs` con `--herramientas secant,smooth,slope-graph,chain --juegos slopes,match,tangent,detective`, enviada al dueño. Como en Funciones y Limiteak, no trae los retos fijos del laboratorio ni los ejercicios de `content.ts`.
+- **Motor común:** sin cambios, salvo el registro en `paths.ts`. En Limiteak solo cambia `export` en `PlotFigure`.
+- **Sin publicar:** la rama es `feat/deribatuak-batx1z`; publicar lo decide el dueño desde la sesión principal.
