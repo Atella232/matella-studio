@@ -50,6 +50,7 @@ const DeribatuakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-deribat
 const SistemakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-sistemak').then((module) => ({ default: module.SistemakBatx1zIntroPage })))
 const EstatistikaBatx1zPage = lazy(() => import('../pages/batx1-zientziak-estatistika').then((module) => ({ default: module.EstatistikaBatx1zIntroPage })))
 const KonikakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-konikak').then((module) => ({ default: module.KonikakBatx1zIntroPage })))
+const BidimentsionalaBatx1zPage = lazy(() => import('../pages/batx1-zientziak-bidimentsionala').then((module) => ({ default: module.BidimentsionalaBatx1zIntroPage })))
 const PolinomikoakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-polinomikoak').then((module) => ({ default: module.PolinomikoakDbh4AkIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
@@ -447,6 +448,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx1-zientziak/conicas/*',
                         element: <KonikakBatx1zPage />,
+                    },
+                    // Estadística bidimensional de 1.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx1-zientziak/estadistica-bidimensional/*',
+                        element: <BidimentsionalaBatx1zPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {
