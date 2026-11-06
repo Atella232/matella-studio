@@ -57,10 +57,15 @@ V1 repaso corto y lo nuevo a fondo; V2 sec, cosec y cotg aquí; V3 ecuaciones en
 - El test compartido `lesson-texts` compara las fórmulas en orden: si en árabe o en inglés la frase pone las fórmulas al revés que en castellano («pon A en lugar de B»), falla. Escribe la frase en el mismo orden.
 - En SVG, varios espacios seguidos se juntan en uno: dos valores en la misma línea van en dos `<text>`.
 - Revisión de figuras con el panel oculto: clonar el SVG en un `div` fijo a 367 px y hacer `zoom` de la captura. El auditor de desbordes debe saltarse `.hide-tail` (la raíz de KaTeX dibuja una cola muy larga recortada).
-
 - En las herramientas, los números de los tableros llevan el signo menos tipográfico (`num` en `TrigonometryTools.tsx`); `dec` deja el guion.
-- Pendiente fuera de esta unidad: en árabe, la herramienta `wave` de 4.º saca las etiquetas «6» y «−6» 1–3 px fuera del tablero. No se ha tocado (es de otra unidad).
+- Banco a 375 px: las soluciones solo se ven tras escribir un intento; el auditor rellena cada campo con «1», pulsa «Comparar con la resolución» y recorre los cinco temas del desplegable.
+- Hoja de euskera: tras `hoja-revision.mjs`, cambiar en cada fila `\sen`, `\tg`, `\cosec`, `\cotg` (y `\sin`, `\tan`, `\csc`, `\cot`) por los nombres de cada columna, porque KaTeX no conoce `\sen` ni `\cosec`.
 
-## En curso
+## Cierre (2026-11-06)
 
-- Fases 1+2 (72f2ee1a), 3 (18158e89) y 4 hechas. Siguiente: cierre (revisión a 375 px de ejercicios, práctica, retos y banco en eu, es y ar; hoja de euskera; informe).
+- Fases: 1+2 (72f2ee1a), 3 (18158e89), 4 (88d44edd) y arreglos del cierre (ver el último commit de la rama).
+- `npm test` (2253), `npm run lint` y `npm run build` en verde; inventario OK (4 juegos propios, 3 herramientas propias).
+- Revisión a 375 px en eu, es y ar: 15 lecciones (sin desbordes, sin textos fuera del SVG ni solapados), laboratorio con predicción hecha, los 7 juegos, diagnóstico, práctica (20 respuestas correctas), retos (15) y banco con las 50 soluciones abiertas. Arreglados en el cierre: la explicación del reto 103 y la solución 40 del banco, que no cabían.
+- Hoja de euskera en la carpeta de notas compartidas: `trigonometria-batx1z-revision.html`.
+- Pendientes fuera de la unidad (no tocados): la herramienta `wave` de 4.º saca «6» y «−6» 1–3 px fuera del tablero en árabe; `spokenLatex` de la memoria lee `\operatorname{cosec}` y `\sqrt{3}` tal cual.
+- Para el tema 3 (complejos): el test de sufijos vascos confunde `$z$` con un «-z» pegado; escribir `${z}$` (nota compartida `basque-z-suffix-test.md`).
