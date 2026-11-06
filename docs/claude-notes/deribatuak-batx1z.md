@@ -82,7 +82,7 @@ Es la sexta unidad de Bachillerato y la tercera del bloque Análisis: curso `bat
 
 ## Cierre (2026-11-06)
 
-- **Comprobado:** 2282 tests, lint y build en verde; revisión a 375 px en eu, es y ar de las 15 lecciones, las 6 herramientas y los 6 juegos.
+- **Comprobado:** 2282 tests, lint y build en verde; revisión a 375 px en eu, es y ar de las 15 lecciones, las 6 herramientas, los 6 juegos, el diagnóstico, la práctica guiada, los retos y el banco (con las soluciones abiertas). Diez soluciones largas (banco 4, 18, 34, 35 y 39; práctica 12 y 14; retos 102, 103 y 106) pedían desplazamiento lateral: van en dos filas con `aligned`.
 - **Inventario:** OK (3 juegos propios más el detective; el script cuenta 5 herramientas propias porque `composition` está definida dentro de esta unidad, pero es la de Funciones: las propias de verdad son 4).
 - **Hoja de euskera:** `hoja-revision.mjs` con `--herramientas secant,smooth,slope-graph,chain --juegos slopes,match,tangent,detective`, enviada al dueño. Como en Funciones y Limiteak, no trae los retos fijos del laboratorio ni los ejercicios de `content.ts`.
 - **Motor común:** sin cambios, salvo el registro en `paths.ts`. En Limiteak solo cambia `export` en `PlotFigure`.
