@@ -1,0 +1,23 @@
+/* ¿Dónde cae el punto?, Ordena las máquinas and Deshaz la máquina (Funtzio elementalak, Batxilergoa 1 · Zientziak) */
+.fraction-v2-games-card[data-game="where"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="order"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="undo"] { --game-tint: var(--success-tint, #d9efe2); }
+
+.bach-fn-big { text-align: center; font-size: 24px; }
+.bach-fn-plane { width: 100%; max-width: 360px; margin: 0 auto; }
+.bach-fn-plane svg { display: block; width: 100%; height: auto; cursor: crosshair; touch-action: manipulation; }
+.bach-fn-picked { margin: 0; min-width: 72px; text-align: center; font-size: 19px; font-weight: 700; }
+
+.bach-fn-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 2px; }
+.bach-fn-end { font-size: 22px; font-weight: 700; font-style: italic; padding: 0 4px; }
+.bach-fn-slot-wrap { display: inline-flex; align-items: center; gap: 2px; }
+.bach-fn-arrow { font-size: 20px; color: var(--muted); }
+.bach-fn-slot { min-width: 66px; min-height: 48px; padding: 4px 8px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 19px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.bach-fn-slot.empty { border-style: dashed; color: var(--muted); box-shadow: none; font-size: 15px; }
+.bach-fn-slot:disabled { cursor: default; }
+.bach-fn-slot.fixed { display: inline-flex; align-items: center; justify-content: center; background: var(--paper); box-shadow: none; cursor: default; }
+.bach-fn-given { margin-top: 4px; }
+.bach-fn-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; margin-top: 10px; }
+.bach-fn-card { min-height: 48px; padding: 4px 8px; border: 2px solid var(--ink); border-radius: 12px; background: var(--mustard-tint, #fbebc0); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 19px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.bach-fn-card:disabled { opacity: 0.45; cursor: default; box-shadow: none; }
+.bach-fn-chain { font-size: 18px; font-weight: 700; }
