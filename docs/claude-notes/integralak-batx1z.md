@@ -70,11 +70,14 @@ Es la octava unidad de Bachillerato y la quinta y última del bloque Análisis: 
 ## Trucos
 
 - En el navegador, los botones de predicción no responden a `dispatchEvent`; sí a llamar a `onClick` desde `__reactProps…` del botón (o a un clic real).
-
 - Las fórmulas largas de pasos, ejemplos, soluciones y errores típicos van en `\begin{aligned}&…\\ &=…\end{aligned}`: a 375 px el banco tiene unos 257 px y los pasos unos 237 px.
 - El SVG de una figura se puede mirar grande en el navegador fijándolo arriba a la izquierda con 720 px de ancho (`position: fixed`) y haciendo zoom de esa zona; el modal «Ampliar» gira la figura en el móvil.
 - `PropertiesFigure` usa f(x) = 2,705·e^(−0,3539x), con ∫₀³ f ≈ 5 y ∫₃⁷ f ≈ 2.
 
-## En curso
+## Cierre
 
-- **Siguiente paso:** el cierre: hoja de euskera para el dueño (`hoja-revision.mjs`), repaso final a 375 px y sección «Cierre» en esta nota.
+- **Commits en `feat/integralak-batx1z`:** db9efa8 (fases 1+2), e44849c (fase 3), 3b51045 (fase 4) y el de esta nota.
+- **Comprobado:** 2354 tests, lint y build en verde; inventario OK (3 juegos propios + detective; 4 herramientas propias más las 2 prestadas de Derivadas, que el script cuenta como propias).
+- **Hoja de euskera** para el dueño: `integralak-batx1z-euskera.html` en las notas compartidas de la sesión principal (enviada).
+- **Sin publicar:** la publicación la decide el dueño desde la sesión principal.
+- **Pendiente del dueño:** confirmar los nombres en euskera (jatorrizkoa, integral mugagabea / mugatua, Barrow-ren erregela, azalera, ebaki-puntuak).
