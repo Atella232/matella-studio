@@ -1,0 +1,12 @@
+/* ¿Dónde cae el afijo?, Gira y estira y Caza las raíces (Zenbaki konplexuak, Batxilergoa 1 · Zientziak) */
+.fraction-v2-games-card[data-game="affix"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="twist"] { --game-tint: var(--coral-tint, #f6d9d2); }
+.fraction-v2-games-card[data-game="hunt"] { --game-tint: var(--success-tint, #d9efe2); }
+
+.konplexuak-asked { text-align: center; font-size: 20px; padding: 6px 0; }
+.dbh4-scene.konplexuak-grid,
+.dbh4-scene.konplexuak-hunt { max-width: 340px; }
+.dbh4-scene.konplexuak-grid g[role="button"]:focus-visible circle:last-of-type,
+.dbh4-scene.konplexuak-hunt g[role="button"]:focus-visible circle:last-of-type { outline: none; stroke: var(--blue, #2f5fb3); stroke-width: 3; }
+.prop3-options.konplexuak-letters { grid-template-columns: repeat(4, 1fr); }
+.prop3-options.konplexuak-letters button { min-height: 52px; font-size: 20px; font-weight: 700; }

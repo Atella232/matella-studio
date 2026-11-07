@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from '../dbh4-akademikoak-trigonometria/answers'
 import { complexChallenges, complexDiagnostic, complexExerciseBank, complexPractice } from './content'
 import { ComplexHeroArt } from './figures'
+import { KonplexuakBatx1zGames } from './games'
+import { KONPLEXUAK_BATX1Z_GAME_RECORDS_KEY, konplexuakBatx1zGameProgressIds } from './games/info'
 import { KonplexuakBatx1zLaboratory } from './lab'
 import { konplexuakBatx1zLabChallengeIds, konplexuakBatx1zLabToolForTopic, konplexuakBatx1zLabTools } from './lab/labTools'
 import { complexStages, complexTopics } from './lessons'
@@ -37,6 +39,17 @@ const konplexuakBatx1zUnit: UnitDefinition = {
         progressIds: konplexuakBatx1zLabChallengeIds,
         toolForTopic: konplexuakBatx1zLabToolForTopic,
         render: (props) => <KonplexuakBatx1zLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, non dago afixua?, biratu eta luzatu, ehizatu erroak, konplexuen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿dónde cae el afijo?, gira y estira, caza las raíces, detective de complejos y memoria.',
+            en: 'Six games: race, where is the affix?, turn and stretch, hunt the roots, complex numbers detective and memory.',
+            ar: 'ست ألعاب: السباق، أين تقع الصورة؟، أدِر ومدّ، اصطد الجذور، مخبر الأعداد المركبة والذاكرة.'
+        },
+        progressIds: konplexuakBatx1zGameProgressIds,
+        recordsKey: KONPLEXUAK_BATX1Z_GAME_RECORDS_KEY,
+        render: (props) => <KonplexuakBatx1zGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat (3/4), komarekin edo puntuarekin (0,75 edo 0.75). Argumentuak gradutan, 0° eta 360° artean. Negatiboak minus ikurrarekin.', es: 'Escribe un número o una fracción (3/4), con coma o con punto (0,75 o 0.75). Los argumentos, en grados entre 0° y 360°. Los negativos, con signo menos.', en: 'Write a number or a fraction (3/4); a decimal point or a comma both work (0.75). Arguments in degrees, between 0° and 360°. Negatives with a minus sign.', ar: 'اكتب عددًا أو كسرًا (3/4) بالنقطة أو بالفاصلة (0.75). والعُمَد بالدرجات بين 0° و360°. والسالب بإشارة الناقص.' },

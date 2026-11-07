@@ -49,6 +49,17 @@ V1 polar $r_\alpha$ (subíndice) y también la forma trigonométrica $r(\cos\alp
 - Prestadas con sus ids: `vector` y `combination` de 4.º vectores (73101–73104 y 73201–73204), `circle` de 4.º trigonometría (71001–71004) y `spin` de `trigonometria-batx1z` (103201–103205).
 - Test `tests/konplexuak-batx1z-lab.test.ts`: retos resueltos por un estado conocido y no resueltos al abrir; 150 retos infinitos por herramienta; la imagen y su cuadrante para todos los z; $|zw|=|z||w|$ y $\arg(zw)=\arg z+\arg w$ para todos los z y w; cada raíz elevada a n devuelve w.
 
+### Fase 4: juegos
+
+- Seis juegos (`games/info.ts`), ids 104401–104813:
+  - `race` (104401–104405, `race.ts`): cinco circuitos, uno por etapa (partes, opuesto y conjugado; parte real de un producto o cociente y potencias de i; módulo, argumento y parte real de $r_\alpha$; argumento del producto, módulo del cociente y Moivre; módulo de las raíces, primer argumento, separación y cuántas reales). Las opciones malas son los errores típicos; cada pregunta lleva `meta` para el test.
+  - `affix` J1 «¿Dónde cae el afijo?» (104501–104503, `affix.ts`): se toca un punto entero de −5 a 5. Nivel 1 número, opuesto y conjugado; nivel 2 suma, producto, cuadrado y división con resultado entero; nivel 3 polar con múltiplos de 90° o $k\sqrt{2}$ y 45°, forma trigonométrica, $i^n\cdot z$ y $(1+i)^n$.
+  - `twist` J2 «Gira y estira» (104601–104603, `twist.ts`): z en el plano y cuatro puntos A–D (la respuesta y tres errores: girar al otro lado, conjugado por opuesto, cambiar las partes sin signo, estirar sin girar).
+  - `hunt` J3 «Caza las raíces» (104701–104703, `hunt.ts`): el diseño de `hunt` del tema 2 (un punto cada 15°); solo n = 2, 3, 4 y 6 y argumentos que dejan las raíces en múltiplos de 15°.
+  - `detective` J4 (104801–104803, `detective.ts`): 12 errores típicos de la unidad.
+  - `memory` (104811–104813, `boards.ts`): $k\,i^n$ ↔ valor, polar ↔ binómica, operación ↔ resultado.
+- Tests `tests/konplexuak-batx1z-games.test.ts` (cada ronda se recalcula con el evaluador de complejos) y `tests/konplexuak-batx1z-math.ts` (el evaluador, compartido con el test de contenido; no es un test).
+
 ## Trucos
 
 - Los tests compartidos (`lesson-checks`, `lesson-texts`) tratan `i` como una letra que puede valer cualquier número. Un «Compruébalo» con una sola fórmula de cálculo con `i` en el enunciado y una sola en la respuesta falla: el enunciado lleva dos fórmulas (`${z}=…$` y lo que se pregunta).
@@ -58,5 +69,5 @@ V1 polar $r_\alpha$ (subíndice) y también la forma trigonométrica $r(\cos\alp
 
 ## En curso
 
-- Fases 1+2 y 3 hechas (ver los commits de la rama). Siguiente: fase 4, juegos (J1 dónde cae el afijo, J2 gira y estira, J3 caza las raíces con el diseño de `hunt` del tema 2, J4 detective, J5 carrera y memoria).
+- Fases 1+2, 3 y 4 hechas (ver los commits de la rama). Siguiente: cierre (revisión a 375 px en eu, es y ar; hoja de euskera; aviso a la sesión principal).
 - Truco para empezar: el test de sufijos vascos confunde `$z$` con un «-z» pegado; escribir `${z}$` en los cuatro idiomas (nota compartida `basque-z-suffix-test.md`).
