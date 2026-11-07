@@ -74,3 +74,7 @@ V1 polar $r_\alpha$ (subíndice) y también la forma trigonométrica $r(\cos\alp
 - Revisión a 375 px en eu, es y ar: 15 lecciones con todos los pasos y la figura (sin desbordes, sin textos fuera del SVG ni solapados), laboratorio con predicción hecha y varios estados de las raíces, los 6 juegos con sus 3 niveles (también con respuestas falladas), diagnóstico, práctica (20 bien), retos (15 bien) y banco con las 50 soluciones abiertas, portada, resumen y menú de juegos. Arreglados en el cierre: cuatro rótulos de figuras, «Re» e «Im» de los tableros del laboratorio, y dos casos del detective que no cabían (se parten en dos filas).
 - Hoja de euskera en la carpeta de notas compartidas: `konplexuak-batx1z-revision.html` (tras `hoja-revision.mjs`, nombres de sen y tg por columna y «…» donde la pantalla pone un número variable).
 - Pendiente fuera de la unidad (no tocado): en las herramientas `vector` y `combination` de 4.º vectores, la «y» del eje sale medio cortada arriba y la «x» 2 px fuera a la derecha.
+
+## Publicación
+
+Publicada en matella.net el 2026-11-07 (`main` 4ea794c, bundle `index-BEQ4mLjw.js`), la última de los 17 temas de 1.º Ciencias. La rama ya traía `main` fusionado, así que entró por avance rápido y sin choques. Antes de publicar: 2683 tests, lint y build en verde, y sin claves de guardado repetidas. Comprobado en vivo a 375 px en eu, es y ar (portada, lecciones 1, 8 y 15, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola. La página del curso muestra los 17 temas activos.
