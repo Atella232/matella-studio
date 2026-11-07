@@ -186,7 +186,7 @@ export function ComplexPlaneFigure({ language }: { language: UnitLanguage }) {
             <Dot p={minus} color={SECOND} />
             <Dot p={bar} color={GREEN} />
             <F x={z[0] + 14} y={z[1] - 10} size={23} color={STAGE} anchor="start">z = 3 + 2i</F>
-            <F x={minus[0] - 14} y={minus[1] + 30} size={23} color={SECOND} anchor="start">−z = −3 − 2i</F>
+            <F x={minus[0] - 14} y={minus[1] + 44} size={23} color={SECOND} anchor="start">−z = −3 − 2i</F>
             <F x={bar[0] + 14} y={bar[1] + 30} size={23} color={GREEN} anchor="start"><Bar /> = 3 − 2i</F>
         </Figure>
     )
@@ -201,7 +201,7 @@ export function SumFigure({ language }: { language: UnitLanguage }) {
     const z2 = at(O, u, 4, -1)
     const total = at(O, u, 6, 2)
     return (
-        <Figure height={320} label={pickText(language, say('Batuketa paralelogramoaren erregelarekin: 2 + 3i gehi 4 − i, 6 + 2i', 'La suma con la regla del paralelogramo: 2 + 3i más 4 − i da 6 + 2i', 'الجمع بقاعدة متوازي الأضلاع: 2 + 3i زائد 4 − i يساوي 6 + 2i', 'The sum with the parallelogram rule: 2 + 3i plus 4 − i is 6 + 2i'))}>
+        <Figure height={334} label={pickText(language, say('Batuketa paralelogramoaren erregelarekin: 2 + 3i gehi 4 − i, 6 + 2i', 'La suma con la regla del paralelogramo: 2 + 3i más 4 − i da 6 + 2i', 'الجمع بقاعدة متوازي الأضلاع: 2 + 3i زائد 4 − i يساوي 6 + 2i', 'The sum with the parallelogram rule: 2 + 3i plus 4 − i is 6 + 2i'))}>
             <Plane o={O} unit={u} x={[-1, 7]} y={[-2, 4]} numbers={[['x', 2], ['x', 4], ['x', 6]]} />
             <line x1={z1[0]} y1={z1[1]} x2={total[0]} y2={total[1]} stroke={MUTED} strokeWidth={2} strokeDasharray="7 6" />
             <line x1={z2[0]} y1={z2[1]} x2={total[0]} y2={total[1]} stroke={MUTED} strokeWidth={2} strokeDasharray="7 6" />
@@ -214,7 +214,7 @@ export function SumFigure({ language }: { language: UnitLanguage }) {
             <Card x={430} y={40} width={270} color={STAGE}>2 + 3i</Card>
             <Card x={430} y={110} width={270} color={GREEN}>4 − i</Card>
             <Card x={430} y={180} width={270} color={SECOND} tint={ROSE}>6 + 2i</Card>
-            <W x={565} y={276} language={language} text={say('Zati errealak eta irudikariak, bakoitza bere aldetik', 'Reales con reales, imaginarias con imaginarias', 'الحقيقي مع الحقيقي، والتخيلي مع التخيلي', 'Real with real, imaginary with imaginary')} />
+            <W x={360} y={318} language={language} text={say('Zati errealak eta irudikariak, bakoitza bere aldetik', 'Reales con reales, imaginarias con imaginarias', 'الحقيقي مع الحقيقي، والتخيلي مع التخيلي', 'Real with real, imaginary with imaginary')} />
         </Figure>
     )
 }
@@ -277,7 +277,7 @@ export function PowersOfIFigure({ language }: { language: UnitLanguage }) {
             <Card x={450} y={108} width={250}>i⁵ = i</Card>
             <Card x={450} y={176} width={250}>i⁶ = −1</Card>
             <Card x={450} y={244} width={250}>i⁷ = −i</Card>
-            <W x={575} y={326} language={language} text={say('Lauka errepikatzen dira', 'Se repiten de cuatro en cuatro', 'تتكرر كل أربع', 'They repeat every four')} />
+            <W x={575} y={326} language={language} text={say('Lauka errepikatzen dira', 'Se repiten cada cuatro', 'تتكرر كل أربع', 'They repeat every four')} />
         </Figure>
     )
 }
@@ -333,7 +333,7 @@ export function ModulusArgumentFigure({ language }: { language: UnitLanguage }) 
             <Card x={450} y={40} width={250} color={STAGE}>|z| = 2</Card>
             <Card x={450} y={110} width={250}>{trig(language, 'tg α = −√3')}</Card>
             <Card x={450} y={180} width={250} color={SECOND} tint={ROSE}>α = 120°</Card>
-            <W x={575} y={276} language={language} text={say('Ez −60°: bigarren koadrantea', 'No −60°: segundo cuadrante', 'لا −60°: الربع الثاني', 'Not −60°: second quadrant')} />
+            <W x={575} y={312} language={language} text={say('Ez −60°: bigarren koadrantea', 'No −60°: segundo cuadrante', 'لا −60°: الربع الثاني', 'Not −60°: second quadrant')} />
         </Figure>
     )
 }
@@ -429,7 +429,7 @@ export function PowerSpiralFigure({ language }: { language: UnitLanguage }) {
                 </g>
             ))}
             <F x={powers[0][0] + 12} y={powers[0][1] + 6} size={23} color={STAGE} anchor="start">{names[0]}</F>
-            <F x={powers[1][0] + 12} y={powers[1][1] - 6} size={23} color={SECOND} anchor="start">{names[1]}</F>
+            <F x={powers[1][0] + 14} y={powers[1][1] + 22} size={23} color={SECOND} anchor="start">{names[1]}</F>
             <F x={powers[2][0] - 10} y={powers[2][1] - 12} size={23} color={SECOND} anchor="end">{names[2]}</F>
             <F x={powers[3][0] - 12} y={powers[3][1] - 8} size={23} color={SECOND} anchor="end">{names[3]}</F>
             <F x={powers[4][0] - 12} y={powers[4][1] + 24} size={23} color={SECOND} anchor="end">{names[4]}</F>
@@ -458,7 +458,7 @@ export function RootsFigure({ language, kind }: { language: UnitLanguage; kind: 
         equation: say('z³ = −8 ekuazioaren hiru soluzioak: 1 + √3 i, −2 eta 1 − √3 i', 'Las tres soluciones de z³ = −8: 1 + √3 i, −2 y 1 − √3 i', 'حلول z³ = −8 الثلاثة: 1 + √3 i و−2 و1 − √3 i', 'The three solutions of z³ = −8: 1 + √3 i, −2 and 1 − √3 i')
     }[kind]
     return (
-        <Figure height={340} label={pickText(language, caption)}>
+        <Figure height={352} label={pickText(language, caption)}>
             <line x1={O[0] - r - 40} y1={O[1]} x2={O[0] + r + 40} y2={O[1]} stroke={MUTED} strokeWidth={1.6} />
             <line x1={O[0]} y1={O[1] - r - 26} x2={O[0]} y2={O[1] + r + 26} stroke={MUTED} strokeWidth={1.6} />
             <F x={O[0] + r + 40} y={O[1] + 28} size={21} color={MUTED} anchor="end">Re</F>
@@ -474,7 +474,7 @@ export function RootsFigure({ language, kind }: { language: UnitLanguage; kind: 
                     <g key={labels[index]}>
                         <line x1={O[0]} y1={O[1]} x2={p[0]} y2={p[1]} stroke={MUTED} strokeWidth={1.8} strokeDasharray="6 5" />
                         <Dot p={p} color={SECOND} />
-                        <F x={label[0]} y={label[1] + (Math.sin(rad(angle)) > 0.5 ? -4 : Math.sin(rad(angle)) < -0.5 ? 22 : 8)} size={23} color={SECOND} anchor={anchor}>{labels[index]}</F>
+                        <F x={label[0]} y={label[1] + (Math.sin(rad(angle)) > 0.5 ? -4 : Math.sin(rad(angle)) < -0.5 ? 20 : 8)} size={23} color={SECOND} anchor={anchor}>{labels[index]}</F>
                     </g>
                 )
             })}

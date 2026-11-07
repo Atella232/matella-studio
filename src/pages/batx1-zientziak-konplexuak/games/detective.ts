@@ -182,8 +182,8 @@ function build(random: Random, error: ComplexDetectiveError): Built | null {
             const wrongReal = r * ratios.s
             return {
                 problem: say(`Idatzi $${r}_{${angle}°}$ forma binomikoan.`, `Escribe $${r}_{${angle}°}$ en forma binómica.`, `اكتب $${r}_{${angle}°}$ بالشكل الجبري.`, `Write $${r}_{${angle}°}$ in binomial form.`),
-                lines: [line(LABELS.formula, `a=${r}\\sen ${angle}°\\qquad b=${r}\\cos ${angle}°`), line(LABELS.data, `\\sen ${angle}°=${ratios.sin}\\qquad\\cos ${angle}°=${ratios.cos}`), line(LABELS.result, `a=${times(r, ratios.s)}\\qquad b=${times(r, ratios.c)}`)],
-                wrong: 0, error, fix: `a=${r}\\cos ${angle}°=${times(r, ratios.c)}\\qquad b=${r}\\sen ${angle}°=${times(r, ratios.s)}`, right: realPart, reached: wrongReal
+                lines: [line(LABELS.formula, `\\begin{gathered}a=${r}\\sen ${angle}°\\\\ b=${r}\\cos ${angle}°\\end{gathered}`), line(LABELS.data, `\\begin{gathered}\\sen ${angle}°=${ratios.sin}\\\\ \\cos ${angle}°=${ratios.cos}\\end{gathered}`), line(LABELS.result, `\\begin{gathered}a=${times(r, ratios.s)}\\\\ b=${times(r, ratios.c)}\\end{gathered}`)],
+                wrong: 0, error, fix: `\\begin{gathered}a=${r}\\cos ${angle}°=${times(r, ratios.c)}\\\\ b=${r}\\sen ${angle}°=${times(r, ratios.s)}\\end{gathered}`, right: realPart, reached: wrongReal
             }
         }
         case 'conjugate-opposite': {
@@ -234,8 +234,8 @@ function build(random: Random, error: ComplexDetectiveError): Built | null {
             const r = 2
             return {
                 problem: say(`Aurkitu $${r ** n}_{${theta}°}$ zenbakiaren erroak, $n=${n}$ izanik.`, `Halla las raíces de orden $n=${n}$ de $${r ** n}_{${theta}°}$.`, `أوجد الجذور من الرتبة $n=${n}$ لـ $${r ** n}_{${theta}°}$.`, `Find the roots of order $n=${n}$ of $${r ** n}_{${theta}°}$.`),
-                lines: [line(LABELS.step, `\\sqrt[${n}]{${r ** n}}=${r}`), line(LABELS.formula, `\\frac{${theta}°}{${n}}+360°\\cdot k=${first}°+360°\\cdot k`), line(LABELS.solutions, `{z}=${r}_{${first}°}`)],
-                wrong: 1, error, fix: `\\frac{${theta}°+360°\\cdot k}{${n}}=${first}°+${360 / n}°\\cdot k`, right: 360 / n, reached: 360
+                lines: [line(LABELS.step, `\\sqrt[${n}]{${r ** n}}=${r}`), line(LABELS.formula, `${first}°+360°\\cdot k`), line(LABELS.solutions, `{z}=${r}_{${first}°}`)],
+                wrong: 1, error, fix: `\\begin{gathered}\\frac{${theta}°+360°\\cdot k}{${n}}\\\\ =${first}°+${360 / n}°\\cdot k\\end{gathered}`, right: 360 / n, reached: 360
             }
         }
     }

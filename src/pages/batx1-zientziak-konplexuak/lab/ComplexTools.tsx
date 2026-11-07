@@ -62,7 +62,7 @@ function Grid({ o, unit, limit }: { o: Point; unit: number; limit: number }) {
             ))}
             <line x1={o[0] - far - 8} y1={o[1]} x2={o[0] + far + 8} y2={o[1]} stroke={MUTED} strokeWidth={1.4} />
             <line x1={o[0]} y1={o[1] + far + 8} x2={o[0]} y2={o[1] - far - 8} stroke={MUTED} strokeWidth={1.4} />
-            <text x={o[0] + far + 8} y={o[1] + 14} textAnchor="end" fontSize={12} fontWeight={700} fill={MUTED}>Re</text>
+            <text x={o[0] + far + 8} y={o[1] - 5} textAnchor="end" fontSize={12} fontWeight={700} fill={MUTED}>Re</text>
             <text x={o[0] + 5} y={o[1] - far - 1} fontSize={12} fontWeight={700} fill={MUTED}>Im</text>
             {[-limit, limit].map((value) => <text key={`x${value}`} x={o[0] + value * unit} y={o[1] + 14} textAnchor="middle" fontSize={11} fill={MUTED}>{value < 0 ? `−${-value}` : value}</text>)}
             {[-limit, limit].map((value) => <text key={`y${value}`} x={o[0] - 5} y={o[1] - value * unit + 4} textAnchor="end" fontSize={11} fill={MUTED}>{value < 0 ? `−${-value}i` : `${value}i`}</text>)}
@@ -336,7 +336,7 @@ export function RootsTool(props: LabToolProps) {
                 <line x1={O[0] - radius - 18} y1={O[1]} x2={O[0] + radius + 18} y2={O[1]} stroke={MUTED} strokeWidth={1.4} />
                 <line x1={O[0]} y1={O[1] + radius + 18} x2={O[0]} y2={O[1] - radius - 18} stroke={MUTED} strokeWidth={1.4} />
                 {(state.theta > 30 && state.theta < 330) && <text x={O[0] + radius + 18} y={O[1] + 14} textAnchor="end" fontSize={12} fontWeight={700} fill={MUTED}>Re</text>}
-                {(state.theta < 60 || state.theta > 120) && <text x={O[0] + 5} y={O[1] - radius - 8} fontSize={12} fontWeight={700} fill={MUTED}>Im</text>}
+                {(state.theta < 60 || state.theta > 120) && !angles.some((angle) => Math.abs(angle - 90) < 30) && <text x={O[0] + 5} y={O[1] - radius - 8} fontSize={12} fontWeight={700} fill={MUTED}>Im</text>}
                 <circle cx={O[0]} cy={O[1]} r={radius} fill="none" stroke={INK} strokeWidth={1.8} />
                 <line x1={O[0]} y1={O[1]} x2={wTip[0]} y2={wTip[1]} stroke={MUTED} strokeWidth={1.6} strokeDasharray="5 4" />
                 <text x={wLabel[0]} y={wLabel[1] + 4} textAnchor="middle" fontSize={12} fontWeight={700} fill={MUTED}>w</text>

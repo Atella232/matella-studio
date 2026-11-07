@@ -67,7 +67,10 @@ V1 polar $r_\alpha$ (subíndice) y también la forma trigonométrica $r(\cos\alp
 - En árabe, «la raíz $n$-ésima» lleva la $n$ como fórmula («الجذر من الرتبة $n$»): si no, el orden de las fórmulas no coincide con el castellano.
 - `text.ts` reexporta el de `trigonometria-batx1z` (`\sen`, `\tg` en el nombre de cada idioma).
 
-## En curso
+## Cierre (2026-11-07)
 
-- Fases 1+2, 3 y 4 hechas (ver los commits de la rama). Siguiente: cierre (revisión a 375 px en eu, es y ar; hoja de euskera; aviso a la sesión principal).
-- Truco para empezar: el test de sufijos vascos confunde `$z$` con un «-z» pegado; escribir `${z}$` en los cuatro idiomas (nota compartida `basque-z-suffix-test.md`).
+- Fases: 1+2 (cad3dd52), 3 (3c5b034d), 4 (bdbd90fe) y arreglos del cierre (ver el último commit de la rama). Antes de la fase 1+2 se fusionó main 373890c en la rama (solo chocaron las líneas de registro).
+- `npm test` (2683), `npm run lint` y `npm run build` en verde; inventario OK (3 juegos propios: `affix`, `twist`, `hunt`; 3 herramientas propias: `plane`, `turn`, `roots`).
+- Revisión a 375 px en eu, es y ar: 15 lecciones con todos los pasos y la figura (sin desbordes, sin textos fuera del SVG ni solapados), laboratorio con predicción hecha y varios estados de las raíces, los 6 juegos con sus 3 niveles (también con respuestas falladas), diagnóstico, práctica (20 bien), retos (15 bien) y banco con las 50 soluciones abiertas, portada, resumen y menú de juegos. Arreglados en el cierre: cuatro rótulos de figuras, «Re» e «Im» de los tableros del laboratorio, y dos casos del detective que no cabían (se parten en dos filas).
+- Hoja de euskera en la carpeta de notas compartidas: `konplexuak-batx1z-revision.html` (tras `hoja-revision.mjs`, nombres de sen y tg por columna y «…» donde la pantalla pone un número variable).
+- Pendiente fuera de la unidad (no tocado): en las herramientas `vector` y `combination` de 4.º vectores, la «y» del eje sale medio cortada arriba y la «x» 2 px fuera a la derecha.
