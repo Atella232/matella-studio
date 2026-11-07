@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from '../dbh4-akademikoak-trigonometria/answers'
 import { complexChallenges, complexDiagnostic, complexExerciseBank, complexPractice } from './content'
 import { ComplexHeroArt } from './figures'
+import { KonplexuakBatx1zLaboratory } from './lab'
+import { konplexuakBatx1zLabChallengeIds, konplexuakBatx1zLabToolForTopic, konplexuakBatx1zLabTools } from './lab/labTools'
 import { complexStages, complexTopics } from './lessons'
 
 const konplexuakBatx1zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const konplexuakBatx1zUnit: UnitDefinition = {
     guidedPractice: complexPractice,
     exerciseBank: complexExerciseBank,
     challenges: complexChallenges,
+    lab: {
+        description: {
+            eu: `${konplexuakBatx1zLabTools.length} tresna, erronkekin: plano konplexua, biderkatzea biratzea da eta erroek poligono bat osatzen dute, berriak; 4. DBHko bektorea, a · u + b · v konbinazioa eta zirkunferentzia goniometrikoa; eta formula trigonometrikoen gaiko soluzioak biraka.`,
+            es: `${konplexuakBatx1zLabTools.length} herramientas con retos: el plano complejo, multiplicar es girar y las raíces forman un polígono, nuevas; de 4.º ESO, el vector, la combinación a · u + b · v y la circunferencia goniométrica; y las soluciones que dan vueltas, del tema de fórmulas trigonométricas.`,
+            en: `${konplexuakBatx1zLabTools.length} tools with challenges: the complex plane, multiplying is turning and the roots make a polygon, new; from 4th ESO, the vector, the combination a · u + b · v and the unit circle; and the solutions that go round, from the trigonometric formulas unit.`,
+            ar: `${konplexuakBatx1zLabTools.length} أدوات مع تحديات: المستوى المركب والضرب دوران والجذور تشكّل مضلعًا، وهي جديدة؛ ومن الصف الرابع: المتجه والتركيب a · u + b · v والدائرة المثلثية؛ والحلول التي تدور من وحدة الصيغ المثلثية.`
+        },
+        progressIds: konplexuakBatx1zLabChallengeIds,
+        toolForTopic: konplexuakBatx1zLabToolForTopic,
+        render: (props) => <KonplexuakBatx1zLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat (3/4), komarekin edo puntuarekin (0,75 edo 0.75). Argumentuak gradutan, 0° eta 360° artean. Negatiboak minus ikurrarekin.', es: 'Escribe un número o una fracción (3/4), con coma o con punto (0,75 o 0.75). Los argumentos, en grados entre 0° y 360°. Los negativos, con signo menos.', en: 'Write a number or a fraction (3/4); a decimal point or a comma both work (0.75). Arguments in degrees, between 0° and 360°. Negatives with a minus sign.', ar: 'اكتب عددًا أو كسرًا (3/4) بالنقطة أو بالفاصلة (0.75). والعُمَد بالدرجات بين 0° و360°. والسالب بإشارة الناقص.' },
         defaultForm: 'any',

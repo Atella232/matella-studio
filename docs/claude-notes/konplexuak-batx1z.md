@@ -39,6 +39,16 @@ V1 polar $r_\alpha$ (subíndice) y también la forma trigonométrica $r(\cos\alp
 - Contenido: diagnóstico 104001–104008, práctica 1–20, retos 101–115, banco 1–50. Respuestas: parte real o imaginaria, módulo, argumento en grados entre 0° y 360° (la nota de respuestas lo dice), coordenadas, áreas y recuentos.
 - Test propio `tests/konplexuak-batx1z-content.test.ts`: un evaluador de LaTeX con complejos (`[re, im]`; `i`, `\frac`, `\sqrt`, `\sqrt[n]`, `^n`, `\overline`, `|…|`, `\cos`/`\sen`/`\tg` en grados y la polar `r_{α}`) comprueba cada `=` y `≈`; una tabla `computed` recalcula cada respuesta; también resuelve otra vez las ecuaciones y raíces de las lecciones.
 
+### Fase 3: laboratorio
+
+- Siete herramientas (`lab/labTools.ts`), una o dos por etapa. Propias, cada una con predicción, retos fijos, retos infinitos y ▶:
+  - `plane` (L1, `plane.ts`, retos 104101–104105): ${z}=a+bi$ con $a$ y $b$ de −4 a 4, y su opuesto o su conjugado. Se predice el cuadrante donde cae la imagen (cinco botones: 1.º–4.º y «Eje», con un `ChoicePredict` propio que usa el CSS de la predicción común); luego salen $|z|$ y el argumento, y ▶ lleva z a su imagen.
+  - `turn` (L2, `turn.ts`, retos 104201–104205): z por $w$ ($i$, $-1$, $-i$, 2, $1+i$, $2i$ o $\frac{1+i}{2}$). Se predice si z gira menos de 90°, 90° o más; ▶ gira y estira a la vez. El producto va en verde porque la etapa es coral.
+  - `roots` (L3, `roots.ts`, retos 104301–104305): las n raíces de $w$ ($|w|$ de 1, 8, 16, 27 o 64; argumento de 30 en 30°), en una circunferencia y como polígono. Se predice cuántas caen dentro del primer cuadrante (las de un eje no cuentan); ▶ las enseña una a una.
+  - `complex.ts`: aritmética común (`mul`, `argumentOf` en [0°, 360°), `complexLatex`, `complexPlain` con el menos tipográfico) para las herramientas y los juegos.
+- Prestadas con sus ids: `vector` y `combination` de 4.º vectores (73101–73104 y 73201–73204), `circle` de 4.º trigonometría (71001–71004) y `spin` de `trigonometria-batx1z` (103201–103205).
+- Test `tests/konplexuak-batx1z-lab.test.ts`: retos resueltos por un estado conocido y no resueltos al abrir; 150 retos infinitos por herramienta; la imagen y su cuadrante para todos los z; $|zw|=|z||w|$ y $\arg(zw)=\arg z+\arg w$ para todos los z y w; cada raíz elevada a n devuelve w.
+
 ## Trucos
 
 - Los tests compartidos (`lesson-checks`, `lesson-texts`) tratan `i` como una letra que puede valer cualquier número. Un «Compruébalo» con una sola fórmula de cálculo con `i` en el enunciado y una sola en la respuesta falla: el enunciado lleva dos fórmulas (`${z}=…$` y lo que se pregunta).
@@ -48,5 +58,5 @@ V1 polar $r_\alpha$ (subíndice) y también la forma trigonométrica $r(\cos\alp
 
 ## En curso
 
-- Fase 1+2 hecha (ver el commit de la rama). Siguiente: fase 3, laboratorio (L1 plano complejo, L2 multiplicar es girar, L3 raíces en polígono; prestadas de 4.º y del tema 2).
+- Fases 1+2 y 3 hechas (ver los commits de la rama). Siguiente: fase 4, juegos (J1 dónde cae el afijo, J2 gira y estira, J3 caza las raíces con el diseño de `hunt` del tema 2, J4 detective, J5 carrera y memoria).
 - Truco para empezar: el test de sufijos vascos confunde `$z$` con un «-z» pegado; escribir `${z}$` en los cuatro idiomas (nota compartida `basque-z-suffix-test.md`).
