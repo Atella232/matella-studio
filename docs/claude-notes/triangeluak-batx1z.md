@@ -73,4 +73,7 @@ Es la cuarta unidad de Bachillerato (bloque Trigonometría del reparto en parale
 
 - Fases 1+2 (6a59d1d), 3 (aa00f48) y 4 (2ecd615) en `feat/triangeluak-batx1z`. 2215 tests, lint y build en verde; inventario OK.
 - Hoja de euskera: `hoja-revision.mjs` con `--herramientas compass,circumcircle,hinge --juegos count,pieces,station,detective,race,memory`, mandada al dueño el 2026-11-05. La hoja escribe `\sen` tal cual: se pasa a sin (euskera) y sen (castellano) por filas antes de mandarla.
-- Sin publicar: lo hace la sesión principal.
+
+## Publicación
+
+Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.

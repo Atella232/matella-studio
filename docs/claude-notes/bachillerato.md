@@ -142,6 +142,9 @@ En la columna «Capítulos», S es Santillana y A es Anaya. «Solo S» o «solo 
   No se sale nada de la pantalla.
 - **Publicado el 2026-11-05,** junto con la primera unidad, Números reales de 1.º Ciencias: `main` 3be8b8e, bundle `index-ZB994Q3f.js`. Ver `errealak-batx1z.md`.
 - 1.º Ciencias publicadas el 2026-11-05: Números reales, Sucesiones y Ecuaciones e inecuaciones (ver sus notas).
+- **2026-11-06: nueve temas más de 1.º Ciencias publicados a la vez** (`main` 27c197e, bundle `index-7UBtIGbr.js`): Resolución de triángulos, Fórmulas y funciones trigonométricas, Vectores, Geometría analítica, Funciones elementales, Límites y continuidad, Derivadas, Sistemas y Estadística unidimensional. Se fusionaron las cuatro ramas finales de cada bloque (`feat/trigonometria-`, `feat/geometria-`, `feat/deribatuak-` y `feat/estatistika-batx1z`), que ya traen los temas anteriores. Ojo al fusionar: el arreglo automático de `courses.ts` repitió líneas y hubo que dejarlas a mano. Ver la tabla del reparto.
+- **2026-11-06, segunda tanda: Cónicas, Estadística bidimensional y Aplicaciones de la derivada** (`main` 5cec556, bundle `index-DOvfCVKR.js`). Con ellas, 15 de los 17 temas de 1.º Ciencias están en la web. El dueño eligió la regla de percentiles de 4.º para Estadística (la que ya usaba la web) y confirmó ahurra (∪) y ganbila (∩). Quedan Números complejos (a medias) e Integrales (terminado en `feat/integralak-batx1z`, va encima de Aplicaciones, sin publicar).
+- **2026-11-07: Integrales publicado** (`main` 4b87350, bundle `index-DSObpCRa.js`): 16 de los 17 temas de 1.º Ciencias en la web. Solo falta Números complejos (3 de 15 lecciones en `feat/konplexuak-batx1z`, sesión de Trigonometría).
 
 ## Reparto en paralelo de 1.º Ciencias (2026-11-05)
 
@@ -154,20 +157,20 @@ El dueño aceptó hacer los 14 temas que quedan en **4 sesiones a la vez, una po
 - Las sesiones **no publican, no fusionan en `main` y no suben nada**. Tampoco tocan `docs/claude-notes/README.md` ni la memoria de Claude: eso se hace en la sesión principal al fusionar y publicar, de una en una.
 - La hoja de euskera sale con `node .claude/skills/matella-nueva-unidad/scripts/hoja-revision.mjs <carpeta> <salida.html> "<título>" --herramientas … --juegos …`.
 
-| Bloque | Tema (`id` del curso) | Nombre | Bloque de ids |
-|---|---|---|---|
-| Trigonometría | `resolucion-triangulos` | `triangeluak` | 102000–102999 |
-| Trigonometría | `funciones-trigonometricas` | `trigonometria` | 103000–103999 |
-| Trigonometría | `numeros-complejos` | `konplexuak` | 104000–104999 |
-| Geometría | `vectores` | `bektoreak` | 105000–105999 |
-| Geometría | `geometria-analitica` | `geometria` | 106000–106999 |
-| Geometría | `conicas` | `konikak` | 107000–107999 |
-| Análisis | `funciones` | `funtzioak` | 108000–108999 |
-| Análisis | `limites-continuidad` | `limiteak` | 109000–109999 |
-| Análisis | `derivadas` | `deribatuak` | 110000–110999 |
-| Análisis | `aplicaciones-derivada` | `aplikazioak` | 111000–111999 |
-| Análisis | `integrales` | `integralak` | 112000–112999 |
-| Álgebra y estadística | `sistemas` | `sistemak` | 113000–113999 |
-| Álgebra y estadística | `estadistica` | `estatistika` | 114000–114999 |
-| Álgebra y estadística | `estadistica-bidimensional` | `bidimentsionala` | 115000–115999 |
+| Bloque | Tema (`id` del curso) | Nombre | Bloque de ids | Estado (2026-11-07) |
+|---|---|---|---|---|
+| Trigonometría | `resolucion-triangulos` | `triangeluak` | 102000–102999 | Publicado 2026-11-06 |
+| Trigonometría | `funciones-trigonometricas` | `trigonometria` | 103000–103999 | Publicado 2026-11-06 |
+| Trigonometría | `numeros-complejos` | `konplexuak` | 104000–104999 | A medias (3 de 15 lecciones) |
+| Geometría | `vectores` | `bektoreak` | 105000–105999 | Publicado 2026-11-06 |
+| Geometría | `geometria-analitica` | `geometria` | 106000–106999 | Publicado 2026-11-06 |
+| Geometría | `conicas` | `konikak` | 107000–107999 | Publicado 2026-11-06 |
+| Análisis | `funciones` | `funtzioak` | 108000–108999 | Publicado 2026-11-06 |
+| Análisis | `limites-continuidad` | `limiteak` | 109000–109999 | Publicado 2026-11-06 |
+| Análisis | `derivadas` | `deribatuak` | 110000–110999 | Publicado 2026-11-06 |
+| Análisis | `aplicaciones-derivada` | `aplikazioak` | 111000–111999 | Publicado 2026-11-06 |
+| Análisis | `integrales` | `integralak` | 112000–112999 | Publicado 2026-11-07 |
+| Álgebra y estadística | `sistemas` | `sistemak` | 113000–113999 | Publicado 2026-11-06 |
+| Álgebra y estadística | `estadistica` | `estatistika` | 114000–114999 | Publicado 2026-11-06 |
+| Álgebra y estadística | `estadistica-bidimensional` | `bidimentsionala` | 115000–115999 | Publicado 2026-11-06 |
 

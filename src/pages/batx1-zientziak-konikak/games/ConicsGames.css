@@ -1,0 +1,9 @@
+/* Zein konika da? and Antena (Leku geometrikoak eta konikak, Batxilergoa 1 · Zientziak) */
+.fraction-v2-games-card[data-game="conic"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="antenna"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+.conic-big { text-align: center; font-size: clamp(17px, 5.2vw, 24px); }
+.prop3-options.conic-kinds { grid-template-columns: 1fr 1fr; }
+.prop3-options.conic-elements { grid-template-columns: 1fr 1fr; }
+.prop3-options.conic-antenna-options { grid-template-columns: 1fr 1fr; }
+.conic-game-drawing { display: block; width: 100%; max-width: 300px; height: auto; margin: 8px auto 0; font-family: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif; }
