@@ -79,5 +79,8 @@ Es la octava unidad de Bachillerato y la quinta y última del bloque Análisis: 
 - **Commits en `feat/integralak-batx1z`:** db9efa8 (fases 1+2), e44849c (fase 3), 3b51045 (fase 4) y el de esta nota.
 - **Comprobado:** 2354 tests, lint y build en verde; inventario OK (3 juegos propios + detective; 4 herramientas propias más las 2 prestadas de Derivadas, que el script cuenta como propias).
 - **Hoja de euskera** para el dueño: `integralak-batx1z-euskera.html` en las notas compartidas de la sesión principal (enviada).
-- **Sin publicar:** la publicación la decide el dueño desde la sesión principal.
 - **Euskera confirmado por el dueño (2026-11-06):** jatorrizkoa, integral mugagabea / mugatua, Barrow-ren erregela, azalera, ebaki-puntuak.
+
+## Publicación
+
+Publicada en matella.net el 2026-11-07 (`main` 4b87350, bundle `index-DSObpCRa.js`). Al fusionar solo chocaron `courses.ts` (se dejó nuestra versión y se añadió `active: true` a `integrales`) y `paths.ts`; el router y la nota de Aplicaciones se unieron solos. Antes de publicar: 2643 tests, lint y build en verde, y sin claves de guardado repetidas. Comprobado en vivo a 375 px en eu, es y ar (portada, lecciones 1, 8 y 15, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.
