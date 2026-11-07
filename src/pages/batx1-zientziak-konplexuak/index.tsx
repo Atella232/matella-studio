@@ -1,6 +1,7 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readTrigonometryAnswer } from '../dbh4-akademikoak-trigonometria/answers'
+import { complexChallenges, complexDiagnostic, complexExerciseBank, complexPractice } from './content'
 import { ComplexHeroArt } from './figures'
 import { complexStages, complexTopics } from './lessons'
 
@@ -20,6 +21,10 @@ const konplexuakBatx1zUnit: UnitDefinition = {
     pathSubtitle: { eu: 'Bost etapa, i zenbakitik erroen poligonoetara', es: 'Cinco etapas, de la i a los polígonos de las raíces', en: 'Five stages, from i to the polygons of the roots', ar: 'خمس مراحل، من i إلى مضلعات الجذور' },
     stages: complexStages,
     topics: complexTopics,
+    diagnostic: complexDiagnostic,
+    guidedPractice: complexPractice,
+    exerciseBank: complexExerciseBank,
+    challenges: complexChallenges,
     answers: {
         note: { eu: 'Idatzi zenbaki bat edo zatiki bat (3/4), komarekin edo puntuarekin (0,75 edo 0.75). Argumentuak gradutan, 0° eta 360° artean. Negatiboak minus ikurrarekin.', es: 'Escribe un número o una fracción (3/4), con coma o con punto (0,75 o 0.75). Los argumentos, en grados entre 0° y 360°. Los negativos, con signo menos.', en: 'Write a number or a fraction (3/4); a decimal point or a comma both work (0.75). Arguments in degrees, between 0° and 360°. Negatives with a minus sign.', ar: 'اكتب عددًا أو كسرًا (3/4) بالنقطة أو بالفاصلة (0.75). والعُمَد بالدرجات بين 0° و360°. والسالب بإشارة الناقص.' },
         defaultForm: 'any',

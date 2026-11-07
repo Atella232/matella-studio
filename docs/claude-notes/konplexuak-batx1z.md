@@ -29,11 +29,24 @@ Menú: V1–V4; L1 el plano complejo, L2 multiplicar es girar, L3 las raíces fo
 
 V1 polar $r_\alpha$ (subíndice) y también la forma trigonométrica $r(\cos\alpha+i\sen\alpha)$; V2 respuestas numéricas (parte real o imaginaria, módulo, argumento en grados en [0°, 360°), cuántas raíces); sin V3 (familias en el plano) ni V4 (sistemas en ℂ). L1 el plano complejo (opuesto, conjugado, módulo y argumento, con predicción del cuadrante), L2 multiplicar es girar (▶), L3 las raíces forman un polígono (sin L4). M: los vectores de 4.º (suma como paralelogramo), la circunferencia de 4.º y «las soluciones dan vueltas» del tema 2. J1 dónde cae el afijo, J2 gira y estira, J3 caza las raíces, J4 detective, J5 carrera y memoria.
 
+## Fases
+
+### Fase 1+2: lecciones y contenido
+
+- Cinco etapas (`binomial`, `operations`, `polar`, `turns`, `roots`) y 15 lecciones: `imaginary-unit`, `binomial-form`, `complex-plane`, `add-multiply`, `division`, `powers-of-i`, `quadratic-complex`, `modulus-argument`, `polar-binomial`, `product-quotient`, `rotations`, `de-moivre`, `nth-roots`, `roots-polygons`, `binomial-equations`.
+- Las 10 mejoras de teoría desde el principio: definiciones, vocabulario, ejemplo con enunciado propio, «¿Por qué funciona?» en `division`, `powers-of-i`, `product-quotient`, `de-moivre` y `nth-roots`; `cases` en `binomial-form`, `quadratic-complex` (el signo del discriminante) y `modulus-argument` (el cuadrante); enlaces «Repasa antes» a `errealak-batx1z` (`sets`, `newton`, `rationalize`), a 4.º (`vector-operations`, `quadratic-formula`, `notable-angles`), a `triangeluak-batx1z` (`quadrant-ratios`, `inverse-angles`), a `trigonometria-batx1z` (`sum-formulas`, `double-angle`) y a `ekuazioak-batx1z` (`ruffini-roots`).
+- Figuras propias (`figures.tsx`, texto ≥21 px, ejes Re e Im en todos los idiomas): eje imaginario, conjuntos de números, plano con z, −z y z̄, suma como paralelogramo, división por el conjugado, las cuatro potencias de i, parábola sin cortes y sus raíces conjugadas, módulo y argumento, forma polar con sus proyecciones, producto que suma ángulos, giro de 90°, espiral de potencias y `RootsFigure` (`kind`: `cube`, `triangle`, `equation`).
+- Contenido: diagnóstico 104001–104008, práctica 1–20, retos 101–115, banco 1–50. Respuestas: parte real o imaginaria, módulo, argumento en grados entre 0° y 360° (la nota de respuestas lo dice), coordenadas, áreas y recuentos.
+- Test propio `tests/konplexuak-batx1z-content.test.ts`: un evaluador de LaTeX con complejos (`[re, im]`; `i`, `\frac`, `\sqrt`, `\sqrt[n]`, `^n`, `\overline`, `|…|`, `\cos`/`\sen`/`\tg` en grados y la polar `r_{α}`) comprueba cada `=` y `≈`; una tabla `computed` recalcula cada respuesta; también resuelve otra vez las ecuaciones y raíces de las lecciones.
+
+## Trucos
+
+- Los tests compartidos (`lesson-checks`, `lesson-texts`) tratan `i` como una letra que puede valer cualquier número. Un «Compruébalo» con una sola fórmula de cálculo con `i` en el enunciado y una sola en la respuesta falla: el enunciado lleva dos fórmulas (`${z}=…$` y lo que se pregunta).
+- `${z}` en los cuatro idiomas, también en `content.ts`; el test propio lo comprueba. Ni siquiera en un comentario de `lessons.tsx` se puede escribir «$z…»: el test lee las fórmulas del archivo como texto.
+- En árabe, «la raíz $n$-ésima» lleva la $n$ como fórmula («الجذر من الرتبة $n$»): si no, el orden de las fórmulas no coincide con el castellano.
+- `text.ts` reexporta el de `trigonometria-batx1z` (`\sen`, `\tg` en el nombre de cada idioma).
+
 ## En curso
 
-- Fase 1+2 a medias (commit WIP de esta rama): carpeta `src/pages/batx1-zientziak-konplexuak` con `text.ts` (reexporta el de trigonometria), `lessons.tsx`, `lessonTexts.ts` y `lessonChecks.ts` con solo las 3 lecciones de la etapa `binomial`, `figures.tsx` (Plane, 3 figuras y hero), `index.tsx` sin contenido, laboratorio ni juegos. Registro hecho (courses, router, paths).
-- Etapas: `binomial`, `operations`, `polar`, `turns` (antes `polar-operations`), `roots`.
-- Fallan 2 tests compartidos en la unidad: `lesson-texts` «the worked formulas add up» y «texts in four languages, same formulas, all drawn by KaTeX». Mirar el mensaje con `node --test tests/lesson-texts.test.ts 2>&1 | grep -A8 konplexu` y corregir antes de seguir.
-- Siguiente paso: arreglar esos 2 fallos; escribir las 12 lecciones que faltan (plan de lecciones, errores y «Compruébalo» arriba en la propuesta); `content.ts` (diagnóstico 104001–104008, práctica 20, retos 15, banco 50); test propio `tests/konplexuak-batx1z-content.test.ts` con un evaluador de complejos ([re, im], `i`, `\frac`, `\sqrt`, `^n`, `\cos`/`\sen` en grados y la polar `r_{α°}`).
-- Ojo con los tests compartidos: tratan `i` como una letra cualquiera. Un «Compruébalo» cuyo enunciado tenga una sola fórmula de cálculo con `i` y una respuesta de una sola fórmula falla: poner dos fórmulas en el enunciado (`${z}=…$` y `$\overline{z}$`).
+- Fase 1+2 hecha (ver el commit de la rama). Siguiente: fase 3, laboratorio (L1 plano complejo, L2 multiplicar es girar, L3 raíces en polígono; prestadas de 4.º y del tema 2).
 - Truco para empezar: el test de sufijos vascos confunde `$z$` con un «-z» pegado; escribir `${z}$` en los cuatro idiomas (nota compartida `basque-z-suffix-test.md`).
