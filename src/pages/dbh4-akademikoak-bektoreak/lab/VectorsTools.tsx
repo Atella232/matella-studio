@@ -110,6 +110,9 @@ const TINT = 'rgba(47, 111, 219, 0.10)'
 const say = (eu: string, es: string, ar: string, en: string): Text => ({ eu, es, en, ar })
 const BOX: PlaneBox = { xMin: -7, xMax: 7, yMin: -7, yMax: 7 }
 const BOARD_HEIGHT = 330
+/** Extra room above and to the right, so the axis names y and x are not cut */
+const BOARD_TOP = 12
+const BOARD_RIGHT = 46
 
 /** a/b in LaTeX */
 const fracLatex = ({ numerator, denominator }: FractionValue) => (denominator === 1 ? String(numerator) : `${numerator < 0 ? '-' : ''}\\frac{${Math.abs(numerator)}}{${denominator}}`)
@@ -126,7 +129,7 @@ function Board({ label, children }: { label: string; children: (map: PlaneMap, c
     const map = planeMap(BOX, 21, 20, 16)
     const [clipPath, clip] = useBoxClip(map)
     return (
-        <svg viewBox={`0 0 ${map.width + 40} ${BOARD_HEIGHT}`} direction="ltr" role="img" aria-label={label} style={{ display: 'block', width: '100%', maxWidth: 420, height: 'auto', margin: '0 auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>
+        <svg viewBox={`0 ${-BOARD_TOP} ${map.width + BOARD_RIGHT} ${BOARD_HEIGHT + BOARD_TOP}`} direction="ltr" role="img" aria-label={label} style={{ display: 'block', width: '100%', maxWidth: 420, height: 'auto', margin: '0 auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>
             <defs>{clipPath}</defs>
             <rect x={20} y={16} width={map.width} height={map.height} fill={CARD} />
             <PlaneGrid map={map} labelStep={2} />
