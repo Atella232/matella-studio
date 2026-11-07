@@ -1,0 +1,8 @@
+/* ¿De quién es la primitiva?, Ajusta la constante and Área a ojo (Integralak, Batxilergoa 1 · Zientziak) */
+.fraction-v2-games-card[data-game="primitive"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="adjust"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="estimate"] { --game-tint: var(--success-tint, #d9efe2); }
+
+/* The three antiderivatives one under the other: a formula needs the whole width */
+.bach-int-formulas { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.bach-int-formulas button { font-size: 18px; overflow-x: auto; overflow-y: hidden; }
