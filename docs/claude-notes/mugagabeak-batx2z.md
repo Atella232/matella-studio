@@ -69,5 +69,12 @@ Primer tema del bloque Integrales de 2.º Ciencias (reparto en paralelo, ver `ba
 
 ## En curso
 
-- Fases 1+2 (6ef7bb4) y 3 (commit siguiente a esta nota) hechas. Siguiente: fase 4, juegos (`games/`): J1 «¿Qué método?», J2 «Elige la u», J3 «Construye las fracciones», J5 detective, carrera y memoria, con ids 126401–126899.
-- Después, el cierre: inventario, revisión a 375 px de los juegos, hoja de euskera y la propuesta del tema 2 (`mugatua`).
+- Hechas: fase 1+2 (6ef7bb4) y fase 3, laboratorio (524b88a).
+- **Fase 4, juegos, a medias** (commit WIP siguiente a esta nota): escritos `games/info.ts` (los 6 juegos con sus niveles e ids 126401–126803 y las direcciones) y `games/method.ts` (J1 «¿Qué método?»: plantillas por método y nivel, 8 rondas, cada ronda con `fn` y `F` para comprobarla). Aún sin enganchar en `index.tsx` de la unidad ni probados.
+- Falta, en este orden:
+  1. `games/chooseU.ts` (J2 «Elige la u»: tres repartos u/dv, uno bueno; niveles x·eᵏˣ/x·cos kx, x²·g y xⁿ ln x, ln x / arctg x / x·arctg x con dv = dx; sin eˣ·sen x, que vale de las dos maneras).
+  2. `games/build.ts` (J3 «Construye las fracciones»: nivel 1 el esqueleto según el denominador; nivel 2 el valor de A o B con distractores B y N(a); nivel 3 cociente + resto/(x − a)).
+  3. `games/detective.ts` con `createWorkedCases` (12 errores: partes — signo, v sin integrar, último paso, integral nueva mal; racionales — no dividir, raíz doble como logaritmo, A sin dividir entre a − b, signo de las raíces; cambio — dx sin cambiar, cambio sin deshacer, cos² x como potencia, una sola constante). Líneas sin sen ni tg y de 245 px como mucho.
+  4. `games/race.ts` (5 circuitos, 3 tipos cada uno, respuestas numéricas con los errores típicos), `RaceGame.tsx`, `games/boards.ts` (memoria: compuestas, partes con (x + c)eˣ, cambio; tarjetas de 77 px como mucho y sin sen ni tg), `GameArt.tsx`, `Bach2IndefiniteGames.tsx` (+ `.css`) y `games/index.tsx`, como en `batx1-zientziak-integralak/games`.
+  5. `tests/mugagabeak-batx2z-games.test.ts` (cada respuesta derivada numéricamente), enganchar `games` en `index.tsx`, revisión a 375 px en eu, es y ar, commit de la fase 4.
+- Después, el cierre: `npm test`, lint y build, inventario, hoja de euskera con `hoja-revision.mjs` (`--herramientas parts,fractions,constants --juegos method,choose-u,fractions,detective`), y la propuesta del tema 2 (`mugatua`, rama cortada de esta).
