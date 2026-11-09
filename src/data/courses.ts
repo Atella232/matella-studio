@@ -216,7 +216,7 @@ export const courses: Course[] = [
     descriptionEn: 'Mathematics II: linear algebra, solid geometry and calculus',
     color: '#c4432a',
     topics: [
-      { id: 'matrices', name: 'Matrices', nameEu: 'Matrizeak', nameAr: 'المصفوفات', nameEn: 'Matrices', icon: '🔲' },
+      { id: 'matrices', name: 'Matrices', nameEu: 'Matrizeak', nameAr: 'المصفوفات', nameEn: 'Matrices', icon: '🔲', active: true },
       { id: 'determinantes', name: 'Determinantes', nameEu: 'Determinanteak', nameAr: 'المحددات', nameEn: 'Determinants', icon: '▦' },
       { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', nameEn: 'Systems of Equations', icon: '📝' },
       { id: 'vectores-espacio', name: 'Vectores en el Espacio', nameEu: 'Espazioko Bektoreak', nameAr: 'المتجهات في الفضاء', nameEn: 'Vectors in Space', icon: '➡️' },
