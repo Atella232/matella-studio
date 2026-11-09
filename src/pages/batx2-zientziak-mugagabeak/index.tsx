@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2IndefiniteChallenges, bach2IndefiniteDiagnostic, bach2IndefiniteExerciseBank, bach2IndefinitePractice } from './content'
 import { Bach2IndefiniteHeroArt } from './figures'
+import { Bach2IndefiniteLaboratory } from './lab'
+import { bach2IndefiniteLabChallengeIds, bach2IndefiniteLabToolForTopic, bach2IndefiniteLabTools } from './lab/labTools'
 import { bach2IndefiniteStages, bach2IndefiniteTopics } from './lessons'
 
 const mugagabeakBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const mugagabeakBatx2zUnit: UnitDefinition = {
     guidedPractice: bach2IndefinitePractice,
     exerciseBank: bach2IndefiniteExerciseBank,
     challenges: bach2IndefiniteChallenges,
+    lab: {
+        description: {
+            eu: `${bach2IndefiniteLabTools.length} tresna, erronkekin: aukeratu u eta dv, zatiki sinpleak eta bi konstante, berriak; eta Deribatuetako f′ funtzioaren grafikoa eta makinen katea.`,
+            es: `${bach2IndefiniteLabTools.length} herramientas con retos: elige u y dv, fracciones simples y dos constantes, nuevas; y la gráfica de f′ y la cadena de máquinas de Derivadas.`,
+            en: `${bach2IndefiniteLabTools.length} tools with challenges: choose u and dv, partial fractions and two constants, new; and the graph of f′ and the chain of machines from Derivatives.`,
+            ar: `${bach2IndefiniteLabTools.length} أدوات مع تحديات: اختر u و dv، والكسور البسيطة، والثابتان، وهي جديدة؛ ورسم f′ وسلسلة الآلات من المشتقات.`
+        },
+        progressIds: bach2IndefiniteLabChallengeIds,
+        toolForTopic: bach2IndefiniteLabToolForTopic,
+        render: (props) => <Bach2IndefiniteLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',

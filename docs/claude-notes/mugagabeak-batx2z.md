@@ -50,6 +50,16 @@ Primer tema del bloque Integrales de 2.º Ciencias (reparto en paralelo, ver `ba
 - **Registro:** `courses.ts` (`active: true` en `integrales-indefinidas`), router y `paths.ts`.
 - **Revisión a 375 px:** las 15 lecciones, el banco con las 50 soluciones abiertas, la práctica guiada, los retos y el diagnóstico en eu, es y ar: sin desbordes, sin fórmulas encogidas (las largas van en filas `aligned`) y sin errores de KaTeX. Los 15 dibujos mirados en grande; ningún texto se sale de su caja en los tres idiomas.
 
+**Fase 3, laboratorio (`lab/`):**
+- **Herramientas propias (3):**
+  - `parts` «Elige u y dv» (`parts.ts`, ids 126101–126105): seis productos (x·eˣ, eˣ·x², x·sen x, cos x·x, x·ln x, eˣ·sen x). Se toca un factor (será u; el otro, dv). Predicción: ¿la integral nueva ∫v du será más fácil, igual o más difícil? Después se ven du, v, los pasos y la cadena de integrandos en el tablero (verde si baja, rojo si sube, violeta si vuelve I). ▶ aplica partes otra vez. Con la u buena llega al resultado; eˣ·sen x vuelve a I en dos pasos.
+  - `fractions` «Fracciones simples» (`fractions.ts`, ids 126201–126205): seis fracciones (tres con raíces simples y tres con una raíz doble, una con A = 0). A y B se mueven de medio en medio; la gráfica de la suma (violeta) se pone sobre la de R hasta coincidir, y entonces sale la integral. Predicción: el signo de A (regla de tapar).
+  - `constants` «Dos constantes» (`constants.ts`, ids 126301–126305): cinco problemas con f″ dada; k₁ inclina y k₂ sube la curva hasta pasar por P con la pendiente m (trazo rojo). Predicción: el signo de k₁. ▶ recorre la familia con k₂.
+- **Prestadas (2), con sus ids:** `slope-graph` (110201–110205) y `chain` (110351–110355) de Derivadas de 1.º.
+- **Componentes:** `Bach2IndefiniteTools.tsx` (copia `curvePath`, `Grid` y `useClip` de Integralak de 1.º, que no los exporta), `labTools.ts`, `index.tsx` con `Bach2IndefiniteLaboratory`. La lógica (`parts.ts`, `fractions.ts`, `constants.ts`) no tiene React y queda exportada para 2.º Sociales.
+- **Test:** `tests/mugagabeak-batx2z-lab.test.ts`: cada resultado de partes se deriva numéricamente; las piezas rehacen R y su integral se deriva a R (también en 60 fracciones generadas); k₁ y k₂ son únicos; retos fijos con su solución e infinitos (150 semillas).
+- **Revisión a 375 px:** las 5 herramientas en eu, es y ar, con cada caso, cada u, la predicción y todos los pasos: sin desbordes ni fórmulas encogidas (las líneas de partes van como «= …» debajo de la integral) y sin textos fuera del tablero.
+
 ## Trucos
 
 - **`takeaway-notation.test.ts`:** si la idea clave usa una letra mayúscula (A de una fracción) y el resto de la lección no, falla. Ojo: las letras de `{aligned}` cuentan como letras de la lección (a, l, i, g, n, e, d).
@@ -59,5 +69,5 @@ Primer tema del bloque Integrales de 2.º Ciencias (reparto en paralelo, ver `ba
 
 ## En curso
 
-- Fase 1+2 hecha (commit siguiente a esta nota). Siguiente: fase 3, laboratorio (`lab/`): `parts.ts`, `fractions.ts`, `constants.ts`, `labTools.ts`, `Bach2IndefiniteTools.tsx`, `index.tsx` y `tests/mugagabeak-batx2z-lab.test.ts` ya escritos y con su test en verde; falta engancharlo en `index.tsx` de la unidad, revisarlo a 375 px y hacer el commit.
-- Después, fase 4 (juegos) y el cierre (inventario, hoja de euskera).
+- Fases 1+2 (6ef7bb4) y 3 (commit siguiente a esta nota) hechas. Siguiente: fase 4, juegos (`games/`): J1 «¿Qué método?», J2 «Elige la u», J3 «Construye las fracciones», J5 detective, carrera y memoria, con ids 126401–126899.
+- Después, el cierre: inventario, revisión a 375 px de los juegos, hoja de euskera y la propuesta del tema 2 (`mugatua`).
