@@ -31,6 +31,15 @@ Primera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - **Test nuevo:** `tests/bektoreak-batx2z-content.test.ts` (copia del de 1.º).
 - **Comprobación:** 2712 tests, lint y build en verde. Revisado a 375 px en eu: los 15 dibujos y todas las fórmulas de las lecciones con los pasos abiertos (ninguna baja de 13 px ni se sale).
 
+**Fase 3, laboratorio:** 5 herramientas propias en `lab/`, todas en el tablero 3D (`rotate="drag"`), con predicción antes del resultado y retos infinitos (`freshFrom` de `dbh3-segidak/lab/prediction.ts`). Un selector (Segmented) elige el punto o el vector que se cambia, con tres steppers x, y, z.
+- L1 `point-box` «El punto y su caja» (`pointBox.ts`, retos 119101–119105): A y B (−4…4), el vector AB y su caja; se predice si |AB| es menor, igual o mayor que 5; después AB, el módulo con los tres cuadrados y el punto medio M.
+- L2 `in-plane` «¿Cabe en el plano?» (`inPlane.ts`, 119151–119155): u, v y w (−3…3) con el plano de u y v; se predice «dentro», «no hay plano» (paralelos) o «fuera»; después el determinante, el rango y, si está dentro, w = a·u + b·v (exacto, con fracciones) dibujado a trazos.
+- L3 `space-shadow` «La sombra en el espacio» (`spaceShadow.ts`, 119201–119205): se predice el signo de u·v; después la sombra (verde hacia delante, roja hacia atrás), la proyección y el ángulo.
+- L4 `right-hand` «La mano derecha» (`rightHand.ts`, 119251–119255): paralelogramo de u y v; se predice si u × v apunta abajo, horizontal o arriba; un botón cambia el orden (v × u) y pide predecir otra vez; después el determinante con i, j, k y el área.
+- L5 `box-volume` «La caja de tres vectores» (`boxVolume.ts`, 119301–119305): cada cambio guarda la caja anterior (dibujada a trazos); se predice si el volumen baja, sigue igual o sube; empieza con w movido de lado (mismo volumen). ▶ «Aplasta la caja» baja w al plano de la base (`flattenedW`). Se puede ver la caja o el tetraedro.
+- Test: `tests/bektoreak-batx2z-lab.test.ts` (retos fijos resueltos por un estado y nunca al abrir, 150 semillas de retos infinitos, coeficientes exactos, sombra perpendicular, aplastar a medias = mitad de volumen).
+- Revisión a 375 px en eu: las cinco herramientas antes y después de predecir; sin desbordes ni fórmulas de menos de 13 px.
+
 ## Pendiente para la fusión
 
 - Enlaces «Antes de empezar» a Determinantes de 2.º (bloque Álgebra, no está en esta rama): en `dependence-rank` (regla de Sarrus), `basis-3d` y `mixed-product`. Ahora el determinante se calcula con Sarrus dentro de la lección.
@@ -44,4 +53,4 @@ Primera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 
 ## En curso
 
-- Fase 1+2 hecha (commit de este paso). Siguiente: fase 3, laboratorio (L1–L5) en `lab/`; ya están `lab/common.ts`, `lab/pointBox.ts` (L1, retos 119101–119105) e `lab/inPlane.ts` (L2, 119151–119155). Ids de retos previstos: L3 119201–119205, L4 119251–119255, L5 119301–119305.
+- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos (J1 «¿Número o vector?» en el espacio, J2 «¿Cuál es u×v?», J3 «La caja aplastada», J4 detective, J5 carrera y memoria) en `games/`, ids 119401–119899.

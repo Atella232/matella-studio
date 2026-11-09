@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { spaceVectorsChallenges, spaceVectorsDiagnostic, spaceVectorsExerciseBank, spaceVectorsPractice } from './content'
 import { SpaceVectorsHeroArt } from './figures'
+import { SpaceVectorsLaboratory } from './lab'
+import { spaceVectorsLabChallengeIds, spaceVectorsLabToolForTopic, spaceVectorsLabTools } from './lab/labTools'
 import { spaceVectorsStages, spaceVectorsTopics } from './lessons'
 
 const bektoreakBatx2zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const bektoreakBatx2zUnit: UnitDefinition = {
     guidedPractice: spaceVectorsPractice,
     exerciseBank: spaceVectorsExerciseBank,
     challenges: spaceVectorsChallenges,
+    lab: {
+        description: {
+            eu: `${spaceVectorsLabTools.length} tresna, erronkekin, guztiak 3D taulan: puntua eta haren kutxa, planoan sartzen da?, itzala espazioan, eskuineko eskua eta hiru bektoreren kutxa.`,
+            es: `${spaceVectorsLabTools.length} herramientas con retos, todas en el tablero 3D: el punto y su caja, ¿cabe en el plano?, la sombra en el espacio, la mano derecha y la caja de tres vectores.`,
+            en: `${spaceVectorsLabTools.length} tools with challenges, all on the 3D board: the point and its box, does it fit in the plane?, the shadow in space, the right hand and the box of three vectors.`,
+            ar: `${spaceVectorsLabTools.length} أدوات مع تحديات، كلها على اللوحة ثلاثية الأبعاد: النقطة وصندوقها، وهل يدخل في المستوى؟، والظل في الفضاء، واليد اليمنى، وصندوق ثلاثة متجهات.`
+        },
+        progressIds: spaceVectorsLabChallengeIds,
+        toolForTopic: spaceVectorsLabToolForTopic,
+        render: (props) => <SpaceVectorsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, modulua, biderkadura, angelua gradutan, azalera, bolumena edo parametroa. Adibidez 5, −3, 2,5 edo 3/5.', es: 'Escribe un solo número: la coordenada, el módulo, el producto, el ángulo en grados, el área, el volumen o el parámetro que se pide. Por ejemplo 5, −3, 2,5 o 3/5.', en: 'Write a single number: the coordinate, magnitude, product, angle in degrees, area, volume or parameter that is asked for. For example 5, −3, 2.5 or 3/5.', ar: 'اكتب عددًا واحدًا: المركّبة أو الطول أو الجداء أو الزاوية بالدرجات أو المساحة أو الحجم أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 3/5.' },
         defaultForm: 'any',
