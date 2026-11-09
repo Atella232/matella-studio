@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { matrizeakChallenges, matrizeakDiagnostic, matrizeakExerciseBank, matrizeakPractice } from './content'
 import { MatricesHeroArt } from './figures'
+import { MatrizeakLaboratory } from './lab'
+import { matrizeakLabChallengeIds, matrizeakLabToolForTopic, matrizeakLabTools } from './lab/labTools'
 import { matrizeakStages, matrizeakTopics } from './lessons'
 
 const matrizeakBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const matrizeakBatx2zUnit: UnitDefinition = {
     guidedPractice: matrizeakPractice,
     exerciseBank: matrizeakExerciseBank,
     challenges: matrizeakChallenges,
+    lab: {
+        description: {
+            eu: `${matrizeakLabTools.length} tresna, erronkekin: errenkada bider zutabe, bideen mapa, Gauss-Jordanen makina eta heinaren graduatzailea, berriak; eta 1. Batxilergoko Gaussen makina.`,
+            es: `${matrizeakLabTools.length} herramientas con retos: fila por columna, el mapa de rutas, la máquina de Gauss-Jordan y el deslizador del rango, nuevas; y la máquina de Gauss de 1.º de Bachillerato.`,
+            en: `${matrizeakLabTools.length} tools with challenges: row by column, the route map, the Gauss–Jordan machine and the rank slider, new; and the Gauss machine from 1st Bachillerato.`,
+            ar: `${matrizeakLabTools.length} أدوات مع تحديات: صفّ في عمود وخريطة الطرق وآلة غاوس-جوردان ومنزلقة الرتبة، وهي جديدة؛ وآلة غاوس من البكالوريا الأولى.`
+        },
+        progressIds: matrizeakLabChallengeIds,
+        toolForTopic: matrizeakLabToolForTopic,
+        render: (props) => <MatrizeakLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Matrize bat eskatzen bada, eskatzen den elementua bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide una matriz, solo el elemento que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If a matrix is involved, only the entry that is asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كان المطلوب من مصفوفة فاكتب العنصر المطلوب فقط.' },
         defaultForm: 'any',
