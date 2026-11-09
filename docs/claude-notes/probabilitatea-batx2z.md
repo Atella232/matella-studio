@@ -50,5 +50,6 @@ Commit 7c923c4 (2710 tests, lint y build en verde).
 
 ## En curso
 
-- Fase 2 (laboratorio) hecha; falta su commit.
-- Siguiente paso: fase 3, juegos (J1 ¿independientes, incompatibles o ninguno?, J2 rellena el Venn, J3 ¿quién fue?, J4 detective de 2.º; el árbol y la tabla de 4.º con niveles nuevos; carrera y memoria).
+- Fase 2 (laboratorio) hecha: commit 4d6ca6f.
+- Fase 3 sin empezar (nada de código). Modelo a copiar: `src/pages/batx1-zientziak-estatistika/games/` (`info.ts` con `GameInfo` y niveles, `index.tsx` con `GamesHub`, juegos propios con `RoundGame` de `features/unit-v2/games/RoundGame`, detective con `createWorkedCases` y `WorkedDetectiveGame`, carrera, memoria con `PairsMemoryGame`, `GameArt.tsx`) y su test `tests/estatistika-batx1z-games.test.ts`. Ids de juegos: 128401–128899 (p. ej. carrera 128401–128405, J1 128501–3, J2 128601–3, J3 128701–3, J4 128751–3, memoria 128801–3, árbol y tabla de 4.º con 128811–3 y 128821–3). El detective de 4.º ya usa «conditional-swapped» y «total-one-branch»: el de 2.º usa otros errores (ignorar la a priori, P(A − B) = P(A) − P(B), independiente ⇒ incompatible, P(A∩B) como P(A/B), P(Ā/B) = 1 − P(A/B̄), De Morgan mal, multiplicar sin independencia, dividir entre P(Aᵢ) en Bayes). Después: registrar `games` en `index.tsx`, cierre (tests, lint, build, inventario, 375 px, hoja de euskera) y el tema 2 `binomial-normal`.
+- Fase 3: juegos (J1 ¿independientes, incompatibles o ninguno?, J2 rellena el Venn, J3 ¿quién fue?, J4 detective de 2.º; el árbol y la tabla de 4.º con niveles nuevos; carrera y memoria).
