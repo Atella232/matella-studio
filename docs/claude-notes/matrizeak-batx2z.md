@@ -14,7 +14,40 @@ Primer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `matrices`), primero
 - **Textos y ejercicios:** todos propios. Del libro solo se saca el alcance.
 - **Frontera con los otros dos temas del bloque:** aquí la inversa solo por Gauss-Jordan (y por sistema en 2 × 2) y el rango solo por Gauss; «¿tiene inversa según k?» se decide por el rango. Determinantes, adjunta y rango por menores van en `determinanteak`; Rouché, Cramer y discusión de sistemas, en `sistemak`.
 
+**Lo que eligió el dueño («Las recomendadas», 2026-11-09):**
+- **V1:** 16 lecciones en cinco etapas con las diez mejoras de la teoría, y «Antes de empezar» a 1.º (Gauss y matriz ampliada en Sistemas, combinación lineal en Vectores). **V2:** retos al estilo de la EBAU vasca (inversa según un parámetro, Mⁿ, ecuación matricial).
+- **L propias:** L1 «Fila por columna», L2 «El mapa de rutas» (grafo y A²), L3 «La máquina de Gauss-Jordan», L4 «El deslizador del rango» (reutilizable en Determinantes y Sistemas).
+- **M prestada:** M1 «La máquina de Gauss» de 1.º, tal cual.
+- **J propios:** J1 «Dominó de dimensiones», J2 «Despeja la X», J3 «Potencia gigante», J5 detective de errores de matrices. **J6:** carrera y memoria.
+- **Notación:** filas $E_1$, $E_2$… en los cuatro idiomas (como el Gauss de 1.º); rango `\operatorname{rg}` en los cuatro idiomas. Euskera: matrize iraulia, alderantzizko matrizea, heina, identitate-matrizea, matrize trukakorrak. Árabe: الرتبة (rango), الأبعاد (dimensión), المنقول (traspuesta).
+- **Respuestas:** siempre un número (un elemento, un rango, un parámetro, cuántos caminos). Las matrices enteras solo en el banco, con la solución a la vista.
+
+**Etapas y lecciones:**
+
+| Etapa | Lecciones |
+|---|---|
+| `basics` | `what-is-a-matrix`, `matrix-types`, `transpose-symmetric` |
+| `operations` | `sum-scalar`, `matrix-product`, `product-properties`, `matrix-applications` |
+| `rank` | `linear-dependence`, `rank-gauss`, `rank-parameter` |
+| `inverse` | `inverse-definition`, `gauss-jordan`, `matrix-powers` |
+| `equations` | `matrix-equations`, `equation-systems`, `commuting-matrices` |
+
+## Hecho
+
+**Fase 1+2, lecciones y contenido** (commit c2d0234):
+- 16 lecciones con las diez mejoras (`lessonTexts.ts`, `lessonChecks.ts`), 5 «¿Por qué funciona?», 16 dibujos (`figures.tsx`) y el arte de la portada. 5 enlaces «Antes de empezar» a `batx1-zientziak/sistemas` (`augmented-matrix`, `gauss-method`, `parameter-discussion`, `equivalent-systems`) y a `batx1-zientziak/vectores` (`linear-combination`).
+- Contenido: diagnóstico 116001–116008, práctica 1–20, retos 101–115, banco 1–50 (4, 3 y 10 por etapa).
+- **Piezas compartidas, exportadas** (para Determinantes, Sistemas y 2.º Sociales): `matrix.ts` (operaciones con fracciones exactas, tipos, operaciones de fila, `echelonSteps`, `rank`, `gaussJordan`, `inverse`, LaTeX de matrices y de operaciones `E_2-3E_1`) y `MatrixSvg.tsx` (`MatrixBlock`, una matriz dibujada en SVG con casillas coloreadas y barra de `(A | I)`).
+- **Tests nuevos:** `tests/matrix-latex.ts` (lee cada `pmatrix` como números y comprueba cada igualdad entre expresiones de matrices: sumas, por números, productos, potencias, `^t`, `^{-1}`, `I` y `O`; con una tabla de matrices con nombre por texto; sirve para los otros dos temas del bloque), `tests/matrizeak-batx2z-content.test.ts` (unas 200 igualdades de matrices de lecciones, ejemplos, «Compruébalo», práctica, retos y banco; que el error típico de verdad está mal; que solo la respuesta buena de «Compruébalo» da el cálculo) y `tests/matrizeak-batx2z-matrix.test.ts` (Gauss y Gauss-Jordan con 500 matrices al azar).
+- 2717 tests, lint y build en verde. Dibujos comprobados en euskera a 375 px con `getBBox`: ningún texto fuera.
+
+## Trucos
+
+- **Matrices en los tests comunes:** `lesson-texts.test.ts` quita `\begin{pmatrix}` y cambia `&` por espacios, y parte por `\\`. Una fila como `2 -3` se evalúa como 2 − 3: si una igualdad entre matrices escrita en `lessonTexts.ts` (ejemplo, casos, «¿Por qué?») fallara por eso, basta con reordenar la fórmula. De momento no ha pasado.
+- **Orden de las fórmulas:** el test común compara las fórmulas de cada texto en orden con su forma (cada letra pasa a `x`): `$AB$` (dos letras) y `$c_{ij}$` no pueden cambiar de sitio entre idiomas; dos letras sueltas sí.
+- **Ejemplos en general:** la tabla de matrices con nombre del test se aplica solo a «Resolvemos» y sus pasos (la idea clave habla de una $A$ cualquiera).
+- **Respuestas con decimal exacto:** si la respuesta es $\frac{1}{5}$, la explicación tiene que escribir también $0{,}2$ (el test busca la forma decimal).
+
 ## En curso
 
-- 2026-11-09: fuentes leídas (ficha fuera del repositorio, en `~/Documents/Matella-fuentes/batx2z-algebra/`). Propuesta de diseño mandada al dueño; **se espera su respuesta antes de escribir código.**
-- Siguiente paso: con su elección, fase 1+2 (lecciones con las diez mejoras de la teoría, diagnóstico, práctica, retos y banco). Antes de escribir las 15 lecciones, probar una lección con un producto de matrices contra `latex-math.ts`, el test de sufijos y el de orden de fórmulas.
+- Siguiente paso: fase 3, laboratorio (L1–L4 propias y M1 prestada), y fase 4, juegos (J1, J2, J3, J5, carrera y memoria). Después, cierre (inventario, 375 px en eu, es y ar, hoja de euskera).
