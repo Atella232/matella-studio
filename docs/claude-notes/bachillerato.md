@@ -175,3 +175,39 @@ El dueño aceptó hacer los 14 temas que quedan en **4 sesiones a la vez, una po
 | Álgebra y estadística | `estadistica` | `estatistika` | 114000–114999 | Publicado 2026-11-06 |
 | Álgebra y estadística | `estadistica-bidimensional` | `bidimentsionala` | 115000–115999 | Publicado 2026-11-06 |
 
+
+## Reparto en paralelo de 2.º Ciencias (2026-11-09)
+
+El dueño pidió hacer 2.º Ciencias con varias sesiones a la vez. Los 14 temas van en **5 sesiones, una por bloque**. Dentro de cada bloque los temas se hacen en orden y la rama de cada tema se corta de la del anterior. Esta sesión principal no hace temas: fusiona en `main` y publica, de una en una y con el visto bueno del dueño.
+
+**Reglas comunes (las mismas que en 1.º):**
+- Cada tema tiene **un bloque de mil ids** para todo: diagnóstico `N001–N008`, laboratorio propio `N101–N399`, juegos `N401–N899`. Nadie usa ids fuera de su bloque.
+- Carpeta `src/pages/batx2-zientziak-<nombre>`, `storagePrefix` `matella-<nombre>-batx2z`, rama `feat/<nombre>-batx2z` y nota `docs/claude-notes/<nombre>-batx2z.md` (con su sección «En curso» mientras dure).
+- Se sigue la skill `matella-nueva-unidad`: fuentes con `matella-fuentes`, propuesta con menú de letras, **el dueño elige en cada tema** y después se construye. Mínimo 2 juegos y 2 herramientas propias.
+- Fuera de su carpeta, cada sesión solo toca los puntos de registro: **su línea** de `src/data/courses.ts` (añadir `active: true`, sin mover nada), el router y las rutas. Si una pieza prestada de otra unidad necesita un arreglo, no se edita: se apunta en la nota y se avisa (así no chocan dos sesiones).
+- Los enlaces «Antes de empezar» solo pueden ir a lecciones que ya estén en la rama (ESO, 1.º Bachillerato o temas anteriores del mismo bloque). Los enlaces a temas de otro bloque de 2.º se apuntan en la nota y se ponen al fusionar.
+- Las sesiones **no publican, no fusionan en `main` y no suben nada**. Tampoco tocan `docs/claude-notes/README.md`, esta nota ni la memoria de Claude.
+- Cada sesión arranca su propio servidor de pruebas en su puerto (archivo `.claude/launch.json` propio, sin hacer commit), para no mirar la web de otra.
+- Exámenes de EBAU del País Vasco (`LIBROS/EBAU/<comunidad>/Matematicas_II`): sirven para ver el estilo de los problemas de 2.º, nunca para copiarlos.
+- Las piezas que puedan servir a 2.º Sociales (matrices, límites, derivadas, integrales, probabilidad…) se dejan exportadas y reutilizables: la decisión de los gemelos Ciencias/Sociales se toma al empezar Sociales.
+
+| Bloque | Puerto | Tema (`id` del curso) | Nombre | Bloque de ids | Reutilizar de | Estado (2026-11-09) |
+|---|---|---|---|---|---|---|
+| Álgebra | 5181 | `matrices` | `matrizeak` | 116000–116999 | nuevo (Gauss de `batx1-zientziak-sistemak`) | Empezado |
+| Álgebra | 5181 | `determinantes` | `determinanteak` | 117000–117999 | `matrizeak` | Pendiente |
+| Álgebra | 5181 | `sistemas` | `sistemak` | 118000–118999 | `batx1-zientziak-sistemak`, `determinanteak` | Pendiente |
+| Espacio | 5182 | `vectores-espacio` | `bektoreak` | 119000–119999 | `batx1-zientziak-bektoreak` (tablero 3D nuevo, para todo el bloque) | Empezado |
+| Espacio | 5182 | `rectas-planos` | `planoak` | 120000–120999 | `batx1-zientziak-geometria`, `bektoreak` | Pendiente |
+| Espacio | 5182 | `angulos-distancias` | `distantziak` | 121000–121999 | `batx1-zientziak-geometria`, `planoak` | Pendiente |
+| Cálculo diferencial | 5183 | `limites-continuidad` | `limiteak` | 122000–122999 | `batx1-zientziak-limiteak` | Empezado |
+| Cálculo diferencial | 5183 | `derivadas` | `deribatuak` | 123000–123999 | `batx1-zientziak-deribatuak` | Pendiente |
+| Cálculo diferencial | 5183 | `aplicaciones-derivada` | `aplikazioak` | 124000–124999 | `batx1-zientziak-aplikazioak` | Pendiente |
+| Cálculo diferencial | 5183 | `representacion-funciones` | `adierazpena` | 125000–125999 | `batx1-zientziak-funtzioak`, `-limiteak`, `-aplikazioak` | Pendiente |
+| Integrales | 5184 | `integrales-indefinidas` | `mugagabeak` | 126000–126999 | `batx1-zientziak-integralak`, `-deribatuak` | Empezado |
+| Integrales | 5184 | `integral-definida` | `mugatua` | 127000–127999 | `batx1-zientziak-integralak`, `mugagabeak` | Pendiente |
+| Probabilidad | 5185 | `probabilidad` | `probabilitatea` | 128000–128999 | `dbh4-akademikoak-probabilitatea`, `-konbinatoria` | Empezado |
+| Probabilidad | 5185 | `binomial-normal` | `banaketak` | 129000–129999 | `dbh4-akademikoak-probabilitatea`, `probabilitatea` | Pendiente |
+
+**Ids reservados para más adelante:** 1.º Sociales 130000–140999 (11 temas) y 2.º Sociales 141000–153999 (13 temas), un bloque de mil por tema en el orden del curso.
+
+**Fuentes:** todas en Drive, `LIBROS/2_Bach/Santillana/Ciencias` (U1–U14) y `LIBROS/2_Bach/Anaya/Ciencias` (U1–U14, con los mismos temas y en el mismo orden).
