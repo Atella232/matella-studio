@@ -228,7 +228,7 @@ export const courses: Course[] = [
       { id: 'representacion-funciones', name: 'Representación de Funciones', nameEu: 'Funtzioen Adierazpen Grafikoa', nameAr: 'التمثيل البياني للدوال', nameEn: 'Curve Sketching', icon: '📈' },
       { id: 'integrales-indefinidas', name: 'Integrales Indefinidas', nameEu: 'Integral Mugagabeak', nameAr: 'التكاملات غير المحددة', nameEn: 'Indefinite Integrals', icon: '∫' },
       { id: 'integral-definida', name: 'Integral Definida', nameEu: 'Integral Mugatua', nameAr: 'التكامل المحدد', nameEn: 'Definite Integral', icon: '▨' },
-      { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲' },
+      { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲', active: true },
       { id: 'binomial-normal', name: 'Distribuciones Binomial y Normal', nameEu: 'Banaketa Binomiala eta Normala', nameAr: 'التوزيع الثنائي والتوزيع الطبيعي', nameEn: 'Binomial and Normal Distributions', icon: '🔔' },
     ]
   },
