@@ -41,6 +41,16 @@ Primer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `matrices`), primero
 - **Tests nuevos:** `tests/matrix-latex.ts` (lee cada `pmatrix` como números y comprueba cada igualdad entre expresiones de matrices: sumas, por números, productos, potencias, `^t`, `^{-1}`, `I` y `O`; con una tabla de matrices con nombre por texto; sirve para los otros dos temas del bloque), `tests/matrizeak-batx2z-content.test.ts` (unas 200 igualdades de matrices de lecciones, ejemplos, «Compruébalo», práctica, retos y banco; que el error típico de verdad está mal; que solo la respuesta buena de «Compruébalo» da el cálculo) y `tests/matrizeak-batx2z-matrix.test.ts` (Gauss y Gauss-Jordan con 500 matrices al azar).
 - 2717 tests, lint y build en verde. Dibujos comprobados en euskera a 375 px con `getBBox`: ningún texto fuera.
 
+**Fase 3, laboratorio** (commit 01bd4a0): 5 herramientas.
+- **Propias (4),** con predicción antes del resultado y retos infinitos (`freshFrom`):
+  - L1 `row-column` «Fila por columna», retos 116101–116105: A 2 × 3 por B 3 × 2 (tres pares); se elige la casilla $c_{ij}$ (también tocándola) y se cambian los tres números de esa columna de B. Se predice el signo de la casilla. Lógica en `lab/rowColumn.ts`.
+  - L2 `route-map` «El mapa de rutas», retos 116151–116155: cuatro pueblos; tocar una flecha pone o quita una línea y cambia A; se predice si hay 0, 1 o más viajes con un transbordo y después se ve $A^2$ y los caminos. Lógica en `lab/routeMap.ts`.
+  - L3 `gauss-jordan` «La máquina de Gauss-Jordan», retos 116201–116205: (A | I) de seis matrices (A, B, D, E con inversa; C y F sin ella); m·Eᵢ + k·Eⱼ con m 1–4 y k −6…6, «÷ pivote» y cambio de filas; fracciones exactas. Lógica en `lab/jordanMachine.ts`.
+  - L4 `rank-slider` «El deslizador del rango», retos 116301–116305: cinco familias 3 × 3 con m de −4 a 6 (valores críticos 3; 2; 1; −2 y 1; 6); se predice el rango (1, 2 o 3) y ▶ recorre todos los m dejando el rango de cada uno en una tira. Lógica en `lab/rankSlider.ts` (exportada para Determinantes y Sistemas).
+- **Prestada (1):** M1 «La máquina de Gauss» de 1.º, con sus retos 113101–113105, en la etapa del rango.
+- **Test:** `tests/matrizeak-batx2z-lab.test.ts` (cada reto fijo se resuelve y ninguno empieza resuelto; los infinitos, con 150 semillas; $A^2$ cuenta caminos a fuerza bruta; la máquina de Gauss-Jordan llega a (I | A⁻¹) con sus propios límites de m y k en las cuatro matrices con inversa, y a una fila de ceros en las otras dos).
+- Revisado en euskera a 375 px con `getBBox`: ningún texto fuera de los tableros.
+
 ## Trucos
 
 - **Matrices en los tests comunes:** `lesson-texts.test.ts` quita `\begin{pmatrix}` y cambia `&` por espacios, y parte por `\\`. Una fila como `2 -3` se evalúa como 2 − 3: si una igualdad entre matrices escrita en `lessonTexts.ts` (ejemplo, casos, «¿Por qué?») fallara por eso, basta con reordenar la fórmula. De momento no ha pasado.
@@ -50,4 +60,4 @@ Primer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `matrices`), primero
 
 ## En curso
 
-- Siguiente paso: fase 3, laboratorio (L1–L4 propias y M1 prestada), y fase 4, juegos (J1, J2, J3, J5, carrera y memoria). Después, cierre (inventario, 375 px en eu, es y ar, hoja de euskera).
+- Siguiente paso: fase 4, juegos (J1, J2, J3, J5, carrera y memoria). Después, cierre (inventario, 375 px en eu, es y ar, hoja de euskera).
