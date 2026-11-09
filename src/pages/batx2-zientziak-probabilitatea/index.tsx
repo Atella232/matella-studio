@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { probabilityBatx2Challenges, probabilityBatx2Diagnostic, probabilityBatx2ExerciseBank, probabilityBatx2Practice } from './content'
 import { ProbabilityBatx2HeroArt } from './figures'
+import { ProbabilityBatx2Laboratory } from './lab'
+import { probabilityBatx2LabChallengeIds, probabilityBatx2LabToolForTopic, probabilityBatx2LabTools } from './lab/labTools'
 import { probabilityBatx2Stages, probabilityBatx2Topics } from './lessons'
 
 const probabilitateaBatx2zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const probabilitateaBatx2zUnit: UnitDefinition = {
     guidedPractice: probabilityBatx2Practice,
     exerciseBank: probabilityBatx2ExerciseBank,
     challenges: probabilityBatx2Challenges,
+    lab: {
+        description: {
+            eu: `${probabilityBatx2LabTools.length} tresna, erronkekin: margotu gertaera, lau zonak, probabilitatearen karratua, kausak karratuan eta 10\u00a0000 pertsona, berriak; eta 4. DBHko gertaeren bildura, kutxa bateko bi atera, batera ateratzea, gutxienez behin, kontingentzia-taula eta kutxa aukeratzen duen dadoa.`,
+            es: `${probabilityBatx2LabTools.length} herramientas con retos: pinta el suceso, las cuatro zonas, el cuadrado de probabilidad, las causas en el cuadrado y 10\u00a0000 personas, nuevas; y de 4.º ESO, la unión de sucesos, dos extracciones de una urna, sacar varias a la vez, al menos una vez, la tabla de contingencia y el dado que elige la urna.`,
+            en: `${probabilityBatx2LabTools.length} tools with challenges: paint the event, the four zones, the probability square, the causes in the square and 10,000 people, new; and from 4th ESO, the union of events, two draws from an urn, drawing several at once, at least once, the contingency table and the die that chooses the urn.`,
+            ar: `${probabilityBatx2LabTools.length} أداة مع تحديات: لوّن الحدث، والمناطق الأربع، ومربع الاحتمال، والأسباب في المربع، و10\u00a0000 شخص، وهي جديدة؛ ومن الصف الرابع: اتحاد الأحداث، وسحبتان من جرّة، والسحب معًا، ومرة واحدة على الأقل، وجدول التوافق، والنرد الذي يختار الجرّة.`
+        },
+        progressIds: probabilityBatx2LabChallengeIds,
+        toolForTopic: probabilityBatx2LabToolForTopic,
+        render: (props) => <ProbabilityBatx2Laboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zatiki bat edo zenbaki zehatz bat: 3/8, 0,375 edo 12. Probabilitate ez-zehatzak (1/6), zatiki gisa.', es: 'Escribe una fracción o un número exacto: 3/8, 0,375 o 12. Las probabilidades no exactas (1/6), como fracción.', en: 'Write a fraction or an exact number: 3/8, 0.375 or 12. Non-exact probabilities (1/6): write them as a fraction.', ar: 'اكتب كسرًا أو عددًا مضبوطًا: 3/8 أو 0.375 أو 12. والاحتمالات غير المنتهية (1/6) كسرًا.' },
         defaultForm: 'any',

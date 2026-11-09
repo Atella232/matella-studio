@@ -32,7 +32,23 @@ Notación de 4.º: P(A), \overline{A}, P(A/B). 15 lecciones en 4 etapas: «Antes
 - **Trucos:** las letras de los sucesos son las mismas en los cuatro idiomas (A, B, D, E, M, N), definidas con palabras en cada idioma; en euskera nada de «% 1ek», «% 99an», «% 34ra»: se reescribe («Biztanleen % 1 gaixo dago», «% 34 izatera»). Un enunciado de «Otro ejemplo» tiene 30 palabras como mucho (en castellano).
 - **Revisión:** las 15 lecciones a 375 px en eu y ar sin desbordes ni textos que se pisen o se salgan de las figuras (medido con `getBBox`); figuras vistas ampliadas en eu.
 
+Commit 7c923c4 (2710 tests, lint y build en verde).
+
+## Fase 2: laboratorio
+
+- **Propias** (en `lab/`, lógica pura exportada en `.ts`, con predicción y retos infinitos):
+  - `paint` «Margotu gertaera / Pinta el suceso» (`events.ts`, retos 128101–128103): las cuatro zonas de un Venn se pintan tocándolas (o con los botones); 20 expresiones (A, Ā, A ∩ B̄, (A − B) ∪ (B − A), ∅, E…) cubren los 16 conjuntos de zonas, y el resultado da todos los nombres de lo pintado, así que De Morgan se ve solo. Predicción: cuántas zonas ocupa el suceso elegido.
+  - `zones` «Lau zonak / Las cuatro zonas» (`zones.ts`, 128121–128123): P(A), P(B) y P(A ∩ B) en centésimas (pasos de 0,05), Venn con los valores y barra del 100 %. Predicción: P(A ∪ B) frente a P(A) + P(B). Los retos infinitos dan tres datos como en la EBAU (unión, contrario de la intersección, ni A ni B, diferencia).
+  - `mosaic` «Probabilitatearen karratua / El cuadrado de probabilidad» (`mosaic.ts`, 128141–128143): P(A), P(B/A) y P(B/Ā) en décimas; las piezas son las intersecciones; independientes = cortes a la misma altura. Predicción: P(A/B) frente a P(A). ▶ «Junta B» lleva las dos piezas de B a una barra.
+  - `causes` «Kausak karratuan / Las causas en el cuadrado» (`causes.ts`, 128161–128163): tres franjas P(Aᵢ) (décimas) pintadas hasta P(D/Aᵢ) (por ciento); P(D) es el área pintada y Bayes la parte de cada franja. Predicción: la causa más probable sabiendo D (al empezar es A₃, la que menos fabrica). ▶ «Junta lo pintado».
+  - `people` «10 000 pertsona / 10 000 personas» (`people.ts`, 128181–128183): cuadrícula de 100 × 100 dibujada por tramos (pocas `rect`); prevalencia, sensibilidad y falsos positivos en por ciento, así que todos los grupos son enteros. Predicción: P(E/+) frente a 1/2; los positivos solo se colorean después de predecir.
+- **Prestadas** con sus ids: `union`, `urn`, `contingency` (4.º aplicadas) y `draw`, `repeat`, `total` (4.º académicas). 11 herramientas.
+- `lab/probability.ts`: `say` que pasa `{,}` a punto en árabe, `probLatex` (decimal exacto corto o fracción), `hundredthsLatex`, `tenthsLatex`.
+- **Test** `tests/probabilitatea-batx2z-lab.test.ts`: retos fijos con su solución y sin empezar resueltos, retos infinitos (150 semillas) resolubles y alcanzables, mismas fórmulas en los cuatro idiomas, De Morgan (dos nombres para una zona), independencia en todos los cortes iguales, grupos enteros en las 10 000 personas.
+- **Trucos:** las fórmulas del resultado van una por línea y cortas (a 375 px, `P(A∪B)=0,5+0,4−0,2=0,7` ya necesita barra); la cuenta va en la nota. El árabe no pasa `{,}` a punto por sí solo en el laboratorio: `inLanguage` lo hace en las fórmulas del resultado y el `say` de `probability.ts` en los textos. Un texto árabe con números en el SVG va con `Label`, no con `text`. El lint de React no deja reasignar variables al dibujar (`let x` dentro de un `map`): se calculan los inicios con `reduce`. Con el panel oculto, `requestAnimationFrame` no corre: el ▶ no se puede ver, solo comprobar en el código.
+- **Revisión:** las 11 herramientas a 375 px en eu y ar sin desbordes, sin textos que se pisen o se salgan del tablero y sin fórmulas con barra de desplazamiento.
+
 ## En curso
 
-- Fase 1 (lecciones y contenido) hecha; falta el commit con tests, lint y build en verde.
-- Siguiente paso: fase 2, laboratorio (L1 pinta el suceso, L2 las cuatro zonas, L3 el cuadrado, L4 las causas en el cuadrado, L5 1000 personas, y las prestadas de 4.º).
+- Fase 2 (laboratorio) hecha; falta su commit.
+- Siguiente paso: fase 3, juegos (J1 ¿independientes, incompatibles o ninguno?, J2 rellena el Venn, J3 ¿quién fue?, J4 detective de 2.º; el árbol y la tabla de 4.º con niveles nuevos; carrera y memoria).
