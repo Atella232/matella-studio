@@ -15,7 +15,8 @@ import { CAUSES_LIMITS, causesChallenges, causesExtra, causesPrediction, initial
 import { initialPaintState, namesOf, PAINT_TARGETS, paintChallenges, paintExtra, paintPrediction, sameZones, setTarget, toggleZone, ZONES, type PaintState, type Zone } from './events'
 import { aGivenB, bOf, initialMosaicState, isIndependent, MOSAIC_LIMITS, mosaicChallenges, mosaicExtra, mosaicPrediction, piecesOf, setMosaic, type MosaicState } from './mosaic'
 import { countsOf, illGivenPositive, initialPeopleState, PEOPLE_LIMITS, peopleChallenges, peopleExtra, peoplePrediction, setPeople, type PeopleState } from './people'
-import { hundredthsLatex, probLatex, say, tenthsLatex } from './probability'
+import { hundredthsLatex, pct, probLatex, say, tenthsLatex } from './probability'
+import { VENN, ZONE_PATHS, ZONE_SPOTS } from './vennGeometry'
 import { initialZonesState, unionOf, ZONES_STEP, zonesChallenges, zonesExtra, zonesOf, zonesPrediction, setZones, type ZonesState } from './zones'
 
 /* ==========================================================================
@@ -32,42 +33,16 @@ import { initialZonesState, unionOf, ZONES_STEP, zonesChallenges, zonesExtra, zo
 /** The readout formulas in a language: Arabic writes the decimal point */
 const inLanguage = (latex: string[], language: UnitLanguage) => (language === 'ar' ? latex.map((line) => line.replace(/\{,\}/g, '.')) : latex)
 
-/** A percentage as each language writes it: % 5 in Basque, 5 % in Spanish, 5% in English, 5٪ in Arabic */
-function pct(value: number, language: UnitLanguage): string {
-    const number = dec(value, language, 1)
-    if (language === 'eu') return `% ${number}`
-    if (language === 'en') return `${number}%`
-    if (language === 'ar') return `${number}٪`
-    return `${number} %`
-}
-
 /* ---------- The Venn diagram shared by the first two tools ---------- */
 
-const VENN = { a: { x: 130, y: 112 }, b: { x: 230, y: 112 }, r: 84, box: { x: 10, y: 10, width: 340, height: 204 } }
-const half = VENN.b.x - VENN.a.x
-const rise = Math.sqrt(VENN.r ** 2 - (half / 2) ** 2)
-const top = { x: (VENN.a.x + VENN.b.x) / 2, y: VENN.a.y - rise }
-const bottom = { x: top.x, y: VENN.a.y + rise }
-const r = VENN.r
-const ZONE_PATHS: Record<Zone, string> = {
-    both: `M ${top.x} ${top.y} A ${r} ${r} 0 0 1 ${bottom.x} ${bottom.y} A ${r} ${r} 0 0 1 ${top.x} ${top.y} Z`,
-    onlyA: `M ${top.x} ${top.y} A ${r} ${r} 0 1 0 ${bottom.x} ${bottom.y} A ${r} ${r} 0 0 1 ${top.x} ${top.y} Z`,
-    onlyB: `M ${top.x} ${top.y} A ${r} ${r} 0 1 1 ${bottom.x} ${bottom.y} A ${r} ${r} 0 0 0 ${top.x} ${top.y} Z`,
-    none: `M ${VENN.box.x} ${VENN.box.y} h ${VENN.box.width} v ${VENN.box.height} h ${-VENN.box.width} Z M ${top.x} ${top.y} A ${r} ${r} 0 1 0 ${bottom.x} ${bottom.y} A ${r} ${r} 0 1 0 ${top.x} ${top.y} Z`
-}
-/** Where the number or the label of each zone goes */
-const ZONE_SPOTS: Record<Zone, { x: number; y: number }> = {
-    onlyA: { x: 88, y: 118 },
-    both: { x: 180, y: 118 },
-    onlyB: { x: 272, y: 118 },
-    none: { x: 318, y: 200 }
-}
 const ZONE_NAMES: Record<Zone, ReturnType<typeof say>> = {
     onlyA: say('A bakarrik', 'Solo A', 'A وحده', 'Only A'),
     both: say('A eta B', 'A y B', 'A وB', 'A and B'),
     onlyB: say('B bakarrik', 'Solo B', 'B وحده', 'Only B'),
     none: say('Bat ere ez', 'Ninguno', 'لا أحد', 'Neither')
 }
+
+const r = VENN.r
 
 function VennOutline() {
     return (

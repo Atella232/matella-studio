@@ -48,8 +48,27 @@ Commit 7c923c4 (2710 tests, lint y build en verde).
 - **Trucos:** las fórmulas del resultado van una por línea y cortas (a 375 px, `P(A∪B)=0,5+0,4−0,2=0,7` ya necesita barra); la cuenta va en la nota. El árabe no pasa `{,}` a punto por sí solo en el laboratorio: `inLanguage` lo hace en las fórmulas del resultado y el `say` de `probability.ts` en los textos. Un texto árabe con números en el SVG va con `Label`, no con `text`. El lint de React no deja reasignar variables al dibujar (`let x` dentro de un `map`): se calculan los inicios con `reduce`. Con el panel oculto, `requestAnimationFrame` no corre: el ▶ no se puede ver, solo comprobar en el código.
 - **Revisión:** las 11 herramientas a 375 px en eu y ar sin desbordes, sin textos que se pisen o se salgan del tablero y sin fórmulas con barra de desplazamiento.
 
+Commit 4d6ca6f.
+
+## Fase 3: juegos
+
+- **Propios** (lógica pura en `games/*.ts`, pantallas con `RoundGame` en `ProbabilityBatx2Games.tsx`):
+  - `relation` «¿Independientes, incompatibles o ninguna de las dos?» (`relation.ts`, niveles 128501–128503): P(A), P(B) y un tercer dato (la intersección, la unión o P(B/A)); seis rondas con cada respuesta dos veces; nunca independientes e incompatibles a la vez.
+  - `venn` «Rellena el Venn» (`vennGame.ts`, 128601–128603): tres datos (como en la EBAU: intersección, unión, diferencia, «ni A ni B», contrarios y De Morgan) y la zona o el suceso preguntado sombreado con «?»; tres valores, dos de ellos errores típicos. Usa las 20 expresiones de `lab/events.ts`.
+  - `culprit` «¿Quién fue?» (`culprit.ts`, 128701–128703): dos o tres máquinas con su parte y su tasa de fallo; se toca la más probable sabiendo D (o D̄ en el nivel 3). En los niveles 1 y 2, cuatro de seis rondas son trampa (no gana la que más fabrica) y la ganadora supera a las demás en un quinto.
+  - `detective` (`detective.ts`, 128751–128753): errores que no están en el detective de 4.º: P(A − B) = P(A) − P(B), «ni A ni B» como contrario de la intersección, «solo uno» como la unión; P(A∩B) dada como P(A/B), independientes como incompatibles, multiplicar sin independencia, P(Ā/B) = 1 − P(A/B̄); olvidar las a priori, P(D/Aᵢ) por P(Aᵢ/D), la total como media simple y olvidar la bola pasada.
+- **Carrera** (`race.ts`, 128401–128404): cuatro circuitos, uno por etapa, 13 tipos de pregunta; las opciones malas son errores típicos.
+- **Memoria** (`boards.ts`, 128801–128803): contrarios con De Morgan, la regla del producto y el cociente de Bayes.
+- **Prestados** de 4.º con las etapas y los ids de esta unidad: el árbol (128811–128813) y la tabla de contingencia (128821–128823).
+- `lab/vennGeometry.ts` (geometría del Venn, compartida por el laboratorio y el juego) y `pct` en `lab/probability.ts` (porcentaje con espacio no separable: «% 60» en euskera, «60 %» en castellano).
+- **Test** `tests/probabilitatea-batx2z-games.test.ts`: el centro de juegos y sus ids; cada pregunta de la carrera recalculada desde sus números; rondas bien formadas en los tres juegos; el detective con una sola línea mal y su arreglo correcto; parejas de la memoria con un solo compañero y cuentas exactas.
+- **Trucos:** el evaluador de los tests no lee `\frac` con `{,}` dentro: los tests de los juegos pasan `{,}` a punto antes de evaluar. Tres botones con texto («Independenteak», «Ez bata ez bestea») no caben en tres columnas a 375 px: van en una columna. Una línea del detective con dos productos (`P(D)=0,7·0,04+0,3·0,09=0,055`) se sale a 375 px: se escriben los caminos ya multiplicados.
+- **Revisión:** los juegos a 375 px en eu y ar, respondiendo una ronda: sin desbordes, sin fórmulas fuera de la pantalla ni comas decimales en árabe.
+
 ## En curso
 
-- Fase 2 (laboratorio) hecha: commit 4d6ca6f.
+- Fase 2 (laboratorio) hecha: commit 4d6ca6f. Fase 3 (juegos) hecha; falta su commit.
+- Siguiente paso: cierre del tema (tests completos, lint, build, revisión a 375 px también en castellano, hoja de euskera) y después el tema 2 `binomial-normal`.
+- (Plan anterior de la fase 3, ya hecho:)
 - Fase 3 sin empezar (nada de código). Modelo a copiar: `src/pages/batx1-zientziak-estatistika/games/` (`info.ts` con `GameInfo` y niveles, `index.tsx` con `GamesHub`, juegos propios con `RoundGame` de `features/unit-v2/games/RoundGame`, detective con `createWorkedCases` y `WorkedDetectiveGame`, carrera, memoria con `PairsMemoryGame`, `GameArt.tsx`) y su test `tests/estatistika-batx1z-games.test.ts`. Ids de juegos: 128401–128899 (p. ej. carrera 128401–128405, J1 128501–3, J2 128601–3, J3 128701–3, J4 128751–3, memoria 128801–3, árbol y tabla de 4.º con 128811–3 y 128821–3). El detective de 4.º ya usa «conditional-swapped» y «total-one-branch»: el de 2.º usa otros errores (ignorar la a priori, P(A − B) = P(A) − P(B), independiente ⇒ incompatible, P(A∩B) como P(A/B), P(Ā/B) = 1 − P(A/B̄), De Morgan mal, multiplicar sin independencia, dividir entre P(Aᵢ) en Bayes). Después: registrar `games` en `index.tsx`, cierre (tests, lint, build, inventario, 375 px, hoja de euskera) y el tema 2 `binomial-normal`.
 - Fase 3: juegos (J1 ¿independientes, incompatibles o ninguno?, J2 rellena el Venn, J3 ¿quién fue?, J4 detective de 2.º; el árbol y la tabla de 4.º con niveles nuevos; carrera y memoria).

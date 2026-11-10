@@ -1,5 +1,6 @@
 import { fraction, hasTerminatingDecimal, toExactDecimal, type FractionValue } from '../../../features/unit-v2/math/fraction.ts'
-import type { LocalizedText } from '../../../features/unit-v2/types.ts'
+import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types.ts'
+import { dec } from '../../dbh3-segidak/lab/labStyle.ts'
 
 /* ==========================================================================
    Probabilitatea · Batxilergoa 2 — small helpers shared by the lab tools
@@ -22,3 +23,12 @@ export function probLatex(value: FractionValue): string {
 export const hundredthsLatex = (hundredths: number) => probLatex({ numerator: hundredths, denominator: 100 })
 /** A number of tenths for LaTeX: 3 → 0{,}3 */
 export const tenthsLatex = (tenths: number) => probLatex({ numerator: tenths, denominator: 10 })
+
+/** A percentage as each language writes it (with a no-break space): % 5 in Basque, 5 % in Spanish, 5% in English, 5٪ in Arabic */
+export function pct(value: number, language: UnitLanguage): string {
+    const number = dec(value, language, 1)
+    if (language === 'eu') return `%\u00a0${number}`
+    if (language === 'en') return `${number}%`
+    if (language === 'ar') return `${number}٪`
+    return `${number}\u00a0%`
+}

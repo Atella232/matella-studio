@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { probabilityBatx2Challenges, probabilityBatx2Diagnostic, probabilityBatx2ExerciseBank, probabilityBatx2Practice } from './content'
 import { ProbabilityBatx2HeroArt } from './figures'
+import { ProbabilityBatx2Games } from './games'
+import { PROBABILITY_BATX2_GAME_RECORDS_KEY, probabilityBatx2GameProgressIds } from './games/info'
 import { ProbabilityBatx2Laboratory } from './lab'
 import { probabilityBatx2LabChallengeIds, probabilityBatx2LabToolForTopic, probabilityBatx2LabTools } from './lab/labTools'
 import { probabilityBatx2Stages, probabilityBatx2Topics } from './lessons'
@@ -37,6 +39,17 @@ const probabilitateaBatx2zUnit: UnitDefinition = {
         progressIds: probabilityBatx2LabChallengeIds,
         toolForTopic: probabilityBatx2LabToolForTopic,
         render: (props) => <ProbabilityBatx2Laboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, independenteak ala bateraezinak, bete Venn diagrama, nork egin du?, probabilitatearen detektibea eta memoria, berriak; eta 4. DBHko zuhaitzaren bideak eta kontingentzia-taula.',
+            es: 'Ocho juegos: carrera, ¿independientes o incompatibles?, rellena el Venn, ¿quién fue?, detective de probabilidad y memoria, nuevos; y de 4.º ESO, los caminos del árbol y la tabla de contingencia.',
+            en: 'Eight games: race, independent or mutually exclusive?, fill in the Venn diagram, who did it?, probability detective and memory, new; and from 4th ESO, the paths of the tree and the contingency table.',
+            ar: 'ثماني ألعاب: السباق، ومستقلان أم متنافيان، واملأ مخطط فن، ومن الفاعل، ومخبر الاحتمالات، والذاكرة، وهي جديدة؛ ومن الصف الرابع: مسارات الشجرة وجدول التوافق.'
+        },
+        progressIds: probabilityBatx2GameProgressIds,
+        recordsKey: PROBABILITY_BATX2_GAME_RECORDS_KEY,
+        render: (props) => <ProbabilityBatx2Games {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zatiki bat edo zenbaki zehatz bat: 3/8, 0,375 edo 12. Probabilitate ez-zehatzak (1/6), zatiki gisa.', es: 'Escribe una fracción o un número exacto: 3/8, 0,375 o 12. Las probabilidades no exactas (1/6), como fracción.', en: 'Write a fraction or an exact number: 3/8, 0.375 or 12. Non-exact probabilities (1/6): write them as a fraction.', ar: 'اكتب كسرًا أو عددًا مضبوطًا: 3/8 أو 0.375 أو 12. والاحتمالات غير المنتهية (1/6) كسرًا.' },
