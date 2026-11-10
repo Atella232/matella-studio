@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2ApplicationsChallenges, bach2ApplicationsDiagnostic, bach2ApplicationsExerciseBank, bach2ApplicationsPractice } from './content'
 import { Bach2ApplicationsHeroArt } from './figures'
+import { Bach2ApplicationsGames } from './games'
+import { BACH2_APPLICATIONS_GAME_RECORDS_KEY, bach2ApplicationsGameProgressIds } from './games/info'
 import { Bach2ApplicationsLaboratory } from './lab'
 import { bach2ApplicationsLabChallengeIds, bach2ApplicationsLabToolForTopic, bach2ApplicationsLabTools } from './lab/labTools'
 import { bach2ApplicationsStages, bach2ApplicationsTopics } from './lessons'
@@ -36,6 +38,17 @@ const aplikazioakBatx2zUnit: UnitDefinition = {
         progressIds: bach2ApplicationsLabChallengeIds,
         toolForTopic: bach2ApplicationsLabToolForTopic,
         render: (props) => <Bach2ApplicationsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, L\'Hôpitalek balio du?, Rolle betetzen du?, planteatu eta optimizatu, aplikazioen detektibea eta memoria, berriak; eta 1. mailako Aplikazioak unitateko ehizatu muturrak eta ∪ ala ∩?.',
+            es: 'Ocho juegos: carrera, ¿vale L\'Hôpital?, ¿cumple Rolle?, plantea y optimiza, detective de aplicaciones y memoria, nuevos; y de Aplicaciones de 1.º, caza los extremos y ¿∪ o ∩?.',
+            en: 'Eight games: race, does L\'Hôpital apply?, does Rolle hold?, set up and optimise, applications detective and memory, new; and from Applications of 1st year, hunt the extrema and ∪ or ∩?.',
+            ar: 'ثماني ألعاب: السباق، وهل تصح قاعدة لوبيتال؟، وهل تتحقق مبرهنة رول؟، وصُغ واستمثل، ومخبر التطبيقات، والذاكرة، وهي جديدة؛ ومن تطبيقات السنة الأولى: اصطد القيم القصوى، و∪ أم ∩؟.'
+        },
+        progressIds: bach2ApplicationsGameProgressIds,
+        recordsKey: BACH2_APPLICATIONS_GAME_RECORDS_KEY,
+        render: (props) => <Bach2ApplicationsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2.', es: 'Escribe un número: 5, −3, 0,25 o 3/2.', en: 'Write a number: 5, −3, 0.25 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2.' },

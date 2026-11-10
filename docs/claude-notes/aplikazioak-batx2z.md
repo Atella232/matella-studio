@@ -61,6 +61,22 @@ Tercer tema del bloque Cálculo diferencial de 2.º Ciencias (reparto en paralel
 - **Comprobación:** las 7 herramientas a 375 px en eu, es y ar, antes y después de predecir, con todas las funciones y los pasadores en sus dos extremos: sin desbordes, sin errores de KaTeX y sin textos fuera del tablero (el selector de herramientas se desliza a propósito).
 - **Trucos:** en las etapas violeta y verde el color de la etapa coincide con el violeta y el verde de las piezas: las cuerdas, A y B van en tinta y el segmento PQ en rojo. En el árabe de los retos los decimales van con punto también dentro de la fórmula (`$x=1.01$`).
 
+**Fase 4, juegos (8):**
+- **Propios:**
+  - `hopitalGame.ts`, J1 «¿Vale L'Hôpital?» (124501–124503): un límite y tres veredictos (se aplica ya, hay que transformarlo antes, no hay indeterminación). Niveles: en un punto, en el infinito, todo mezclado. Tras responder, la forma y el valor.
+  - `rolleGame.ts`, J2 «¿Cumple Rolle?» (124601–124603): función e intervalo y cuatro veredictos (cumple, falla la continuidad, falla la derivabilidad, f(a) ≠ f(b)). Solo falla una hipótesis por ronda. Niveles: polinomios y trigonométricas, picos de |x − k| y saltos, y además asíntotas y la raíz cúbica de x².
+  - `optimizeGame.ts`, J3 «Plantea y optimiza» (124651–124653): primero la función bien planteada entre tres (las malas usan mal la condición), después el óptimo entre tres (las malas son la x del óptimo y un despiste). Niveles: números, figuras (rectángulos, valla junto al río, caja), distancias y costes.
+  - `detective.ts` (124701–124703): 12 errores en tres niveles (signo de f′ y f″, bordes, f(c); L'Hôpital sin indeterminación, regla del cociente, ∞·0 = 0, ln L; f = 0 en el extremo, f′ = 0 en la inflexión, la x como óptimo, D como distancia).
+- **Genéricos:** carrera (`race.ts`, 124401–124405, 15 tipos con `meta`) y memoria (`boards.ts`, 124801–124803: límites, extremos y óptimos, ocho parejas por nivel con respuestas distintas).
+- **Prestados de Aplikazioak 1.º:** «Caza los extremos» (124811–124813) y «¿∪ o ∩?» (124821–124823), en la etapa de repaso.
+- **Test:** `tests/aplikazioak-batx2z-games.test.ts` (8 pruebas; la de optimiza busca el óptimo de la función buena en una rejilla fina y lo compara con la respuesta).
+- **Comprobación:** los juegos de rondas (los 3 propios y los 2 prestados) jugados en sus tres niveles a 375 px en eu, es y ar; el detective y la memoria pulsando líneas y tarjetas; la carrera medida fuera de la página (con el panel oculto su cuenta atrás va muy lenta).
+- **Trucos:**
+  - Las tarjetas de memoria son estrechas en el móvil: nada de fracciones con «x > 0» ni paréntesis largos en el nivel de óptimos.
+  - Las soluciones de la carrera pasan por `rows()`, que parte en filas `gathered` cada `\qquad` y cada `\ \to\ `.
+  - En «Plantea y optimiza», las funciones van en una sola columna (`bach2-app-options-one`): en dos columnas KaTeX las partía en dos líneas.
+- **Fallo que no es de esta unidad:** en árabe, la «y» del eje vertical se sale un poco por arriba en «Caza los extremos» y «¿∪ o ∩?» de 1.º (el mismo fallo que en los juegos de 1.º que usa Derivadas 2.º). Se arregla en `batx1-zientziak-aplikazioak/games/BachApplicationsGames.tsx`, que no se ha tocado.
+
 ## En curso
 
-- **Siguiente:** fase 4, juegos (ids 124401–124899): J1 «¿Vale L'Hôpital?», J2 «¿Cumple Rolle?», J3 «Plantea y optimiza», detective, carrera, memoria y los prestados de 1.º «Caza los extremos» y «¿∪ o ∩?». Después el cierre (inventario, 375 px, hoja de euskera, nota).
+- **Siguiente:** el cierre: `npm test`, lint y build; hoja de euskera; quitar esta sección.
