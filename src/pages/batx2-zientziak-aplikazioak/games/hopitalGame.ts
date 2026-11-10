@@ -29,6 +29,13 @@ type Maker = (random: Random) => HopitalRound
 
 const at = (a: number | string) => `\\lim_{x\\to ${a}}`
 
+/** A fraction in lowest terms, or a whole number */
+function frac(p: number, q: number): string {
+    const gcd = (x: number, y: number): number => (y === 0 ? Math.abs(x) : gcd(y, x % y))
+    const g = gcd(p, q)
+    return q / g === 1 ? String(p / g) : `\\frac{${p / g}}{${q / g}}`
+}
+
 /** Level 1: limits at a point */
 const POINT: Record<HopitalBin, Maker[]> = {
     now: [
@@ -46,10 +53,10 @@ const POINT: Record<HopitalBin, Maker[]> = {
         () => ({ latex: `\\lim_{x\\to 0^+}\\sqrt{x}\\ln x`, form: '0\\cdot(-\\infty)', value: '0', bin: 'transform' })
     ],
     none: [
-        (random) => { const p = randomInt(random, 1, 5); const q = randomInt(random, 2, 6); return { latex: `${at(0)}\\frac{x+${p}}{x+${q}}`, form: `\\frac{${p}}{${q}}`, value: `\\frac{${p}}{${q}}`, bin: 'none' } },
+        (random) => { const p = randomInt(random, 1, 5); const q = p + randomInt(random, 1, 3); return { latex: `${at(0)}\\frac{x+${p}}{x+${q}}`, form: `\\frac{${p}}{${q}}`, value: frac(p, q), bin: 'none' } },
         (random) => { const k = randomInt(random, 2, 5); return { latex: `${at(0)}\\frac{\\cos x}{x+${k}}`, form: `\\frac{1}{${k}}`, value: `\\frac{1}{${k}}`, bin: 'none' } },
         (random) => { const k = randomInt(random, 1, 4); return { latex: `${at(0)}\\frac{e^x+${k}}{x+1}`, form: `\\frac{${k + 1}}{1}`, value: String(k + 1), bin: 'none' } },
-        (random) => { const a = randomInt(random, 2, 4); return { latex: `${at(a)}\\frac{x^2}{x+1}`, form: `\\frac{${a * a}}{${a + 1}}`, value: `\\frac{${a * a}}{${a + 1}}`, bin: 'none' } }
+        (random) => { const a = randomInt(random, 2, 4); return { latex: `${at(a)}\\frac{x^2}{x+1}`, form: `\\frac{${a * a}}{${a + 1}}`, value: frac(a * a, a + 1), bin: 'none' } }
     ]
 }
 

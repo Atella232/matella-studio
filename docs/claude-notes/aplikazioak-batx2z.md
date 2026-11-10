@@ -77,6 +77,12 @@ Tercer tema del bloque Cálculo diferencial de 2.º Ciencias (reparto en paralel
   - En «Plantea y optimiza», las funciones van en una sola columna (`bach2-app-options-one`): en dos columnas KaTeX las partía en dos líneas.
 - **Fallo que no es de esta unidad:** en árabe, la «y» del eje vertical se sale un poco por arriba en «Caza los extremos» y «¿∪ o ∩?» de 1.º (el mismo fallo que en los juegos de 1.º que usa Derivadas 2.º). Se arregla en `batx1-zientziak-aplikazioak/games/BachApplicationsGames.tsx`, que no se ha tocado.
 
-## En curso
+## Cierre (2026-11-10)
 
-- **Siguiente:** el cierre: `npm test`, lint y build; hoja de euskera; quitar esta sección.
+- `npm test` (2790), `npm run lint` y `npm run build` en verde.
+- Inventario: OK (juegos propios: `hopital`, `rolle`, `optimize` y el detective; el script cuenta también como propios los dos prestados de 1.º. Herramientas propias: `rolle`, `mean`, `hopital`, `distance`; el script cuenta 7 porque las de 1.º son propias de su unidad).
+- Revisión a 375 px en eu, es y ar: lecciones, resumen, diagnóstico, práctica, retos, banco, las 7 herramientas y 7 de los 8 juegos jugando; la carrera, medida fuera de la página (su cuenta atrás no avanza con el panel oculto).
+- **Último arreglo:** en «¿Vale L'Hôpital?», los límites sin indeterminación dan el valor simplificado (nada de 3/3 ni 2/4).
+- Hoja de euskera: `aplikazioak-batx2z-euskera.html` en la carpeta compartida del bloque, enviada al dueño.
+- **Fallo de otra unidad (sin tocar, para el dueño):** la «y» del eje en árabe en «Caza los extremos» y «¿∪ o ∩?» de Aplikazioak 1.º (ver la fase 4).
+- **Para 2.º Sociales:** las figuras de `figures.tsx`, las herramientas de `lab/Bach2ApplicationsTools.tsx` y los juegos están exportados.
