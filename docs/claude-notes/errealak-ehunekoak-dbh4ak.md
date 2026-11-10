@@ -9,7 +9,7 @@ Five stages: rational, reals, approx (intervals + approximations), percent, inte
 
 Status: merged into main (fast-forward, up to 832b160) and deployed to matella.net on 2026-10-02.
 
-Gotcha learnt: Chrome ignores LRI/PDI isolates inside SVG text, so in Arabic figure labels keep formulas in their own <text>, never mixed with Arabic words. Basque suffixes after generated numbers (% 5ean, 1200en) depend on pronunciation: phrase generated prompts without suffixes.
+Gotcha learnt: Chrome ignores LRI/PDI isolates inside SVG text, so in Arabic figure labels keep formulas in their own <text>, never mixed with Arabic words. (Corrected on 2026-11-10: it is WebKit, Safari and every iPhone browser, that ignores LRI/PDI inside SVG text; Chromium honours them. The shared `Label` of `dbh2-funtzioak-v2/plane.tsx` now marks each formula itself with RLM + LRE … PDF + RLM, which both engines honour, so a formula can go inside an Arabic sentence of a figure. See `funtzioak-dbh2.md`.) Basque suffixes after generated numbers (% 5ean, 1200en) depend on pronunciation: phrase generated prompts without suffixes.
 
 ## Own games (2026-11-02)
 
