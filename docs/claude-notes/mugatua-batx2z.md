@@ -44,7 +44,7 @@ Segundo tema del bloque Integrales de 2.º Ciencias (reparto en paralelo, ver `b
 
 ## Trucos
 
-- **Árabe dentro de un dibujo:** Chrome no respeta los aislantes LRI/PDI dentro de `<text>` de SVG, así que «x = 0» o «π r² dx» dentro de una frase árabe salen desordenados. En los dibujos, la frase va sola en una línea y la fórmula en otra (con `F`). Una letra suelta (x, f) sí sale bien. Esto pasa con el `Label` compartido en todo el sitio (pendiente para el dueño, no es pieza de esta unidad).
+- **Árabe dentro de un dibujo:** en las capturas, Chrome no respetó los aislantes LRI/PDI dentro de `<text>` de SVG, así que «x = 0» o «π r² dx» dentro de una frase árabe salían desordenados. En los dibujos, la frase va sola en una línea y la fórmula en otra (con `F`). Una letra suelta (x, f) sí sale bien. Viene del `Label` compartido (ver «Aviso» en el cierre).
 - **SVG junta los espacios:** «u = x      dv = …» sale con un solo espacio; separa con «;».
 - **Revisar lecciones:** los pasos se abren uno a uno («Ikusi 2. urratsa») y el dibujo con `figureAfterSteps` solo aparece al final; hay que pulsar todos antes de medir.
 - **Banco:** para ver la solución hay que escribir algo antes; el tema se elige en `#fraction-v2-bank-section` (un `<select>`).
@@ -53,6 +53,12 @@ Segundo tema del bloque Integrales de 2.º Ciencias (reparto en paralelo, ver `b
 - **Detective:** caben unos 220 px por línea; «m₁ = f(1) = 2  m₂ = f(2) = 5» no cabía y quedó «m₁ = f(1)  m₂ = f(2)».
 - **Revisar herramientas:** con el panel oculto la captura no sigue el scroll; copiar `.fraction-v2-lab-tool` (con `cloneNode`) a una capa fija y mover su `scrollTop`.
 
-## En curso
+## Cierre
 
-- Fases 1+2 (fe5c95f), 3 (7092dbf) y 4 (commit con esta nota) terminadas. Siguiente paso: cierre (tests, lint y build, inventario, hoja de euskera y avisar).
+- **Commits en `feat/mugatua-batx2z`:** f6ae31f (nota y propuesta), fe5c95f (fases 1+2), 7092dbf (fase 3), 3517d86 (fase 4) y el del cierre con esta nota.
+- **Comprobaciones:** `npm test`, `npm run lint` y `npm run build` en verde.
+- **Inventario:** OK (3 juegos propios + detective; 3 herramientas propias más las 2 prestadas de Integralak de 1.º, que el script cuenta como propias).
+- **Hoja de euskera** para el dueño: `mugatua-batx2z-euskera.html` en las notas compartidas de la sesión principal (enviada).
+- **Euskera elegido (para revisar en la hoja):** behe-batura / goi-batura (suma inferior / superior), zatiketa (partición; ojo, en otras unidades «zatiketa» es la división: alternativa «partiketa»), funtzio integragarria, batez besteko balioa, funtzio integrala, integrazio-aldagaia, muga aldakorra, oinarrizko teorema, barrutia (recinto), zerrenda (tira), bira-gorputza (cuerpo de revolución), inflexio-puntua, zatika definitutako funtzioa (a trozos), jauzia (salto).
+- **Para la sesión principal:** esta rama toca `courses.ts` (solo `active: true` en `integral-definida`), el router y `paths.ts`; nada de otras unidades. Las piezas quedan exportadas para 2.º Sociales: la lógica de `lab/` (sumas, valor medio, tiras) y de `games/` (Barrow, límites, derivar la función integral, detective, carrera, memoria).
+- **Aviso fuera de esta unidad:** el `Label` compartido (`dbh2-funtzioak-v2/plane.tsx`) aísla las fórmulas con LRI/PDI dentro de `<text>` SVG, pero en las capturas de esta revisión (Chrome) no se respetaron: «x = 0» dentro de una frase árabe de un dibujo salía al revés, y es probable que pase en otras unidades. Aquí se ha evitado separando frase y fórmula; mirarlo y arreglarlo en la pieza común es tarea aparte.

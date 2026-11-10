@@ -99,7 +99,8 @@ function upperX(random: Random) {
 /** ∫ₐ^g(x) f(t) dt: f(g)·g′, f(g), f(x)·g′ */
 function upperG(random: Random) {
     const inner = pick(random, INNER)
-    const g = pick(random, inner.positive ? G.filter((item) => item.latex !== '3x+1') : G)
+    // 3x + 1 inside 1 + t would read 1 + 3x + 1, and ln needs t > 0: keep it for eᵗ and cos t
+    const g = pick(random, inner.positive || inner.at('u', true).includes('1+') ? G.filter((item) => item.latex !== '3x+1') : G)
     const a = inner.positive ? 1 : 0
     const fg = inner.at(g.latex, g.simple)
     const fx = inner.at('x', true)

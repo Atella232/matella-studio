@@ -76,8 +76,8 @@ const EXP: Body = { t: 'e^t', x: (u) => `e^{${u}}`, fn: (t) => Math.exp(t) }
 /** t = x² + m: ∫ₐᵇ 2x·f(x² + m) dx = ∫ from a² + m to b² + m of f(t) dt */
 function square(random: Random): Made | null {
     const body = pick(random, [...POWERS, EXP])
-    // (x²)ⁿ would read better as a power of x: with a power inside, t = x² + m with m ≠ 0
-    const m = pick(random, body === EXP || body.t === '\\sqrt{t}' ? [0, 1, 2] : [1, 2])
+    // (x²)ⁿ or √(x²) would read better as a power of x: only eᵗ takes t = x² itself
+    const m = pick(random, body === EXP ? [0, 1, 2] : [1, 2])
     const a = randomInt(random, 0, 1)
     const b = randomInt(random, a + 1, 2)
     const [A, B] = [a * a + m, b * b + m]
