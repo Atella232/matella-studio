@@ -227,7 +227,7 @@ export const courses: Course[] = [
       { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️' },
       { id: 'representacion-funciones', name: 'Representación de Funciones', nameEu: 'Funtzioen Adierazpen Grafikoa', nameAr: 'التمثيل البياني للدوال', nameEn: 'Curve Sketching', icon: '📈' },
       { id: 'integrales-indefinidas', name: 'Integrales Indefinidas', nameEu: 'Integral Mugagabeak', nameAr: 'التكاملات غير المحددة', nameEn: 'Indefinite Integrals', icon: '∫', active: true },
-      { id: 'integral-definida', name: 'Integral Definida', nameEu: 'Integral Mugatua', nameAr: 'التكامل المحدد', nameEn: 'Definite Integral', icon: '▨' },
+      { id: 'integral-definida', name: 'Integral Definida', nameEu: 'Integral Mugatua', nameAr: 'التكامل المحدد', nameEn: 'Definite Integral', icon: '▨', active: true },
       { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲' },
       { id: 'binomial-normal', name: 'Distribuciones Binomial y Normal', nameEu: 'Banaketa Binomiala eta Normala', nameAr: 'التوزيع الثنائي والتوزيع الطبيعي', nameEn: 'Binomial and Normal Distributions', icon: '🔔' },
     ]
