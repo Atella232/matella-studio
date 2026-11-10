@@ -61,8 +61,25 @@ Commit 43bcbbf.
 - **Test:** `tests/deribatuak-batx2z-lab.test.ts` (retos resueltos por su solución y no al abrir; extras alcanzables; cada punto está en su curva y su pendiente coincide con la numérica; la inversa deshace f y su pendiente es 1/f′).
 - **Comprobación:** revisión a 375 px en eu, es y ar de las 7 herramientas, antes y después de predecir y moviendo todos los controles: sin desbordes ni textos fuera del tablero.
 
-## En curso
+Commit 7823f12.
 
-- Fase 3: hecha, falta el commit (en este momento).
-- Fase 4 (juegos): escritos `games/derivable.ts` (J1), `onion.ts` (J2), `hidden.ts` (J3) y `detective.ts`. Faltan `race.ts`, `boards.ts`, `info.ts`, `GameArt.tsx`, `Bach2DerivativesGames.tsx`, `RaceGame.tsx`, `index.tsx`, el CSS, el test de juegos y la revisión a 375 px.
-- Después: cierre (inventario, hoja de euskera, esta nota).
+**Fase 4, juegos (8):**
+- **Propios (3):**
+  - J1 `derivable` «¿Derivable?» (`games/derivable.ts`, ids 123501–123503): una función a trozos (o con valor absoluto) y la unión; tres veredictos: derivable, continua con pico o no continua. Nivel 1: dos polinomios (la mitad de los saltos con las mismas pendientes: la trampa de mirar solo las pendientes); nivel 2: polinomio y eˣ, e²ˣ, sen x, cos x, ln(x + 1), ln x, x³, 1/x, eˣ⁻¹; nivel 3: x|x|, (x − a)|x − a|, |x − a|³, |x² − a²|, x|x − a|, |x − a| + x, |x − a|/(x − a), (x² − a²)/|x − a|. 8 rondas, cada veredicto al menos dos veces. Tras responder salen las alturas y las pendientes de los dos lados.
+  - J2 `onion` «Pela la cebolla» (`games/onion.ts`, ids 123601–123603): una función de tres capas; primero se tocan las tarjetas de fuera adentro (solo vale un orden) y después se elige la derivada entre tres: la buena, la que olvida la capa de dentro y la que olvida la del medio. Fuera: □², □³, √□, e^□, ln □; medio: sen, cos, e, ln; dentro: kx, qx², x² + c. Se evitan las parejas que se deshacen (ln e^□, e^{ln □}) y □² de una exponencial.
+  - J3 `hidden` «Pendiente escondida» (`games/hidden.ts`, ids 123651–123653): una curva, un punto de coordenadas enteras y tres rectas A, B, C por él; solo una es la tangente. Nivel 1 circunferencias (normal y signo cambiado), nivel 2 elipses x² + ky² = d y xy = k (factor olvidado, x e y cambiadas), nivel 3 x² ± xy + y² = d (xy derivado sin y′ o sin y). Si dos pendientes quedan a menos de 12°, se toman la normal o el signo cambiado.
+- **Detective** (`games/detective.ts`, ids 123701–123703), 12 errores: normal −m, (uv)′ = u′v′, pendientes iguales con salto, pico donde lo de dentro solo toca 0; capa de dentro, u′ de ln u, signo que alterna, n en vez de n!; 1/f′(b), (y²)′ = 2y, (xˣ)′ = x·xˣ⁻¹, pendiente en la abscisa del punto exterior.
+- **Carrera** (`games/race.ts`, ids 123401–123405): 15 tipos con `meta` (tangente, normal, producto; k de la unión, picos de un valor absoluto, f′(a⁺); tres capas en 0, ln(x² + c) en 1, eᵏˣ de orden n; inversa, circunferencia, elipse; tangente horizontal, coeficiente b, tangentes desde (0, −k²)).
+- **Memoria** (`games/boards.ts`, ids 123801–123803): compuestas ↔ derivada, sucesivas ↔ resultado, curva ↔ y′; cada tablero toma cada plantilla una vez y no hay senos ni arcos (las tarjetas no se traducen).
+- **Prestados de 1.º:** «Empareja f y f′» (123811–123813) y «Tangente exacta» (123821–123823), con sus textos y niveles y las etapas de esta unidad.
+- **Test:** `tests/deribatuak-batx2z-games.test.ts` (alturas y pendientes de J1 comparadas con las numéricas de la propia función; en J2 el producto de factores es la derivada numérica; en J3 la pendiente se sigue por la curva con Newton; la carrera contra su `meta` y, en cinco tipos, contra un cálculo numérico).
+
+## Cierre (2026-11-10)
+
+- `npm test` (2753), `npm run lint` y `npm run build` en verde.
+- Inventario: OK (juegos propios: `derivable`, `onion`, `hidden` y el detective; herramientas propias: `zoom`, `no-corner`, `implicit`, `mirror`).
+- Revisión a 375 px en eu, es y ar: lecciones, resumen, diagnóstico, práctica, retos, banco, las 7 herramientas y los 8 juegos en sus tres niveles.
+- Hoja de euskera: `deribatuak-batx2z-euskera.html` en la carpeta compartida del bloque, enviada al dueño.
+- **Arreglos de la revisión:** en «Pendiente escondida» las letras A, B y C se buscan a lo largo de su recta hasta que caben en el tablero; en el detective, las líneas «deriva» de orden n muestran solo f″ (la pareja f′, f″ no cabía en árabe).
+- **Fallo de otra unidad (sin tocar, para el dueño):** en árabe, en «Empareja f y f′» y «Tangente exacta» de Deribatuak 1.º, la «y» del eje vertical se sale unos píxeles por arriba del dibujo. Pasa igual en la unidad de 1.º; habría que bajar ese rótulo en `batx1-zientziak-deribatuak/games/BachDerivativesGames.tsx`.
+- **Para 2.º Sociales:** `LimitPlot` (de Limiteak 2.º) y las figuras de `figures.tsx` están exportadas; `polyLatex` de `games/derivable.ts` también.

@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2DerivativesChallenges, bach2DerivativesDiagnostic, bach2DerivativesExerciseBank, bach2DerivativesPractice } from './content'
 import { Bach2DerivativesHeroArt } from './figures'
+import { Bach2DerivativesGames } from './games'
+import { BACH2_DERIVATIVES_GAME_RECORDS_KEY, bach2DerivativesGameProgressIds } from './games/info'
 import { Bach2DerivativesLaboratory } from './lab'
 import { bach2DerivativesLabChallengeIds, bach2DerivativesLabToolForTopic, bach2DerivativesLabTools } from './lab/labTools'
 import { bach2DerivativesStages, bach2DerivativesTopics } from './lessons'
@@ -36,6 +38,17 @@ const deribatuakBatx2zUnit: UnitDefinition = {
         progressIds: bach2DerivativesLabChallengeIds,
         toolForTopic: bach2DerivativesLabToolForTopic,
         render: (props) => <Bach2DerivativesLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, deribagarria?, zuritu tipula, malda ezkutua, deribatuen detektibea eta memoria, berriak; eta 1. mailako Deribatuak unitateko parekatu f eta f′ eta zuzen ukitzaile zehatza.',
+            es: 'Ocho juegos: carrera, ¿derivable?, pela la cebolla, pendiente escondida, detective de derivadas y memoria, nuevos; y de Derivadas de 1.º, empareja f y f′ y tangente exacta.',
+            en: 'Eight games: race, differentiable?, peel the onion, the hidden slope, derivatives detective and memory, new; and from Derivatives of 1st year, match f and f′ and the exact tangent.',
+            ar: 'ثماني ألعاب: السباق، وقابلة للاشتقاق؟، وقشّر البصلة، والميل المخفي، ومخبر المشتقات، والذاكرة، وهي جديدة؛ ومن مشتقات السنة الأولى: طابِق f وf′ والمماس الدقيق.'
+        },
+        progressIds: bach2DerivativesGameProgressIds,
+        recordsKey: BACH2_DERIVATIVES_GAME_RECORDS_KEY,
+        render: (props) => <Bach2DerivativesGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2.', es: 'Escribe un número: 5, −3, 0,25 o 3/2.', en: 'Write a number: 5, −3, 0.25 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2.' },
