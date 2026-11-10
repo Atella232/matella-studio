@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { spaceVectorsChallenges, spaceVectorsDiagnostic, spaceVectorsExerciseBank, spaceVectorsPractice } from './content'
 import { SpaceVectorsHeroArt } from './figures'
+import { SpaceVectorsGames } from './games'
+import { SPACE_VECTORS_GAME_RECORDS_KEY, spaceVectorsGameProgressIds } from './games/info'
 import { SpaceVectorsLaboratory } from './lab'
 import { spaceVectorsLabChallengeIds, spaceVectorsLabToolForTopic, spaceVectorsLabTools } from './lab/labTools'
 import { spaceVectorsStages, spaceVectorsTopics } from './lessons'
@@ -37,6 +39,17 @@ const bektoreakBatx2zUnit: UnitDefinition = {
         progressIds: spaceVectorsLabChallengeIds,
         toolForTopic: spaceVectorsLabToolForTopic,
         render: (props) => <SpaceVectorsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, zenbakia ala bektorea?, zein da u × v?, kutxa zapaldua, detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿número o vector?, ¿cuál es u × v?, la caja aplastada, detective y memoria.',
+            en: 'Six games: race, number or vector?, which is u × v?, the flattened box, detective and memory.',
+            ar: 'ست ألعاب: السباق، وعدد أم متجه؟، وأيها u × v؟، والصندوق المنضغط، والمخبر، والذاكرة.'
+        },
+        progressIds: spaceVectorsGameProgressIds,
+        recordsKey: SPACE_VECTORS_GAME_RECORDS_KEY,
+        render: (props) => <SpaceVectorsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, modulua, biderkadura, angelua gradutan, azalera, bolumena edo parametroa. Adibidez 5, −3, 2,5 edo 3/5.', es: 'Escribe un solo número: la coordenada, el módulo, el producto, el ángulo en grados, el área, el volumen o el parámetro que se pide. Por ejemplo 5, −3, 2,5 o 3/5.', en: 'Write a single number: the coordinate, magnitude, product, angle in degrees, area, volume or parameter that is asked for. For example 5, −3, 2.5 or 3/5.', ar: 'اكتب عددًا واحدًا: المركّبة أو الطول أو الجداء أو الزاوية بالدرجات أو المساحة أو الحجم أو الوسيط المطلوب. مثلًا 5 أو ⁦−3⁩ أو 2.5 أو 3/5.' },

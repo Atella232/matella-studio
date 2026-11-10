@@ -40,6 +40,16 @@ Primera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - Test: `tests/bektoreak-batx2z-lab.test.ts` (retos fijos resueltos por un estado y nunca al abrir, 150 semillas de retos infinitos, coeficientes exactos, sombra perpendicular, aplastar a medias = mitad de volumen).
 - Revisión a 375 px en eu: las cinco herramientas antes y después de predecir; sin desbordes ni fórmulas de menos de 13 px.
 
+**Fase 4, juegos:** 6 juegos en `games/`, récords en `matella-bektoreak-batx2z-game-records`.
+- **Propios (4):**
+  - J1 `kind` «¿Número o vector?» en el espacio (`kind.ts`, niveles 119501–119503): u, v y w y una expresión con los tres productos; primero número, vector o «no tiene sentido» (u + k, (u·v) × w, u × v + k), después el valor entre cuatro (u·v como vector, sin el término de z, la j sin el menos, v × u, el determinante con el signo cambiado, (u × v) × w por u × (v × w)…).
+  - J2 `cross` «¿Cuál es u × v?» (`crossPick.ts`, 119551–119553): en el tablero 3D, u, v, su paralelogramo y cuatro flechas A–D del mismo largo: u × v, v × u, u × v con la j sin el menos y una perpendicular a uno solo. Nivel 1 vectores en los ejes, nivel 2 en un plano coordenado, nivel 3 con las coordenadas de las flechas.
+  - J3 `flat` «La caja aplastada» (`flatBox.ts`, 119601–119603): u, v y w con k en una coordenada de w; [u, v, w] = pendiente · k + término. Niveles 1–2: el k que aplasta la caja; nivel 3: el k > 0 que da un volumen (solo hay uno). Al responder, la caja se mueve al k correcto (`usePlayback`).
+  - J4 `detective` (`detective.ts`, 119701–119703): 12 errores (A − B, módulo sin z, simétrico como punto medio, tercera ecuación sin comprobar; u·v como vector, la j sin el menos, v × u = u × v, proyección entre el módulo equivocado; triángulo sin la mitad, tetraedro sin el sexto, volumen negativo, signo cambiado en una rotación).
+- **Carrera** `race.ts` (119401–119405, 15 tipos de pregunta con `meta`) y **memoria** `boards.ts` (119801–119803: producto escalar, módulo y producto vectorial).
+- **Test:** `tests/bektoreak-batx2z-games.test.ts` (cada respuesta de la carrera se recalcula con `meta`; J1 recalcula u·v, u × v, [u, v, w] y u × (v × w); J2 comprueba que solo la buena es u × v y que las falsas no son perpendiculares a los dos; J3, que solo el k bueno aplasta la caja o da el volumen; detective y memoria bien formados).
+- Revisión en el navegador a 375 px: hub y J2 con el tablero.
+
 ## Pendiente para la fusión
 
 - Enlaces «Antes de empezar» a Determinantes de 2.º (bloque Álgebra, no está en esta rama): en `dependence-rank` (regla de Sarrus), `basis-3d` y `mixed-product`. Ahora el determinante se calcula con Sarrus dentro de la lección.
@@ -53,4 +63,4 @@ Primera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 
 ## En curso
 
-- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos (J1 «¿Número o vector?» en el espacio, J2 «¿Cuál es u×v?», J3 «La caja aplastada», J4 detective, J5 carrera y memoria) en `games/`, ids 119401–119899.
+- Fases 1+2, 3 y 4 hechas. Siguiente: cierre de la unidad (tests, lint y build completos, inventario, revisión a 375 px en eu, es y ar, hoja de euskera con `hoja-revision.mjs`). Después, `planoak`.
