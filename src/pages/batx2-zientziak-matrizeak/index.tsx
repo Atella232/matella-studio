@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { matrizeakChallenges, matrizeakDiagnostic, matrizeakExerciseBank, matrizeakPractice } from './content'
 import { MatricesHeroArt } from './figures'
+import { MatrizeakGames } from './games'
+import { MATRIZEAK_GAME_RECORDS_KEY, matrizeakGameProgressIds } from './games/info'
 import { MatrizeakLaboratory } from './lab'
 import { matrizeakLabChallengeIds, matrizeakLabToolForTopic, matrizeakLabTools } from './lab/labTools'
 import { matrizeakStages, matrizeakTopics } from './lessons'
@@ -36,6 +38,17 @@ const matrizeakBatx2zUnit: UnitDefinition = {
         progressIds: matrizeakLabChallengeIds,
         toolForTopic: matrizeakLabToolForTopic,
         render: (props) => <MatrizeakLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, dimentsioen dominoa, askatu X, berretura erraldoia, matrizeen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, dominó de dimensiones, despeja la X, potencia gigante, detective de matrices y memoria.',
+            en: 'Six games: race, size dominoes, solve for X, giant power, matrix detective and memory.',
+            ar: 'ست ألعاب: السباق ودومينو الأبعاد واستخرج X والقوة العملاقة ومخبر المصفوفات والذاكرة.'
+        },
+        progressIds: matrizeakGameProgressIds,
+        recordsKey: MATRIZEAK_GAME_RECORDS_KEY,
+        render: (props) => <MatrizeakGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Matrize bat eskatzen bada, eskatzen den elementua bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide una matriz, solo el elemento que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If a matrix is involved, only the entry that is asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كان المطلوب من مصفوفة فاكتب العنصر المطلوب فقط.' },

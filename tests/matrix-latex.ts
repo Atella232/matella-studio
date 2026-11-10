@@ -112,7 +112,7 @@ function tokens(side: string, matrices: Array<Grid | null>, env: Env): Token[] |
         if ((match = rest.match(/^⟦(\d+)⟧/))) found.push({ kind: 'value', value: matrices[Number(match[1])] })
         else if ((match = rest.match(/^\\frac\{(\d+)\}\{(\d+)\}/))) found.push({ kind: 'value', value: Number(match[1]) / Number(match[2]) })
         else if ((match = rest.match(/^\d+(?:\{,\}\d+)?/))) found.push({ kind: 'value', value: Number(match[0].replace('{,}', '.')) })
-        else if ((match = rest.match(/^[A-Z](?![a-zA-Z])/))) {
+        else if ((match = rest.match(/^[A-Z](?![a-z])/))) {
             const name = match[0]
             if (name === 'I') found.push({ kind: 'value', value: { identity: 1 } })
             else if (name === 'O') found.push({ kind: 'value', value: { identity: 0 } })
@@ -227,4 +227,14 @@ export function matrixRelations(text: string, env: Env = {}): Relation[] {
 /** The matrices written in a text, read as numbers (null when a cell has a letter) */
 export function matricesIn(text: string): Array<Grid | null> {
     return [...text.matchAll(/\$([^$]+)\$/g)].flatMap(([, formula]) => literals(formula).matrices)
+}
+
+/** The value of one expression of matrices (A^{-1}(C-B), (A+I)^{-1}B…), or null when it cannot be worked out */
+export function evaluateMatrix(latex: string, env: Env = {}): Grid | number | null {
+    const { text, matrices } = literals(latex)
+    const list = tokens(text, matrices, env)
+    if (!list || !list.length) return null
+    const value = parse(list)
+    if (value === null || isScaled(value)) return null
+    return value
 }
