@@ -51,13 +51,23 @@ Primer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `matrices`), primero
 - **Test:** `tests/matrizeak-batx2z-lab.test.ts` (cada reto fijo se resuelve y ninguno empieza resuelto; los infinitos, con 150 semillas; $A^2$ cuenta caminos a fuerza bruta; la máquina de Gauss-Jordan llega a (I | A⁻¹) con sus propios límites de m y k en las cuatro matrices con inversa, y a una fila de ceros en las otras dos).
 - Revisado en euskera a 375 px con `getBBox`: ningún texto fuera de los tableros.
 
+**Fase 4, juegos** (commit 2addf2c): 6 juegos, récords en `matella-matrizeak-batx2z-game-records`.
+- **Propios (4):**
+  - J1 `dominoes` «Dominó de dimensiones», niveles 116501–116503: cada matriz es una ficha (filas | columnas); nivel 1 A · ? = m × p, nivel 2 A · ? · C, nivel 3 AᵗB, ABᵗ… o «no se puede». Una sola ficha encaja. Lógica en `games/dominoes.ts`.
+  - J2 `solve-x` «Despeja la X», niveles 116601–116603: cinco ecuaciones por nivel (una matriz; factor común con I; matrices a los dos lados) y cuatro formas de despejar; las malas son el lado cambiado, «dividir», A + 1 en vez de A + I y (AB)⁻¹ sin cambiar el orden. Lógica en `games/solveX.ts`.
+  - J3 `big-power` «Potencia gigante», niveles 116701–116703: se ven A, A² y A³ y se elige una potencia enorme (A² = I; A³ = I o A⁴ = I; (1 a / 0 1)ⁿ y parecidas). Lógica en `games/bigPower.ts`.
+  - J5 `detective`, niveles 116801–116803: 12 errores de matrices (un solo producto en $c_{11}$, $(A+B)^2$ con $2AB$, $kA$ en una fila, $A^2$ casilla a casilla; contar filas sin escalonar, dividir entre $m-c$, la inversa como inverso de cada número, Gauss-Jordan solo a la izquierda; $A^{-1}$ por el lado equivocado, $A+1$, simplificar $A$ sin inversa, $(AB)^{-1}=A^{-1}B^{-1}$).
+- **Carrera** 116401–116405 (15 tipos, tres por etapa, con `meta`) y **memoria** 116851–116853 (fila por columna ↔ número, A ↔ Aᵗ, A ↔ A⁻¹ con determinante 1).
+- **Test:** `tests/matrizeak-batx2z-games.test.ts` (cada respuesta de la carrera sale de sus números; una sola ficha encaja; en «Despeja la X», con matrices de números, solo la opción buena cumple la ecuación; la potencia es la de verdad; la corrección del detective cuadra; las parejas de memoria son ciertas).
+- `tests/matrix-latex.ts` ahora lee productos como `AX` o `AB` (antes se los saltaba): el test de contenido comprueba 128 igualdades de las lecciones y 106 de los ejercicios. Por eso «Resolvemos» de `product-properties` pregunta «si $AB$ y $BA$ son iguales» en vez de escribir $AB=BA$.
+
+**Cierre (2026-11-10):** 2729 tests, lint y build en verde; inventario OK (3 juegos y 5 herramientas «propios» para el script, más el detective; de verdad propios: 4 juegos contando el detective, y 4 herramientas). Revisado a 375 px en eu, es y ar con `getBBox` y medidas de la página: las 16 lecciones y el resumen, las 5 herramientas (con la predicción hecha), los 6 juegos, práctica, ejercicios, retos, diagnóstico y portada; sin desbordes ni errores de KaTeX. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio, `~/Documents/Matella-fuentes/batx2z-algebra/hojas/`) y mandada al dueño.
+
+**Enlaces que poner al fusionar:** ninguno pendiente (los «Antes de empezar» van a 1.º Ciencias, que ya está en `main`).
+
 ## Trucos
 
 - **Matrices en los tests comunes:** `lesson-texts.test.ts` quita `\begin{pmatrix}` y cambia `&` por espacios, y parte por `\\`. Una fila como `2 -3` se evalúa como 2 − 3: si una igualdad entre matrices escrita en `lessonTexts.ts` (ejemplo, casos, «¿Por qué?») fallara por eso, basta con reordenar la fórmula. De momento no ha pasado.
 - **Orden de las fórmulas:** el test común compara las fórmulas de cada texto en orden con su forma (cada letra pasa a `x`): `$AB$` (dos letras) y `$c_{ij}$` no pueden cambiar de sitio entre idiomas; dos letras sueltas sí.
 - **Ejemplos en general:** la tabla de matrices con nombre del test se aplica solo a «Resolvemos» y sus pasos (la idea clave habla de una $A$ cualquiera).
 - **Respuestas con decimal exacto:** si la respuesta es $\frac{1}{5}$, la explicación tiene que escribir también $0{,}2$ (el test busca la forma decimal).
-
-## En curso
-
-- Siguiente paso: fase 4, juegos (J1, J2, J3, J5, carrera y memoria). Después, cierre (inventario, 375 px en eu, es y ar, hoja de euskera).
