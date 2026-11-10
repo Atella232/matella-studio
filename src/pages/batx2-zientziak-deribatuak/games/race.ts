@@ -44,6 +44,10 @@ export type Bach2DerivativesRaceQuestion = RaceQuestion<Bach2DerivativesRaceErro
 const same = (latex: string): LocalizedText => sameText(`$${latex}$`)
 const math = (latex: string) => `$${latex}$`
 const signed = (value: number) => (value < 0 ? `-${-value}` : `+${value}`)
+/** A term c·letters after another one: nothing for 0, +x or −x for ±1 */
+const plusTerm = (coefficient: number, letters: string) => (coefficient === 0 ? '' : `${coefficient < 0 ? '-' : '+'}${Math.abs(coefficient) === 1 ? '' : Math.abs(coefficient)}${letters}`)
+/** A positive coefficient in front of letters: x, not 1x */
+const times = (coefficient: number, letters: string) => `${coefficient === 1 ? '' : coefficient}${letters}`
 
 interface Candidate {
     value: FractionValue
@@ -84,7 +88,7 @@ function tangentQuestion(random: Random): Bach2DerivativesRaceQuestion | null {
     const p = randomInt(random, -4, 4)
     const answer = fraction(3 * a * a + p)
     const choices = options(random, answer, [whole(a ** 3 + p * a, 'value'), whole(3 * a + p, 'square'), whole(3 * a * a, 'calculation')])
-    return choices && build(0, 'tangent', say(`Zein da ${math(`f(x)=x^3${signed(p)}x`)} funtzioaren zuzen ukitzailearen malda ${math(`x=${a}`)} puntuan?`, `¿Cuál es la pendiente de la tangente a ${math(`f(x)=x^3${signed(p)}x`)} en ${math(`x=${a}`)}?`, `ما ميل مماس ${math(`f(x)=x^3${signed(p)}x`)} عند ${math(`x=${a}`)}؟`, `What is the slope of the tangent to ${math(`f(x)=x^3${signed(p)}x`)} at ${math(`x=${a}`)}?`), choices, answer, same(`f'(${a})=3\\cdot ${a * a}${signed(p)}=${3 * a * a + p}`), { a, p })
+    return choices && build(0, 'tangent', say(`Zein da ${math(`f(x)=x^3${plusTerm(p, 'x')}`)} funtzioaren zuzen ukitzailearen malda ${math(`x=${a}`)} puntuan?`, `¿Cuál es la pendiente de la tangente a ${math(`f(x)=x^3${plusTerm(p, 'x')}`)} en ${math(`x=${a}`)}?`, `ما ميل مماس ${math(`f(x)=x^3${plusTerm(p, 'x')}`)} عند ${math(`x=${a}`)}؟`, `What is the slope of the tangent to ${math(`f(x)=x^3${plusTerm(p, 'x')}`)} at ${math(`x=${a}`)}?`), choices, answer, same(`f'(${a})=3\\cdot ${a * a}${p === 0 ? '' : signed(p)}=${3 * a * a + p}`), { a, p })
 }
 
 /** The slope of the normal to x² + px at a: −1/(2a + p) */
@@ -95,7 +99,7 @@ function normalQuestion(random: Random): Bach2DerivativesRaceQuestion | null {
     if (Math.abs(m) < 2) return null
     const answer = fraction(-1, m)
     const choices = options(random, answer, [whole(-m, 'normal'), ratio(1, m, 'sign'), whole(m, 'calculation')])
-    return choices && build(0, 'normal', say(`Zein da ${math(`f(x)=x^2${signed(p)}x`)} funtzioaren normalaren malda ${math(`x=${a}`)} puntuan?`, `¿Cuál es la pendiente de la normal a ${math(`f(x)=x^2${signed(p)}x`)} en ${math(`x=${a}`)}?`, `ما ميل العمودي على ${math(`f(x)=x^2${signed(p)}x`)} عند ${math(`x=${a}`)}؟`, `What is the slope of the normal to ${math(`f(x)=x^2${signed(p)}x`)} at ${math(`x=${a}`)}?`), choices, answer, same(`f'(${a})=${m}\\ \\to\\ -\\frac{1}{${m}}`), { a, p })
+    return choices && build(0, 'normal', say(`Zein da ${math(`f(x)=x^2${plusTerm(p, 'x')}`)} funtzioaren normalaren malda ${math(`x=${a}`)} puntuan?`, `¿Cuál es la pendiente de la normal a ${math(`f(x)=x^2${plusTerm(p, 'x')}`)} en ${math(`x=${a}`)}?`, `ما ميل العمودي على ${math(`f(x)=x^2${plusTerm(p, 'x')}`)} عند ${math(`x=${a}`)}؟`, `What is the slope of the normal to ${math(`f(x)=x^2${plusTerm(p, 'x')}`)} at ${math(`x=${a}`)}?`), choices, answer, same(`f'(${a})=${m}\\ \\to\\ -\\frac{1}{${m}}`), { a, p })
 }
 
 /** f′(1) of (x + p)(x² + q): (1 + q) + 2(1 + p) */
@@ -130,7 +134,7 @@ function cornersQuestion(random: Random): Bach2DerivativesRaceQuestion | null {
             ? [`|x^2-${2 * c}x+${c * c}|`, 0, `(x-${c})^2\\ge 0`]
             : kind === 'factor'
                 ? [`|x^2-${c === 1 ? '' : c}x|`, 2, `x=0,\\ x=${c}`]
-                : [`|x^3-${c * c}x|`, 3, `x=0,\\ x=\\pm ${c}`]
+                : [`|x^3-${times(c * c, 'x')}|`, 3, `x=0,\\ x=\\pm ${c}`]
     const answer = fraction(count)
     const choices = options(random, answer, [whole(count === 0 ? 1 : count - 1, 'corner'), whole(count + 1, 'corner'), whole(0, 'corner')])
     return choices && build(1, 'corners', say(`Zenbat puntutan ez da deribagarria ${math(`f(x)=${latex}`)}?`, `¿En cuántos puntos no es derivable ${math(`f(x)=${latex}`)}?`, `في كم نقطة تكون ${math(`f(x)=${latex}`)} غير قابلة للاشتقاق؟`, `At how many points is ${math(`f(x)=${latex}`)} not differentiable?`), choices, answer, same(zeros), { c, count })
@@ -143,7 +147,7 @@ function sideQuestion(random: Random): Bach2DerivativesRaceQuestion | null {
     if (p === 0) return null
     const answer = fraction(1 + p)
     const choices = options(random, answer, [whole(p - 1, 'side'), whole(p, 'calculation'), whole(1 - p, 'sign')])
-    return choices && build(1, 'side', valueAt(`f(x)=|x-${a}|${signed(p)}x`, `f'(${a}^+)`), choices, answer, same(`f(x)=x-${a}${signed(p)}x\\ \\to\\ 1${signed(p)}=${1 + p}`), { a, p })
+    return choices && build(1, 'side', valueAt(`f(x)=|x-${a}|${plusTerm(p, 'x')}`, `f'(${a}^+)`), choices, answer, same(`f(x)=x-${a}${plusTerm(p, 'x')}\\ \\to\\ 1${signed(p)}=${1 + p}`), { a, p })
 }
 
 /* ---------- Circuit 2: the chain rule ---------- */
@@ -183,7 +187,7 @@ function inverseQuestion(random: Random): Bach2DerivativesRaceQuestion | null {
     const b = 1 + p
     const answer = fraction(1, 3 + p)
     const choices = options(random, answer, [whole(3 + p, 'reciprocal'), ratio(1, 3 * b * b + p, 'point'), ratio(-1, 3 + p, 'sign')])
-    return choices && build(3, 'inverse', say(`${math(`f(x)=x^3+${p}x`)} funtzioak alderantzizkoa du, eta ${math(`f(1)=${b}`)}. Zenbat da ${math(`(f^{-1})'(${b})`)}?`, `${math(`f(x)=x^3+${p}x`)} tiene inversa y ${math(`f(1)=${b}`)}. ¿Cuánto vale ${math(`(f^{-1})'(${b})`)}?`, `للدالة ${math(`f(x)=x^3+${p}x`)} دالة عكسية و${math(`f(1)=${b}`)}. كم تساوي ${math(`(f^{-1})'(${b})`)}؟`, `${math(`f(x)=x^3+${p}x`)} has an inverse and ${math(`f(1)=${b}`)}. What is ${math(`(f^{-1})'(${b})`)}?`), choices, answer, same(`\\frac{1}{f'(1)}=\\frac{1}{${3 + p}}`), { p })
+    return choices && build(3, 'inverse', say(`${math(`f(x)=x^3+${times(p, 'x')}`)} funtzioak alderantzizkoa du, eta ${math(`f(1)=${b}`)}. Zenbat da ${math(`(f^{-1})'(${b})`)}?`, `${math(`f(x)=x^3+${times(p, 'x')}`)} tiene inversa y ${math(`f(1)=${b}`)}. ¿Cuánto vale ${math(`(f^{-1})'(${b})`)}?`, `للدالة ${math(`f(x)=x^3+${times(p, 'x')}`)} دالة عكسية و${math(`f(1)=${b}`)}. كم تساوي ${math(`(f^{-1})'(${b})`)}؟`, `${math(`f(x)=x^3+${times(p, 'x')}`)} has an inverse and ${math(`f(1)=${b}`)}. What is ${math(`(f^{-1})'(${b})`)}?`), choices, answer, same(`\\frac{1}{f'(1)}=\\frac{1}{${3 + p}}`), { p })
 }
 
 const CIRCLE_POINTS: Array<[number, number]> = [[3, 4], [4, 3], [-3, 4], [3, -4], [1, 2], [2, -1], [1, 3], [-3, 1], [2, 3], [-2, 3]]

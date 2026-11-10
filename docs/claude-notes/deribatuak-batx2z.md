@@ -76,10 +76,11 @@ Commit 7823f12.
 
 ## Cierre (2026-11-10)
 
-- `npm test` (2753), `npm run lint` y `npm run build` en verde.
+- `npm test` (2754), `npm run lint` y `npm run build` en verde.
 - Inventario: OK (juegos propios: `derivable`, `onion`, `hidden` y el detective; herramientas propias: `zoom`, `no-corner`, `implicit`, `mirror`).
 - Revisión a 375 px en eu, es y ar: lecciones, resumen, diagnóstico, práctica, retos, banco, las 7 herramientas y los 8 juegos en sus tres niveles.
 - Hoja de euskera: `deribatuak-batx2z-euskera.html` en la carpeta compartida del bloque, enviada al dueño.
+- **Coeficientes 0 y 1:** la carrera y el detective escribían a veces `x^2x`, `+1x` o `+0x` (KaTeX lo dibuja sin error y la revisión de desbordes no lo ve). Ahora usan `plusTerm`/`times`, y un test de juegos busca esas formas en todos los textos generados.
 - **Arreglos de la revisión:** en «Pendiente escondida» las letras A, B y C se buscan a lo largo de su recta hasta que caben en el tablero; en el detective, las líneas «deriva» de orden n muestran solo f″ (la pareja f′, f″ no cabía en árabe).
 - **Fallo de otra unidad (sin tocar, para el dueño):** en árabe, en «Empareja f y f′» y «Tangente exacta» de Deribatuak 1.º, la «y» del eje vertical se sale unos píxeles por arriba del dibujo. Pasa igual en la unidad de 1.º; habría que bajar ese rótulo en `batx1-zientziak-deribatuak/games/BachDerivativesGames.tsx`.
 - **Para 2.º Sociales:** `LimitPlot` (de Limiteak 2.º) y las figuras de `figures.tsx` están exportadas; `polyLatex` de `games/derivable.ts` también.

@@ -195,6 +195,27 @@ test('deribatuak batx2 z games: the race, every answer checked against its meta'
     assert.equal(kinds.size, 15)
 })
 
+test('deribatuak batx2 z games: no coefficient 0 or 1 written out (x^2x, +1x, +0x, y-0=)', () => {
+    const ugly = /(^|[^\d.])1x|[+-]0x|x\^[23]x|y-0=/
+    const texts: string[] = []
+    const all = (text: LocalizedText) => languages.map((language) => text[language])
+    for (let seed = 1; seed <= 60; seed += 1) {
+        for (let circuit = 0; circuit < BACH2_DERIVATIVES_RACE_CIRCUITS; circuit += 1) {
+            const question = generateBach2DerivativesRaceQuestion(createRandom(seed * 7919 + circuit), circuit, 'base')
+            texts.push(...all(question.prompt), ...all(question.solution), ...question.options.map((option) => option.latex))
+        }
+        for (let level = 0; level < 3; level += 1) {
+            const random = () => createRandom(seed * 7919 + level)
+            for (const item of createBach2DerivativesDetectiveCases(random(), level)) texts.push(...all(item.problem), ...item.lines.map((line) => line.latex), item.fix)
+            for (const round of createDerivableRounds(random(), level)) texts.push(round.latex)
+            for (const round of createOnionRounds(random(), level)) texts.push(round.latex, ...round.options)
+            for (const round of createHiddenRounds(random(), level)) texts.push(round.latex)
+        }
+    }
+    const bad = texts.filter((text) => ugly.test(text))
+    assert.deepEqual([...new Set(bad)].slice(0, 5), [])
+})
+
 test('deribatuak batx2 z games: memory', () => {
     for (let seed = 1; seed <= 40; seed += 1) {
         for (let level = 0; level < 3; level += 1) {

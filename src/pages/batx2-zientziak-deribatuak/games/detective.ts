@@ -40,6 +40,8 @@ export const BACH2_DERIVATIVES_DETECTIVE_CASES = 6
 
 const line = (label: LocalizedText, latex: string): WorkedLine => ({ label, latex })
 const signed = (value: number) => (value === 0 ? '' : value > 0 ? `+${value}` : `-${-value}`)
+/** A term c·letters after another one: nothing for 0, +x or −x for ±1 */
+const plusTerm = (coefficient: number, letters: string) => (coefficient === 0 ? '' : `${coefficient < 0 ? '-' : '+'}${Math.abs(coefficient) === 1 ? '' : Math.abs(coefficient)}${letters}`)
 const factorial = (n: number): number => (n <= 1 ? 1 : n * factorial(n - 1))
 const LABELS = {
     slope: say('Malda', 'Pendiente', 'الميل', 'Slope'),
@@ -64,8 +66,8 @@ function build(random: Random, error: Bach2DerivativesDetectiveError): Built | n
             if (Math.abs(m) < 2) return null
             const fa = a * a + p * a
             return {
-                problem: say(`Aurkitu $f(x)=x^2${signed(p)}x$ funtzioaren normalaren malda $x=${a}$ puntuan.`, `Halla la pendiente de la normal a $f(x)=x^2${signed(p)}x$ en $x=${a}$.`, `أوجد ميل العمودي على $f(x)=x^2${signed(p)}x$ عند $x=${a}$.`, `Find the slope of the normal to $f(x)=x^2${signed(p)}x$ at $x=${a}$.`),
-                lines: [line(LABELS.slope, `f'(${a})=${m}`), line(LABELS.step, `m_{\\perp}=${-m}`), line(LABELS.result, `y-${fa}=${-m}(x-${a})`.replace('y--', 'y+'))],
+                problem: say(`Aurkitu $f(x)=x^2${plusTerm(p, 'x')}$ funtzioaren normalaren malda $x=${a}$ puntuan.`, `Halla la pendiente de la normal a $f(x)=x^2${plusTerm(p, 'x')}$ en $x=${a}$.`, `أوجد ميل العمودي على $f(x)=x^2${plusTerm(p, 'x')}$ عند $x=${a}$.`, `Find the slope of the normal to $f(x)=x^2${plusTerm(p, 'x')}$ at $x=${a}$.`),
+                lines: [line(LABELS.slope, `f'(${a})=${m}`), line(LABELS.step, `m_{\\perp}=${-m}`), line(LABELS.result, `y${fa === 0 ? '' : `-${fa}`}=${-m}(x-${a})`)],
                 wrong: 1, error, fix: `m_{\\perp}=-\\frac{1}{f'(${a})}=-\\frac{1}{${m}}`, right: -1 / m, reached: -m
             }
         }
@@ -137,7 +139,7 @@ function build(random: Random, error: Bach2DerivativesDetectiveError): Built | n
             const b = 1 + p
             const wrongSlope = 3 * b * b + p
             return {
-                problem: say(`$f(x)=x^3+${p}x$ funtzioak alderantzizkoa du, eta $f(1)=${b}$. Zenbat da $(f^{-1})'(${b})$?`, `$f(x)=x^3+${p}x$ tiene inversa y $f(1)=${b}$. ¿Cuánto vale $(f^{-1})'(${b})$?`, `للدالة $f(x)=x^3+${p}x$ دالة عكسية و$f(1)=${b}$. كم تساوي $(f^{-1})'(${b})$؟`, `$f(x)=x^3+${p}x$ has an inverse and $f(1)=${b}$. What is $(f^{-1})'(${b})$?`),
+                problem: say(`$f(x)=x^3+${p === 1 ? '' : p}x$ funtzioak alderantzizkoa du, eta $f(1)=${b}$. Zenbat da $(f^{-1})'(${b})$?`, `$f(x)=x^3+${p === 1 ? '' : p}x$ tiene inversa y $f(1)=${b}$. ¿Cuánto vale $(f^{-1})'(${b})$?`, `للدالة $f(x)=x^3+${p === 1 ? '' : p}x$ دالة عكسية و$f(1)=${b}$. كم تساوي $(f^{-1})'(${b})$؟`, `$f(x)=x^3+${p === 1 ? '' : p}x$ has an inverse and $f(1)=${b}$. What is $(f^{-1})'(${b})$?`),
                 lines: [line(LABELS.derive, `f'(x)=3x^2+${p}`), line(LABELS.step, `(f^{-1})'(${b})=\\frac{1}{f'(${b})}`), line(LABELS.result, `\\frac{1}{${wrongSlope}}`)],
                 wrong: 1, error, fix: `(f^{-1})'(${b})=\\frac{1}{f'(1)}=\\frac{1}{${3 + p}}`, right: 1 / (3 + p), reached: 1 / wrongSlope
             }
