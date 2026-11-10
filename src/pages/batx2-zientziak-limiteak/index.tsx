@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2LimitsChallenges, bach2LimitsDiagnostic, bach2LimitsExerciseBank, bach2LimitsPractice } from './content'
 import { Bach2LimitsHeroArt } from './figures'
+import { Bach2LimitsGames } from './games'
+import { BACH2_LIMITS_GAME_RECORDS_KEY, bach2LimitsGameProgressIds } from './games/info'
 import { Bach2LimitsLaboratory } from './lab'
 import { bach2LimitsLabChallengeIds, bach2LimitsLabToolForTopic, bach2LimitsLabTools } from './lab/labTools'
 import { bach2LimitsStages, bach2LimitsTopics } from './lessons'
@@ -36,6 +38,17 @@ const limiteakBatx2zUnit: UnitDefinition = {
         progressIds: bach2LimitsLabChallengeIds,
         toolForTopic: bach2LimitsLabToolForTopic,
         render: (props) => <Bach2LimitsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, nork irabazten du?, teoremak ziurtatzen al du?, ehizatu erroak, limiteen detektibea eta memoria, berriak; eta 1. mailako Limiteak unitateko indeterminazioa ala ez? eta zer etenune?',
+            es: 'Ocho juegos: carrera, ¿quién gana?, ¿lo asegura el teorema?, caza raíces, detective de límites y memoria, nuevos; y de Límites de 1.º, ¿indeterminación o no? y ¿qué discontinuidad?',
+            en: 'Eight games: race, who wins?, does the theorem ensure it?, hunt the roots, limits detective and memory, new; and from Limits of 1st year, indeterminate or not? and which discontinuity?',
+            ar: 'ثماني ألعاب: السباق ومن يفوز؟ وهل تضمنه المبرهنة؟ واصطد الجذور ومخبر النهايات والذاكرة، وهي جديدة؛ ومن نهايات السنة الأولى: عدم تعيين أم لا؟ وأي انقطاع؟'
+        },
+        progressIds: bach2LimitsGameProgressIds,
+        recordsKey: BACH2_LIMITS_GAME_RECORDS_KEY,
+        render: (props) => <Bach2LimitsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2. Emaitza eᵃ bada, a bakarrik.', es: 'Escribe un número: 5, −3, 0,25 o 3/2. Si el resultado es eᵃ, solo a.', en: 'Write a number: 5, −3, 0.25 or 3/2. If the result is eᵃ, only a.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2. وإذا كانت النتيجة eᵃ فاكتب a وحدها.' },
