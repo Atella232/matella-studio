@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2DefiniteChallenges, bach2DefiniteDiagnostic, bach2DefiniteExerciseBank, bach2DefinitePractice } from './content'
 import { Bach2DefiniteHeroArt } from './figures'
+import { Bach2DefiniteGames } from './games'
+import { BACH2_DEFINITE_GAME_RECORDS_KEY, bach2DefiniteGameProgressIds } from './games/info'
 import { Bach2DefiniteLaboratory } from './lab'
 import { bach2DefiniteLabChallengeIds, bach2DefiniteLabToolForTopic, bach2DefiniteLabTools } from './lab/labTools'
 import { bach2DefiniteStages, bach2DefiniteTopics } from './lessons'
@@ -36,6 +38,17 @@ const mugatuaBatx2zUnit: UnitDefinition = {
         progressIds: bach2DefiniteLabChallengeIds,
         toolForTopic: bach2DefiniteLabToolForTopic,
         render: (props) => <Bach2DefiniteLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, Barrow-k balio du?, aldatu mugak, deribatu funtzio integrala, integral mugatuaren detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿vale Barrow?, cambia los límites, deriva la función integral, detective de la integral definida y memoria.',
+            en: 'Six games: race, does Barrow work?, change the limits, differentiate the integral function, definite integral detective and memory.',
+            ar: 'ست ألعاب: السباق، وهل تصح قاعدة بارو؟، وغيّر الحدود، واشتق الدالة التكاملية، ومخبر التكامل المحدد، والذاكرة.'
+        },
+        progressIds: bach2DefiniteGameProgressIds,
+        recordsKey: BACH2_DEFINITE_GAME_RECORDS_KEY,
+        render: (props) => <Bach2DefiniteGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
