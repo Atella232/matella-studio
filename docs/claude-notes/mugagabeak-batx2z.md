@@ -88,3 +88,7 @@ Primer tema del bloque Integrales de 2.º Ciencias (reparto en paralelo, ver `ba
 - **Inventario:** OK (3 juegos propios + detective; 3 herramientas propias más las 2 prestadas de Derivadas, que el script cuenta como propias).
 - **Hoja de euskera** para el dueño: `mugagabeak-batx2z-euskera.html` en las notas compartidas de la sesión principal (enviada).
 - **Para la sesión principal:** esta rama toca `courses.ts` (solo `active: true` en `integrales-indefinidas`), el router y `paths.ts`; nada de otras unidades. Lo que exporta para `mugatua` y para 2.º Sociales: `plot.tsx`, `figureKit.ts` y la lógica de `lab/` y `games/`.
+
+## Publicación
+
+- **Publicada el 2026-11-10** con los otros temas terminados de 2.º Ciencias, tras el «publica lo que ya esté hecho» del dueño: `main` 5e186b4, bundle `index-BiUKCFuE.js`. 2993 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.

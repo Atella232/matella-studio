@@ -93,3 +93,7 @@ Commit 592f76b.
 - **Al fusionar:** `paths.ts` es una sola línea y las cinco sesiones de 2.º la tocan: hay que dejar todas las direcciones. Los enlaces «Antes de empezar» solo van a 1.º Bachillerato y a 4.º ESO.
 - **Para 2.º Sociales:** quedan exportados `LimitPlot` y las figuras (`figures.tsx`), las cuatro herramientas (`lab/Bach2LimitsTools.tsx` y su lógica) y los tres juegos (`games/Bach2LimitsGames.tsx`).
 - **Commits:** 74b593e (fases 1+2), 7655b1e (fase 3), 592f76b (fase 4) y el de esta nota, todos en `feat/limiteak-batx2z`.
+
+## Publicación
+
+- **Publicada el 2026-11-10** con los otros temas terminados de 2.º Ciencias, tras el «publica lo que ya esté hecho» del dueño: `main` 5e186b4, bundle `index-BiUKCFuE.js`. 2993 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.

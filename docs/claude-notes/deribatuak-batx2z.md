@@ -84,3 +84,7 @@ Commit 7823f12.
 - **Arreglos de la revisión:** en «Pendiente escondida» las letras A, B y C se buscan a lo largo de su recta hasta que caben en el tablero; en el detective, las líneas «deriva» de orden n muestran solo f″ (la pareja f′, f″ no cabía en árabe).
 - **Fallo de otra unidad (sin tocar, para el dueño):** en árabe, en «Empareja f y f′» y «Tangente exacta» de Deribatuak 1.º, la «y» del eje vertical se sale unos píxeles por arriba del dibujo. Pasa igual en la unidad de 1.º; habría que bajar ese rótulo en `batx1-zientziak-deribatuak/games/BachDerivativesGames.tsx`.
 - **Para 2.º Sociales:** `LimitPlot` (de Limiteak 2.º) y las figuras de `figures.tsx` están exportadas; `polyLatex` de `games/derivable.ts` también.
+
+## Publicación
+
+- **Publicada el 2026-11-10** con los otros temas terminados de 2.º Ciencias, tras el «publica lo que ya esté hecho» del dueño: `main` 5e186b4, bundle `index-BiUKCFuE.js`. 2993 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.
