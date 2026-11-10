@@ -26,13 +26,23 @@ Segundo tema del bloque Integrales de 2.º Ciencias (reparto en paralelo, ver `b
 - **Registro:** `courses.ts` (`active: true` en `integral-definida`), router (después de Integral mugagabeak) y `paths.ts`.
 - **Revisión a 375 px:** las 15 lecciones con todos los pasos abiertos y «¿Por qué?» en eu, es y ar (sin desbordes, sin fórmulas encogidas, sin errores de KaTeX, ningún texto fuera de los dibujos), los 15 dibujos mirados en grande en árabe, y el banco con las 50 soluciones abiertas en ar y eu. Las fórmulas de práctica, retos y diagnóstico medidas fuera de la página.
 
+## Fase 3: laboratorio (hecho)
+
+- **Herramientas propias (3):** L1 «Encaja el área» (`lab/squeeze.ts`, retos 127101–127105): en cada tramo el rectángulo azul con el mínimo (s) y el rojo con el máximo (S), con curvas que suben y bajan; ▶ duplica n; predicción: ¿el área está más cerca de s, en el medio o de S? (depende de cómo se dobla la curva, no de n). L2 «El rectángulo del valor medio» (`lab/meanRect.ts`, 127201–127205): c en décimas (paso a paso o tocando el tablero) hasta que f(c)·(b − a) iguala el área; predicción: ¿c a la izquierda, en el centro o a la derecha del centro? L3 «Parte el recinto» (`lab/strips.ts`, 127301–127305): cinco recintos estilo EBAU; predicción: ¿una, dos o tres tiras?; luego se elige la curva de arriba en cada tira y cada tira se calcula como ∫(elegida − otra).
+- **Prestadas de Integralak de 1.º (con sus ids):** «Área con signo» (etapa `techniques`, lección `piecewise`) y «La función área» (etapa `fundamental`).
+- **Retos infinitos:** L1 curva × anchura de banda; L2 colocar c, o un rectángulo que sobre o falte al menos 1; L3 encajar el recinto, o sacar a propósito una suma negativa.
+- **Test:** `tests/mugatua-batx2z-lab.test.ts`: s ≤ A ≤ S para todo n, cada rectángulo es el mínimo y el máximo de verdad (comprobado en una malla fina), la banda no crece al duplicar n y la predicción no cambia con n; el c exacto da f(c)·(b − a) = A y la mejor décima es la que más se acerca; en cada tira la curva marcada arriba está arriba, y con las buenas todas las tiras son positivas y suman el área; retos fijos con su solución y 150 semillas de retos infinitos.
+- **Revisión a 375 px:** las 5 herramientas en eu, es y ar con cada función o recinto, la predicción hecha y el paso al máximo: sin desbordes ni fórmulas encogidas.
+
 ## Trucos
 
 - **Árabe dentro de un dibujo:** Chrome no respeta los aislantes LRI/PDI dentro de `<text>` de SVG, así que «x = 0» o «π r² dx» dentro de una frase árabe salen desordenados. En los dibujos, la frase va sola en una línea y la fórmula en otra (con `F`). Una letra suelta (x, f) sí sale bien. Esto pasa con el `Label` compartido en todo el sitio (pendiente para el dueño, no es pieza de esta unidad).
 - **SVG junta los espacios:** «u = x      dv = …» sale con un solo espacio; separa con «;».
 - **Revisar lecciones:** los pasos se abren uno a uno («Ikusi 2. urratsa») y el dibujo con `figureAfterSteps` solo aparece al final; hay que pulsar todos antes de medir.
 - **Banco:** para ver la solución hay que escribir algo antes; el tema se elige en `#fraction-v2-bank-section` (un `<select>`).
+- **Botones con fórmulas en árabe:** «√x» o «√x, 2 − x» salen al revés en un botón RTL; en HTML los aislantes sí funcionan, así que las etiquetas de los `Segmented` van envueltas con `ltr()` (U+2066 … U+2069).
+- **Revisar herramientas:** con el panel oculto la captura no sigue el scroll; copiar `.fraction-v2-lab-tool` (con `cloneNode`) a una capa fija y mover su `scrollTop`.
 
 ## En curso
 
-- Fase 1+2 terminada (commit con esta nota). Siguiente paso: fase 3, el laboratorio (L1, L2, L3 propios con ids 1271xx–1273xx y las dos herramientas prestadas de 1.º).
+- Fases 1+2 (fe5c95f) y 3 (commit con esta nota) terminadas. Siguiente paso: fase 4, los juegos (J1 «¿Vale Barrow?», J2 «Cambia los límites», J3 «Deriva la función integral», J5 detective con errores de 2.º, J6 carrera y memoria; ids 127401–127899).

@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2DefiniteChallenges, bach2DefiniteDiagnostic, bach2DefiniteExerciseBank, bach2DefinitePractice } from './content'
 import { Bach2DefiniteHeroArt } from './figures'
+import { Bach2DefiniteLaboratory } from './lab'
+import { bach2DefiniteLabChallengeIds, bach2DefiniteLabToolForTopic, bach2DefiniteLabTools } from './lab/labTools'
 import { bach2DefiniteStages, bach2DefiniteTopics } from './lessons'
 
 const mugatuaBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const mugatuaBatx2zUnit: UnitDefinition = {
     guidedPractice: bach2DefinitePractice,
     exerciseBank: bach2DefiniteExerciseBank,
     challenges: bach2DefiniteChallenges,
+    lab: {
+        description: {
+            eu: `${bach2DefiniteLabTools.length} tresna, erronkekin: azalera behe- eta goi-baturen artean estutu, batez besteko balioaren laukizuzena eta barrutia zerrendatan zatitu, berriak; eta 1. mailako Integraletako zeinudun azalera eta azalera-funtzioa.`,
+            es: `${bach2DefiniteLabTools.length} herramientas con retos: encaja el área entre la suma inferior y la superior, el rectángulo del valor medio y parte el recinto en tiras, nuevas; y el área con signo y la función área de Integrales de 1.º.`,
+            en: `${bach2DefiniteLabTools.length} tools with challenges: trap the area between the lower and the upper sum, the mean value rectangle and split the region into strips, new; and signed area and the area function from Integrals of 1.º.`,
+            ar: `${bach2DefiniteLabTools.length} أدوات مع تحديات: احصر المساحة بين المجموع الأدنى والأعلى، ومستطيل القيمة المتوسطة، وقسّم المنطقة إلى شرائح، وهي جديدة؛ والمساحة ذات الإشارة ودالة المساحة من تكاملات السنة الأولى.`
+        },
+        progressIds: bach2DefiniteLabChallengeIds,
+        toolForTopic: bach2DefiniteLabToolForTopic,
+        render: (props) => <Bach2DefiniteLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',
