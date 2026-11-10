@@ -65,10 +65,12 @@ Commit 4d6ca6f.
 - **Trucos:** el evaluador de los tests no lee `\frac` con `{,}` dentro: los tests de los juegos pasan `{,}` a punto antes de evaluar. Tres botones con texto («Independenteak», «Ez bata ez bestea») no caben en tres columnas a 375 px: van en una columna. Una línea del detective con dos productos (`P(D)=0,7·0,04+0,3·0,09=0,055`) se sale a 375 px: se escriben los caminos ya multiplicados.
 - **Revisión:** los juegos a 375 px en eu y ar, respondiendo una ronda: sin desbordes, sin fórmulas fuera de la pantalla ni comas decimales en árabe.
 
-## En curso
+Commit a6d85597.
 
-- Fase 2 (laboratorio) hecha: commit 4d6ca6f. Fase 3 (juegos) hecha; falta su commit.
-- Siguiente paso: cierre del tema (tests completos, lint, build, revisión a 375 px también en castellano, hoja de euskera) y después el tema 2 `binomial-normal`.
-- (Plan anterior de la fase 3, ya hecho:)
-- Fase 3 sin empezar (nada de código). Modelo a copiar: `src/pages/batx1-zientziak-estatistika/games/` (`info.ts` con `GameInfo` y niveles, `index.tsx` con `GamesHub`, juegos propios con `RoundGame` de `features/unit-v2/games/RoundGame`, detective con `createWorkedCases` y `WorkedDetectiveGame`, carrera, memoria con `PairsMemoryGame`, `GameArt.tsx`) y su test `tests/estatistika-batx1z-games.test.ts`. Ids de juegos: 128401–128899 (p. ej. carrera 128401–128405, J1 128501–3, J2 128601–3, J3 128701–3, J4 128751–3, memoria 128801–3, árbol y tabla de 4.º con 128811–3 y 128821–3). El detective de 4.º ya usa «conditional-swapped» y «total-one-branch»: el de 2.º usa otros errores (ignorar la a priori, P(A − B) = P(A) − P(B), independiente ⇒ incompatible, P(A∩B) como P(A/B), P(Ā/B) = 1 − P(A/B̄), De Morgan mal, multiplicar sin independencia, dividir entre P(Aᵢ) en Bayes). Después: registrar `games` en `index.tsx`, cierre (tests, lint, build, inventario, 375 px, hoja de euskera) y el tema 2 `binomial-normal`.
-- Fase 3: juegos (J1 ¿independientes, incompatibles o ninguno?, J2 rellena el Venn, J3 ¿quién fue?, J4 detective de 2.º; el árbol y la tabla de 4.º con niveles nuevos; carrera y memoria).
+## Cierre (2026-11-10)
+
+- 2724 tests, lint y build en verde; inventario OK (5 juegos y 5 herramientas propios).
+- Revisado a 375 px en eu, es y ar: las 15 lecciones (dibujos medidos con `getBBox`, sin desbordes ni textos que se pisen), las 11 herramientas (con la predicción hecha, sin fórmulas con barra), los 8 juegos respondiendo una ronda, el diagnóstico, la práctica, los retos, la portada, el resumen y los 50 ejercicios con su resolución abierta.
+- Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio, en `~/Documents/Matella-fuentes/batx2z-probabilitatea/hoja-euskera-probabilitatea.html`) y mandada al dueño.
+- **Al fusionar:** el registro toca tres líneas compartidas con las otras sesiones (`courses.ts`, el router y `paths.ts`, que es una sola línea larga). No se ha tocado ninguna pieza de otra unidad: el laboratorio y los juegos de 4.º se usan tal cual.
+- Sin publicar: la sesión principal fusiona y publica.
