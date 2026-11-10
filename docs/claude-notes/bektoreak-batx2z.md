@@ -61,6 +61,8 @@ Primera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - El test de contenido compara todos los valores numéricos de una igualdad separada solo por comas: `b=1,\ a=5-3=2` falla; separar con `\qquad`.
 - Fórmulas largas de productos vectoriales: a 375 px bajan a 12 px; van en dos filas con `gathered` (la fila que empieza por `=` sigue a la de arriba).
 
-## En curso
+## Cierre
 
-- Fases 1+2, 3 y 4 hechas. Siguiente: cierre de la unidad (tests, lint y build completos, inventario, revisión a 375 px en eu, es y ar, hoja de euskera con `hoja-revision.mjs`). Después, `planoak`.
+- Inventario: 3 juegos propios (¿Número o vector?, ¿Cuál es u × v?, La caja aplastada) más el detective con los errores de esta unidad, y 5 herramientas propias → OK.
+- Revisión final a 375 px en eu, es y ar: las 15 lecciones con todos los pasos abiertos, las 5 herramientas tras predecir, diagnóstico, práctica, retos y banco; sin desbordes, sin fórmulas de menos de 13 px ni cortadas. En árabe el tablero sigue de izquierda a derecha y la interfaz de derecha a izquierda. Un arreglo de paso: la lectura de u · v de «La sombra en el espacio» se salía en árabe y va en dos filas.
+- Hoja de euskera: `hoja-revision.mjs` con `--herramientas point-box,in-plane,space-shadow,right-hand,box-volume --juegos kind,cross,flat,detective,race,memory`, en la carpeta de notas compartidas de la sesión (`bektoreak-batx2z-revision.html`).

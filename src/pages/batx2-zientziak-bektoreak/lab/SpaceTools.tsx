@@ -180,7 +180,9 @@ export function SpaceShadowTool(props: LabToolProps) {
     const angle = shadowAngle(state)
     const squareU = state.u[0] ** 2 + state.u[1] ** 2 + state.u[2] ** 2
     const controls = <VectorEditor names={['u', 'v'] as ShadowVectorName[]} current={editing} value={state[editing]} limit={SHADOW_LIMIT} language={props.language} label={EDIT_VECTOR} onPick={setEditing} onChange={(next) => setState((s) => setShadowVector(s, editing, next))} />
-    const lines = [`\\vec{u}\\cdot\\vec{v}=${state.u.map((value, index) => `${wrap(value)}\\cdot ${wrap(state.v[index])}`).join('+')}=${product}`]
+    const terms = state.u.map((value, index) => `${wrap(value)}\\cdot ${wrap(state.v[index])}`)
+    // Two rows, so the three products never overflow a phone
+    const lines = [`\\begin{gathered}\\vec{u}\\cdot\\vec{v}=${terms[0]}+${terms[1]}\\\\ +${terms[2]}=${product}\\end{gathered}`]
     if (squareU > 0) lines.push(`\\frac{\\vec{u}\\cdot\\vec{v}}{|\\vec{u}|}=\\frac{${product}}{${root(squareU)}}${relation(product / Math.sqrt(squareU))}${exact(product / Math.sqrt(squareU), props.language)}`)
     if (angle !== null) lines.push(`\\alpha${relation(angle)}${exact(angle, props.language)}^\\circ`)
     const note = product === 0
