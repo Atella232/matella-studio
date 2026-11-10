@@ -1,0 +1,1 @@
+import{a as p}from"./labTools-B_BmxeGA.js";const f=(r,t,a,e)=>r/(e-t)+a;function b(r,t,a,e,o,h,l,i=.02){const c=(s,u)=>p(n=>f(r,t,a,n),s,u,i).filter(([,n])=>n>=h-2&&n<=l+2);return[c(e,t-.01),c(t+.01,o)].filter(s=>s.length>1)}const x=(r,t,a,e)=>p(o=>r*Math.sqrt(Math.max(0,o-t))+a,t,e,.02),v=(r,t,a,e)=>p(o=>r*t**o,a,e);export{v as e,b as h,x as r};

@@ -1,0 +1,1 @@
+const o=n=>Math.round(n*1e9)/1e9;function u(n){const e=o(n);for(let t=1;t<=48;t+=1){const r=e*t;if(Math.abs(r-Math.round(r))<1e-7){const a=Math.round(r);return t===1?String(a):`${a<0?"-":""}\\frac{${Math.abs(a)}}{${t}}`}}return(Math.round(e*100)/100).toString().replace(".","{,}")}export{o as e,u as n};
