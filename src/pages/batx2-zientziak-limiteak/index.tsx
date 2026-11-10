@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2LimitsChallenges, bach2LimitsDiagnostic, bach2LimitsExerciseBank, bach2LimitsPractice } from './content'
 import { Bach2LimitsHeroArt } from './figures'
+import { Bach2LimitsLaboratory } from './lab'
+import { bach2LimitsLabChallengeIds, bach2LimitsLabToolForTopic, bach2LimitsLabTools } from './lab/labTools'
 import { bach2LimitsStages, bach2LimitsTopics } from './lessons'
 
 const limiteakBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const limiteakBatx2zUnit: UnitDefinition = {
     guidedPractice: bach2LimitsPractice,
     exerciseBank: bach2LimitsExerciseBank,
     challenges: bach2LimitsChallenges,
+    lab: {
+        description: {
+            eu: `${bach2LimitsLabTools.length} tresna, erronkekin: epsilon eta delta, infinituen lasterketa, doitu a eta b eta teorema egokia, berriak; eta 1. mailako Limiteak unitateko lupa, 0/0 zuloa, maila handienak irabazten du, e zenbakiaren makina eta Bolzanok erroa harrapatzen du.`,
+            es: `${bach2LimitsLabTools.length} herramientas con retos: épsilon y delta, la carrera de infinitos, ajusta a y b y el teorema justo, nuevas; y de Límites de 1.º, la lupa, el agujero del 0/0, gana el de mayor grado, la máquina de e y Bolzano encierra la raíz.`,
+            en: `${bach2LimitsLabTools.length} tools with challenges: epsilon and delta, the race of infinities, adjust a and b and the right theorem, new; and from Limits of 1st year, the lens, the hole of 0/0, the highest degree wins, the e machine and Bolzano traps the root.`,
+            ar: `${bach2LimitsLabTools.length} أدوات مع تحديات: إبسيلون ودلتا وسباق اللانهايات واضبط a وb والمبرهنة المناسبة، وهي جديدة؛ ومن نهايات السنة الأولى: العدسة وثقب 0/0 وتفوز الدرجة الأكبر وآلة العدد e وبولتسانو يحصر الجذر.`
+        },
+        progressIds: bach2LimitsLabChallengeIds,
+        toolForTopic: bach2LimitsLabToolForTopic,
+        render: (props) => <Bach2LimitsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2. Emaitza eᵃ bada, a bakarrik.', es: 'Escribe un número: 5, −3, 0,25 o 3/2. Si el resultado es eᵃ, solo a.', en: 'Write a number: 5, −3, 0.25 or 3/2. If the result is eᵃ, only a.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2. وإذا كانت النتيجة eᵃ فاكتب a وحدها.' },
         defaultForm: 'any',

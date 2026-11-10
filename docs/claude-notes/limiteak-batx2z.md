@@ -49,6 +49,18 @@ Primer tema del bloque Cálculo diferencial de 2.º Ciencias (reparto en paralel
 - **Test:** `tests/limiteak-batx2z-content.test.ts` (copia del de 1.º; ahora lee también las filas de un bloque `gathered`).
 - **Comprobación:** 2706 tests, lint y `tsc -b` en verde. Revisión a 375 px en eu, es y ar: las 15 lecciones y el resumen (con los pasos y los «¿Por qué funciona?» abiertos), el diagnóstico, la práctica (20, contestadas), los retos (15, contestados) y el banco (50, con las soluciones abiertas): sin desbordes, sin desplazamiento lateral, sin errores de KaTeX ni LaTeX sin dibujar, y sin textos fuera de los dibujos.
 
+Commit 74b593e.
+
+**Fase 3, laboratorio (9 herramientas):**
+- **Propias (4),** con predicción antes del dibujo, retos fijos y retos infinitos (`freshFrom`):
+  - L1 `epsilon` «Épsilon y delta» (`lab/epsilon.ts`, ids 122101–122105): f₁ = 3x − 1, f₂ = x/2 + 1, f₃ = (x² − 1)/(x − 1) y f₄ = x²; ε de una lista (1; 0,5; 0,2; 0,1) y δ de otra (2 … 0,01). La parte de la curva sobre la franja se pinta verde si cabe en la banda y roja si no. Predicción: el mayor δ que sirve, ¿menor, igual o mayor que ε? (es ε entre la pendiente). ▶ abre la franja. Retos: el mayor δ de la lista para cada función.
+  - L2 `race` «La carrera de infinitos» (`lab/infinities.ts`, ids 122201–122205): c·f arriba y g abajo entre ln x, √x, x, x², x³, x¹⁰, 1,1ˣ, 2ˣ y eˣ, en x = 10 … 10 000. Todo con log₁₀ (las cifras): barras y «≈ 10ᵐ». Predicción: el cociente va a 0, a un número o a ∞. ▶ hace crecer x. Trampa: x¹⁰ va delante de 1,1ˣ hasta x = 100.
+  - L4 `joints` «Ajusta a y b» (`lab/joints.ts`, ids 122301–122305): tres funciones de tres trozos (soluciones (5, 6), (−1, 2) y (2, 3)); cada unión verde si se cierra. Predicción: si a sube, ¿b baja, se queda o sube para mantener cerrada la primera unión? (f₂, f₃ y f₁).
+  - L5 `theorem` «El teorema justo» (`lab/theorems.ts`, ids 122351–122355): g₁ = x³ − 3x + 1, g₂ salto en 1, g₃ = 1/(x − 1), g₄ = x² − 2, intervalo [a, b] entero entre −2 y 2 y tres capas: Bolzano, valores intermedios (recta y = k, ▶ la desliza de f(a) a f(b)) y Weierstrass (intervalo cerrado o abierto). Predicción: sí lo asegura, no (no es continua) o no (falla la otra condición).
+- **Prestadas de 1.º, con sus retos e ids:** la lupa (`review-continuity`), el agujero del 0/0 (`review-point`), gana el de mayor grado (`review-infinity`), la máquina de e (`one-infinity`) y Bolzano encierra la raíz (`bolzano-equations`).
+- **Archivos:** `lab/Bach2LimitsTools.tsx` (copia `curvePath`, `Grid` y `useClip` de 1.º, que no los exporta), `labTools.ts`, `index.tsx`; test `tests/limiteak-batx2z-lab.test.ts` (además comprueba con muestreo que δ vale, que el orden de infinitos manda a la larga, que solo una pareja (a, b) cierra las dos uniones y que cuando un teorema dice «sí» lo prometido está).
+- **Comprobación:** las 9 herramientas a 375 px en eu, es y ar, antes y después de predecir: sin desbordes, sin errores de KaTeX y sin textos fuera del tablero (el selector de herramientas se desliza a propósito).
+
 ## Trucos
 
 - La revisión a 375 px se puede automatizar con un script en la consola del navegador: recorrer las lecciones por `location.hash`, pulsar «Ikusi urrats guztiak» y medir el ancho de la página, cada `.katex`, los `.katex-error`, el LaTeX sin dibujar y el `getBBox` de cada `<text>` de los dibujos. Con el panel oculto los temporizadores van lentos: lanzar el script sin esperar y guardar el resultado en `window`.
@@ -58,6 +70,7 @@ Primer tema del bloque Cálculo diferencial de 2.º Ciencias (reparto en paralel
 
 ## En curso
 
-- Fase 1+2 terminada (commit de la fase).
-- Siguiente: fase 3, laboratorio. Lógica ya escrita (sin commit): `lab/epsilon.ts` (L1) y `lab/infinities.ts` (L2). Faltan `lab/joints.ts` (L4, «Ajusta a y b»), `lab/theorems.ts` (L5, «El teorema justo»), los componentes, `labTools.ts`, `lab/index.tsx`, el registro en `index.tsx` y el test `tests/limiteak-batx2z-lab.test.ts`.
+- Fases 1+2 y 3 terminadas.
+- Siguiente: fase 4, juegos. Propios: J1 «¿Quién gana?» (cociente de dos infinitos: 0, número o ∞), J2 «¿Lo asegura el teorema?» (sí y cuál, o qué condición falla), J3 «Caza raíces» (marcar todos los [n, n + 1] con raíz asegurada; nivel 3, cortes de dos curvas), J5 detective de 2.º. Después carrera y memoria, y de 1.º «¿Indeterminación o no?» (`forms`) y «¿Qué discontinuidad?» (`discontinuity`). Ids 122401–122899. Modelo: `games/` de `batx1-zientziak-limiteak`.
+- Al cerrar: npm test, lint, build, inventario, revisión a 375 px, hoja de euskera con `hoja-revision.mjs --herramientas epsilon,race,joints,theorem --juegos …`.
 - Derivadas: propuesta enviada al dueño (`propuesta-deribatuak-batx2z.md` en la carpeta de notas compartidas); esperando respuesta.
