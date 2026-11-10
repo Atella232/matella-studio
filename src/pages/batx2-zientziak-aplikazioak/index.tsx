@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2ApplicationsChallenges, bach2ApplicationsDiagnostic, bach2ApplicationsExerciseBank, bach2ApplicationsPractice } from './content'
 import { Bach2ApplicationsHeroArt } from './figures'
+import { Bach2ApplicationsLaboratory } from './lab'
+import { bach2ApplicationsLabChallengeIds, bach2ApplicationsLabToolForTopic, bach2ApplicationsLabTools } from './lab/labTools'
 import { bach2ApplicationsStages, bach2ApplicationsTopics } from './lessons'
 
 const aplikazioakBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const aplikazioakBatx2zUnit: UnitDefinition = {
     guidedPractice: bach2ApplicationsPractice,
     exerciseBank: bach2ApplicationsExerciseBank,
     challenges: bach2ApplicationsChallenges,
+    lab: {
+        description: {
+            eu: `${bach2ApplicationsLabTools.length} tresna, erronkekin: Rollek puntua bilatzen du, ebakitzailea eta haren zuzen ukitzaile paraleloa, L'Hôpital hurbiletik eta kurba baterainoko distantzia minimoa, berriak; eta 1. mailako Aplikazioak unitateko f′ deribatuaren semaforoa, kurbadura zuzen ukitzailearekin eta estalkirik gabeko kutxa.`,
+            es: `${bach2ApplicationsLabTools.length} herramientas con retos: Rolle busca el punto, la secante y su tangente paralela, L'Hôpital de cerca y la distancia mínima a una curva, nuevas; y de Aplicaciones de 1.º, el semáforo de f′, la curvatura con la tangente y la caja sin tapa.`,
+            en: `${bach2ApplicationsLabTools.length} tools with challenges: Rolle looks for the point, the secant and its parallel tangent, L'Hôpital up close and the shortest distance to a curve, new; and from Applications of 1st year, the traffic light of f′, concavity with the tangent and the box without a lid.`,
+            ar: `${bach2ApplicationsLabTools.length} أدوات مع تحديات: رول يبحث عن النقطة، والقاطع ومماسه الموازي، ولوبيتال عن قرب، والمسافة الصغرى إلى منحنى، وهي جديدة؛ ومن تطبيقات السنة الأولى: إشارة f′ الضوئية، والتقعّر بالمماس، والعلبة بلا غطاء.`
+        },
+        progressIds: bach2ApplicationsLabChallengeIds,
+        toolForTopic: bach2ApplicationsLabToolForTopic,
+        render: (props) => <Bach2ApplicationsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2.', es: 'Escribe un número: 5, −3, 0,25 o 3/2.', en: 'Write a number: 5, −3, 0.25 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2.' },
         defaultForm: 'any',

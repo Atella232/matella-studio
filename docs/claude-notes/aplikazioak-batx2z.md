@@ -50,6 +50,17 @@ Tercer tema del bloque Cálculo diferencial de 2.º Ciencias (reparto en paralel
   - Para medir todas las fórmulas de golpe: importar en la consola `katex.mjs`, `latexLanguage.ts` y `content.ts`, y dibujarlas con la `.katex` a 18 px. Las de más de ~255 px (banco y práctica) o ~280 px («Otro ejemplo») se parten en filas `gathered`: cada `\qquad` y cada `\ \to\ ` en su fila, y las cadenas de `\lim` en la segunda igualdad.
   - El banco solo enseña la solución tras escribir un intento: rellenar los campos con el `setter` nativo y pulsar «Comprobar» antes de «Compara con la solución».
 
+**Fase 3, laboratorio «Los teoremas de cerca» (7 herramientas):**
+- **Propias (cada una pide una predicción antes de dibujar y tiene 5 retos fijos y retos sin fin con `freshFrom`):**
+  - `rolle.ts`, L1 «Rolle busca el punto» (124101–124105): f₁ = x² − 2x, f₂ = x³ − 3x (con ±√3 en la lista), f₃ = |x|, f₄ con salto en x = 1 y f₅ = sen x (múltiplos de π/2). Mueves a y b; si se cumplen las tres hipótesis marca cada c con tangente horizontal; si no, dice cuál falla (orden, salto, pico o alturas). Predicción: cuántos c en el intervalo de salida (ninguno, uno, más).
+  - `meanValue.ts`, L2 «La secante y su tangente paralela» (124201–124205): x², x³, √x y eˣ; secante, tangentes paralelas en cada c y una marca en el punto medio. Predicción: c más cerca de a, en el medio o más cerca de b (∪ lo lleva hacia b, ∩ hacia a).
+  - `hopitalLens.ts`, L3 «L'Hôpital de cerca» (124301–124305): seis cocientes (q₁…q₆; q₆ = (x + 1)/(x + 2) no es indeterminado). Mueves h = x − a por los dos lados y se ven f/g y f′/g′. Predicción: el límite menor, igual o mayor que 1.
+  - `distance.ts`, L4 «La distancia mínima a una curva» (124351–124355): cinco curvas con su punto P; Q se mueve por la curva, debajo se dibuja d(x), y en el mínimo PQ es perpendicular a la tangente. Predicción: el punto más cercano a la izquierda de P, en su vertical o a la derecha.
+- **Prestadas de Aplikazioak 1.º, con sus retos e ids:** el semáforo de f′, la curvatura con la tangente y la caja sin tapa (componentes `SignTool`, `CurveTool` y `BoxTool`, sin tocarlos).
+- **Componentes:** `Bach2ApplicationsTools.tsx` (copias de `curvePath`, `Grid` y `useClip` de Deribatuak 2.º), `labTools.ts` e `index.tsx`. Test `tests/aplikazioak-batx2z-lab.test.ts`.
+- **Comprobación:** las 7 herramientas a 375 px en eu, es y ar, antes y después de predecir, con todas las funciones y los pasadores en sus dos extremos: sin desbordes, sin errores de KaTeX y sin textos fuera del tablero (el selector de herramientas se desliza a propósito).
+- **Trucos:** en las etapas violeta y verde el color de la etapa coincide con el violeta y el verde de las piezas: las cuerdas, A y B van en tinta y el segmento PQ en rojo. En el árabe de los retos los decimales van con punto también dentro de la fórmula (`$x=1.01$`).
+
 ## En curso
 
-- **Siguiente:** fase 3, laboratorio (L1–L4 propias, ids 124101–124355, y las 3 prestadas de Aplikazioak 1.º con ids nuevos de este bloque si hace falta). Después fase 4, juegos (ids 124401–124899), y el cierre (inventario, 375 px, hoja de euskera, nota).
+- **Siguiente:** fase 4, juegos (ids 124401–124899): J1 «¿Vale L'Hôpital?», J2 «¿Cumple Rolle?», J3 «Plantea y optimiza», detective, carrera, memoria y los prestados de 1.º «Caza los extremos» y «¿∪ o ∩?». Después el cierre (inventario, 375 px, hoja de euskera, nota).
