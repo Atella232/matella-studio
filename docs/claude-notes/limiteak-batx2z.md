@@ -61,6 +61,22 @@ Commit 74b593e.
 - **Archivos:** `lab/Bach2LimitsTools.tsx` (copia `curvePath`, `Grid` y `useClip` de 1.º, que no los exporta), `labTools.ts`, `index.tsx`; test `tests/limiteak-batx2z-lab.test.ts` (además comprueba con muestreo que δ vale, que el orden de infinitos manda a la larga, que solo una pareja (a, b) cierra las dos uniones y que cuando un teorema dice «sí» lo prometido está).
 - **Comprobación:** las 9 herramientas a 375 px en eu, es y ar, antes y después de predecir: sin desbordes, sin errores de KaTeX y sin textos fuera del tablero (el selector de herramientas se desliza a propósito).
 
+Commit 7655b1e.
+
+**Fase 4, juegos (8):**
+- **Propios (3 + detective):**
+  - J1 `winner` «¿Quién gana?» (`games/winner.ts`, ids 122501–122503): el límite en +∞ de un cociente; cada término es c·aˣ·xᵖ·(ln x)^q y el orden se decide por a, luego p, luego q. Se responde 0, un número o +∞. Nivel 1, un término arriba y otro abajo; nivel 2, sumas (solo el principal); nivel 3, trampas (x¹⁰ y 1,1ˣ, 2ˣ y 3ˣ, ln x⁵ y √x, e²ˣ y x³eˣ…).
+  - J2 `assure` «¿Lo asegura el teorema?» (`games/assure.ts`, ids 122601–122603): función, intervalo y afirmación (raíz: Bolzano; valor k: valores intermedios; máximo y mínimo: Weierstrass). Respuestas: sí; no, no es continua (se mira primero); no, falla otra condición (mismo signo, k fuera, intervalo no cerrado). Nivel 3 con ln, √ e intervalos abiertos.
+  - J3 `hunt` «Caza raíces» (`games/hunt.ts`, ids 122651–122653): marcar todos los [n, n + 1] de −3 a 3 con cambio de signo. Nivel 1, cúbica con un cambio; nivel 2, con tres; nivel 3, ecuaciones x⁴ + c = bx² y x³ = bx + c (h = f − g). Ningún valor entero es 0.
+  - Detective `detective` (`games/detective.ts`, ids 122701–122703): δ = ε sin mirar la pendiente, la potencia gana a la exponencial, 1^∞ = 1, √x² = x con x → −∞; sen px / qx → 1/q, una sola unión para dos parámetros, «existe el límite» por continua, el extremo del dominio como discontinuidad; mismo signo «sin raíz», h = f − g con el signo mal, un valor fuera de f(a) y f(b), el máximo en el extremo de un intervalo abierto. Las líneas solo llevan fórmulas; `\sin` pasa por `localize`.
+- **Carrera** (`games/race.ts`, ids 122401–122405): 15 tipos, tres por etapa; el test recalcula cada respuesta con `meta`.
+- **Memoria** (`games/boards.ts`, ids 122801–122803): 1^∞ ↔ eᵃ (en un punto y en el infinito), límites en −∞ con raíces, cocientes en +∞. Sin senos: las cartas no se traducen y el castellano escribe sen.
+- **De 1.º, con niveles y etapas de esta unidad:** «¿Indeterminación o no?» (`forms`, 122811–122813) y «¿Qué discontinuidad?» (`discontinuity`, 122821–122823).
+- **Archivos:** `Bach2LimitsGames.tsx` (+ `.css`), `GameArt.tsx`, `RaceGame.tsx`, `info.ts`, `index.tsx`; test `tests/limiteak-batx2z-games.test.ts`.
+- **Inventario:** OK. Propios de verdad: 3 juegos más el detective y 4 herramientas (el script cuenta también los prestados de 1.º).
+
+Commit 592f76b.
+
 ## Trucos
 
 - La revisión a 375 px se puede automatizar con un script en la consola del navegador: recorrer las lecciones por `location.hash`, pulsar «Ikusi urrats guztiak» y medir el ancho de la página, cada `.katex`, los `.katex-error`, el LaTeX sin dibujar y el `getBBox` de cada `<text>` de los dibujos. Con el panel oculto los temporizadores van lentos: lanzar el script sin esperar y guardar el resultado en `window`.
@@ -68,9 +84,12 @@ Commit 74b593e.
 - A 375 px, una fórmula de solución o de «Otro ejemplo» de más de unos 260 px (medida con KaTeX a 22 px) pide desplazamiento lateral dentro de su caja: se parte en filas con `\begin{gathered}` (cada `\qquad` y cada `\ \to\ ` en su fila). Para medirlas todas de una vez, importar en la consola `/node_modules/katex/dist/katex.mjs` y el `content.ts` de la unidad (`?t=…`).
 - La comprobación de desbordes tiene que mirar también el desplazamiento dentro de las cajas (`scrollWidth > clientWidth` con `overflow-x` distinto de `visible`), sin contar `.katex-mathml` ni la lista de tareas de la práctica, que se desplaza a propósito.
 
-## En curso
+## Cierre (2026-11-10)
 
-- Fases 1+2 y 3 terminadas.
-- Siguiente: fase 4, juegos. Propios: J1 «¿Quién gana?» (cociente de dos infinitos: 0, número o ∞), J2 «¿Lo asegura el teorema?» (sí y cuál, o qué condición falla), J3 «Caza raíces» (marcar todos los [n, n + 1] con raíz asegurada; nivel 3, cortes de dos curvas), J5 detective de 2.º. Después carrera y memoria, y de 1.º «¿Indeterminación o no?» (`forms`) y «¿Qué discontinuidad?» (`discontinuity`). Ids 122401–122899. Modelo: `games/` de `batx1-zientziak-limiteak`.
-- Al cerrar: npm test, lint, build, inventario, revisión a 375 px, hoja de euskera con `hoja-revision.mjs --herramientas epsilon,race,joints,theorem --juegos …`.
-- Derivadas: propuesta enviada al dueño (`propuesta-deribatuak-batx2z.md` en la carpeta de notas compartidas); esperando respuesta.
+- **Comprobado:** 2718 tests, lint y build en verde; inventario OK.
+- **Revisión a 375 px en eu, es y ar:** lecciones y resumen, diagnóstico, práctica, retos, banco, las 9 herramientas (antes y después de predecir) y los 6 juegos nuevos en sus tres niveles (respondiendo rondas): sin desbordes, sin errores de KaTeX ni LaTeX sin dibujar. Lo único que «se desplaza» es a propósito: el selector de herramientas, la lista de tareas de la práctica y un texto solo para lectores de pantalla de la carrera.
+- **Hoja de euskera:** `limiteak-batx2z-euskera.html` en la carpeta de notas compartidas de la sesión principal, con `--herramientas epsilon,race,joints,theorem --juegos race,winner,assure,hunt,detective,memory`. Como en 1.º, no trae los retos fijos del laboratorio ni `content.ts`.
+- **Fuera de la carpeta:** solo el registro (la fila de 2.º Ciencias de `courses.ts`, el router y `paths.ts`). No se ha tocado ninguna pieza de otra unidad.
+- **Al fusionar:** `paths.ts` es una sola línea y las cinco sesiones de 2.º la tocan: hay que dejar todas las direcciones. Los enlaces «Antes de empezar» solo van a 1.º Bachillerato y a 4.º ESO.
+- **Para 2.º Sociales:** quedan exportados `LimitPlot` y las figuras (`figures.tsx`), las cuatro herramientas (`lab/Bach2LimitsTools.tsx` y su lógica) y los tres juegos (`games/Bach2LimitsGames.tsx`).
+- **Commits:** 74b593e (fases 1+2), 7655b1e (fase 3), 592f76b (fase 4) y el de esta nota, todos en `feat/limiteak-batx2z`.
