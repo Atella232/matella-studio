@@ -53,6 +53,8 @@ const KonikakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-konikak').
 const BidimentsionalaBatx1zPage = lazy(() => import('../pages/batx1-zientziak-bidimentsionala').then((module) => ({ default: module.BidimentsionalaBatx1zIntroPage })))
 const AplikazioakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-aplikazioak').then((module) => ({ default: module.AplikazioakBatx1zIntroPage })))
 const IntegralakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-integralak').then((module) => ({ default: module.IntegralakBatx1zIntroPage })))
+const MugagabeakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-mugagabeak').then((module) => ({ default: module.MugagabeakBatx2zIntroPage })))
+const MugatuaBatx2zPage = lazy(() => import('../pages/batx2-zientziak-mugatua').then((module) => ({ default: module.MugatuaBatx2zIntroPage })))
 const KonplexuakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-konplexuak').then((module) => ({ default: module.KonplexuakBatx1zIntroPage })))
 const MatrizeakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-matrizeak').then((module) => ({ default: module.MatrizeakBatx2zIntroPage })))
 const BektoreakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-bektoreak').then((module) => ({ default: module.BektoreakBatx2zIntroPage })))
@@ -471,6 +473,16 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx1-zientziak/integrales/*',
                         element: <IntegralakBatx1zPage />,
+                    },
+                    // Integrales indefinidas de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/integrales-indefinidas/*',
+                        element: <MugagabeakBatx2zPage />,
+                    },
+                    // Integral definida de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/integral-definida/*',
+                        element: <MugatuaBatx2zPage />,
                     },
                     // Números complejos de 1.º Bachillerato (Ciencias): unidad V2
                     {
