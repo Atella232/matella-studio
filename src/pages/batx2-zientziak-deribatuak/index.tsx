@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2DerivativesChallenges, bach2DerivativesDiagnostic, bach2DerivativesExerciseBank, bach2DerivativesPractice } from './content'
 import { Bach2DerivativesHeroArt } from './figures'
+import { Bach2DerivativesLaboratory } from './lab'
+import { bach2DerivativesLabChallengeIds, bach2DerivativesLabToolForTopic, bach2DerivativesLabTools } from './lab/labTools'
 import { bach2DerivativesStages, bach2DerivativesTopics } from './lessons'
 
 const deribatuakBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const deribatuakBatx2zUnit: UnitDefinition = {
     guidedPractice: bach2DerivativesPractice,
     exerciseBank: bach2DerivativesExerciseBank,
     challenges: bach2DerivativesChallenges,
+    lab: {
+        description: {
+            eu: `${bach2DerivativesLabTools.length} tresna, erronkekin: deribagarritasunaren lupa, doitu a eta b puntarik gabe, alderantzizkoaren ispilua eta kurba inplizituaren zuzen ukitzailea, berriak; eta 1. mailako Deribatuak unitateko ebakitzailetik zuzen ukitzailera, deribagarria hemen? eta f′ funtzioaren grafikoa.`,
+            es: `${bach2DerivativesLabTools.length} herramientas con retos: la lupa de la derivabilidad, ajusta a y b sin pico, el espejo de la inversa y la tangente a la curva implícita, nuevas; y de Derivadas de 1.º, de la secante a la tangente, ¿derivable aquí? y la gráfica de f′.`,
+            en: `${bach2DerivativesLabTools.length} tools with challenges: the lens of differentiability, adjust a and b with no corner, the mirror of the inverse and the tangent to an implicit curve, new; and from Derivatives of 1st year, from the secant to the tangent, differentiable here? and the graph of f′.`,
+            ar: `${bach2DerivativesLabTools.length} أدوات مع تحديات: عدسة قابلية الاشتقاق، واضبط a وb بلا زاوية، ومرآة الدالة العكسية، ومماس المنحنى الضمني، وهي جديدة؛ ومن مشتقات السنة الأولى: من القاطع إلى المماس، وقابلة للاشتقاق هنا؟، ورسم f′.`
+        },
+        progressIds: bach2DerivativesLabChallengeIds,
+        toolForTopic: bach2DerivativesLabToolForTopic,
+        render: (props) => <Bach2DerivativesLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2.', es: 'Escribe un número: 5, −3, 0,25 o 3/2.', en: 'Write a number: 5, −3, 0.25 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2.' },
         defaultForm: 'any',
