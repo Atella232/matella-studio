@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2IndefiniteChallenges, bach2IndefiniteDiagnostic, bach2IndefiniteExerciseBank, bach2IndefinitePractice } from './content'
 import { Bach2IndefiniteHeroArt } from './figures'
+import { Bach2IndefiniteGames } from './games'
+import { BACH2_INDEFINITE_GAME_RECORDS_KEY, bach2IndefiniteGameProgressIds } from './games/info'
 import { Bach2IndefiniteLaboratory } from './lab'
 import { bach2IndefiniteLabChallengeIds, bach2IndefiniteLabToolForTopic, bach2IndefiniteLabTools } from './lab/labTools'
 import { bach2IndefiniteStages, bach2IndefiniteTopics } from './lessons'
@@ -36,6 +38,17 @@ const mugagabeakBatx2zUnit: UnitDefinition = {
         progressIds: bach2IndefiniteLabChallengeIds,
         toolForTopic: bach2IndefiniteLabToolForTopic,
         render: (props) => <Bach2IndefiniteLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, zein metodo?, aukeratu u, eraiki zatikiak, integral mugagabeen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿qué método?, elige la u, construye las fracciones, detective de integrales indefinidas y memoria.',
+            en: 'Six games: race, which method?, choose the u, build the fractions, indefinite integrals detective and memory.',
+            ar: 'ست ألعاب: السباق، وأيّ طريقة؟، واختر u، وابنِ الكسور، ومخبر التكاملات غير المحددة، والذاكرة.'
+        },
+        progressIds: bach2IndefiniteGameProgressIds,
+        recordsKey: BACH2_INDEFINITE_GAME_RECORDS_KEY,
+        render: (props) => <Bach2IndefiniteGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
