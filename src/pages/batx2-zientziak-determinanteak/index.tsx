@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { determinanteakChallenges, determinanteakDiagnostic, determinanteakExerciseBank, determinanteakPractice } from './content'
 import { DeterminantsHeroArt } from './figures'
+import { DeterminanteakLaboratory } from './lab'
+import { determinanteakLabChallengeIds, determinanteakLabToolForTopic, determinanteakLabTools } from './lab/labTools'
 import { determinanteakStages, determinanteakTopics } from './lessons'
 
 const determinanteakBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const determinanteakBatx2zUnit: UnitDefinition = {
     guidedPractice: determinanteakPractice,
     exerciseBank: determinanteakExerciseBank,
     challenges: determinanteakChallenges,
+    lab: {
+        description: {
+            eu: `${determinanteakLabTools.length} tresna, erronkekin: paralelogramoa, propietateen makina, zeinuen taula eta determinantea k aldatzean, berriak; eta Matrizeak gaiko heinaren graduatzailea.`,
+            es: `${determinanteakLabTools.length} herramientas con retos: el paralelogramo, la máquina de propiedades, el tablero de signos y el deslizador del determinante, nuevas; y el deslizador del rango de Matrices.`,
+            en: `${determinanteakLabTools.length} tools with challenges: the parallelogram, the property machine, the sign board and the determinant slider, new; and the rank slider from Matrices.`,
+            ar: `${determinanteakLabTools.length} أدوات مع تحديات: متوازي الأضلاع وآلة الخواص ولوحة الإشارات ومنزلقة المحدد، وهي جديدة؛ ومنزلقة الرتبة من وحدة المصفوفات.`
+        },
+        progressIds: determinanteakLabChallengeIds,
+        toolForTopic: determinanteakLabToolForTopic,
+        render: (props) => <DeterminanteakLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',
