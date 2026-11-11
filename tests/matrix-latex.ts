@@ -88,28 +88,72 @@ function raise(base: Value, exponent: string): Value | null {
 
 /* ---------- Reading a formula ---------- */
 
-/** The matrices written in a formula, each replaced by ⟦n⟧; a matrix with a cell that is not a number is null */
-function literals(formula: string): { text: string; matrices: Array<Grid | null> } {
-    const matrices: Array<Grid | null> = []
-    const text = formula.replace(/\\begin\{pmatrix\}([\s\S]*?)\\end\{pmatrix\}/g, (_, body: string) => {
-        const rows = body.split(/\\\\/).map((row) => row.split('&').map((cell) => evaluate(cell.trim())))
+/** The determinant of a square grid, by elimination */
+export function detGrid(matrix: Grid): number | null {
+    const size = matrix.length
+    if (matrix.some((row) => row.length !== size)) return null
+    const work = matrix.map((row) => [...row])
+    let result = 1
+    for (let column = 0; column < size; column++) {
+        let pivot = column
+        for (let r = column + 1; r < size; r++) if (Math.abs(work[r][column]) > Math.abs(work[pivot][column])) pivot = r
+        if (Math.abs(work[pivot][column]) < 1e-12) return 0
+        if (pivot !== column) {
+            ;[work[column], work[pivot]] = [work[pivot], work[column]]
+            result = -result
+        }
+        result *= work[column][column]
+        for (let r = column + 1; r < size; r++) {
+            const factor = work[r][column] / work[column][column]
+            work[r] = work[r].map((value, j) => value - factor * work[column][j])
+        }
+    }
+    return result
+}
+
+/** A cell written as {-4} (braces keep the shared lesson test from reading «1 -4» as a subtraction) */
+const cellValue = (cell: string) => evaluate(cell.trim().replace(/^\{([^{}]*)\}$/, '$1'))
+
+/**
+ * The matrices written in a formula, each replaced by ⟦n⟧; a matrix with a cell that is not a number is null.
+ * A determinant, \begin{vmatrix}…\end{vmatrix}, is replaced by its value.
+ */
+function literals(formula: string): { text: string; matrices: Array<Grid | number | null> } {
+    const matrices: Array<Grid | number | null> = []
+    const read = (body: string) => {
+        const rows = body.split(/\\\\/).map((row) => row.split('&').map(cellValue))
         const ok = rows.every((row) => row.every((value) => value !== null)) && rows.every((row) => row.length === rows[0].length)
-        matrices.push(ok ? (rows as Grid) : null)
-        return `⟦${matrices.length - 1}⟧`
-    })
+        return ok ? (rows as Grid) : null
+    }
+    const text = formula
+        .replace(/\\begin\{pmatrix\}([\s\S]*?)\\end\{pmatrix\}/g, (_, body: string) => {
+            matrices.push(read(body))
+            return `⟦${matrices.length - 1}⟧`
+        })
+        .replace(/\\begin\{vmatrix\}([\s\S]*?)\\end\{vmatrix\}/g, (_, body: string) => {
+            const grid = read(body)
+            matrices.push(grid ? detGrid(grid) : null)
+            return `⟦${matrices.length - 1}⟧`
+        })
     return { text, matrices }
 }
 
 type Token = { kind: 'value'; value: Value | null } | { kind: 'op'; op: string } | { kind: 'power'; exponent: string }
 
 /** Tokens of one side; null when it holds something this reader does not know */
-function tokens(side: string, matrices: Array<Grid | null>, env: Env): Token[] | null {
+function tokens(side: string, matrices: Array<Grid | number | null>, env: Env): Token[] | null {
     const found: Token[] = []
     let rest = side.replace(/\\left|\\right|\\,|\\ /g, ' ').trim()
     while (rest.length) {
         let match: RegExpMatchArray | null
         if ((match = rest.match(/^\s+/))) { rest = rest.slice(match[0].length); continue }
         if ((match = rest.match(/^⟦(\d+)⟧/))) found.push({ kind: 'value', value: matrices[Number(match[1])] })
+        else if ((match = rest.match(/^\|([^|]+)\|/))) {
+            // |A|, |2A|, |AB|, |A^t|: the determinant of what is inside
+            const inner = tokens(match[1], matrices, env)
+            const value = inner && inner.length ? parse(inner) : null
+            found.push({ kind: 'value', value: value !== null && isGrid(value) ? detGrid(value) : null })
+        }
         else if ((match = rest.match(/^\\frac\{(\d+)\}\{(\d+)\}/))) found.push({ kind: 'value', value: Number(match[1]) / Number(match[2]) })
         else if ((match = rest.match(/^\d+(?:\{,\}\d+)?/))) found.push({ kind: 'value', value: Number(match[0].replace('{,}', '.')) })
         else if ((match = rest.match(/^[A-Z](?![a-z])/))) {
@@ -226,7 +270,8 @@ export function matrixRelations(text: string, env: Env = {}): Relation[] {
 
 /** The matrices written in a text, read as numbers (null when a cell has a letter) */
 export function matricesIn(text: string): Array<Grid | null> {
-    return [...text.matchAll(/\$([^$]+)\$/g)].flatMap(([, formula]) => literals(formula).matrices)
+    // Only the matrices in round brackets: a determinant (vmatrix) is read as its value
+    return [...text.matchAll(/\$([^$]+)\$/g)].flatMap(([, formula]) => literals(formula.replace(/\\begin\{vmatrix\}[\s\S]*?\\end\{vmatrix\}/g, ' ')).matrices.filter((value): value is Grid | null => typeof value !== 'number'))
 }
 
 /** The value of one expression of matrices (A^{-1}(C-B), (A+I)^{-1}B…), or null when it cannot be worked out */
