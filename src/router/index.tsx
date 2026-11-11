@@ -62,6 +62,7 @@ const LimiteakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-limiteak'
 const DeribatuakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-deribatuak').then((module) => ({ default: module.DeribatuakBatx2zIntroPage })))
 const AplikazioakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-aplikazioak').then((module) => ({ default: module.AplikazioakBatx2zIntroPage })))
 const ProbabilitateaBatx2zPage = lazy(() => import('../pages/batx2-zientziak-probabilitatea').then((module) => ({ default: module.ProbabilitateaBatx2zIntroPage })))
+const BanaketakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-banaketak').then((module) => ({ default: module.BanaketakBatx2zIntroPage })))
 const PolinomikoakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-polinomikoak').then((module) => ({ default: module.PolinomikoakDbh4AkIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
@@ -519,6 +520,10 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx2-zientziak/probabilidad/*',
                         element: <ProbabilitateaBatx2zPage />,
+                    },
+                    {
+                        path: 'matematika/batx2-zientziak/binomial-normal/*',
+                        element: <BanaketakBatx2zPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {

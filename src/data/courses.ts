@@ -229,7 +229,7 @@ export const courses: Course[] = [
       { id: 'integrales-indefinidas', name: 'Integrales Indefinidas', nameEu: 'Integral Mugagabeak', nameAr: 'التكاملات غير المحددة', nameEn: 'Indefinite Integrals', icon: '∫', active: true },
       { id: 'integral-definida', name: 'Integral Definida', nameEu: 'Integral Mugatua', nameAr: 'التكامل المحدد', nameEn: 'Definite Integral', icon: '▨', active: true },
       { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲', active: true },
-      { id: 'binomial-normal', name: 'Distribuciones Binomial y Normal', nameEu: 'Banaketa Binomiala eta Normala', nameAr: 'التوزيع الثنائي والتوزيع الطبيعي', nameEn: 'Binomial and Normal Distributions', icon: '🔔' },
+      { id: 'binomial-normal', name: 'Distribuciones Binomial y Normal', nameEu: 'Banaketa Binomiala eta Normala', nameAr: 'التوزيع الثنائي والتوزيع الطبيعي', nameEn: 'Binomial and Normal Distributions', icon: '🔔', active: true },
     ]
   },
   {
