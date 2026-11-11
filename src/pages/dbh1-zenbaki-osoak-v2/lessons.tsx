@@ -114,7 +114,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
             en: 'On the left, the negatives; in the middle, zero; on the right, the positives.',
             ar: 'السالبة على اليسار، والصفر في الوسط، والموجبة على اليمين.'
         },
-        figure: () => <NumberLine min={-7} max={7} braces points={[{ value: -4, tone: 'second', label: '−4' }, { value: 5, label: '+5' }]} />
+        figure: (language) => <NumberLine min={-7} max={7} braces language={language} points={[{ value: -4, tone: 'second', label: '−4' }, { value: 5, label: '+5' }]} />
     },
     {
         id: 'compare',
