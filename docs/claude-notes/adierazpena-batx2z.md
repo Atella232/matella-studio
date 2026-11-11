@@ -80,6 +80,11 @@ Cuarto y último tema del bloque Cálculo diferencial de 2.º Ciencias (reparto 
   - Las asíntotas de un logaritmo crecen despacio: el test mira |f| > 15 a 10⁻⁹ del borde, y solo exige horizontal donde f se estabiliza lejos.
 - **Fallo que no es de esta unidad:** en árabe, la «y» del eje y algún número se salen un poco por arriba en «Sube o baja» de Aplikazioak 1.º (el mismo fallo de `batx1-zientziak-aplikazioak/games/BachApplicationsGames.tsx` que ya se anotó en Aplicaciones 2.º). No se ha tocado.
 
-## En curso
+## Cierre (2026-11-11)
 
-- **Siguiente paso:** el cierre: `npm test`, `npm run lint` y `npm run build`, inventario, hoja de euskera en la carpeta compartida, y quitar esta sección.
+- `npm test` (2825), `npm run lint` y `npm run build` en verde.
+- Inventario: OK (juegos propios: `graph`, `read`, `sight` y el detective; el script cuenta también como propios los dos prestados de 1.º. Herramientas propias: `asymptote`, `symmetry`, `mirror`, `derivative`; el script cuenta 6 porque las de 1.º son propias de su unidad).
+- Revisión a 375 px en eu, es y ar: lecciones, resumen, diagnóstico, práctica, retos, banco, las 6 herramientas y los juegos jugando; la carrera, medida fuera de la página.
+- Hoja de euskera: `adierazpena-batx2z-euskera.html` en la carpeta compartida del bloque, enviada al dueño.
+- **Fallo de otra unidad (sin tocar, para el dueño):** la «y» del eje en árabe en «Sube o baja» de Aplikazioak 1.º (ver la fase 4).
+- **Para 2.º Sociales:** las figuras de `figures.tsx`, las herramientas de `lab/Bach2SketchTools.tsx` y los juegos están exportados.
