@@ -1,0 +1,14 @@
+/* ¿Qué gráfica es?, Lee la derivada and Asíntotas a la vista (Adierazpena, Batxilergoa 2 · Zientziak) */
+.fraction-v2-games-card[data-game="graph"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="read"] { --game-tint: var(--coral-tint, #f8dcd0); }
+.fraction-v2-games-card[data-game="sight"] { --game-tint: var(--violet-tint, #ece4f8); }
+
+.bach2-sketch-options,
+.bach2-sketch-choices { grid-template-columns: 1fr; }
+.bach2-sketch-choices button { font-size: 16px; }
+.bach2-sketch-options button { position: relative; padding: 6px 8px 6px 30px; }
+.bach2-sketch-letter { position: absolute; left: 10px; top: 8px; font-weight: 700; }
+.bach2-sketch-plot { display: block; width: 100%; height: auto; }
+.bach2-sketch-derivative { position: relative; width: 100%; max-width: 420px; margin: 4px auto 8px; border: 2px solid var(--ink); border-radius: 12px; overflow: hidden; }
+.bach2-sketch-tag { position: absolute; right: 10px; top: 6px; font-weight: 700; color: var(--coral, #c4432a); }
+.bach2-sketch-wide { display: block; overflow-x: visible; font-size: 15px; }
