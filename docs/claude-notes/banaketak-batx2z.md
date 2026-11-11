@@ -35,7 +35,15 @@ La rama se puso al día con `main` (e4dc4f8, primera tanda de 2.º publicada, co
 - **Tests:** `tests/banaketak-batx2z-content.test.ts` comprueba la tabla (valores conocidos, monotonía, |tabla − Φ| ≤ 0,00005), la binomial (suma 1, μ = np, σ² = npq, la versión decimal), recalcula cada respuesta normal desde μ, σ y x exigiendo z exacta con dos decimales y búsquedas inversas sin empate, y compara cada aproximación con corrección de continuidad con la binomial exacta (diferencia < 0,01).
 - **Trucos:** el test de sufijos del euskera lee `$z` como sufijo «-z»: la z va como `{z}` (`${z}=…$`; en las plantillas, la constante `Z`). La fracción exacta de la binomial se desborda desde n ≈ 40 (5¹⁰⁰): los dibujos usan `binomialPmfDecimal`. Las fórmulas largas de los pasos aprietan el texto de al lado en pantalla ancha: una cuenta corta por paso y el resto en el texto. Con σ = 3, 4, 6 u 8 las z de la corrección de continuidad no salen con dos decimales: en la aproximación solo σ = 2; 2,5; 5 o 10.
 
+## Fase 2 · laboratorio
+
+- **Herramientas propias (5):** `build` (Eraiki banaketa: cinco barras en décimas; μ como punto de equilibrio y σ² en centésimas, exactas), `machine` (Makina binomiala: n 1–20, p en décimas, «= / ≥ / ≤ k»), `bell` (Kanpaiaren azpian: N(μ; σ) con σ = 2, 4, 5 o 10 y a, b en pasos que dejan z con dos decimales; ▶ tipifica cambiando el eje x por el eje z), `lookup` (Normalaren taula: signo, fila, columna y lado; los negativos con la simetría), `approx` (Binomiala kanpaiaren azpian: B(16; 0,5), B(25; 0,2), B(100; 0,5) y B(400; 0,5), con σ = 2, 2, 5, 10; corrección sí/no).
+- **Prestadas para el repaso:** `pascal` (4.º ak Combinatoria) y `score` (1.º Ciencias Estadística), con sus ids.
+- **Ids:** retos 129101–129103 (build), 129111–129113 (machine), 129121–129123 (bell), 129131–129133 (lookup), 129141–129143 (approx); cada herramienta tiene retos sin fin (`freshFrom`).
+- **Tests:** `tests/banaketak-batx2z-lab.test.ts` (retos resolubles y no resueltos al abrir, z siempre con dos decimales, la b de los retos sin fin única, la tabla estrictamente creciente hasta 2,5, la aproximación con corrección a < 0,002 de la exacta salvo B(25; 0,2), que llega a 0,019 por ser np = 5 justo: lo dice el «Zeri begiratu»).
+- **Trucos:** `with` es palabra reservada (no sirve de nombre en los tests). En las pizarras, los valores con cuatro decimales van con `toFixed(4)` (si no, 0,3770 sale 0,377).
+
 ## En curso
 
-- Fase 1 escrita y en verde (tests, lint, tsc); falta la revisión final a 375 px en eu, es y ar y el commit.
-- Siguiente paso: fase 2, laboratorio L1–L5 (ids 129101–129399).
+- Fases 1 y 2 en verde (tests, lint, tsc), revisadas a 375 px en eu, es y ar; la 2 sin commit todavía en el momento de escribir esto.
+- Siguiente paso: fase 3, juegos J1 ¿Es binomial?, J2 ¿Qué área es?, J3 Busca en la tabla, J4 detective, carrera y memoria (ids 129401–129899).

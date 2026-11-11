@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { distributionsBatx2Challenges, distributionsBatx2Diagnostic, distributionsBatx2ExerciseBank, distributionsBatx2Practice } from './content'
 import { DistributionsBatx2HeroArt } from './figures'
+import { DistributionsBatx2Laboratory } from './lab'
+import { distributionsBatx2LabChallengeIds, distributionsBatx2LabToolForTopic, distributionsBatx2LabTools } from './lab/labTools'
 import { distributionsBatx2Stages, distributionsBatx2Topics } from './lessons'
 
 const banaketakBatx2zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const banaketakBatx2zUnit: UnitDefinition = {
     guidedPractice: distributionsBatx2Practice,
     exerciseBank: distributionsBatx2ExerciseBank,
     challenges: distributionsBatx2Challenges,
+    lab: {
+        description: {
+            eu: `${distributionsBatx2LabTools.length} tresna, erronkekin: eraiki banaketa, makina binomiala, kanpaiaren azpian, normalaren taula eta binomiala kanpaiaren azpian, berriak; eta 4. DBHko Tartagliaren triangelua eta 1. Batxilergoko puntuazio tipikoa.`,
+            es: `${distributionsBatx2LabTools.length} herramientas con retos: construye la distribución, la máquina binomial, bajo la campana, la tabla de la normal y la binomial bajo la campana, nuevas; y el triángulo de Tartaglia de 4.º ESO y la puntuación típica de 1.º de Bachillerato.`,
+            en: `${distributionsBatx2LabTools.length} tools with challenges: build the distribution, the binomial machine, under the bell, the normal table and the binomial under the bell, new; and Tartaglia's triangle from 4th ESO and the standard score from 1st Bachillerato.`,
+            ar: `${distributionsBatx2LabTools.length} أدوات مع تحديات: ابنِ التوزيع، والآلة الثنائية، وتحت الجرس، وجدول التوزيع الطبيعي، والتوزيع الثنائي تحت الجرس، وهي جديدة؛ ومثلث تارتاليا من الصف الرابع والدرجة المعيارية من البكالوريا الأولى.`
+        },
+        progressIds: distributionsBatx2LabChallengeIds,
+        toolForTopic: distributionsBatx2LabToolForTopic,
+        render: (props) => <DistributionsBatx2Laboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,8944, 3/8 edo 12. Normalaren probabilitateak, taulako lau hamartarrekin; ehunekoak, % ikurrik gabe.', es: 'Escribe un número exacto o una fracción: 0,8944, 3/8 o 12. Las probabilidades de la normal, con los cuatro decimales de la tabla; los porcentajes, sin el signo %.', en: 'Write an exact number or a fraction: 0.8944, 3/8 or 12. Normal probabilities with the four decimals of the table; percentages without the % sign.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.8944 أو 3/8 أو 12. احتمالات التوزيع الطبيعي بأربعة أرقام عشرية من الجدول، والنسب دون الرمز ٪.' },
         defaultForm: 'any',
