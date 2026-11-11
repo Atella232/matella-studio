@@ -21,3 +21,6 @@ The crossing point, touch the solution and the systems detective: see [dbh4-own-
 
 
 **Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commits b8a084b y 3396946, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 16 enlaces; 3 «¿Por qué funciona?» (punto de corte, sumar igualdades, un punto de prueba basta). `tests/sistemak-dbh4ak-content.test.ts` lee ahora los tres archivos y comprueba 14 sistemas y 2 semiplanos nuevos. Un paso de «Recta y curva», en dos filas. Detalles en `teoria-dbh4ak.md`.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/SystemsTools.tsx`: nombres de las cosas y unidades del escenario. Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

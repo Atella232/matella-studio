@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
@@ -192,7 +193,7 @@ export function ProportionDbh4ApTankGame({ language, records, onResult, onExit }
                     const isOpen = choice.taps[position]
                     return (
                         <g key={position}>
-                            <text x={cx} y={14} textAnchor="middle" fontSize={13} fontWeight={700} fill={INK}>{l(TANK_LETTERS[position])}</text>
+                            <Label x={cx} y={14} textAnchor="middle" fontSize={13} fontWeight={700} fill={INK}>{l(TANK_LETTERS[position])}</Label>
                             <text x={cx} y={30} textAnchor="middle" fontSize={13} fill={INK}>{`${tapHours} h`}</text>
                             <rect x={cx - 5} y={36} width={10} height={14} fill="var(--paper-deep, #ece6da)" stroke={INK} strokeWidth={1.4} />
                             <rect x={cx - 9} y={48} width={18} height={7} rx={2} fill={isOpen ? WATER : 'var(--paper-deep, #ece6da)'} stroke={INK} strokeWidth={1.4} />

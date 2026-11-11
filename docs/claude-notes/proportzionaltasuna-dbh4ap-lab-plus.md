@@ -725,3 +725,6 @@ Committed as 5b1ed33 and 49b5db1, fast-forwarded into main, pushed and deployed 
 - Miles: el inglés lleva coma (€1,000) y el árabe, espacio no separable.
 
 Ver [teoria-dbh4ap](teoria-dbh4ap.md).
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/ProportionDbh4ApTools.tsx` (etiqueta «العيار» de la aleación), `lab/ReceiptTool.tsx` («إيصال») y `games/TankGame.tsx` (letras de los grifos), `games/MixGame.tsx` (cantidades y precios con unidad árabe «كغ», «غ») y `games/RoadGame.tsx` (letras y velocidades de los coches; ya traían LRI/PDI a mano, que `Label` cambia por sus marcas). Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

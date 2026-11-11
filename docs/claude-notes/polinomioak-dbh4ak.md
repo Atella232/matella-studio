@@ -19,3 +19,6 @@ Root hunt, simplify the fraction and the polynomials detective (shared with the 
 
 
 **Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commits 9430ec1, 0ac8c74 y 3396946, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 13 enlaces a 3. DBH; 3 «¿Por qué funciona?» (cuadrado de una suma, teorema del resto, raíces y factores). Los ejemplos son identidades: la unidad está en `identityUnits` y se comprueban con dos juegos de números. El paso del m.c.d. y el m.c.m. (15,8 px), en dos filas. Detalles en `teoria-dbh4ak.md`.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/PolynomialsFractionsTools.tsx`: el ayudante `Text` pasa a `Label` («ق.م.أ», «م.م.أ», «العوامل التي تُحذف»). Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

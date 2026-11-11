@@ -20,3 +20,6 @@ Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 
 **Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commit f8bce45, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones. Los archivos nuevos escriben `\sin` y `\tan` en los cuatro idiomas (así los tests comparan las mismas fórmulas) y `localizeNames` de `text.ts` los cambia al mezclarlos en `lessons.tsx` (sen y tg en castellano, tg en euskera). `tests/trigonometria-dbh4ak-content.test.ts` dibuja también las fórmulas nuevas y prueba `localizeNames`. Detalles en `teoria-dbh4ak.md`.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/TrigonometryTools.tsx`: el ayudante `Tag` llevaba `direction="ltr"` a mano; pasa a `Label` («الارتفاع», «خط النظر», «الربع الأول», «طول القوس»…). Lo usan también 1.º Bachillerato de Resolución de triángulos, Funciones trigonométricas y Números complejos. Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

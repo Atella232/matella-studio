@@ -22,3 +22,6 @@ Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 
 **Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commit 2f1fe93, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 9 enlaces a 3. DBH; 4 «¿Por qué funciona?» (exponente 0 y negativo, $a^{1/2}=\sqrt{a}$, logaritmo del producto, cambio de base); «Una raíz cuadrada en el denominador» con el dibujo tras los pasos. Detalles en `teoria-dbh4ak.md`.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/PowersTools.tsx`: el ayudante `Text` pasa a `Label` («الأسس:», «الأساس 2»). Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

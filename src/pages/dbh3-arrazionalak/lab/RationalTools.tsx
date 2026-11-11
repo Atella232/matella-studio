@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState } from 'react'
 import { Stepper, Segmented, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
@@ -127,7 +128,7 @@ export function MagnifierTool(props: LabToolProps) {
                 {/* Zoomed line */}
                 <line x1={ZX(grid.low)} x2={ZX(grid.high)} y1={150} y2={150} stroke={INK} strokeWidth={2.2} />
                 {shown && !tooMany && marks.slice(1, 1 + visible).filter((top) => top < grid.high).map((top) => <line key={top} x1={ZX(top)} x2={ZX(top)} y1={143} y2={157} stroke={STAGE} strokeWidth={1.6} />)}
-                {shown && tooMany && <text x={180} y={136} textAnchor="middle" fontSize={11} fill={MUTED}>{l(say(`${count} marka: gehiegi marrazteko`, `${count} marcas: demasiadas para dibujarlas`, `${count} علامة: أكثر من أن تُرسم`, `${count} marks: too many to draw`))}</text>}
+                {shown && tooMany && <Label x={180} y={136} textAnchor="middle" fontSize={11} fill={MUTED}>{l(say(`${count} marka: gehiegi marrazteko`, `${count} marcas: demasiadas para dibujarlas`, `${count} علامة: أكثر من أن تُرسم`, `${count} marks: too many to draw`))}</Label>}
                 {[grid.low, grid.high].map((top) => <line key={`end${top}`} x1={ZX(top)} x2={ZX(top)} y1={140} y2={160} stroke={SECOND} strokeWidth={2.6} />)}
                 <SvgFraction value={{ numerator: grid.low, denominator: grid.denominator }} x={ZX(grid.low)} y={182} colour={SECOND} />
                 <SvgFraction value={{ numerator: grid.high, denominator: grid.denominator }} x={ZX(grid.high)} y={182} colour={SECOND} />
@@ -218,7 +219,7 @@ export function RemainingTool(props: LabToolProps) {
                         </>
                     )
                     : <Hidden x={X0 + a * column + ((b - a) * column) / 2} y={Y0 + H / 2 + 9} />}
-                <text x={180} y={Y0 + H + 26} textAnchor="middle" fontSize={12} fill={MUTED}>{l(say(`${b} zutabe · ${d} errenkada`, `${b} columnas · ${d} filas`, `${b} أعمدة · ${d} صفوف`, `${b} columns · ${d} rows`))}</text>
+                <Label x={180} y={Y0 + H + 26} textAnchor="middle" fontSize={12} fill={MUTED}>{l(say(`${b} zutabe · ${d} errenkada`, `${b} columnas · ${d} filas`, `${b} أعمدة · ${d} صفوف`, `${b} columns · ${d} rows`))}</Label>
             </Board>
             <PlayButton label={l(say('Moztu', 'Corta', 'اقطع', 'Cut'))} disabled={!shown} playing={playback.playing} onPlay={playback.play} />
         </ToolFrame>
@@ -302,11 +303,11 @@ export function MachineTool(props: LabToolProps) {
                 <line x1={COMMA_X + 3} x2={COMMA_X + 3} y1={20} y2={140} stroke={MUSTARD} strokeWidth={1.4} strokeDasharray="3 4" />
                 <Strip whole={top.whole} tail={top.tail} y={50} label={label(state.m)} colour={INK} tailColour={tailColour} tailOpacity={done && cancel ? 0.25 : fade < 1 && cancel ? 0.25 + 0.75 * fade : 1} separator={separator} dots={!exactTail(top.tail)} />
                 {state.n < 0
-                    ? <text x={12} y={92} fontSize={13} fill={MUTED}>{l(say('— (ez da ezer kentzen)', '— (no se resta nada)', '— (لا يُطرح شيء)', '— (nothing is subtracted)'))}</text>
+                    ? <Label x={12} y={92} fontSize={13} fill={MUTED}>{l(say('— (ez da ezer kentzen)', '— (no se resta nada)', '— (لا يُطرح شيء)', '— (nothing is subtracted)'))}</Label>
                     : <Strip whole={bottom.whole} tail={bottom.tail} y={92} label={`− ${label(state.n)}`} colour={INK} tailColour={tailColour} tailOpacity={done && cancel ? 0.25 : fade < 1 && cancel ? 0.25 + 0.75 * fade : 1} separator={separator} dots={!exactTail(bottom.tail)} />}
                 <line x1={12} x2={348} y1={108} y2={108} stroke={INK} strokeWidth={1.6} />
                 {shown && done
-                    ? <text x={COMMA_X} y={138} textAnchor="end" fontSize={17} fontWeight={700} fill={cancel ? GREEN : SECOND}>{cancel ? `${factor}x = ${number}` : l(say('buztana geratzen da', 'queda cola', 'يبقى ذيل', 'a tail is left'))}</text>
+                    ? <Label x={COMMA_X} y={138} textAnchor="end" fontSize={17} fontWeight={700} fill={cancel ? GREEN : SECOND}>{cancel ? `${factor}x = ${number}` : l(say('buztana geratzen da', 'queda cola', 'يبقى ذيل', 'a tail is left'))}</Label>
                     : <Hidden x={COMMA_X} y={140} size={22} />}
             </Board>
             <PlayButton label={l(say('Kendu', 'Resta', 'اطرح', 'Subtract'))} disabled={!shown} playing={playback.playing} onPlay={playback.play} />
@@ -379,7 +380,7 @@ export function WholeTool(props: LabToolProps) {
                 {shown && copies === b - a
                     ? <SvgFraction value={total} x={180} y={152} size={15} colour={GREEN} />
                     : <Hidden x={180} y={158} size={22} />}
-                <text x={180} y={182} textAnchor="middle" fontSize={11} fill={MUTED}>{l(say(`${a} zati ezagun · ${b} zati osoan`, `${a} trozos conocidos · ${b} en el total`, `${a} قطع معروفة · ${b} في الكل`, `${a} known pieces · ${b} in the whole`))}</text>
+                <Label x={180} y={182} textAnchor="middle" fontSize={11} fill={MUTED}>{l(say(`${a} zati ezagun · ${b} zati osoan`, `${a} trozos conocidos · ${b} en el total`, `${a} قطع معروفة · ${b} في الكل`, `${a} known pieces · ${b} in the whole`))}</Label>
             </Board>
             <PlayButton label={l(say('Kopiatu zatia', 'Copia el trozo', 'انسخ القطعة', 'Copy the piece'))} disabled={!shown} playing={playback.playing} onPlay={playback.play} />
         </ToolFrame>

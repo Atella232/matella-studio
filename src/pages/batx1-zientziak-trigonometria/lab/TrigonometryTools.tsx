@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState } from 'react'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
@@ -236,7 +237,7 @@ export function SpinTool(props: LabToolProps) {
                 {moving && <line x1={O[0]} y1={O[1]} x2={moving[0]} y2={moving[1]} stroke={INK} strokeWidth={2.4} />}
                 {moving && <circle cx={moving[0]} cy={moving[1]} r={5} fill={INK} />}
                 <text x={262} y={44} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND} direction="ltr">{`${names[state.ratio]} ${angle} = ${spinPlain(state.k)}`}</text>
-                <text x={262} y={72} textAnchor="middle" fontSize={13} fontWeight={700} fill={MUTED}>{l(turns)}</text>
+                <Label x={262} y={72} textAnchor="middle" fontSize={13} fontWeight={700} fill={MUTED}>{l(turns)}</Label>
                 {u !== null && <text x={262} y={100} textAnchor="middle" fontSize={13} fontWeight={700} fill={INK} direction="ltr">{`u = ${Math.round(u)}°`}</text>}
 
                 <line x1={rulerX(0)} y1={rulerY} x2={rulerX(360)} y2={rulerY} stroke={INK} strokeWidth={2} />
@@ -256,7 +257,7 @@ export function SpinTool(props: LabToolProps) {
                     ))
                     : <Hidden x={180} y={rulerY - 10} size={22} />}
                 {now !== null && <line x1={rulerX(now)} y1={rulerY - 10} x2={rulerX(now)} y2={rulerY + 10} stroke={INK} strokeWidth={2.4} />}
-                {shown && <text x={180} y={256} textAnchor="middle" fontSize={13} fontWeight={700} fill={INK}>{l(say(`${visible.length} soluzio`, `${visible.length} soluciones`, `${visible.length} حلول`, `${visible.length} solutions`))}</text>}
+                {shown && <Label x={180} y={256} textAnchor="middle" fontSize={13} fontWeight={700} fill={INK}>{l(say(`${visible.length} soluzio`, `${visible.length} soluciones`, `${visible.length} حلول`, `${visible.length} solutions`))}</Label>}
             </Board>
             <PlayButton label={l(say('Eman birak', 'Da las vueltas', 'أدِر الدورات', 'Go round'))} disabled={!shown} playing={playback.playing} onPlay={playback.play} />
         </ToolFrame>

@@ -1,3 +1,4 @@
+import { Label } from '../dbh2-funtzioak-v2/plane'
 import { useState, type ReactNode } from 'react'
 import { MathText } from '../../components/MathText'
 import { localLatex, useGameText } from '../../features/unit-v2/games/gameHooks'
@@ -34,7 +35,7 @@ function Ball({ x, y, colour, language, size = 9 }: { x: number; y: number; colo
     return (
         <g>
             <circle cx={x} cy={y} r={size} fill={BALL_COLOURS[colour]} stroke={INK} strokeWidth="1.5" />
-            <text x={x} y={y + size * 0.45} textAnchor="middle" fontSize={size * 1.15} fontWeight="700" fill="#fff">{initial(colour, language)}</text>
+            <Label x={x} y={y + size * 0.45} textAnchor="middle" fontSize={size * 1.15} fontWeight="700" fill="#fff">{initial(colour, language)}</Label>
         </g>
     )
 }

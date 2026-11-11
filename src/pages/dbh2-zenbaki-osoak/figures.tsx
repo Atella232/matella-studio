@@ -90,7 +90,7 @@ export function NumberLine({
                 return (
                     <g key={`span-${index}`}>
                         <rect x={left} y={y} width={Math.abs(x(span.to) - x(span.from))} height={12} rx={4} fill={toneColor[span.tone ?? 'stage']} opacity={0.28} stroke={toneColor[span.tone ?? 'stage']} strokeWidth={1.5} />
-                        {span.label && <text x={(x(span.from) + x(span.to)) / 2} y={y - 5} textAnchor="middle" fontSize={16} fontWeight={700} fill={toneColor[span.tone ?? 'stage']}>{span.label}</text>}
+                        {span.label && <Label x={(x(span.from) + x(span.to)) / 2} y={y - 5} textAnchor="middle" fontSize={16} fontWeight={700} fill={toneColor[span.tone ?? 'stage']}>{span.label}</Label>}
                     </g>
                 )
             })}
@@ -105,7 +105,7 @@ export function NumberLine({
                 return (
                     <g key={`jump-${index}`}>
                         <path d={`M${x1} ${y} C ${x1} ${y - lift}, ${x2} ${y - lift}, ${x2} ${y}`} fill="none" stroke={toneColor[tone]} strokeWidth={2.6} markerEnd={`url(#integers-arrow-${tone})`} />
-                        {jump.label && <text x={(x1 + x2) / 2} y={y - lift * 0.78 - 4} textAnchor="middle" fontSize={16} fontWeight={700} fill={toneColor[tone]}>{jump.label}</text>}
+                        {jump.label && <Label x={(x1 + x2) / 2} y={y - lift * 0.78 - 4} textAnchor="middle" fontSize={16} fontWeight={700} fill={toneColor[tone]}>{jump.label}</Label>}
                     </g>
                 )
             })}
@@ -122,7 +122,7 @@ export function NumberLine({
             {points.map((point, index) => (
                 <g key={`point-${index}`}>
                     <circle cx={x(point.value)} cy={lineY} r={8} fill={toneColor[point.tone ?? 'stage']} stroke={INK} strokeWidth={2} />
-                    {point.label && <text x={x(point.value)} y={lineY - (point.raise ? 40 : 16)} textAnchor="middle" fontSize={16} fontWeight={700} fill={toneColor[point.tone ?? 'stage']}>{point.label}</text>}
+                    {point.label && <Label x={x(point.value)} y={lineY - (point.raise ? 40 : 16)} textAnchor="middle" fontSize={16} fontWeight={700} fill={toneColor[point.tone ?? 'stage']}>{point.label}</Label>}
                 </g>
             ))}
 
@@ -149,7 +149,7 @@ export function NumberLine({
                 />
             )}
 
-            {caption && <text x={width / 2} y={height - 6} textAnchor="middle" fontSize={16} fill={MUTED}>{caption}</text>}
+            {caption && <Label x={width / 2} y={height - 6} textAnchor="middle" fontSize={16} fill={MUTED}>{caption}</Label>}
         </svg>
     )
 }

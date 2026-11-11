@@ -5,7 +5,7 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import type { FractionValue } from '../../../features/unit-v2/math/fraction'
 import type { UnitLanguage } from '../../../features/unit-v2/types'
-import { AxisTitles, PlaneGrid, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
+import { AxisTitles, Label, PlaneGrid, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
 import { useBoxClip } from '../../dbh2-funtzioak-v2/planeClip'
 import { planeMap, type PlaneBox, type PlaneMap } from '../../dbh2-funtzioak-v2/planeMap'
 import {
@@ -222,7 +222,7 @@ export function VectorTool(props: LabToolProps) {
 function Readings({ rows }: { rows: Array<[string, string]> }) {
     return (
         <svg viewBox={`0 0 420 ${rows.length * 28 + 10}`} direction="ltr" style={{ display: 'block', width: '100%', maxWidth: 420, height: 'auto', margin: '0 auto' }} aria-hidden="true">
-            {rows.map(([text, color], index) => <text key={index} x={210} y={24 + index * 28} textAnchor="middle" fontSize={18} fontWeight={700} fill={color}>{text}</text>)}
+            {rows.map(([text, color], index) => <Label key={index} x={210} y={24 + index * 28} textAnchor="middle" fontSize={18} fontWeight={700} fill={color}>{text}</Label>)}
         </svg>
     )
 }

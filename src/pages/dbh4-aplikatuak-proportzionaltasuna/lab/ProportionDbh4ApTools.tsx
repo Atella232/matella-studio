@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { Fragment, useState, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
@@ -6,7 +7,6 @@ import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toExactDecimal, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
 import { decimalSeparatorFor, groupDigits, groupLatex } from '../../../utils/numberFormat'
-import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { PredictionStep } from '../../dbh2-zatikiak-prototype/lab/PredictionStep'
 import {
     atMeeting,
@@ -389,7 +389,7 @@ export function MixtureTool(props: LabToolProps) {
                                     </g>
                                 )
                             })}
-                            <text x={Math.min(300, Math.max(60, meanX))} y={beam + 96} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{gold ? `${l(say('purutasuna', 'ley', 'العيار', 'fineness'))} ${valueText(meanValue)}` : `${valueText(meanValue)} €/kg`}</text>
+                            <Label x={Math.min(300, Math.max(60, meanX))} y={beam + 96} textAnchor="middle" fontSize={16} fontWeight={700} fill={SECOND}>{gold ? `${l(say('purutasuna', 'ley', 'العيار', 'fineness'))} ${valueText(meanValue)}` : `${valueText(meanValue)} €/kg`}</Label>
                         </>
                     )
                     : <Hidden x={180} y={beam + 70} size={28} />}

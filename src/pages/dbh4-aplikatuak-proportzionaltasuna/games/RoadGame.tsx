@@ -43,7 +43,7 @@ function Car({ x, y, color, letter, right }: { x: number; y: number; color: stri
         <g transform={`translate(${x} ${y})`}>
             <rect x={-16} y={-8} width={32} height={16} rx={5} fill={color} stroke={INK} strokeWidth={1.4} />
             <rect x={right ? 4 : -12} y={-6} width={8} height={12} rx={2} fill="#fff" fillOpacity={0.75} />
-            <text x={right ? -5 : 5} y={4} textAnchor="middle" fontSize={11} fontWeight={700} fill="#fff">{letter}</text>
+            <Label x={right ? -5 : 5} y={4} textAnchor="middle" fontSize={11} fontWeight={700} fill="#fff">{letter}</Label>
         </g>
     )
 }
@@ -213,8 +213,8 @@ export function ProportionDbh4ApRoadGame({ language, records, onResult, onExit }
                 onPointerUp={() => { dragging.current = false }}
                 onPointerCancel={() => { dragging.current = false }}
             >
-                <text x={12} y={14} fontSize={13} fontWeight={700} fill={BLUE}>{speedLabel(0)}</text>
-                <text x={348} y={14} textAnchor="end" fontSize={13} fontWeight={700} fill={RED}>{speedLabel(1)}</text>
+                <Label x={12} y={14} fontSize={13} fontWeight={700} fill={BLUE}>{speedLabel(0)}</Label>
+                <Label x={348} y={14} textAnchor="end" fontSize={13} fontWeight={700} fill={RED}>{speedLabel(1)}</Label>
 
                 {/* The road from above: B's lane on top, A's below */}
                 <rect x={8} y={56} width={344} height={48} rx={6} fill="var(--paper-deep, #ece6da)" stroke={INK} strokeWidth={1.6} />

@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useId, useState, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import { ResultAnswer, Segmented, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
@@ -5,7 +6,6 @@ import { NumberField } from '../../../features/unit-v2/lab/NumberField'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
 import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction, toNumber, type FractionValue } from '../../../features/unit-v2/math/fraction'
-import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { readMoneyAnswer, typeLabAnswer } from '../answers'
 import {
     couponTotals,
@@ -163,7 +163,7 @@ export function ReceiptTool(props: LabToolProps) {
         <ToolFrame {...props} controls={controls} readout={readout} challenges={receiptChallenges} extraChallenges={receiptExtra} state={state}>
             <svg viewBox={`0 0 320 ${height}`} direction="ltr" role="img" aria-label={l(say('Erosketaren tiketa', 'El tique de la compra', 'إيصال الشراء', 'The shopping receipt'))} style={{ display: 'block', width: '100%', maxWidth: 460, height: 'auto', margin: '0 auto', fontFamily: '"Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif' }}>
                 <path d={`M10 6 H310 V${height - 16} ${zigzag} Z`} fill="#fffcf6" stroke={INK} strokeWidth={1.6} strokeLinejoin="round" />
-                <text x={160} y={36} textAnchor="middle" fontSize={15} fontWeight={700} letterSpacing={3} fill={MUTED}>{l(say('TIKETA', 'TIQUE', 'إيصال', 'RECEIPT'))}</text>
+                <Label x={160} y={36} textAnchor="middle" fontSize={15} fontWeight={700} letterSpacing={3} fill={MUTED}>{l(say('TIKETA', 'TIQUE', 'إيصال', 'RECEIPT'))}</Label>
 
                 <Label x={24} y={top + 20} fontSize={15} fill={INK}>{l(say('Prezioa BEZik gabe', 'Precio sin IVA', 'السعر دون ضريبة', 'Price without VAT'))}</Label>
                 <text x={296} y={top + 20} textAnchor="end" fontSize={16} fontWeight={700} fill={INK}>{ltr(money(props.language, fraction(state.price)))}</text>
