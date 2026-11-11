@@ -48,6 +48,4 @@ Segundo tema de 2.º Ciencias (curso `batx2-zientziak`, tema `determinantes`), s
 - `-0`: `ad-bc` puede dar `-0` y `assert.equal` lo distingue de `0`; se suma `+ 0`.
 - En el test de contenido, la línea mala de un error típico puede tener pasos bien hechos (`|…|=1\cdot 4+2\cdot 3=10`): basta con que un paso falle.
 
-## En curso
-
-- Fases 1–4 hechas (ver commits). Falta el cierre: revisión final a 375 px (lecciones hechas en eu y es; faltan ar, práctica, ejercicios, retos, diagnóstico y portada), hoja de euskera con `hoja-revision.mjs` y nota final. Después, Sistemas (`sistemak`).
+**Cierre (2026-11-11):** 3039 tests, lint y build en verde; inventario OK (2 juegos propios para el script, más el detective; 5 herramientas «propias» para el script, de verdad 4: el deslizador del rango es de `matrizeak`). Revisado a 375 px en eu, es y ar con medidas de la página y `getBBox`: las 16 lecciones (con los desplegables abiertos) y el resumen, las 5 herramientas con la predicción hecha, los 5 juegos (rondas enteras de J1 y J2 en los tres niveles, detective, carrera y memoria), los 50 ejercicios del banco, la práctica, los retos, el diagnóstico y la portada; sin desbordes ni errores de KaTeX. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio, `~/Documents/Matella-fuentes/batx2z-algebra/hojas/determinanteak-euskara.html`) y mandada al dueño.
