@@ -1,0 +1,17 @@
+/* Laboratory of Zuzenak eta planoak espazioan (PlanesTools.tsx): the equations above the 3D board */
+
+.planoak-lab-equations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+    margin: 0 auto 4px;
+    font-size: 1.02rem;
+    color: var(--ink, #1d2733);
+}
+
+.planoak-lab-equations > * {
+    max-width: 100%;
+    overflow-x: auto;
+}
