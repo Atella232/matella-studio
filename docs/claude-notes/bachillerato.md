@@ -195,10 +195,10 @@ El dueño pidió hacer 2.º Ciencias con varias sesiones a la vez. Los 14 temas 
 |---|---|---|---|---|---|---|
 | Álgebra | 5181 | `matrices` | `matrizeak` | 116000–116999 | nuevo (Gauss de `batx1-zientziak-sistemak`) | Publicado 2026-11-10 |
 | Álgebra | 5181 | `determinantes` | `determinanteak` | 117000–117999 | `matrizeak` | Publicado 2026-11-11 |
-| Álgebra | 5181 | `sistemas` | `sistemak` | 118000–118999 | `batx1-zientziak-sistemak`, `determinanteak` | En curso |
+| Álgebra | 5181 | `sistemas` | `sistemak` | 118000–118999 | `batx1-zientziak-sistemak`, `determinanteak` | Publicado 2026-11-11 |
 | Espacio | 5182 | `vectores-espacio` | `bektoreak` | 119000–119999 | `batx1-zientziak-bektoreak` (tablero 3D nuevo, para todo el bloque) | Publicado 2026-11-10 |
 | Espacio | 5182 | `rectas-planos` | `planoak` | 120000–120999 | `batx1-zientziak-geometria`, `bektoreak` | Publicado 2026-11-11 |
-| Espacio | 5182 | `angulos-distancias` | `distantziak` | 121000–121999 | `batx1-zientziak-geometria`, `planoak` | En curso |
+| Espacio | 5182 | `angulos-distancias` | `distantziak` | 121000–121999 | `batx1-zientziak-geometria`, `planoak` | Publicado 2026-11-11 |
 | Cálculo diferencial | 5183 | `limites-continuidad` | `limiteak` | 122000–122999 | `batx1-zientziak-limiteak` | Publicado 2026-11-10 |
 | Cálculo diferencial | 5183 | `derivadas` | `deribatuak` | 123000–123999 | `batx1-zientziak-deribatuak` | Publicado 2026-11-10 |
 | Cálculo diferencial | 5183 | `aplicaciones-derivada` | `aplikazioak` | 124000–124999 | `batx1-zientziak-aplikazioak` | Publicado 2026-11-10 |
@@ -215,3 +215,5 @@ El dueño pidió hacer 2.º Ciencias con varias sesiones a la vez. Los 14 temas 
 **2026-11-10: primera tanda de 2.º Ciencias publicada** (`main` 5e186b4, bundle `index-BiUKCFuE.js`): Matrices, Vectores en el espacio, Límites y continuidad, Derivadas, Aplicaciones de la derivada, Integrales indefinidas, Integral definida y Probabilidad. Se fusionaron las ramas finales `feat/matrizeak-`, `feat/bektoreak-`, `feat/aplikazioak-`, `feat/mugatua-` y `feat/probabilitatea-batx2z` en `feat/batx2z-tanda1`. Conflictos solo en `paths.ts`, el router y `courses.ts` (dos líneas `active: true` vecinas): se resolvieron con el script de unión. 2993 tests en verde. Quedan Determinantes, Sistemas, Rectas y planos, Ángulos y distancias, Representación de funciones y Binomial y normal.
 
 **2026-11-11: segunda tanda publicada** (`main` 9e5e40b, bundle `index-B542gguY.js`): Determinantes, Rectas y planos, Representación de funciones y Binomial y normal (12 de 14), junto con el arreglo del árabe en los dibujos (`feat/arabic-svg-formulas` + `feat/arabic-svg-labels`: las fórmulas dentro de frases árabes de los SVG se leen de izquierda a derecha también en Safari; 104 textos de 13 `figures.tsx` de 1.º y 2.º pasan por `Label`). Rama de unión `feat/batx2z-tanda2`; el script de unión ya resuelve también las líneas `active: true` vecinas de `courses.ts`. 3166 tests en verde. Quedan Sistemas y Ángulos y distancias (esperan la elección del dueño).
+
+**2026-11-11: tercera tanda publicada** (`main` 39ce689, bundle `index-D6LgGDvF.js`): Sistemas y Ángulos y distancias. **2.º Ciencias completo, con sus 14 temas en la web.** 3241 tests en verde. Quedan sin fusionar dos arreglos del árabe hechos por sesiones secundarias (`feat/arabic-svg-labs-games`, `feat/numberline-language`), sin visto bueno todavía. Siguen sin hacer los dos cursos de Ciencias Sociales.

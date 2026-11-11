@@ -63,3 +63,7 @@ Tercera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - Nada propio: las lecciones no usan Determinantes ni Sistemas de 2.º.
 - Piezas prestadas (solo importadas, sin tocar): CSS `PlanesGames.css` y `PlanesTools.css` y `lab/common.ts` de `planoak`; tablero 3D y `vec3.ts` de `bektoreak`.
 
+
+## Publicación
+
+- **Publicada el 2026-11-11** en la tercera tanda de 2.º Ciencias, con el visto bueno del dueño («publícalos»): `main` 39ce689, bundle `index-D6LgGDvF.js`. 3241 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.

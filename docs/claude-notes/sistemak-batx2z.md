@@ -52,3 +52,7 @@ Tercer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `sistemas`), tercero
 - Los textos del centro de juegos (`info.ts`: título, lema, habilidades, niveles) se pintan como texto plano, no con `MathText`: nada de `$…$` ni de `_`, y en árabe cada fórmula entre U+2066 y U+2069.
 - `detValue` suma `+ 0` para no devolver `-0` (los tests comparan con `===`).
 - Los párrafos de Python con `$` en un heredoc de Bash los bloquea el control de seguridad: escribir el script en el scratchpad y ejecutarlo.
+
+## Publicación
+
+- **Publicada el 2026-11-11** en la tercera tanda de 2.º Ciencias, con el visto bueno del dueño («publícalos»): `main` 39ce689, bundle `index-D6LgGDvF.js`. 3241 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.

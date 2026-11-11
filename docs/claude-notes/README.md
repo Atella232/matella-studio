@@ -84,3 +84,5 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [Zuzenak eta planoak espazioan · 2.º Bachillerato Ciencias](planoak-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 9e5e40b, bundle `index-B542gguY.js`)
 - [Funtzioen adierazpen grafikoa · 2.º Bachillerato Ciencias](adierazpena-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 9e5e40b, bundle `index-B542gguY.js`)
 - [Banaketa binomiala eta normala · 2.º Bachillerato Ciencias](banaketak-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 9e5e40b, bundle `index-B542gguY.js`)
+- [Ekuazio-sistemak · 2.º Bachillerato Ciencias](sistemak-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 39ce689, bundle `index-D6LgGDvF.js`)
+- [Angeluak eta distantziak · 2.º Bachillerato Ciencias](distantziak-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 39ce689, bundle `index-D6LgGDvF.js`)
