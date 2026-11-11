@@ -57,6 +57,7 @@ const KonplexuakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-konplex
 const LimiteakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-limiteak').then((module) => ({ default: module.LimiteakBatx2zIntroPage })))
 const DeribatuakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-deribatuak').then((module) => ({ default: module.DeribatuakBatx2zIntroPage })))
 const AplikazioakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-aplikazioak').then((module) => ({ default: module.AplikazioakBatx2zIntroPage })))
+const AdierazpenaBatx2zPage = lazy(() => import('../pages/batx2-zientziak-adierazpena').then((module) => ({ default: module.AdierazpenaBatx2zIntroPage })))
 const PolinomikoakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-polinomikoak').then((module) => ({ default: module.PolinomikoakDbh4AkIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
@@ -489,6 +490,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx2-zientziak/aplicaciones-derivada/*',
                         element: <AplikazioakBatx2zPage />,
+                    },
+                    // Representación de funciones de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/representacion-funciones/*',
+                        element: <AdierazpenaBatx2zPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {
