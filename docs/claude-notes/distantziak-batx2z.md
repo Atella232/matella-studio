@@ -39,17 +39,27 @@ Tercera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - Comunes en `lab/common.ts` (`rootLatex`, `degreesLatex`, `angleFromSquare`; el resto se reexporta de `planoak`). Usa el CSS `.planoak-lab-equations` de `planoak` (importado, no copiado).
 - **Test nuevo:** `tests/distantziak-batx2z-lab.test.ts`. 3061 tests, lint y build en verde. Revisado a 375 px en eu, es y ar.
 
+**Fase 4, juegos y cierre (ids 121401–121803):** seis juegos en `games/`, con `info.ts` (`matella-distantziak-batx2z-game-records`).
+- **Carrera** (`race.ts`, 121401–05): cinco circuitos, uno por etapa, tres tipos de pregunta en cada uno (ángulos; t del pie y coordenadas del pie en plano y recta; simétricos y la D del mediador; punto–plano, planos paralelos, punto–recta; producto mixto, que se cruzan, paralelas). Distractores: complementario, sin valor absoluto, pie, M − P, sin dividir, sin D, normales sin igualar.
+- **J1 ¿Seno o coseno?** (`sine.ts`, 121501–03): primero la fórmula (coseno de directores, de normales o seno), después el ángulo (0°, 30°, 45°, 60° o 90°) con el complementario y el obtuso como trampa.
+- **J2 El espejo** (`mirror.ts`, 121551–53): cuatro puntos numerados en el tablero 3D (P′, el pie M, M − P como punto y P al revés); niveles: planos de normal en un eje, cualquier plano y respecto de una recta.
+- **J3 ¿Quién está más cerca?** (`nearer.ts`, 121601–03): un punto y dos objetos (dos planos, plano y recta, dos rectas) a distancia entera por construcción (normales de módulo 1 o 3, desplazamientos de longitud entera); al responder, las perpendiculares en el tablero.
+- **J4 Detective** (`detective.ts`, 121701–03): doce errores en tres niveles (sin valor absoluto, coseno por seno, olvidar P, pie por simétrico; sin |n|, sin D, normales sin igualar, entre |AP|; entre |u||v|, entre |AB|, fórmula de paralelas, mediador por un extremo).
+- **Memoria** (`boards.ts`, 121801–03): punto y plano ↔ distancia, planos paralelos ↔ distancia, punto y plano x = k ↔ simétrico. Solo planos de un eje (a·z = c): los planos completos no caben en una carta (86 px).
+- **Test nuevo:** `tests/distantziak-batx2z-games.test.ts`. 3068 tests, lint y build en verde; inventario: 3 juegos y 5 herramientas propias.
+- **Revisión a 375 px** en eu, es y ar de los seis juegos (la ronda 2 de «¿Seno o coseno?» empieza limpia: `RoundGame` monta cada ronda con `key`); las líneas y correcciones del detective medidas en el navegador con todos los casos (máximo 233 de 234 px).
+- **Hoja de euskera:** `distantziak-batx2z-revision.html` en la carpeta de notas compartidas.
+
 ## Trucos
 
 - Los de `bektoreak` y `planoak` siguen valiendo (`${z}`, `\qquad`, `gathered`, `\colon` en vez de `:` dentro de fórmulas, `\dfrac` en vez de `\displaystyle`).
 - El test de textos compara el orden de las fórmulas en los cuatro idiomas: si en castellano sale «la recta $P+t\vec n$, que pasa por $P$», en euskera hay que mantener ese orden.
+- Detective a 375 px: el hueco de una línea es de 234 px (botón de 292 menos número y huecos). Medir con `katex.renderToString` dentro del navegador (`import('/node_modules/katex/dist/katex.mjs')` y el módulo del juego con `?t=`) es más fiable que mirar elemento a elemento.
 - Herramientas del laboratorio: un título largo en euskera desborda la cabecera a 375 px (máximo unos 179 px); los marcadores con tres fórmulas van en filas separadas.
 - Ángulos con decimales (26,39°) no van como respuesta cerrada (el redondeo no casa con la fracción exacta): solo en soluciones del banco.
 
 ## Pendiente para la fusión
 
 - Nada propio: las lecciones no usan Determinantes ni Sistemas de 2.º.
+- Piezas prestadas (solo importadas, sin tocar): CSS `PlanesGames.css` y `PlanesTools.css` y `lab/common.ts` de `planoak`; tablero 3D y `vec3.ts` de `bektoreak`.
 
-## En curso
-
-- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos (ids 121401–121803); cierre (tests, lint, build, inventario, 375 px en eu/es/ar, hoja de euskera con `hoja-revision.mjs` en la carpeta de notas compartidas).

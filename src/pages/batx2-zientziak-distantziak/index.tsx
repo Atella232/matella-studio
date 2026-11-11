@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { anglesDistancesChallenges, anglesDistancesDiagnostic, anglesDistancesExerciseBank, anglesDistancesPractice } from './content'
 import { AnglesDistancesHeroArt } from './figures'
+import { AnglesDistancesGames } from './games'
+import { ANGLES_DISTANCES_GAME_RECORDS_KEY, anglesDistancesGameProgressIds } from './games/info'
 import { AnglesDistancesLaboratory } from './lab'
 import { anglesDistancesLabChallengeIds, anglesDistancesLabToolForTopic, anglesDistancesLabTools } from './lab/labTools'
 import { anglesDistancesStages, anglesDistancesTopics } from './lessons'
@@ -37,6 +39,17 @@ const distantziakBatx2zUnit: UnitDefinition = {
         progressIds: anglesDistancesLabChallengeIds,
         toolForTopic: anglesDistancesLabToolForTopic,
         render: (props) => <AnglesDistancesLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, sinua ala kosinua, ispilua, nor dago hurbilago, detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿seno o coseno?, el espejo, ¿quién está más cerca?, detective y memoria.',
+            en: 'Six games: race, sine or cosine, the mirror, who is nearer, detective and memory.',
+            ar: 'ست ألعاب: السباق، وجيب أم جيب تمام، والمرآة، ومن الأقرب، والمخبر، والذاكرة.'
+        },
+        progressIds: anglesDistancesGameProgressIds,
+        recordsKey: ANGLES_DISTANCES_GAME_RECORDS_KEY,
+        render: (props) => <AnglesDistancesGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: angelua gradutan, koordenatua, parametroa edo distantzia. Adibidez 45, −3, 2,5 edo 11/3.', es: 'Escribe un solo número: el ángulo en grados, la coordenada, el parámetro o la distancia. Por ejemplo 45, −3, 2,5 o 11/3.', en: 'Write a single number: the angle in degrees, the coordinate, the parameter or the distance. For example 45, −3, 2.5 or 11/3.', ar: 'اكتب عددًا واحدًا: الزاوية بالدرجات أو المركّبة أو الوسيط أو المسافة. مثلًا 45 أو ⁦−3⁩ أو 2.5 أو 11/3.' },

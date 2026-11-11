@@ -1,0 +1,9 @@
+/* The round games of Angeluak eta distantziak (Batxilergoa 2 · Zientziak); the rest comes from PlanesGames.css */
+.fraction-v2-games-card[data-game="sine"] { --game-tint: var(--violet-tint, #e7e0f6); }
+.fraction-v2-games-card[data-game="mirror"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="nearer"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+.prop3-options.distances-games-formulas { grid-template-columns: 1fr; }
+.prop3-options.distances-games-formulas button { display: flex; justify-content: center; }
+.prop3-options.distances-games-formulas button > span { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+.prop3-options.distances-games-nearer { grid-template-columns: 1fr; }
