@@ -28,6 +28,12 @@ export function linearLatex(coefficients: readonly number[], names: readonly str
     return text || '0'
 }
 
+/** One term k·t of a sum, written well: no 1t, no 0t, a + only when something comes before */
+export const termLatex = (coefficient: number, letter: string, first = false) =>
+    coefficient === 0 ? '' : `${coefficient < 0 ? '-' : first ? '' : '+'}${Math.abs(coefficient) === 1 ? '' : Math.abs(coefficient)}${letter}`
+/** A constant term of a sum: nothing when it is 0 */
+export const constantLatex = (value: number, first = false) => (value === 0 ? '' : `${value < 0 ? '-' : first ? '' : '+'}${Math.abs(value)}`)
+
 /** The general equation a·x + b·y + c·z + D = 0 of the plane with normal n */
 export function generalLatex(n: Vec3, D: number): string {
     const constant = D + 0

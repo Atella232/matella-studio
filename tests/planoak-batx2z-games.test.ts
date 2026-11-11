@@ -33,8 +33,8 @@ function checkTexts(texts: LocalizedText[]) {
 
 /** MathText turns a colon into ÷, so no formula may hold one */
 const noColon = (latex: string) => assert.ok(!latex.includes(':'), latex)
-/** Formulas written well: no +-, no 1x, no 0y */
-const tidy = (latex: string) => assert.ok(!/\+-|--|(?<![\d.])1[xy]|(?<![\d.])1\{z\}|(?<![\d.])0[xy]|(?<![\d.])0\{z\}/.test(latex), latex)
+/** Formulas written well: no +-, no 1x (nor 1t, 1a, 1k), no 0y */
+const tidy = (latex: string) => assert.ok(!/\+-|--|(?<![\d.])1[xytak]|(?<![\d.])1\{z\}|(?<![\d.])0[xytak]|(?<![\d.])0\{z\}/.test(latex), latex)
 
 const seeds = Array.from({ length: 60 }, (_, index) => index + 1)
 
@@ -62,7 +62,7 @@ test('planoak batx2 z games: every race question is right, with four different o
             assert.equal(question.options.find((option) => option.correct)!.latex, written(question.answer))
             for (const option of question.options) render(option.latex)
             checkTexts([question.prompt, question.solution])
-            for (const [, formula] of question.prompt.es.matchAll(/\$([^$]+)\$/g)) { noColon(formula); tidy(formula) }
+            for (const [, formula] of `${question.prompt.es} ${question.solution.es}`.matchAll(/\$([^$]+)\$/g)) { noColon(formula); tidy(formula) }
             const m = question.meta
             const value = question.answer.numerator / question.answer.denominator
             const v3 = (name: string): Vec3 => [m[`${name}1`], m[`${name}2`], m[`${name}3`]]
@@ -198,7 +198,8 @@ test('planoak batx2 z games: the detective cases', () => {
                 assert.ok(item.options.includes(item.error))
                 assert.notEqual(item.right, item.reached)
                 for (const entry of item.lines) { render(entry.latex); noColon(entry.latex); tidy(entry.latex) }
-                render(item.fix)
+                // The game shows the fix in pieces, one per arrow: each piece has to be a formula of its own
+                for (const part of item.fix.split('\\ \\to\\ ')) render(part)
                 noColon(item.fix)
                 checkTexts([item.problem, ...item.lines.map((entry) => entry.label)])
             }

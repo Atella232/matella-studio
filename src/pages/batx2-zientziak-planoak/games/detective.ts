@@ -2,7 +2,7 @@ import { pick, randomInt, type Random } from '../../../features/unit-v2/games/ra
 import { createWorkedCases, type WorkedCase, type WorkedLine } from '../../../features/unit-v2/games/workedDetective.ts'
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import { add, cross, det3, dot, isZero, scale, sub, type Vec3 } from '../../batx2-zientziak-bektoreak/space/vec3.ts'
-import { exactRank, generalLatex, levelLatex } from '../lab/common.ts'
+import { constantLatex, exactRank, generalLatex, levelLatex, termLatex } from '../lab/common.ts'
 import { continuousLatex } from '../lab/parameterT.ts'
 
 /* ==========================================================================
@@ -97,7 +97,7 @@ function build(random: Random, error: PlanesDetectiveError): Built | null {
             const reached = add(u, scale(t, a))
             return {
                 problem: say(`$A${vec(a)}$ puntutik $\\vec{u}=${vec(u)}$ norabidearekin pasatzen den zuzena: aurkitu $t=${t}$ puntua.`, `Recta por $A${vec(a)}$ con dirección $\\vec{u}=${vec(u)}$: halla el punto de $t=${t}$.`, `المستقيم المار بـ $A${vec(a)}$ باتجاه $\\vec{u}=${vec(u)}$: أوجد النقطة عند $t=${t}$.`, `Line through $A${vec(a)}$ with direction $\\vec{u}=${vec(u)}$: find the point for $t=${t}$.`),
-                lines: [line(LABELS.step, `(x,y,{z})=${vectorLatex(u, a)}`), line(LABELS.step, `${vec(u)}+${wrap(t)}\\,${vec(a)}`), line(LABELS.result, vec(reached))],
+                lines: [line(LABELS.step, `\\begin{gathered}(x,y,{z})=${vec(u)}\\\\ +t\\,${vec(a)}\\end{gathered}`), line(LABELS.step, `\\begin{gathered}${vec(u)}\\\\ +${wrap(t)}\\,${vec(a)}\\end{gathered}`), line(LABELS.result, vec(reached))],
                 wrong: 0, error, fix: `(x,y,{z})=${vectorLatex(a, u)}\\ \\to\\ ${vec(right)}`, right: right[0], reached: reached[0]
             }
         }
@@ -135,7 +135,7 @@ function build(random: Random, error: PlanesDetectiveError): Built | null {
             const system = `\\begin{cases}${levelLatex(n1, d1)}\\\\${levelLatex(n2, d2)}\\end{cases}`
             return {
                 problem: say(`Aurkitu $r$ zuzenaren norabide bat: $${system}$`, `Halla un director de $r$: $${system}$`, `أوجد متجه توجيه لـ $r$: ‏$${system}$`, `Find a direction of $r$: $${system}$`),
-                lines: [line(LABELS.data, `\\vec{n}_1=${vec(n1)},\\ \\vec{n}_2=${vec(n2)}`), line(LABELS.step, `\\vec{u}=\\vec{n}_1`), line(LABELS.result, `\\vec{u}=${vec(n1)}`)],
+                lines: [line(LABELS.data, `\\begin{gathered}\\vec{n}_1=${vec(n1)}\\\\ \\vec{n}_2=${vec(n2)}\\end{gathered}`), line(LABELS.step, `\\vec{u}=\\vec{n}_1`), line(LABELS.result, `\\vec{u}=${vec(n1)}`)],
                 wrong: 1, error, fix: `\\vec{u}=\\vec{n}_1\\times\\vec{n}_2=${vec(u)}`, right: u[index], reached: n1[index]
             }
         }
@@ -150,7 +150,7 @@ function build(random: Random, error: PlanesDetectiveError): Built | null {
             const index = [0, 1, 2].find((i) => away[i] !== 0)!
             return {
                 problem: say(`$r$: $${vectorLatex(a, u)}$ eta $s$: $${vectorLatex(b, v, '\\lambda')}$. Zer posizio dute?`, `$r$: $${vectorLatex(a, u)}$ y $s$: $${vectorLatex(b, v, '\\lambda')}$. ¿Qué posición tienen?`, `$r$: ‏$${vectorLatex(a, u)}$ و$s$: ‏$${vectorLatex(b, v, '\\lambda')}$. ما وضعهما؟`, `$r$: $${vectorLatex(a, u)}$ and $s$: $${vectorLatex(b, v, '\\lambda')}$. What is their position?`),
-                lines: [line(LABELS.step, `${vec(v)}=${wrap(k)}\\,${vec(u)}`), line(LABELS.step, `\\vec{u}\\parallel\\vec{v}`), line(LABELS.result, 'r=s')],
+                lines: [line(LABELS.step, `\\begin{gathered}\\vec{v}=${vec(v)}\\\\ =${wrap(k)}\\,${vec(u)}\\end{gathered}`), line(LABELS.step, `\\vec{u}\\parallel\\vec{v}`), line(LABELS.result, 'r=s')],
                 wrong: 2, error, fix: `\\overrightarrow{AB}=${vec(sub(b, a))}\\nparallel\\vec{u}\\ \\to\\ r\\parallel s`, right: away[index], reached: 0
             }
         }
@@ -180,7 +180,7 @@ function build(random: Random, error: PlanesDetectiveError): Built | null {
             if (b.some((value) => Math.abs(value) > 4)) return null
             return {
                 problem: say(`Non ebakitzen dira $r$: $${vectorLatex(a, u)}$ eta $s$: $${vectorLatex(b, v, '\\lambda')}$?`, `¿Dónde se cortan $r$: $${vectorLatex(a, u)}$ y $s$: $${vectorLatex(b, v, '\\lambda')}$?`, `أين يتقاطع $r$: ‏$${vectorLatex(a, u)}$ و$s$: ‏$${vectorLatex(b, v, '\\lambda')}$؟`, `Where do $r$: $${vectorLatex(a, u)}$ and $s$: $${vectorLatex(b, v, '\\lambda')}$ meet?`),
-                lines: [line(LABELS.step, 'A+t\\,\\vec{u}=B+t\\,\\vec{v}'), line(LABELS.step, `t\\,${vec(sub(u, v))}=${vec(sub(b, a))}`), line(LABELS.result, 'r\\cap s=\\varnothing')],
+                lines: [line(LABELS.step, 'A+t\\,\\vec{u}=B+t\\,\\vec{v}'), line(LABELS.step, `\\begin{gathered}t\\,${vec(sub(u, v))}\\\\ =${vec(sub(b, a))}\\end{gathered}`), line(LABELS.result, 'r\\cap s=\\varnothing')],
                 wrong: 0, error, fix: `A+t\\,\\vec{u}=B+\\lambda\\,\\vec{v}\\ \\to\\ t=${t},\\ \\lambda=${lambda}\\ \\to\\ ${vec(p)}`, right: 1, reached: 0
             }
         }
@@ -192,7 +192,7 @@ function build(random: Random, error: PlanesDetectiveError): Built | null {
             const d = dot(n, a) + 0
             return {
                 problem: say(`$r$: $${vectorLatex(a, u)}$ eta $\\pi$: $${levelLatex(n, d)}$. Zer posizio dute?`, `$r$: $${vectorLatex(a, u)}$ y $\\pi$: $${levelLatex(n, d)}$. ¿Qué posición tienen?`, `$r$: ‏$${vectorLatex(a, u)}$ و$\\pi$: ‏$${levelLatex(n, d)}$. ما وضعهما؟`, `$r$: $${vectorLatex(a, u)}$ and $\\pi$: $${levelLatex(n, d)}$. What is their position?`),
-                lines: [line(LABELS.data, `\\vec{u}=${vec(u)},\\ \\vec{n}=${vec(n)}`), line(LABELS.step, `\\vec{u}\\cdot\\vec{n}=0`), line(LABELS.result, 'r\\parallel\\pi')],
+                lines: [line(LABELS.data, `\\begin{gathered}\\vec{u}=${vec(u)}\\\\ \\vec{n}=${vec(n)}\\end{gathered}`), line(LABELS.step, `\\vec{u}\\cdot\\vec{n}=0`), line(LABELS.result, 'r\\parallel\\pi')],
                 wrong: 2, error, fix: `\\vec{n}\\cdot A=${d}\\ \\to\\ r\\subset\\pi`, right: 0, reached: 1
             }
         }
@@ -207,7 +207,7 @@ function build(random: Random, error: PlanesDetectiveError): Built | null {
             const p = add(a, scale(t, u))
             return {
                 problem: say(`Non zeharkatzen du $r$: $${vectorLatex(a, u)}$ zuzenak $\\pi$: $${levelLatex(n, d)}$ planoa?`, `¿Dónde corta $r$: $${vectorLatex(a, u)}$ al plano $\\pi$: $${levelLatex(n, d)}$?`, `أين يقطع $r$: ‏$${vectorLatex(a, u)}$ المستوى $\\pi$: ‏$${levelLatex(n, d)}$؟`, `Where does $r$: $${vectorLatex(a, u)}$ meet $\\pi$: $${levelLatex(n, d)}$?`),
-                lines: [line(LABELS.step, `${dot(n, a) + 0}${along < 0 ? '' : '+'}${along}t=${d}`), line(LABELS.step, `t=${t}`), line(LABELS.result, `P=${wrap(t)}\\,${vec(u)}=${vec(scale(t, u))}`)],
+                lines: [line(LABELS.step, `${constantLatex(dot(n, a), true)}${termLatex(along, 't', dot(n, a) === 0)}=${d}`), line(LABELS.step, `t=${t}`), line(LABELS.result, `\\begin{gathered}P=${wrap(t)}\\,${vec(u)}\\\\ =${vec(scale(t, u))}\\end{gathered}`)],
                 wrong: 2, error, fix: `P=A+${wrap(t)}\\,\\vec{u}=${vec(p)}`, right: p[0], reached: t * u[0]
             }
         }

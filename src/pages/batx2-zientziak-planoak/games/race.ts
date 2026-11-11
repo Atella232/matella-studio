@@ -4,7 +4,7 @@ import { pick, randomInt, shuffle, type Random } from '../../../features/unit-v2
 import type { LocalizedText } from '../../../features/unit-v2/types.ts'
 import { written } from '../../batx1-zientziak-errealak/games/race.ts'
 import { add, cross, det3, dot, scale, sub, type Vec3 } from '../../batx2-zientziak-bektoreak/space/vec3.ts'
-import { generalLatex, levelLatex } from '../lab/common.ts'
+import { constantLatex, generalLatex, levelLatex, termLatex } from '../lab/common.ts'
 import { continuousLatex } from '../lab/parameterT.ts'
 
 /* ==========================================================================
@@ -235,7 +235,7 @@ function meetTQuestion(random: Random): PlanesRaceQuestion | null {
     const answer = fraction(t)
     const choices = options(random, answer, [whole(-t, 'sign'), whole(d, 'calculation'), ratio(d, along, 'forgot-point')])
     const prompt = say(`$r$: $${vec(a)}+t\\,${vec(u)}$ eta $\\pi$: $${levelLatex(n, d)}$. Zein $t$ baliotan ebakitzen dira?`, `$r$: $${vec(a)}+t\\,${vec(u)}$ y $\\pi$: $${levelLatex(n, d)}$. ¿En qué $t$ se cortan?`, `$r$: ‏$${vec(a)}+t\\,${vec(u)}$ و$\\pi$: ‏$${levelLatex(n, d)}$. عند أي $t$ يتقاطعان؟`, `$r$: $${vec(a)}+t\\,${vec(u)}$ and $\\pi$: $${levelLatex(n, d)}$. For which $t$ do they meet?`)
-    return choices && build(3, 'meet-t', prompt, choices, answer, same(`${dot(n, a) + 0}${along < 0 ? '' : '+'}${along}t=${d}\\ \\to\\ t=${t}`), { ...flat('a', a), ...flat('u', u), ...flat('n', n), d })
+    return choices && build(3, 'meet-t', prompt, choices, answer, same(`${constantLatex(dot(n, a), true)}${termLatex(along, 't', dot(n, a) === 0)}=${d}\\ \\to\\ t=${t}`), { ...flat('a', a), ...flat('u', u), ...flat('n', n), d })
 }
 
 function parallelMQuestion(random: Random): PlanesRaceQuestion | null {
@@ -298,7 +298,7 @@ function detAQuestion(random: Random): PlanesRaceQuestion | null {
     const choices = options(random, answer, [whole(-a, 'sign'), whole(offset, 'calculation'), whole(a + 1, 'calculation')])
     const third = `${symbolLatex(t.map((value, place) => (place === index ? 'a' : value)))}=1`
     const prompt = say(`$a$ parametroaren zein baliotarako da $\\det M=0$, $${levelLatex(r, 1)}$, $${levelLatex(s, 2)}$ eta $${third}$ planoetarako?`, `¿Para qué $a$ es $\\det M=0$ con $${levelLatex(r, 1)}$, $${levelLatex(s, 2)}$ y $${third}$?`, `لأي $a$ يكون $\\det M=0$ مع $${levelLatex(r, 1)}$ و$${levelLatex(s, 2)}$ و$${third}$؟`, `For which $a$ is $\\det M=0$ with $${levelLatex(r, 1)}$, $${levelLatex(s, 2)}$ and $${third}$?`)
-    return choices && build(4, 'det-a', prompt, choices, answer, same(`${slope}a${offset < 0 ? '' : '+'}${offset}=0\\ \\to\\ a=${a}`), { ...flat('r', r), ...flat('s', s), ...flat('t', t), index })
+    return choices && build(4, 'det-a', prompt, choices, answer, same(`${termLatex(slope, 'a', true)}${constantLatex(offset)}=0\\ \\to\\ a=${a}`), { ...flat('r', r), ...flat('s', s), ...flat('t', t), index })
 }
 
 function parallelPlanesQuestion(random: Random): PlanesRaceQuestion | null {
