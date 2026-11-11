@@ -42,6 +42,8 @@ Tercer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `sistemas`), tercero
   - Memoria `memoria` (`boards.ts`, 118851–118853): $A^*$ ↔ $(x, y)$, $A^*$ ↔ $|A_x|$, $A^*$ homogénea con $k$ ↔ $k$.
   - Test `tests/sistemak-batx2z-games.test.ts`: resuelve cada ronda con `system.ts` y lee las cartas de memoria (`augmentedIn`).
 
+**Cierre (2026-11-11):** 3078 tests, lint y build en verde; inventario OK (2 juegos propios para el script, más el detective con los errores de esta unidad; 5 herramientas, 4 nuevas y la familia de soluciones de 1.º). Revisado a 375 px en eu, es y ar: las 15 lecciones (con los desplegables abiertos) y el resumen, las 4 herramientas con la predicción hecha, los 5 juegos (rondas de Rouché exprés y de Cramer, detective, carrera y los tres niveles de memoria), el banco de ejercicios, la práctica, los retos, el diagnóstico y la portada; sin desbordes ni errores de KaTeX. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio, `~/Documents/Matella-fuentes/batx2z-algebra/hojas/sistemak-euskara.html`) y mandada al dueño.
+
 ## Trucos
 
 - El test común `lesson-texts` y el de contenido buscan sufijos vascos con `\$(?:…|z|…)`: en euskera **ninguna fórmula puede empezar por la letra z** («$z=\lambda$» se lee como «$…$z»). Se escribe «hirugarren ezezaguna», se reordena ($x$ primero) o se pone `|A_z|` delante.
@@ -49,7 +51,3 @@ Tercer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `sistemas`), tercero
 - Memoria: un sistema entero no cabe en una carta a 375 px; se enseña su $A^*$ en `\scriptstyle` con números pequeños (nivel 1: coeficientes 1..3, soluciones 0..3, $b$ de −9 a 12). Ocupa 87–101 px de 106.
 - `detValue` suma `+ 0` para no devolver `-0` (los tests comparan con `===`).
 - Los párrafos de Python con `$` en un heredoc de Bash los bloquea el control de seguridad: escribir el script en el scratchpad y ejecutarlo.
-
-## En curso
-
-- Fases 1 a 4 hechas. Siguiente: el cierre (inventario, revisión a 375 px en eu, es y ar, hoja de euskera, nota final).
