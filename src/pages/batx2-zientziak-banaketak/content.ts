@@ -213,7 +213,7 @@ export const distributionsBatx2ExerciseBank: ExerciseSection[] = [
     },
     {
         id: 'normal',
-        title: say('Aldagai jarraituak eta banaketa normala', 'Variables continuas y distribución normal', 'المتغيرات المتصلة والتوزيع الطبيعي', 'Continuous variables and the normal distribution'),
+        title: say('Aldagai jarraitua eta normala', 'Variable continua y normal', 'المتغير المتصل والطبيعي', 'Continuous variables and the normal'),
         items: [
             { id: 29, difficulty: 'easy', question: say('Dentsitate batek $k$ balio du 0 eta 5 artean, eta 0 kanpoan. Zenbat da $k$?', 'Una densidad vale $k$ entre 0 y 5, y 0 fuera. ¿Cuánto vale $k$?', 'كثافة تساوي $k$ بين 0 و5، و0 خارج ذلك. كم يساوي $k$؟', 'A density is $k$ between 0 and 5, and 0 outside. What is $k$?'), solution: same('$5k=1\\qquad k=0{,}2$'), answer: { expected: v('0,2') } },
             { id: 30, difficulty: 'easy', question: say('$N(0;\\,1)$ taularekin, zenbat da $P(Z\\le 0{,}75)$?', 'Con la tabla de la $N(0;\\,1)$, ¿cuánto vale $P(Z\\le 0{,}75)$?', 'بجدول $N(0;\\,1)$، كم يساوي $P(Z\\le 0{,}75)$؟', 'With the $N(0;\\,1)$ table, what is $P(Z\\le 0{,}75)$?'), solution: say(`0,7 errenkada eta 0,05 zutabea: $${P(0.75)}$.`, `Fila 0,7 y columna 0,05: $${P(0.75)}$.`, `الصف 0.7 والعمود 0.05: $${P(0.75)}$.`, `Row 0.7 and column 0.05: $${P(0.75)}$.`), answer: { expected: table(below(0.75)) } },
@@ -231,7 +231,7 @@ export const distributionsBatx2ExerciseBank: ExerciseSection[] = [
     },
     {
         id: 'approximation',
-        title: say('Binomiala normalarekin hurbiltzea', 'Aproximar la binomial por la normal', 'تقريب التوزيع الثنائي بالطبيعي', 'Approximating the binomial by the normal'),
+        title: say('Binomialetik normalera', 'De la binomial a la normal', 'من الثنائي إلى الطبيعي', 'From the binomial to the normal'),
         items: [
             { id: 41, difficulty: 'easy', question: say('$B(30;\\,0{,}5)$ normal batez hurbil daiteke?', '¿Se puede aproximar $B(30;\\,0{,}5)$ por una normal?', 'هل يمكن تقريب $B(30;\\,0{,}5)$ بتوزيع طبيعي؟', 'Can $B(30;\\,0{,}5)$ be approximated by a normal?'), solution: say('Bai: $np=15\\ge 5$ eta $nq=15\\ge 5$.', 'Sí: $np=15\\ge 5$ y $nq=15\\ge 5$.', 'نعم: $np=15\\ge 5$ و$nq=15\\ge 5$.', 'Yes: $np=15\\ge 5$ and $nq=15\\ge 5$.') },
             { id: 42, difficulty: 'easy', question: say('$B(50;\\,0{,}04)$ normal batez hurbil daiteke?', '¿Se puede aproximar $B(50;\\,0{,}04)$ por una normal?', 'هل يمكن تقريب $B(50;\\,0{,}04)$ بتوزيع طبيعي؟', 'Can $B(50;\\,0{,}04)$ be approximated by a normal?'), solution: say('Ez: $np=2<5$; barrak 0 zenbakiaren ondoan pilatzen dira.', 'No: $np=2<5$; las barras se amontonan junto a 0.', 'لا: $np=2<5$؛ تتكدس الأعمدة قرب 0.', 'No: $np=2<5$; the bars pile up next to 0.') },

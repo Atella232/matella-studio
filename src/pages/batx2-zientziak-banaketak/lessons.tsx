@@ -22,8 +22,8 @@ export const distributionsBatx2Stages: UnitStage[] = [
     { id: 'review', tone: 'blue', title: { eu: 'Hasi aurretik: errepasoa', es: 'Antes de empezar: repaso', en: 'Before you start: review', ar: 'قبل أن تبدأ: مراجعة' } },
     { id: 'discrete', tone: 'violet', title: { eu: 'Aldagai aleatorio diskretuak', es: 'Variables aleatorias discretas', en: 'Discrete random variables', ar: 'المتغيرات العشوائية المتقطعة' } },
     { id: 'binomial', tone: 'mustard', title: { eu: 'Banaketa binomiala', es: 'La distribución binomial', en: 'The binomial distribution', ar: 'التوزيع الثنائي' } },
-    { id: 'normal', tone: 'coral', title: { eu: 'Aldagai jarraituak eta banaketa normala', es: 'Variables continuas y distribución normal', en: 'Continuous variables and the normal distribution', ar: 'المتغيرات المتصلة والتوزيع الطبيعي' } },
-    { id: 'approximation', tone: 'green', title: { eu: 'Binomiala normalarekin hurbiltzea', es: 'Aproximar la binomial por la normal', en: 'Approximating the binomial by the normal', ar: 'تقريب التوزيع الثنائي بالطبيعي' } }
+    { id: 'normal', tone: 'coral', title: { eu: 'Aldagai jarraitua eta normala', es: 'Variable continua y normal', en: 'Continuous variables and the normal', ar: 'المتغير المتصل والطبيعي' } },
+    { id: 'approximation', tone: 'green', title: { eu: 'Binomialetik normalera', es: 'De la binomial a la normal', en: 'From the binomial to the normal', ar: 'من الثنائي إلى الطبيعي' } }
 ]
 
 /** Arabic writes the decimal point instead of the comma, so {,} becomes . there */

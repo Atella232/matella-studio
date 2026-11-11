@@ -53,9 +53,9 @@ La rama se puso al día con `main` (e4dc4f8, primera tanda de 2.º publicada, co
 
 ## Cierre (2026-11-11)
 
-- **Commits:** fase 1 `bfc1a0e9`, fase 2 `35384ee9`, fase 3 `21590e8a` y este cierre, en la rama `feat/banaketak-batx2z` (sin push ni fusión: lo hace el dueño).
-- 3036 tests, lint y build en verde; inventario OK (3 juegos y 6 herramientas propios, más el detective de errores de esta unidad).
-- Revisado a 375 px en eu, es y ar: las 15 lecciones (dibujos medidos con `getBBox`, sin desbordes ni textos que se pisen), las 7 herramientas con la predicción hecha y los 6 juegos en sus tres niveles, respondiendo una ronda. En el juego del área, las tres campanas van una debajo de otra en el móvil y las marcas cercanas se separan.
+- **Commits:** fase 1 `bfc1a0e9`, fase 2 `35384ee9`, fase 3 `21590e8a`, nota `2b324d88` y el último retoque (nombres de etapa más cortos), en la rama `feat/banaketak-batx2z` (sin push ni fusión: lo hace el dueño).
+- 3036 tests, lint y build en verde. Inventario OK: 5 herramientas propias (más 2 prestadas: Tartaglia de 4.º y la puntuación típica de 1.º, que el script cuenta como propia por estar en otra carpeta de Bachillerato) y 3 juegos propios, más el detective con los 12 errores de esta unidad, la carrera y la memoria.
+- Revisado a 375 px en eu, es y ar: las 15 lecciones (dibujos medidos con `getBBox`, sin desbordes ni textos que se pisen), las 7 herramientas con la predicción hecha, los 6 juegos en sus tres niveles respondiendo una ronda, y la portada, el diagnóstico, la práctica, los retos y el banco por temas. Las fórmulas de práctica, retos, diagnóstico y banco se midieron todas en un hueco de 295 px: el trozo sin corte más ancho mide 208 px. El desplegable de temas del banco se salía 22 px de su tarjeta por dos nombres de etapa largos: ahora son «Variable continua y normal» y «De la binomial a la normal» (y lo mismo en eu, en y ar). En el juego del área, las tres campanas van una debajo de otra en el móvil y las marcas cercanas se separan.
 - **Hoja de euskera:** `~/Documents/Matella-fuentes/batx2z-probabilitatea/hoja-euskera-banaketak.html` (fuera del repositorio), mandada al dueño.
 - **Sin comprobar a la vista:** la animación del botón ▶ de «Kanpaiaren azpian» (con el panel del navegador oculto no corre `requestAnimationFrame`); revisada en el código.
 - **Al fusionar:** solo comparte con las otras sesiones las tres líneas de registro (`courses.ts`, el router y `paths.ts`).
