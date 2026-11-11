@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2SketchChallenges, bach2SketchDiagnostic, bach2SketchExerciseBank, bach2SketchPractice } from './content'
 import { Bach2SketchHeroArt } from './figures'
+import { Bach2SketchGames } from './games'
+import { BACH2_SKETCH_GAME_RECORDS_KEY, bach2SketchGameProgressIds } from './games/info'
 import { Bach2SketchLaboratory } from './lab'
 import { bach2SketchLabChallengeIds, bach2SketchLabToolForTopic, bach2SketchLabTools } from './lab/labTools'
 import { bach2SketchStages, bach2SketchTopics } from './lessons'
@@ -36,6 +38,17 @@ const adierazpenaBatx2zUnit: UnitDefinition = {
         progressIds: bach2SketchLabChallengeIds,
         toolForTopic: bach2SketchLabToolForTopic,
         render: (props) => <Bach2SketchLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, zein grafiko da?, irakurri deribatua, asintotak begi-bistan, adierazpenaren detektibea eta memoria, berriak; eta 1. mailako igo ala jaitsi (Aplikazioak) eta ehizatu asintotak (Limiteak).',
+            es: 'Ocho juegos: carrera, ¿qué gráfica es?, lee la derivada, asíntotas a la vista, detective de la representación y memoria, nuevos; y de 1.º, sube o baja (Aplicaciones) y caza las asíntotas (Límites).',
+            en: 'Eight games: race, which graph is it?, read the derivative, asymptotes in sight, curve-sketching detective and memory, new; and from 1st year, up or down (Applications) and hunt the asymptotes (Limits).',
+            ar: 'ثماني ألعاب: السباق، وأي رسم هو؟، واقرأ المشتقة، والمقاربات في الأفق، ومخبر التمثيل البياني، والذاكرة، وهي جديدة؛ ومن السنة الأولى: تصعد أم تنزل (التطبيقات) واصطد المقاربات (النهايات).'
+        },
+        progressIds: bach2SketchGameProgressIds,
+        recordsKey: BACH2_SKETCH_GAME_RECORDS_KEY,
+        render: (props) => <Bach2SketchGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2.', es: 'Escribe un número: 5, −3, 0,25 o 3/2.', en: 'Write a number: 5, −3, 0.25 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2.' },

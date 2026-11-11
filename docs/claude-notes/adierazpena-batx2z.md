@@ -64,7 +64,22 @@ Cuarto y último tema del bloque Cálculo diferencial de 2.º Ciencias (reparto 
   - Las opciones de una predicción no pasan por KaTeX: van en texto llano (`x = 0`, y en árabe con LRI/PDI).
   - La lectura de «De f′ a f» va en cuatro líneas y con dos decimales: con tres, `f′(x₀)` y `f(x₀)` juntos no caben en 268 px.
 
+**Fase 4, juegos (8):**
+- **Propios:**
+  - `graphGame.ts`, J1 «¿Qué gráfica es?» (125501–125503): una fórmula y tres esbozos de la misma familia que solo cambian en un rasgo (dónde está una asíntota, el signo, el lado del dominio, un reflejo). Niveles: racionales y polinomios; exponenciales, logaritmos y raíces; valor absoluto y trigonométricas mezcladas con el resto. Tras responder, los rasgos clave.
+  - `readGame.ts`, J2 «Lee la derivada» (125601–125603): la gráfica de f′ (no de f) y una pregunta sobre f con tres respuestas. Niveles: máximo o mínimo (f′ recta o parábola); dónde crece e inflexión; cuántos extremos (f′ puede tocar el eje sin cruzarlo). Las malas son las lecturas típicas: la otra raíz, el vértice de f′, donde crece f′.
+  - `sightGame.ts`, J3 «Asíntotas a la vista» (125651–125653): una función y tres listas de asíntotas; las malas cambian a y p, un signo, quitan o añaden una, ponen una horizontal en lugar de la oblicua o la misma oblicua a los dos lados.
+  - `detective.ts` (125701–125703): 12 errores en tres niveles (agujero tomado por asíntota, par/impar, signo de la diferencia, n sin el cociente entero; ≥ en el logaritmo, la constante de la horizontal, √x² = x a la izquierda, periodo por k; f(|x|) por |f(x)|, vértice de f′ como extremo, roce como extremo, picos sin ceros).
+- **Genéricos:** carrera (`race.ts`, 125401–125405, 15 tipos con `meta`) y memoria (`boards.ts`, 125801–125803: asíntotas verticales, horizontales u oblicuas y picos del valor absoluto). La simetría no entra en la memoria: sus respuestas («par», «impar») serían palabras y se repetirían; en su lugar, los picos.
+- **Prestados de 1.º:** «Sube o baja» (`updown` de Aplikazioak 1.º, 125811–125813, etapa `reading`) y «Caza las asíntotas» (`asymptote` de Limiteak 1.º, 125821–125823, etapa `review`).
+- **Test:** `tests/adierazpena-batx2z-games.test.ts` (7 pruebas: los miembros de cada familia se distinguen en el plano, cada respuesta de «Lee la derivada» se comprueba con los cambios de signo de f′, cada lista de asíntotas con la función, el detective, la carrera con `meta` y la memoria).
+- **Comprobación:** los tres juegos propios y los dos prestados jugados en sus tres niveles a 375 px en eu, es y ar; el detective y la memoria pulsando líneas y tarjetas; la carrera medida fuera de la página (todas sus soluciones caben en 234 px).
+- **Trucos:**
+  - En la carrera, `rows()` parte en filas a partir de 14 caracteres (con 28, `f″(x) = 2x + 2 = 0 → x = −1` medía 296 px); la división de la oblicua va en dos filas.
+  - `x·e⁻ˣ` y `x²·e⁻ˣ` se parecen demasiado en un esbozo pequeño: en la familia va `(x − 1)·e⁻ˣ`.
+  - Las asíntotas de un logaritmo crecen despacio: el test mira |f| > 15 a 10⁻⁹ del borde, y solo exige horizontal donde f se estabiliza lejos.
+- **Fallo que no es de esta unidad:** en árabe, la «y» del eje y algún número se salen un poco por arriba en «Sube o baja» de Aplikazioak 1.º (el mismo fallo de `batx1-zientziak-aplikazioak/games/BachApplicationsGames.tsx` que ya se anotó en Aplicaciones 2.º). No se ha tocado.
+
 ## En curso
 
-- **Siguiente paso:** fase 4, juegos. Propios: J1 «¿Qué gráfica es?» (125501–125503), J2 «Lee la derivada» (125601–125603), J3 «Asíntotas a la vista» (125651–125653) y el detective (125701–125703); genéricos: carrera (125401–125405) y memoria (125801–125803, función ↔ asíntota y función ↔ simetría); prestados: «Sube o baja» (`updown` de Aplikazioak 1.º, 125811–125813) y «Caza las asíntotas» (`asymptote` de Limiteak 1.º, 125821–125823).
-- **Después:** el cierre (tests, inventario, 375 px, hoja de euskera, nota sin «En curso»).
+- **Siguiente paso:** el cierre: `npm test`, `npm run lint` y `npm run build`, inventario, hoja de euskera en la carpeta compartida, y quitar esta sección.
