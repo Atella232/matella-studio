@@ -28,8 +28,21 @@ import { satisfies } from '../src/pages/batx2-zientziak-sistemak/system.ts'
 
 const languages = ['eu', 'es', 'en', 'ar'] as const
 
+const leakNames = new Set(['Rouché', 'Frobenius', 'Cramer', 'Sarrus', 'Gauss'])
+const latinWords = (text: string) => (text.replace(/\$[^$]+\$/g, ' ').match(/[A-Za-zÀ-ÿñÑ]{4,}/g) ?? []).filter((word) => !leakNames.has(word))
+const wordPairs = (text: string) => { const list = latinWords(text); return list.slice(1).map((word, index) => `${list[index]} ${word}`) }
+
+/** No Latin words in Arabic, and no Basque phrase in Spanish or English (a phrase passed where only a formula goes) */
+function checkLeaks(text: LocalizedText) {
+    assert.deepEqual(latinWords(text.ar), [], `Latin words in Arabic: ${text.ar}`)
+    if (text.eu === text.es) return
+    const basque = new Set(wordPairs(text.eu))
+    for (const language of ['es', 'en'] as const) assert.deepEqual(wordPairs(text[language]).filter((pair) => basque.has(pair)), [], `Basque in ${language}: ${text[language]}`)
+}
+
 function checkTexts(texts: LocalizedText[]) {
     for (const text of texts) {
+        checkLeaks(text)
         for (const language of languages) {
             assert.ok(text[language].length > 0)
             for (const [, formula] of text[language].matchAll(/\$([^$]+)\$/g)) katex.renderToString(formulaFor(language, formula), { throwOnError: true, strict: 'error' })

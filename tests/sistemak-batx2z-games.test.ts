@@ -20,8 +20,21 @@ const languages = ['eu', 'es', 'en', 'ar'] as const
 const render = (latex: string, language: (typeof languages)[number] = 'es') => katex.renderToString(formulaFor(language, latex), { throwOnError: true, strict: 'error' })
 const value = (input: { numerator: number; denominator: number }) => input.numerator / input.denominator
 
+const leakNames = new Set(['Rouché', 'Frobenius', 'Cramer', 'Sarrus', 'Gauss'])
+const latinWords = (text: string) => (text.replace(/\$[^$]+\$/g, ' ').match(/[A-Za-zÀ-ÿñÑ]{4,}/g) ?? []).filter((word) => !leakNames.has(word))
+const wordPairs = (text: string) => { const list = latinWords(text); return list.slice(1).map((word, index) => `${list[index]} ${word}`) }
+
+/** No Latin words in Arabic, and no Basque phrase in Spanish or English (a phrase passed where only a formula goes) */
+function checkLeaks(text: LocalizedText) {
+    assert.deepEqual(latinWords(text.ar), [], `Latin words in Arabic: ${text.ar}`)
+    if (text.eu === text.es) return
+    const basque = new Set(wordPairs(text.eu))
+    for (const language of ['es', 'en'] as const) assert.deepEqual(wordPairs(text[language]).filter((pair) => basque.has(pair)), [], `Basque in ${language}: ${text[language]}`)
+}
+
 function checkTexts(texts: LocalizedText[]) {
     for (const text of texts) {
+        checkLeaks(text)
         for (const language of languages) {
             assert.ok(text[language].length > 0)
             for (const [, formula] of text[language].matchAll(/\$([^$]+)\$/g)) render(formula, language)
@@ -72,6 +85,12 @@ test('sistemak batx2 z games: the hub, its levels and progress ids', () => {
     assert.ok(sistemakGameProgressIds.every((id) => id >= 118401 && id <= 118899), 'the block of ids of the unit')
     for (const game of sistemakGames) {
         checkTexts([game.title, game.tagline, game.skills, ...game.levels.flatMap((level) => [level.title, level.description])])
+        // The hub writes these as plain text: no LaTeX underscores, and in Arabic every run with symbols inside LRI…PDI
+        for (const text of [game.title, game.tagline, game.skills, ...game.levels.flatMap((level) => [level.title, level.description])]) {
+            for (const language of languages) assert.ok(!text[language].includes('_'), text[language])
+            const bare = text.ar.replace(/\u2066[^\u2069]*\u2069/g, ' ')
+            assert.ok(!/[A-Za-z|(][^\u0600-\u06FF،.]*[^A-Za-z\u0600-\u06FF،.\s]/.test(bare), `formula without LRI in Arabic: ${text.ar}`)
+        }
         assert.equal(sistemakGameModeForPath(`/matematika/batx2-zientziak/sistemas/jokuak/${sistemakGameSlugs[game.id]}`), game.id)
         for (const level of game.levels) for (const text of [level.title, level.description]) assert.ok(!text.eu.includes('$') && !/\d[a-zñ]/.test(text.eu), text.eu)
     }
