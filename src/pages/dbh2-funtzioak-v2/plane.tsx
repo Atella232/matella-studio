@@ -2,6 +2,7 @@ import { type MouseEvent, type ReactNode, type SVGProps } from 'react'
 import type { Point } from './functions'
 import { useBoxClip } from './planeClip'
 import { minusSign, planeMap, type PlaneBox, type PlaneMap } from './planeMap'
+import { ARABIC, markFormulas } from './rtlFormulas'
 
 /* ==========================================================================
    Funtzioak (2. DBH) — the Cartesian plane drawn in the notebook style.
@@ -17,9 +18,6 @@ const STAGE = 'var(--stage, #2f6fdb)'
 const SECOND = 'var(--second, #c4432a)'
 const CARD = 'var(--card, #fffcf6)'
 
-const ARABIC = /[؀-ۿ]/
-/** A run of Latin letters, digits and math signs that starts and ends with a letter, digit, bracket or exponent */
-const FORMULA = /^\d+\.(?= )|[A-Za-z0-9(|−-][A-Za-z0-9()|=+−\-·:,. ²₁₂°×<>/]*[A-Za-z0-9)|²₁₂°]|[A-Za-z0-9]/g
 const flipped = { start: 'end', end: 'start', middle: 'middle' } as const
 
 function plainText(node: ReactNode): string {
@@ -28,16 +26,23 @@ function plainText(node: ReactNode): string {
     return ''
 }
 
+/** Text only: a string, a number or a list of them (no <tspan>) */
+function isPlain(node: ReactNode): boolean {
+    if (typeof node === 'string' || typeof node === 'number') return true
+    return Array.isArray(node) && node.every(isPlain)
+}
+
 /**
  * SVG text that reads right to left when it holds Arabic. The figures are laid
  * out left to right, so the anchor is flipped too: the label keeps its place
  * and only the order of its words changes.
  */
 export function Label({ textAnchor = 'start', children, ...props }: SVGProps<SVGTextElement>) {
-    const rtl = ARABIC.test(plainText(children))
+    const text = plainText(children)
+    const rtl = ARABIC.test(text)
     const anchor = textAnchor as keyof typeof flipped
-    // Inside Arabic, "x = 1" or "(0, 2)" would come out reversed: isolate each formula left to right
-    const content = rtl && typeof children === 'string' ? children.replace(FORMULA, '⁦$&⁩') : children
+    // Inside Arabic, "x = 1" or "(0, 2)" would come out reversed: each formula is kept left to right
+    const content = rtl && isPlain(children) ? markFormulas(text) : children
     return <text {...props} textAnchor={rtl ? flipped[anchor] ?? anchor : anchor} direction={rtl ? 'rtl' : undefined}>{content}</text>
 }
 

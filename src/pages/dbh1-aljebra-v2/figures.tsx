@@ -1,5 +1,6 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Caption, Figure } from '../dbh2-zatikiak-prototype/figures'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Aljebra · 1. DBH — lesson figures in the notebook style: the number
@@ -86,10 +87,10 @@ export function MonomialFigure({ language }: { language: UnitLanguage }) {
             <text x={334} y={80} fontSize={30} fontWeight={700} fill={STAGE} fontFamily="Fraunces, serif">2</text>
             <text x={356} y={112} fontSize={56} fontWeight={700} fill={STAGE} fontFamily="Fraunces, serif" fontStyle="italic">y</text>
             <line x1={250} x2={200} y1={124} y2={160} stroke={SECOND} strokeWidth={1.8} />
-            <text x={200} y={180} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'koefizientea: −4', es: 'coeficiente: −4', en: 'coefficient: −4', ar: 'المعامل: −4' })}</text>
+            <Label x={200} y={180} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'koefizientea: −4', es: 'coeficiente: −4', en: 'coefficient: −4', ar: 'المعامل: −4' })}</Label>
             <line x1={340} x2={420} y1={124} y2={160} stroke={STAGE} strokeWidth={1.8} />
-            <text x={440} y={180} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'zati literala: x²y', es: 'parte literal: x²y', en: 'literal part: x²y', ar: 'الجزء الحرفي: x²y' })}</text>
-            <text x={560} y={70} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'maila', es: 'grado', en: 'degree', ar: 'الدرجة' })}</text>
+            <Label x={440} y={180} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'zati literala: x²y', es: 'parte literal: x²y', en: 'literal part: x²y', ar: 'الجزء الحرفي: x²y' })}</Label>
+            <Label x={560} y={70} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'maila', es: 'grado', en: 'degree', ar: 'الدرجة' })}</Label>
             <text x={560} y={100} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>2 + 1 = 3</text>
             <Caption y={222}>{pick(language, { eu: 'Maila: letren berretzaileen batura (y-k 1 du)', es: 'Grado: suma de los exponentes de las letras (y tiene 1)', en: 'Degree: sum of the exponents of the letters (y has exponent 1)', ar: 'الدرجة: مجموع أسس الحروف (أس y يساوي 1)' })}</Caption>
         </Figure>

@@ -1,4 +1,5 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Zatigarritasuna · lesson figures, drawn as SVG in the notebook style
@@ -43,9 +44,9 @@ export function MultiplesFigure({ step = 3, max = 24, language }: { step?: numbe
                     </g>
                 )
             })}
-            <text x={width / 2} y={164} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={width / 2} y={164} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, { eu: `M(${step}) = {${step}, ${step * 2}, ${step * 3}, …}: ez dute amaierarik`, es: `Múltiplos de ${step}: {${step}, ${step * 2}, ${step * 3}, …}, no se acaban nunca`, en: `Multiples of ${step}: {${step}, ${step * 2}, ${step * 3}, …}, they never end`, ar: `مضاعفات ${step}: {${step}، ${step * 2}، ${step * 3}، …} لا نهاية لها` })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -73,9 +74,9 @@ export function DivisorRectanglesFigure({ n = 12, language }: { n?: number; lang
                     <text x={x + (columns * cell) / 2} y={labelY} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{rows} · {columns}</text>
                 </g>
             ))}
-            <text x={width / 2} y={190} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={width / 2} y={190} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, { eu: `Zat(${n}) = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join(', ')}}`, es: `Div(${n}) = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join(', ')}}`, en: `Div(${n}) = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join(', ')}}`, ar: `قواسم ${n} = {${[...pairs.map(([a]) => a), ...pairs.map(([, b]) => b).reverse()].filter((value, index, list) => list.indexOf(value) === index).join('، ')}}` })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -104,9 +105,9 @@ export function SieveFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 )
             })}
-            <text x={300} y={332} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={300} y={332} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, { eu: 'Koloreztatuak: zenbaki lehenak. Ratatuak: konposatuak. 1 ez da ez lehena ez konposatua.', es: 'En color: primos. Tachados: compuestos. El 1 no es ni primo ni compuesto.', en: 'Coloured: primes. Crossed out: composites. 1 is neither prime nor composite.', ar: 'الملوّنة: أعداد أولية. المشطوبة: مؤلفة. العدد 1 ليس أوليًا ولا مؤلفًا.' })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -149,9 +150,9 @@ export function FactorLadderFigure({ n = 360, language }: { n?: number; language
                     })}
                 </text>
             </g>
-            <text x={260} y={height - 12} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={260} y={height - 12} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, { eu: 'Zatitu zenbaki lehenez, txikienetik hasita, 1 lortu arte.', es: 'Divide entre primos, empezando por el menor, hasta llegar a 1.', en: 'Divide by primes, starting with the smallest, until you reach 1.', ar: 'اقسم على أعداد أولية بدءًا بالأصغر حتى تصل إلى 1.' })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -172,9 +173,9 @@ export function VennFigure({ language }: { language: UnitLanguage }) {
             <text x={320} y={125} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>2</text>
             <text x={320} y={170} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>3</text>
             <text x={445} y={150} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK}>3</text>
-            <text x={320} y={278} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>
+            <Label x={320} y={278} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>
                 {pick(language, { eu: 'Erdian: ZKH = 2 · 3 = 6   ·   Denak: MKT = 2 · 2 · 3 · 3 = 36', es: 'En el centro: m.c.d. = 2 · 3 = 6   ·   Todos: m.c.m. = 2 · 2 · 3 · 3 = 36', en: 'In the centre: GCD = 2 · 3 = 6   ·   All: LCM = 2 · 2 · 3 · 3 = 36', ar: 'في الوسط: ق.م.أ = 2 · 3 = 6   ·   الكل: م.م.أ = 2 · 2 · 3 · 3 = 36' })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -196,7 +197,7 @@ export function CoincidenceFigure({ language }: { language: UnitLanguage }) {
             ))}
             {rows.map((row) => (
                 <g key={row.every}>
-                    <text x={40} y={row.y - 22} fontSize={15} fontWeight={700} fill={row.color}>{pick(language, row.label)}</text>
+                    <Label x={40} y={row.y - 22} fontSize={15} fontWeight={700} fill={row.color}>{pick(language, row.label)}</Label>
                     <line x1={x(0)} x2={x(max)} y1={row.y} y2={row.y} stroke={INK} strokeWidth={2} />
                     {Array.from({ length: max / row.every + 1 }, (_, index) => index * row.every).map((minute) => (
                         <circle key={minute} cx={x(minute)} cy={row.y} r={8} fill={row.color} stroke={INK} strokeWidth={2} />
@@ -206,9 +207,9 @@ export function CoincidenceFigure({ language }: { language: UnitLanguage }) {
             {Array.from({ length: max + 1 }, (_, minute) => minute).filter((minute) => minute % 2 === 0).map((minute) => (
                 <text key={minute} x={x(minute)} y={206} textAnchor="middle" fontSize={14} fill={minute % 12 === 0 ? INK : MUTED} fontWeight={minute % 12 === 0 ? 700 : 400}>{minute}</text>
             ))}
-            <text x={360} y={238} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>
+            <Label x={360} y={238} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>
                 {pick(language, { eu: 'Berriz batera: 12 minututan → MKT(4, 6) = 12', es: 'Vuelven a coincidir a los 12 minutos → m.c.m.(4, 6) = 12', en: 'Together again at 12 minutes → LCM(4, 6) = 12', ar: 'تلتقيان مجددًا بعد 12 دقيقة ← م.م.أ(4، 6) = 12' })}
-            </text>
+            </Label>
         </svg>
     )
 }

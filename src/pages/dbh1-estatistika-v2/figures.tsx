@@ -2,6 +2,7 @@ import { pickText, type LocalizedText, type UnitLanguage } from '../../features/
 import { Caption, Figure } from '../dbh2-zatikiak-prototype/figures'
 import { sportSurvey } from './survey'
 import { decimalSeparatorFor } from '../../utils/numberFormat'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Estatistika · 1. DBH — lesson figures in the notebook style: population
@@ -33,9 +34,9 @@ export function PopulationFigure({ language }: { language: UnitLanguage }) {
                 return <circle key={index} cx={x} cy={y} r={10} fill={inSample ? SECOND : PAPER} stroke={INK} strokeWidth={1.6} />
             })}
             <rect x={48} y={40} width={116} height={78} rx={12} fill="none" stroke={SECOND} strokeWidth={2.4} strokeDasharray="6 4" />
-            <text x={470} y={80} fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'Populazioa: denak (40)', es: 'Población: todos (40)', en: 'Population: everyone (40)', ar: 'المجتمع: الجميع (40)' })}</text>
-            <text x={470} y={115} fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'Lagina: zati bat (6)', es: 'Muestra: una parte (6)', en: 'Sample: part of them (6)', ar: 'العيّنة: جزء (6)' })}</text>
-            <text x={470} y={150} fontSize={17} fontWeight={700} fill={MUTED}>{pick(language, { eu: '● banakoa', es: '● individuo', en: '● individual', ar: '● فرد' })}</text>
+            <Label x={470} y={80} fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'Populazioa: denak (40)', es: 'Población: todos (40)', en: 'Population: everyone (40)', ar: 'المجتمع: الجميع (40)' })}</Label>
+            <Label x={470} y={115} fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'Lagina: zati bat (6)', es: 'Muestra: una parte (6)', en: 'Sample: part of them (6)', ar: 'العيّنة: جزء (6)' })}</Label>
+            <Label x={470} y={150} fontSize={17} fontWeight={700} fill={MUTED}>{pick(language, { eu: '● banakoa', es: '● individuo', en: '● individual', ar: '● فرد' })}</Label>
             <Caption y={220}>{pick(language, { eu: 'Laginak populazioa ondo ordezkatu behar du', es: 'La muestra tiene que representar bien a la población', en: 'The sample has to represent the population well', ar: 'يجب أن تمثّل العيّنة المجتمع تمثيلًا جيدًا' })}</Caption>
         </Figure>
     )
@@ -50,19 +51,19 @@ export function FrequencyTableFigure({ language }: { language: UnitLanguage }) {
     return (
         <Figure height={250} label={pick(language, { eu: 'Maiztasun-taula', es: 'Tabla de frecuencias', en: 'Frequency table', ar: 'جدول التكرارات' })}>
             {[pick(language, { eu: 'Kirola', es: 'Deporte', en: 'Sport', ar: 'الرياضة' }), 'fᵢ', 'hᵢ', '%'].map((title, index) => (
-                <text key={title} x={columns[index]} y={30} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{title}</text>
+                <Label key={title} x={columns[index]} y={30} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{title}</Label>
             ))}
             <line x1={50} x2={620} y1={42} y2={42} stroke={INK} strokeWidth={2} />
             {sportSurvey.map((row, index) => (
                 <g key={index}>
-                    <text x={columns[0]} y={70 + index * 34} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, row.name)}</text>
+                    <Label x={columns[0]} y={70 + index * 34} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, row.name)}</Label>
                     <text x={columns[1]} y={70 + index * 34} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{row.count}</text>
                     <text x={columns[2]} y={70 + index * 34} textAnchor="middle" fontSize={16} fill={INK}>{decimal(row.count / total)}</text>
                     <text x={columns[3]} y={70 + index * 34} textAnchor="middle" fontSize={16} fill={INK}>{(row.count / total) * 100}</text>
                 </g>
             ))}
             <line x1={50} x2={620} y1={196} y2={196} stroke={INK} strokeWidth={1.6} />
-            <text x={columns[0]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Guztira', es: 'Total', en: 'Total', ar: 'المجموع' })}</text>
+            <Label x={columns[0]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Guztira', es: 'Total', en: 'Total', ar: 'المجموع' })}</Label>
             <text x={columns[1]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>N = {total}</text>
             <text x={columns[2]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>1</text>
             <text x={columns[3]} y={220} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>100</text>
@@ -89,7 +90,7 @@ export function BarChartFigure({ language }: { language: UnitLanguage }) {
                 <g key={index}>
                     <rect x={120 + index * 125} y={200 - row.count * unit} width={70} height={row.count * unit} fill={row.color} fillOpacity={0.75} stroke={INK} strokeWidth={2} />
                     <text x={155 + index * 125} y={192 - row.count * unit} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{row.count}</text>
-                    <text x={155 + index * 125} y={222} textAnchor="middle" fontSize={14} fontWeight={700} fill={INK}>{pick(language, row.name)}</text>
+                    <Label x={155 + index * 125} y={222} textAnchor="middle" fontSize={14} fontWeight={700} fill={INK}>{pick(language, row.name)}</Label>
                 </g>
             ))}
             <Caption y={246}>{pick(language, { eu: 'Barra bakoitzaren altuera bere maiztasun absolutua da', es: 'La altura de cada barra es su frecuencia absoluta', en: 'The height of each bar is its absolute frequency', ar: 'ارتفاع كل عمود هو تكراره المطلق' })}</Caption>
@@ -127,7 +128,7 @@ export function PieChartFigure({ language }: { language: UnitLanguage }) {
             {sportSurvey.map((row, index) => (
                 <g key={`legend${index}`}>
                     <rect x={330} y={42 + index * 36} width={18} height={18} fill={row.color} fillOpacity={0.75} stroke={INK} strokeWidth={1.4} />
-                    <text x={358} y={57 + index * 36} fontSize={15} fill={INK}>{pick(language, row.name)}: {row.count} → {row.count} · 18° = {(row.count / total) * 360}°</text>
+                    <Label x={358} y={57 + index * 36} fontSize={15} fill={INK}>{pick(language, row.name)}: {row.count} {language === 'ar' ? '←' : '→'} {row.count} · 18° = {(row.count / total) * 360}°</Label>
                 </g>
             ))}
             <Caption y={242}>{pick(language, { eu: 'Sektore bakoitzaren angelua: hᵢ · 360° (hemen, pertsona bakoitzeko 18°)', es: 'El ángulo de cada sector: hᵢ · 360° (aquí, 18° por persona)', en: 'The angle of each sector: hᵢ · 360° (here, 18° per person)', ar: 'زاوية كل قطاع: hᵢ · 360° (هنا 18° لكل شخص)' })}</Caption>
@@ -181,7 +182,7 @@ export function MeanFigure({ language }: { language: UnitLanguage }) {
                 return <circle key={index} cx={x(value)} cy={132 - level * 24} r={10} fill={STAGE} fillOpacity={0.7} stroke={INK} strokeWidth={1.6} />
             })}
             <polygon points={`${x(7)},153 ${x(7) - 12},178 ${x(7) + 12},178`} fill={SECOND} stroke={INK} strokeWidth={1.6} />
-            <text x={360} y={34} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'Notak: 5, 7, 7, 8, 9, 6', es: 'Notas: 5, 7, 7, 8, 9, 6', en: 'Marks: 5, 7, 7, 8, 9, 6', ar: 'العلامات: 5، 7، 7، 8، 9، 6' })}</text>
+            <Label x={360} y={34} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>{pick(language, { eu: 'Notak: 5, 7, 7, 8, 9, 6', es: 'Notas: 5, 7, 7, 8, 9, 6', en: 'Marks: 5, 7, 7, 8, 9, 6', ar: 'العلامات: 5، 7، 7، 8، 9، 6' })}</Label>
             <text x={360} y={225} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>x̄ = (5 + 7 + 7 + 8 + 9 + 6) : 6 = 42 : 6 = 7</text>
         </Figure>
     )
@@ -207,7 +208,7 @@ export function DiceFigure({ language }: { language: UnitLanguage }) {
                 )
             })}
             <text x={360} y={150} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>E = {'{1, 2, 3, 4, 5, 6}'}</text>
-            <text x={360} y={185} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'Bikoitia atera: 3 aldeko kasu → P = 3/6 = 1/2', es: 'Sacar par: 3 casos favorables → P = 3/6 = 1/2', en: 'Roll an even number: 3 favourable cases → P = 3/6 = 1/2', ar: 'الحصول على عدد زوجي: 3 حالات ملائمة ← P = 3/6 = 1/2' })}</text>
+            <Label x={360} y={185} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'Bikoitia atera: 3 aldeko kasu → P = 3/6 = 1/2', es: 'Sacar par: 3 casos favorables → P = 3/6 = 1/2', en: 'Roll an even number: 3 favourable cases → P = 3/6 = 1/2', ar: 'الحصول على عدد زوجي: 3 حالات ملائمة ← P = 3/6 = 1/2' })}</Label>
             <Caption y={220}>{pick(language, { eu: 'Laplaceren erregela: aldeko kasuak : kasu posibleak', es: 'Regla de Laplace: casos favorables : casos posibles', en: 'Laplace\'s rule: favourable cases : possible cases', ar: 'قاعدة لابلاس: الحالات الملائمة : الحالات الممكنة' })}</Caption>
         </Figure>
     )

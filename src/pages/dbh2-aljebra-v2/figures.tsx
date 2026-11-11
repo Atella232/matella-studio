@@ -1,5 +1,6 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Caption, Figure } from '../dbh2-zatikiak-prototype/figures'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Aljebra · 2. DBH — lesson figures in the notebook style: a pattern and
@@ -64,10 +65,10 @@ export function PolynomialFigure({ language }: { language: UnitLanguage }) {
                     <rect x={term.x - 48} y={76} width={96} height={52} rx={10} fill={index === 3 ? MUSTARD_TINT : STAGE_TINT} stroke={INK} strokeWidth={2} />
                     <text x={term.x} y={112} textAnchor="middle" fontSize={26} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">{term.text}</text>
                     <line x1={term.x} y1={132} x2={term.x} y2={156} stroke={MUTED} strokeWidth={1.6} />
-                    <text x={term.x} y={176} textAnchor="middle" fontSize={15} fill={index === 0 ? SECOND : INK} fontWeight={700}>{pick(language, term.label)}</text>
+                    <Label x={term.x} y={176} textAnchor="middle" fontSize={15} fill={index === 0 ? SECOND : INK} fontWeight={700}>{pick(language, term.label)}</Label>
                 </g>
             ))}
-            <text x={350} y={48} textAnchor="middle" fontSize={16} fill={MUTED}>{pick(language, { eu: '4 gai · polinomioaren maila: 3', es: '4 términos · grado del polinomio: 3', en: '4 terms · degree of the polynomial: 3', ar: '4 حدود · درجة الحدودية: 3' })}</text>
+            <Label x={350} y={48} textAnchor="middle" fontSize={16} fill={MUTED}>{pick(language, { eu: '4 gai · polinomioaren maila: 3', es: '4 términos · grado del polinomio: 3', en: '4 terms · degree of the polynomial: 3', ar: '4 حدود · درجة الحدودية: 3' })}</Label>
             <Caption y={226}>{pick(language, { eu: 'Maila: berretzailerik handiena. Gai askea: letrarik gabeko gaia', es: 'Grado: el mayor exponente. Término independiente: el que no tiene letra', en: 'Degree: the highest exponent. Constant term: the one with no letter.', ar: 'الدرجة: أكبر أس. الحد الثابت: الحد الذي لا حرف فيه' })}</Caption>
         </Figure>
     )
@@ -120,7 +121,7 @@ export function SquareSumFigure({ language }: { language: UnitLanguage }) {
             <text x={left + a + b / 2} y={top - 8} textAnchor="middle" fontSize={18} fontStyle="italic" fill={STAGE} fontWeight={700}>b</text>
             <text x={left - 14} y={top + a / 2 + 6} textAnchor="middle" fontSize={18} fontStyle="italic" fill={STAGE} fontWeight={700}>a</text>
             <text x={left - 14} y={top + a + b / 2 + 6} textAnchor="middle" fontSize={18} fontStyle="italic" fill={STAGE} fontWeight={700}>b</text>
-            <text x={130} y={130} textAnchor="middle" fontSize={17} fill={SECOND} fontWeight={700}>{pick(language, { eu: 'bi ab!', es: '¡dos ab!', en: 'Two ab!', ar: 'مرتان ab!' })}</text>
+            <Label x={130} y={130} textAnchor="middle" fontSize={17} fill={SECOND} fontWeight={700}>{pick(language, { eu: 'bi ab!', es: '¡dos ab!', en: 'Two ab!', ar: 'مرتان ab!' })}</Label>
             <Caption y={262}>{pick(language, { eu: '(a + b)² = a² + 2ab + b², ez a² + b²', es: '(a + b)² = a² + 2ab + b², no a² + b²', en: '(a + b)² = a² + 2ab + b², not a² + b²', ar: '(a + b)² = a² + 2ab + b²، وليس a² + b²' })}</Caption>
         </Figure>
     )
@@ -147,7 +148,7 @@ export function SquareDifferenceFigure({ language }: { language: UnitLanguage })
             <text x={left + inner + b / 2} y={top + inner + b / 2 + 6} textAnchor="middle" fontSize={17} fontWeight={700} fill={INK}>+ b²</text>
             <text x={left + a / 2} y={top - 8} textAnchor="middle" fontSize={18} fontStyle="italic" fill={STAGE} fontWeight={700}>a</text>
             <text x={120} y={120} textAnchor="middle" fontSize={16} fill={MUTED}>{pick(language, { eu: 'a² − 2ab', es: 'a² − 2ab', en: 'a² − 2ab', ar: 'a² − 2ab' })}</text>
-            <text x={120} y={144} textAnchor="middle" fontSize={16} fill={MUTED}>{pick(language, { eu: '(b² bi aldiz kendu da)', es: '(b² se quitó dos veces)', en: '(b² was removed twice)', ar: '(طُرح b² مرتين)' })}</text>
+            <Label x={120} y={144} textAnchor="middle" fontSize={16} fill={MUTED}>{pick(language, { eu: '(b² bi aldiz kendu da)', es: '(b² se quitó dos veces)', en: '(b² was removed twice)', ar: '(طُرح b² مرتين)' })}</Label>
             <Caption y={262}>{pick(language, { eu: '(a − b)² = a² − 2ab + b²', es: '(a − b)² = a² − 2ab + b²', en: '(a − b)² = a² − 2ab + b²', ar: '(a − b)² = a² − 2ab + b²' })}</Caption>
         </Figure>
     )

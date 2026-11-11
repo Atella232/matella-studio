@@ -59,7 +59,7 @@ export function Table({ x0, y0, columns, headers, rows, highlight, rowHeight = 3
                 <rect x={centres[highlight] - columns[highlight] / 2} y={y0 - 24} width={columns[highlight]} height={rowHeight * (rows.length + 1) + 8} fill={STAGE_TINT} rx={8} />
             )}
             {headers.map((header, index) => (
-                <text key={index} x={centres[index]} y={y0} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{header}</text>
+                <Label key={index} x={centres[index]} y={y0} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{header}</Label>
             ))}
             <line x1={x0} x2={x0 + width} y1={y0 + 10} y2={y0 + 10} stroke={INK} strokeWidth={2} />
             {rows.map((row, rowIndex) => row.map((cell, index) => (

@@ -1,5 +1,6 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { signed } from '../dbh2-zenbaki-osoak/format'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Zenbaki osoak · 1. DBH — figures of their own (the number line, the
@@ -25,13 +26,13 @@ export function ElevatorFigure({ language }: { language: UnitLanguage }) {
                 {floors.map((floor, index) => (
                     <g key={floor}>
                         <rect x={0} y={index * row} width={170} height={row} fill={floor < 0 ? '#efe7d6' : floor === 0 ? 'var(--stage-tint, #dde7f7)' : PAPER} stroke={INK} strokeWidth={1.4} />
-                        <text x={85} y={index * row + 16} textAnchor="middle" fontSize={13} fill={floor < 0 ? SECOND : INK}>
+                        <Label x={85} y={index * row + 16} textAnchor="middle" fontSize={13} fill={floor < 0 ? SECOND : INK}>
                             {floor === 0 ? pick(language, { eu: 'Beheko solairua', es: 'Planta baja', en: 'Ground floor', ar: 'الطابق الأرضي' }) : floor < 0 ? pick(language, { eu: `${-floor}. sotoa`, es: `Sótano ${-floor}`, en: `Basement ${-floor}`, ar: `القبو ${-floor}` }) : pick(language, { eu: `${floor}. solairua`, es: `Planta ${floor}`, en: `Floor ${floor}`, ar: `الطابق ${floor}` })}
-                        </text>
+                        </Label>
                     </g>
                 ))}
                 <line x1={-20} x2={190} y1={8 * row} y2={8 * row} stroke={INK} strokeWidth={3} />
-                <text x={-26} y={8 * row + 5} textAnchor="end" fontSize={13} fill={MUTED}>{pick(language, { eu: 'kalea', es: 'calle', en: 'street', ar: 'الشارع' })}</text>
+                <Label x={-26} y={8 * row + 5} textAnchor="end" fontSize={13} fill={MUTED}>{pick(language, { eu: 'kalea', es: 'calle', en: 'street', ar: 'الشارع' })}</Label>
             </g>
             {/* Lift panel */}
             <g transform="translate(360 20)">
@@ -50,9 +51,9 @@ export function ElevatorFigure({ language }: { language: UnitLanguage }) {
                 })}
             </g>
             <text x={660} y={60} textAnchor="middle" fontSize={15} fontWeight={700} fill={STAGE}>+</text>
-            <text x={660} y={80} textAnchor="middle" fontSize={12} fill={MUTED}>{pick(language, { eu: 'gora', es: 'arriba', en: 'up', ar: 'أعلى' })}</text>
+            <Label x={660} y={80} textAnchor="middle" fontSize={12} fill={MUTED}>{pick(language, { eu: 'gora', es: 'arriba', en: 'up', ar: 'أعلى' })}</Label>
             <text x={660} y={270} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>−</text>
-            <text x={660} y={290} textAnchor="middle" fontSize={12} fill={MUTED}>{pick(language, { eu: 'behera', es: 'abajo', en: 'down', ar: 'أسفل' })}</text>
+            <Label x={660} y={290} textAnchor="middle" fontSize={12} fill={MUTED}>{pick(language, { eu: 'behera', es: 'abajo', en: 'down', ar: 'أسفل' })}</Label>
         </svg>
     )
 }
@@ -70,21 +71,21 @@ export function CountersFigure({ language, have = 5, owe = 3 }: { language: Unit
     )
     return (
         <svg viewBox="0 0 720 260" role="img" aria-label={`(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}`} className="integers-number-line">
-            <text x={60} y={36} fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: `Daukat: ${have} €`, es: `Tengo: ${have} €`, en: `I have: €${have}`, ar: `لديّ: ${have} €` })}</text>
+            <Label x={60} y={36} fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: `Daukat: ${have} €`, es: `Tengo: ${have} €`, en: `I have: €${have}`, ar: `لديّ: ${have} €` })}</Label>
             {Array.from({ length: have }, (_, index) => counter(80 + index * 56, 76, true, index < pairs, `p${index}`))}
-            <text x={60} y={136} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: `Zor dut: ${owe} €`, es: `Debo: ${owe} €`, en: `I owe: €${owe}`, ar: `عليّ: ${owe} €` })}</text>
+            <Label x={60} y={136} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: `Zor dut: ${owe} €`, es: `Debo: ${owe} €`, en: `I owe: €${owe}`, ar: `عليّ: ${owe} €` })}</Label>
             {Array.from({ length: owe }, (_, index) => counter(80 + index * 56, 176, false, index < pairs, `n${index}`))}
             {Array.from({ length: pairs }, (_, index) => (
                 <line key={index} x1={80 + index * 56} x2={80 + index * 56} y1={98} y2={154} stroke={MUTED} strokeWidth={1.6} strokeDasharray="4 4" />
             ))}
-            <text x={360} y={242} textAnchor="middle" fontSize={17} fill={INK}>
+            <Label x={360} y={242} textAnchor="middle" fontSize={17} fill={INK}>
                 {pick(language, {
                     eu: `(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}: bikote bakoitza (+1 eta −1) zero da.`,
                     es: `(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}: cada pareja (+1 y −1) vale cero.`,
                     en: `(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}: each pair (+1 and −1) makes zero.`,
                     ar: `(${signed(have)}) + (${signed(-owe)}) = ${signed(result)}: كل زوج (+1 و−1) يساوي صفرًا.`
                 })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -103,9 +104,9 @@ export function BracketsFigure({ language }: { language: UnitLanguage }) {
         <svg viewBox="0 0 720 220" role="img" aria-label={pick(language, { eu: 'Parentesiak kentzea', es: 'Quitar paréntesis', en: 'Removing brackets', ar: 'حذف الأقواس' })} className="integers-number-line">
             {rowText(70, '+', ['−5', '+3', '−2'], ['−5', '+3', '−2'], STAGE)}
             {rowText(150, '−', ['−5', '+3', '−2'], ['+5', '−3', '+2'], SECOND)}
-            <text x={360} y={206} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={360} y={206} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, { eu: '+ aurretik: zeinuak berdin. − aurretik: zeinu guztiak aldatzen dira.', es: 'Delante un +: los signos se mantienen. Delante un −: cambian todos los signos.', en: 'Before a +: the signs stay the same. Before a −: all the signs change.', ar: 'إذا سبقه +: تبقى الإشارات. إذا سبقه −: تتغير كل الإشارات.' })}
-            </text>
+            </Label>
         </svg>
     )
 }

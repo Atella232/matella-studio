@@ -1,5 +1,6 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Caption, Figure } from '../dbh2-zatikiak-prototype/figures'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Ekuazioak · 2. DBH — lesson figures in the notebook style: the parts of
@@ -35,12 +36,12 @@ export function EquationPartsFigure({ language }: { language: UnitLanguage }) {
                 <g key={index}>
                     <text x={term.x} y={116} textAnchor="middle" fontSize={30} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">{term.text}</text>
                     <line x1={term.x} y1={146} x2={term.x} y2={168} stroke={MUTED} strokeWidth={1.4} />
-                    <text x={term.x} y={186} textAnchor="middle" fontSize={14} fill={index === 2 ? SECOND : MUTED} fontWeight={700}>{pick(language, term.note)}</text>
+                    <Label x={term.x} y={186} textAnchor="middle" fontSize={14} fill={index === 2 ? SECOND : MUTED} fontWeight={700}>{pick(language, term.note)}</Label>
                 </g>
             ))}
-            <text x={200} y={56} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'lehen atala', es: 'primer miembro', en: 'left-hand side', ar: 'الطرف الأول' })}</text>
-            <text x={490} y={56} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'bigarren atala', es: 'segundo miembro', en: 'right-hand side', ar: 'الطرف الثاني' })}</text>
-            <text x={360} y={218} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, { eu: 'Maila 1 · ebazpena: x = 6 (3 · 6 − 5 = 6 + 7)', es: 'Grado 1 · solución: x = 6 (3 · 6 − 5 = 6 + 7)', en: 'Degree 1 · solution: x = 6 (3 · 6 − 5 = 6 + 7)', ar: 'الدرجة 1 · الحل: x = 6 (3 · 6 − 5 = 6 + 7)' })}</text>
+            <Label x={200} y={56} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'lehen atala', es: 'primer miembro', en: 'left-hand side', ar: 'الطرف الأول' })}</Label>
+            <Label x={490} y={56} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'bigarren atala', es: 'segundo miembro', en: 'right-hand side', ar: 'الطرف الثاني' })}</Label>
+            <Label x={360} y={218} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, { eu: 'Maila 1 · ebazpena: x = 6 (3 · 6 − 5 = 6 + 7)', es: 'Grado 1 · solución: x = 6 (3 · 6 − 5 = 6 + 7)', en: 'Degree 1 · solution: x = 6 (3 · 6 − 5 = 6 + 7)', ar: 'الدرجة 1 · الحل: x = 6 (3 · 6 − 5 = 6 + 7)' })}</Label>
             <Caption y={244}>{pick(language, { eu: 'Ebazpenak bi atalak berdin uzten ditu', es: 'La solución hace iguales los dos miembros', en: 'The solution makes both sides equal.', ar: 'الحل يجعل الطرفين متساويين' })}</Caption>
         </Figure>
     )
@@ -62,7 +63,7 @@ export function StepsFigure({ language }: { language: UnitLanguage }) {
                 <g key={index}>
                     <rect x={70 + index * 18} y={18 + index * 46} width={330} height={38} rx={10} fill={index === steps.length - 1 ? MUSTARD_TINT : STAGE_TINT} stroke={INK} strokeWidth={1.6} />
                     <text x={235 + index * 18} y={44 + index * 46} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">{step.math}</text>
-                    <text x={420 + index * 18} y={43 + index * 46} fontSize={15} fill={index === 0 ? MUTED : STAGE} fontWeight={700}>{pick(language, step.note)}</text>
+                    <Label x={420 + index * 18} y={43 + index * 46} fontSize={15} fill={index === 0 ? MUTED : STAGE} fontWeight={700}>{pick(language, step.note)}</Label>
                 </g>
             ))}
             <Caption y={262}>{pick(language, { eu: '5. Egiaztatu: 3 · 4 + 1 = 13 eta 6 + 7 = 13', es: '5. Comprueba: 3 · 4 + 1 = 13 y 6 + 7 = 13', en: '5. Check: 3 · 4 + 1 = 13 and 6 + 7 = 13', ar: '5. تحقّق: 3 · 4 + 1 = 13 و6 + 7 = 13' })}</Caption>
@@ -102,7 +103,7 @@ export function DenominatorsFigure({ language }: { language: UnitLanguage }) {
                     <path d="M0 0 L10 5 L0 10 z" fill={MUTED} />
                 </marker>
             </defs>
-            <text x={600} y={96} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'MKT(2, 3) = 6', es: 'm.c.m.(2, 3) = 6', en: 'LCM(2, 3) = 6', ar: 'م.م.أ(2، 3) = 6' })}</text>
+            <Label x={600} y={96} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'MKT(2, 3) = 6', es: 'm.c.m.(2, 3) = 6', en: 'LCM(2, 3) = 6', ar: 'م.م.أ(2، 3) = 6' })}</Label>
             <text x={300} y={216} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>3x + 2x = 30 → x = 6</text>
             <Caption y={252}>{pick(language, { eu: 'Gai GUZTIAK biderkatu MKTaz, zenbakiak ere bai', es: 'Multiplica TODOS los términos por el m.c.m., también los números', en: 'Multiply ALL the terms by the LCM, including the numbers.', ar: 'اضرب كل الحدود في م.م.أ، حتى الأعداد' })}</Caption>
         </Figure>
@@ -123,12 +124,12 @@ export function ProblemStepsFigure({ language }: { language: UnitLanguage }) {
             {steps.map((step, index) => (
                 <g key={index}>
                     <rect x={20 + index * 175} y={50} width={150} height={96} rx={14} fill={index === 1 ? MUSTARD_TINT : STAGE_TINT} stroke={INK} strokeWidth={2} />
-                    <text x={95 + index * 175} y={84} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, step.title)}</text>
-                    <text x={95 + index * 175} y={120} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>{pick(language, step.text)}</text>
+                    <Label x={95 + index * 175} y={84} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>{pick(language, step.title)}</Label>
+                    <Label x={95 + index * 175} y={120} textAnchor="middle" fontSize={18} fontWeight={700} fill={INK}>{pick(language, step.text)}</Label>
                     {index < steps.length - 1 && <path d={`M${172 + index * 175} 98 L${193 + index * 175} 98`} stroke={INK} strokeWidth={2} />}
                 </g>
             ))}
-            <text x={360} y={30} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, { eu: '«Zenbaki baten hirukoitzari 8 kenduta, 25 lortzen da»', es: '«Si al triple de un número le restas 8, obtienes 25»', en: '“If you subtract 8 from three times a number, you get 25”', ar: '«إذا طرحت 8 من ثلاثة أضعاف عدد تحصل على 25»' })}</text>
+            <Label x={360} y={30} textAnchor="middle" fontSize={16} fill={INK}>{pick(language, { eu: '«Zenbaki baten hirukoitzari 8 kenduta, 25 lortzen da»', es: '«Si al triple de un número le restas 8, obtienes 25»', en: '“If you subtract 8 from three times a number, you get 25”', ar: '«إذا طرحت 8 من ثلاثة أضعاف عدد تحصل على 25»' })}</Label>
             <Caption y={196}>{pick(language, { eu: 'Amaitzeko, idatzi erantzuna esaldi batean: zenbakia 11 da', es: 'Al final, escribe la respuesta en una frase: el número es 11', en: 'At the end, write the answer in a sentence: the number is 11', ar: 'في النهاية اكتب الجواب في جملة: العدد 11' })}</Caption>
         </Figure>
     )
@@ -174,7 +175,7 @@ export function DiscriminantFigure({ language }: { language: UnitLanguage }) {
                         <path d={path} fill="none" stroke={STAGE} strokeWidth={3} />
                         {item.shift > 0 && [-1, 1].map((sign) => <circle key={sign} cx={item.cx + sign * 80 * Math.sqrt(item.shift / 110)} cy={axis} r={6} fill={SECOND} />)}
                         {item.shift === 0 && <circle cx={item.cx} cy={axis} r={6} fill={SECOND} />}
-                        <text x={item.cx} y={200} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, item.label)}</text>
+                        <Label x={item.cx} y={200} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, item.label)}</Label>
                     </g>
                 )
             })}

@@ -1,5 +1,6 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { divisors, factorize } from '../dbh2-zatigarritasuna/math'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Zatigarritasuna · 1. DBH — figures of their own (multiples on the line,
@@ -40,19 +41,19 @@ export function BagsFigure({ language }: { language: UnitLanguage }) {
     )
     return (
         <svg viewBox="0 0 630 220" role="img" aria-label={pick(language, { eu: '18 arkatz poltsetan: 3 poltsatan ez da ezer soberan geratzen; 4 poltsatan 2 geratzen dira', es: '18 lápices en bolsas: en 3 bolsas no sobra nada; en 4 bolsas sobran 2', en: '18 pencils in bags: with 3 bags, none are left over; with 4 bags, 2 are left over.', ar: '18 قلمًا في أكياس: في 3 أكياس لا يبقى شيء، وفي 4 أكياس يبقى قلمان' })} className="divisibility-figure">
-            <text x={145} y={24} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '3 poltsa', es: '3 bolsas', en: '3 bags', ar: '3 أكياس' })}</text>
+            <Label x={145} y={24} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '3 poltsa', es: '3 bolsas', en: '3 bags', ar: '3 أكياس' })}</Label>
             {[20, 110, 200].map((x) => bag(x, 70, 6, 3))}
             <text x={145} y={168} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>18 : 3 = 6</text>
-            <text x={145} y={194} textAnchor="middle" fontSize={15} fill={STAGE} fontWeight={700}>{pick(language, { eu: 'hondarra 0 ✓', es: 'resto 0 ✓', en: 'remainder 0 ✓', ar: 'الباقي 0 ✓' })}</text>
+            <Label x={145} y={194} textAnchor="middle" fontSize={15} fill={STAGE} fontWeight={700}>{pick(language, { eu: 'hondarra 0 ✓', es: 'resto 0 ✓', en: 'remainder 0 ✓', ar: 'الباقي 0 ✓' })}</Label>
 
             <line x1={296} x2={296} y1={20} y2={200} stroke={MUTED} strokeWidth={1.4} strokeDasharray="5 6" />
 
-            <text x={462} y={24} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '4 poltsa', es: '4 bolsas', en: '4 bags', ar: '4 أكياس' })}</text>
+            <Label x={462} y={24} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '4 poltsa', es: '4 bolsas', en: '4 bags', ar: '4 أكياس' })}</Label>
             {[320, 384, 448, 512].map((x) => bag(x, 56, 4, 2))}
             <Pencil x={582} y={56} color={SECOND} />
             <Pencil x={600} y={56} color={SECOND} />
             <text x={462} y={168} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>18 : 4 = 4</text>
-            <text x={462} y={194} textAnchor="middle" fontSize={15} fill={SECOND} fontWeight={700}>{pick(language, { eu: 'hondarra 2 ✗', es: 'resto 2 ✗', en: 'remainder 2 ✗', ar: 'الباقي 2 ✗' })}</text>
+            <Label x={462} y={194} textAnchor="middle" fontSize={15} fill={SECOND} fontWeight={700}>{pick(language, { eu: 'hondarra 2 ✗', es: 'resto 2 ✗', en: 'remainder 2 ✗', ar: 'الباقي 2 ✗' })}</Label>
         </svg>
     )
 }
@@ -133,9 +134,9 @@ export function PoolCalendarFigure({ language }: { language: UnitLanguage }) {
             {Array.from({ length: days }, (_, index) => index + 1).map((day) => (
                 <text key={day} x={x(day) + (cell - 8) / 2} y={166} textAnchor="middle" fontSize={13} fontWeight={day % 6 === 0 ? 700 : 400} fill={day % 6 === 0 ? INK : MUTED}>{day}</text>
             ))}
-            <text x={370} y={204} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>
+            <Label x={370} y={204} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>
                 {pick(language, { eu: '6, 12, 18… 2ren eta 3ren multiplo komunak → MKT(2, 3) = 6', es: '6, 12, 18… múltiplos comunes de 2 y 3 → m.c.m.(2, 3) = 6', en: '6, 12, 18… common multiples of 2 and 3 → LCM(2, 3) = 6', ar: '6، 12، 18… مضاعفات مشتركة لـ 2 و3 ← م.م.أ(2، 3) = 6' })}
-            </text>
+            </Label>
         </svg>
     )
 }

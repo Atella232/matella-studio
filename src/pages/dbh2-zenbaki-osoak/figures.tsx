@@ -1,6 +1,7 @@
 import type { PointerEvent } from 'react'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { signed } from './format'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Zenbaki osoak · lesson figures, drawn as SVG in the notebook style
@@ -128,9 +129,9 @@ export function NumberLine({
             {braces && min < 0 && max > 0 && (
                 <g fontSize={15} fill={MUTED} textAnchor="middle">
                     <path d={`M${x(min)} ${lineY + 44} q0 10 10 10 H${x(-1) - 10} q10 0 10 10`} fill="none" stroke={MUTED} strokeWidth={1.5} />
-                    <text x={(x(min) + x(-1)) / 2} y={lineY + 82}>{l({ eu: 'Zenbaki oso negatiboak', es: 'Enteros negativos', en: 'Negative integers', ar: 'الأعداد الصحيحة السالبة' })}</text>
+                    <Label x={(x(min) + x(-1)) / 2} y={lineY + 82} textAnchor="middle">{l({ eu: 'Zenbaki oso negatiboak', es: 'Enteros negativos', en: 'Negative integers', ar: 'الأعداد الصحيحة السالبة' })}</Label>
                     <path d={`M${x(1)} ${lineY + 64} q0 -10 10 -10 H${x(max) - 10} q10 0 10 -10`} fill="none" stroke={MUTED} strokeWidth={1.5} />
-                    <text x={(x(1) + x(max)) / 2} y={lineY + 82}>{l({ eu: 'Zenbaki oso positiboak', es: 'Enteros positivos', en: 'Positive integers', ar: 'الأعداد الصحيحة الموجبة' })}</text>
+                    <Label x={(x(1) + x(max)) / 2} y={lineY + 82} textAnchor="middle">{l({ eu: 'Zenbaki oso positiboak', es: 'Enteros positivos', en: 'Positive integers', ar: 'الأعداد الصحيحة الموجبة' })}</Label>
                 </g>
             )}
 
@@ -170,7 +171,7 @@ export function SituationsFigure({ language }: { language: UnitLanguage }) {
                     </g>
                 ))}
                 <text x={74} y={thermoY(-8) + 5} textAnchor="end" dx={-18} fontSize={16} fontWeight={700} fill="var(--second, #c4432a)">−8</text>
-                <text x={74} y={294} textAnchor="middle" fontSize={15} fill={MUTED}>{l({ eu: 'Zero azpitik', es: 'Bajo cero', en: 'Below zero', ar: 'تحت الصفر' })}</text>
+                <Label x={74} y={294} textAnchor="middle" fontSize={15} fill={MUTED}>{l({ eu: 'Zero azpitik', es: 'Bajo cero', en: 'Below zero', ar: 'تحت الصفر' })}</Label>
             </g>
 
             {/* Building */}
@@ -186,8 +187,8 @@ export function SituationsFigure({ language }: { language: UnitLanguage }) {
                         </g>
                     )
                 })}
-                <text x={146} y={192} fontSize={14} fill={MUTED}>{l({ eu: 'Beheko solairua', es: 'Planta baja', en: 'Ground floor', ar: 'الطابق الأرضي' })}</text>
-                <text x={80} y={294} textAnchor="middle" fontSize={15} fill={MUTED}>{l({ eu: 'Sotoak', es: 'Sótanos', en: 'Basements', ar: 'الطوابق السفلية' })}</text>
+                <Label x={146} y={192} fontSize={14} fill={MUTED}>{l({ eu: 'Beheko solairua', es: 'Planta baja', en: 'Ground floor', ar: 'الطابق الأرضي' })}</Label>
+                <Label x={80} y={294} textAnchor="middle" fontSize={15} fill={MUTED}>{l({ eu: 'Sotoak', es: 'Sótanos', en: 'Basements', ar: 'الطوابق السفلية' })}</Label>
             </g>
 
             {/* Sea level */}
@@ -198,7 +199,7 @@ export function SituationsFigure({ language }: { language: UnitLanguage }) {
                 <text x={86} y={100} fontSize={15} fill={INK}>+12 m</text>
                 <ellipse cx={60} cy={230} rx={30} ry={12} fill="#fffcf6" stroke={INK} strokeWidth={2} />
                 <text x={96} y={236} fontSize={15} fontWeight={700} fill="var(--second, #c4432a)">−100 m</text>
-                <text x={80} y={294} textAnchor="middle" fontSize={15} fill={MUTED}>{l({ eu: 'Itsas maila: 0', es: 'Nivel del mar: 0', en: 'Sea level: 0', ar: 'مستوى سطح البحر: 0' })}</text>
+                <Label x={80} y={294} textAnchor="middle" fontSize={15} fill={MUTED}>{l({ eu: 'Itsas maila: 0', es: 'Nivel del mar: 0', en: 'Sea level: 0', ar: 'مستوى سطح البحر: 0' })}</Label>
             </g>
         </svg>
     )
@@ -212,9 +213,9 @@ export function SignRuleFigure({ language }: { language: UnitLanguage }) {
         <svg viewBox="0 0 720 230" role="img" aria-label={l({ eu: 'Zeinuen araua', es: 'Regla de los signos', en: 'Rule of signs', ar: 'قاعدة الإشارات' })} className="integers-number-line">
             {[{ op: '·', x: 70 }, { op: ':', x: 390 }].map((column) => (
                 <g key={column.op}>
-                    <text x={column.x + 130} y={26} textAnchor="middle" fontSize={17} fontWeight={700} fill={MUTED}>
+                    <Label x={column.x + 130} y={26} textAnchor="middle" fontSize={17} fontWeight={700} fill={MUTED}>
                         {column.op === '·' ? l({ eu: 'Biderketa', es: 'Multiplicación', en: 'Multiplication', ar: 'الضرب' }) : l({ eu: 'Zatiketa', es: 'División', en: 'Division', ar: 'القسمة' })}
-                    </text>
+                    </Label>
                     {rows.map(([a, b, result], index) => {
                         const same = result === '+'
                         return (
