@@ -53,8 +53,15 @@ const KonikakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-konikak').
 const BidimentsionalaBatx1zPage = lazy(() => import('../pages/batx1-zientziak-bidimentsionala').then((module) => ({ default: module.BidimentsionalaBatx1zIntroPage })))
 const AplikazioakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-aplikazioak').then((module) => ({ default: module.AplikazioakBatx1zIntroPage })))
 const IntegralakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-integralak').then((module) => ({ default: module.IntegralakBatx1zIntroPage })))
+const MugagabeakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-mugagabeak').then((module) => ({ default: module.MugagabeakBatx2zIntroPage })))
+const MugatuaBatx2zPage = lazy(() => import('../pages/batx2-zientziak-mugatua').then((module) => ({ default: module.MugatuaBatx2zIntroPage })))
 const KonplexuakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-konplexuak').then((module) => ({ default: module.KonplexuakBatx1zIntroPage })))
 const MatrizeakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-matrizeak').then((module) => ({ default: module.MatrizeakBatx2zIntroPage })))
+const BektoreakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-bektoreak').then((module) => ({ default: module.BektoreakBatx2zIntroPage })))
+const LimiteakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-limiteak').then((module) => ({ default: module.LimiteakBatx2zIntroPage })))
+const DeribatuakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-deribatuak').then((module) => ({ default: module.DeribatuakBatx2zIntroPage })))
+const AplikazioakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-aplikazioak').then((module) => ({ default: module.AplikazioakBatx2zIntroPage })))
+const ProbabilitateaBatx2zPage = lazy(() => import('../pages/batx2-zientziak-probabilitatea').then((module) => ({ default: module.ProbabilitateaBatx2zIntroPage })))
 const PolinomikoakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-polinomikoak').then((module) => ({ default: module.PolinomikoakDbh4AkIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
@@ -468,6 +475,16 @@ export const router = createHashRouter([
                         path: 'matematika/batx1-zientziak/integrales/*',
                         element: <IntegralakBatx1zPage />,
                     },
+                    // Integrales indefinidas de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/integrales-indefinidas/*',
+                        element: <MugagabeakBatx2zPage />,
+                    },
+                    // Integral definida de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/integral-definida/*',
+                        element: <MugatuaBatx2zPage />,
+                    },
                     // Números complejos de 1.º Bachillerato (Ciencias): unidad V2
                     {
                         path: 'matematika/batx1-zientziak/numeros-complejos/*',
@@ -477,6 +494,31 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx2-zientziak/matrices/*',
                         element: <MatrizeakBatx2zPage />,
+                    },
+                    // Vectores en el espacio de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/vectores-espacio/*',
+                        element: <BektoreakBatx2zPage />,
+                    },
+                    // Límites y continuidad de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/limites-continuidad/*',
+                        element: <LimiteakBatx2zPage />,
+                    },
+                    // Derivadas de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/derivadas/*',
+                        element: <DeribatuakBatx2zPage />,
+                    },
+                    // Aplicaciones de la derivada de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/aplicaciones-derivada/*',
+                        element: <AplikazioakBatx2zPage />,
+                    },
+                    // Probabilidad de 2.º Bachillerato (Ciencias): unidad V2
+                    {
+                        path: 'matematika/batx2-zientziak/probabilidad/*',
+                        element: <ProbabilitateaBatx2zPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {
