@@ -43,7 +43,15 @@ La rama se puso al día con `main` (e4dc4f8, primera tanda de 2.º publicada, co
 - **Tests:** `tests/banaketak-batx2z-lab.test.ts` (retos resolubles y no resueltos al abrir, z siempre con dos decimales, la b de los retos sin fin única, la tabla estrictamente creciente hasta 2,5, la aproximación con corrección a < 0,002 de la exacta salvo B(25; 0,2), que llega a 0,019 por ser np = 5 justo: lo dice el «Zeri begiratu»).
 - **Trucos:** `with` es palabra reservada (no sirve de nombre en los tests). En las pizarras, los valores con cuatro decimales van con `toFixed(4)` (si no, 0,3770 sale 0,377).
 
+## Fase 3 · juegos
+
+- **Propios:** `binomial` (¿Es binomial?: 1) sí o no y por qué —sin devolución, sin n fijo, no cuenta éxitos—; 2) qué B(n; p), con p y q cambiadas, «dos resultados, así que 1/2» o «n = 100 por el porcentaje»; 3) qué expresión es P(X = k), sin el número combinatorio o con p y q cambiadas), `area` (¿Qué área es?: tres campanas sombreadas; complemento, imagen simétrica y, entre dos valores, las colas o el intervalo desde 0: la imagen simétrica de un intervalo tiene la misma área, por eso no se usa ahí), `hunt` (Busca en la tabla: k con signo cambiado o una fila al lado; en el nivel 3, x = μ + kσ con μ − kσ y μ + k como errores), `detective` (12 errores en 3 niveles: binomial, normal y aproximación).
+- **Genéricos:** carrera de 5 circuitos (uno por etapa; 16 tipos de pregunta, con `meta` comprobada en los tests) y memoria (B(n; p) ↔ μ, P(Z > k) ↔ valor de la tabla, N(μ; σ) y x ↔ z).
+- **Ids:** carrera 129401–129405, binomial 129501–129503, área 129601–129603, tabla 129701–129703, detective 129751–129753, memoria 129801–129803.
+- **Tests:** `tests/banaketak-batx2z-games.test.ts`.
+- **Trucos:** con k = n − k, «p y q cambiadas» da el mismo número: no se pregunta; tampoco valores menores que 0,001 (en la prueba salían iguales a 0). El inventario (`inventario-unidad.mjs`) da OK: 3 juegos y 6 herramientas propios, más el detective de patrón con errores de esta unidad.
+
 ## En curso
 
-- Fases 1 y 2 en verde (tests, lint, tsc), revisadas a 375 px en eu, es y ar; la 2 sin commit todavía en el momento de escribir esto.
-- Siguiente paso: fase 3, juegos J1 ¿Es binomial?, J2 ¿Qué área es?, J3 Busca en la tabla, J4 detective, carrera y memoria (ids 129401–129899).
+- Fases 1 y 2 con commit (bfc1a0e9, 35384ee9); fase 3 escrita y con sus tests en verde, a falta del commit y de la revisión a 375 px de los juegos.
+- Después: cierre (tests, lint y build completos; hoja de euskera con `hoja-revision.mjs`; quitar esta sección).

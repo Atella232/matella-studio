@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { distributionsBatx2Challenges, distributionsBatx2Diagnostic, distributionsBatx2ExerciseBank, distributionsBatx2Practice } from './content'
 import { DistributionsBatx2HeroArt } from './figures'
+import { DistributionsBatx2Games } from './games'
+import { DISTRIBUTIONS_BATX2_GAME_RECORDS_KEY, distributionsBatx2GameProgressIds } from './games/info'
 import { DistributionsBatx2Laboratory } from './lab'
 import { distributionsBatx2LabChallengeIds, distributionsBatx2LabToolForTopic, distributionsBatx2LabTools } from './lab/labTools'
 import { distributionsBatx2Stages, distributionsBatx2Topics } from './lessons'
@@ -37,6 +39,17 @@ const banaketakBatx2zUnit: UnitDefinition = {
         progressIds: distributionsBatx2LabChallengeIds,
         toolForTopic: distributionsBatx2LabToolForTopic,
         render: (props) => <DistributionsBatx2Laboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko, berriak: lasterketa, binomiala da?, zein azalera da?, bilatu taulan, banaketen detektibea eta memoria.',
+            es: 'Seis juegos, nuevos: carrera, ¿es binomial?, ¿qué área es?, busca en la tabla, detective de distribuciones y memoria.',
+            en: 'Six games, all new: race, is it binomial?, which area is it?, find it in the table, distributions detective and memory.',
+            ar: 'ست ألعاب جديدة: السباق، وهل هو ثنائي؟، وأي مساحة هي؟، وابحث في الجدول، ومخبر التوزيعات، والذاكرة.'
+        },
+        progressIds: distributionsBatx2GameProgressIds,
+        recordsKey: DISTRIBUTIONS_BATX2_GAME_RECORDS_KEY,
+        render: (props) => <DistributionsBatx2Games {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,8944, 3/8 edo 12. Normalaren probabilitateak, taulako lau hamartarrekin; ehunekoak, % ikurrik gabe.', es: 'Escribe un número exacto o una fracción: 0,8944, 3/8 o 12. Las probabilidades de la normal, con los cuatro decimales de la tabla; los porcentajes, sin el signo %.', en: 'Write an exact number or a fraction: 0.8944, 3/8 or 12. Normal probabilities with the four decimals of the table; percentages without the % sign.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.8944 أو 3/8 أو 12. احتمالات التوزيع الطبيعي بأربعة أرقام عشرية من الجدول، والنسب دون الرمز ٪.' },
