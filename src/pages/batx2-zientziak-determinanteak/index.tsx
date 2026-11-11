@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { determinanteakChallenges, determinanteakDiagnostic, determinanteakExerciseBank, determinanteakPractice } from './content'
 import { DeterminantsHeroArt } from './figures'
+import { DeterminanteakGames } from './games'
+import { DETERMINANTEAK_GAME_RECORDS_KEY, determinanteakGameProgressIds } from './games/info'
 import { DeterminanteakLaboratory } from './lab'
 import { determinanteakLabChallengeIds, determinanteakLabToolForTopic, determinanteakLabTools } from './lab/labTools'
 import { determinanteakStages, determinanteakTopics } from './lessons'
@@ -36,6 +38,17 @@ const determinanteakBatx2zUnit: UnitDefinition = {
         progressIds: determinanteakLabChallengeIds,
         toolForTopic: determinanteakLabToolForTopic,
         render: (props) => <DeterminanteakLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bost joko: lasterketa, zer gertatzen zaio determinanteari, zero kalkulatu gabe, determinanteen detektibea eta memoria.',
+            es: 'Cinco juegos: carrera, qué le pasa al determinante, cero sin calcular, detective de determinantes y memoria.',
+            en: 'Five games: race, what happens to the determinant, zero without working it out, determinant detective and memory.',
+            ar: 'خمس ألعاب: السباق، وماذا يحدث للمحدد، وصفر دون حساب، ومخبر المحددات، والذاكرة.'
+        },
+        progressIds: determinanteakGameProgressIds,
+        recordsKey: DETERMINANTEAK_GAME_RECORDS_KEY,
+        render: (props) => <DeterminanteakGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },

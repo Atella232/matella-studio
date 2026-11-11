@@ -33,6 +33,14 @@ Segundo tema de 2.º Ciencias (curso `batx2-zientziak`, tema `determinantes`), s
   - M1: `RankSliderTool` de `matrizeak`, sin cambios y con sus ids 116301–116305.
   - Test `tests/determinanteak-batx2z-lab.test.ts`. Revisado a 375 px en eu, es y ar con la predicción hecha.
 
+- **Fase 4 (juegos):** en `games/`, ids 117401–117853:
+  - Carrera (`race.ts`, 117401–117405): cinco circuitos, quince tipos de pregunta, con `meta` para los tests.
+  - J1 `what-happens` (`whatHappens.ts`, 117501–117503): se conoce $|A|$, se hace algo a la matriz y se elige el nuevo valor; nivel 3 con letras (`LETTER_TEMPLATES`, al estilo de la EBAU).
+  - J2 `zero-or-not` (`zeroOrNot.ts`, 117601–117603): un determinante 3 × 3 y cuatro frases (tres relaciones entre filas y $|A|\neq 0$); exactamente una es cierta; las trampas cambian un número.
+  - J4 `detective` (`detective.ts`, 117801–117803): doce errores típicos en tres niveles.
+  - Memoria (`boards.ts`, 117851–117853): orden 2, triangulares (como mucho un signo menos, para que quepa en la carta) y matriz adjunta.
+  - Test `tests/determinanteak-batx2z-games.test.ts`. Revisado a 375 px en eu, es y ar.
+
 ## Trucos
 
 - El test común `lesson-texts.test.ts` parte `\begin{vmatrix}` por filas y cambia `&` por espacios: una casilla negativa que no sea la primera de su fila (`1&-4`) se lee como una resta. En las fórmulas de `lessonTexts.ts` se escribe `{-4}`; el lector de `tests/matrix-latex.ts` quita esas llaves.
@@ -42,4 +50,4 @@ Segundo tema de 2.º Ciencias (curso `batx2-zientziak`, tema `determinantes`), s
 
 ## En curso
 
-- Fases 1+2 y 3 hechas (ver commits). Siguiente: fase 4, juegos (J1 ¿Qué le pasa al determinante?, J2 ¿Cero sin calcular?, J4 detective, carrera y memoria; ids 117401–117899) y su test `tests/determinanteak-batx2z-games.test.ts`. Después, el cierre: inventario, revisión a 375 px, hoja de euskera y nota final.
+- Fases 1–4 hechas (ver commits). Falta el cierre: revisión final a 375 px (lecciones hechas en eu y es; faltan ar, práctica, ejercicios, retos, diagnóstico y portada), hoja de euskera con `hoja-revision.mjs` y nota final. Después, Sistemas (`sistemak`).
