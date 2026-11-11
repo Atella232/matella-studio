@@ -1,0 +1,13 @@
+/* The round games of Espazioko bektoreak (Batxilergoa 2 · Zientziak) */
+.fraction-v2-games-card[data-game="kind"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="cross"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="flat"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+.space-games-data { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 16px; margin: 0; color: var(--muted); font-size: 15px; }
+.space-games-big { text-align: center; font-size: 26px; }
+.space-games-worked { display: block; max-width: 100%; overflow-x: auto; }
+.prop3-options.space-games-kinds { grid-template-columns: 1fr; }
+.prop3-options.space-games-values { grid-template-columns: 1fr 1fr; }
+.prop3-options.space-games-letters { grid-template-columns: 1fr 1fr; }
+.prop3-options.space-games-letters button { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.space-games-coordinates { font-size: 14px; }

@@ -74,3 +74,7 @@ Commit a6d85597.
 - Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio, en `~/Documents/Matella-fuentes/batx2z-probabilitatea/hoja-euskera-probabilitatea.html`) y mandada al dueño.
 - **Al fusionar:** el registro toca tres líneas compartidas con las otras sesiones (`courses.ts`, el router y `paths.ts`, que es una sola línea larga). No se ha tocado ninguna pieza de otra unidad: el laboratorio y los juegos de 4.º se usan tal cual.
 - Sin publicar: la sesión principal fusiona y publica.
+
+## Publicación
+
+- **Publicada el 2026-11-10** con los otros temas terminados de 2.º Ciencias, tras el «publica lo que ya esté hecho» del dueño: `main` 5e186b4, bundle `index-BiUKCFuE.js`. 2993 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.

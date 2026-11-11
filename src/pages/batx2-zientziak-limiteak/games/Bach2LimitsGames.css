@@ -1,0 +1,7 @@
+/* ¿Quién gana?, ¿Lo asegura el teorema? and Caza raíces (Limiteak eta jarraitutasuna, Batxilergoa 2 · Zientziak) */
+.fraction-v2-games-card[data-game="winner"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="assure"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="hunt"] { --game-tint: var(--coral-tint, #f6d5cc); }
+
+.bach2-lim-claim { margin: 6px 0 10px; font-size: 18px; line-height: 1.5; }
+.bach2-lim-values { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 6px 0; font-size: 16px; }

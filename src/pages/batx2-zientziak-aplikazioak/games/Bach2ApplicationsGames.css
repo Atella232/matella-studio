@@ -1,0 +1,9 @@
+/* ¿Vale L'Hôpital?, ¿Cumple Rolle? and Plantea y optimiza (Aplikazioak, Batxilergoa 2 · Zientziak) */
+.fraction-v2-games-card[data-game="hopital"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="rolle"] { --game-tint: var(--violet-tint, #ece4f8); }
+.fraction-v2-games-card[data-game="optimize"] { --game-tint: var(--success-tint, #d9efe2); }
+
+.bach2-app-options button { font-size: 15px; }
+.bach2-app-options-one { grid-template-columns: 1fr; }
+.bach2-app-wide { display: block; overflow-x: visible; font-size: 15px; }
+.bach2-app-step { margin: 8px 0 4px; font-weight: 700; }
