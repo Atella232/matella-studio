@@ -43,6 +43,16 @@ Segunda unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - **Comprobación:** 3024 tests, lint y build en verde.
 - **Revisión a 375 px** en eu, es y ar: las cinco herramientas antes y después de predecir; sin desbordes ni fórmulas de menos de 13 px.
 
+**Fase 4, juegos:** 6 juegos en `games/`, récords en `matella-planoak-batx2z-game-records`.
+- **Propios (4):**
+  - J1 `twins` «Rectas gemelas en el espacio» (`twins.ts`, niveles 120501–120503): una recta y cuatro ecuaciones, solo una es la misma recta. Nivel 1: vectorial → cuatro continuas (la buena, los signos del punto cambiados, punto y director cambiados, otro director). Nivel 2: continua → cuatro vectoriales por otros puntos y con directores proporcionales (un punto fuera, otro director, los signos cambiados). Nivel 3: vectorial → cuatro pares de implícitas (dos planos que la contienen; un plano movido, que da una paralela; un plano por A que no la contiene; el mismo plano dos veces, que no es una recta).
+  - J2 `classify` «Clasifica la pareja» (`classify.ts`, 120551–120553): nivel 1 dos planos (secantes, paralelos, coincidentes), nivel 2 recta y plano (lo corta, paralela, contenida), nivel 3 dos rectas (se cortan, se cruzan, paralelas, coinciden; la segunda con λ). Las seis respuestas de un nivel pasan por todas las posiciones. Al responder, la pareja en el tablero 3D y la cuenta corta que la decide.
+  - J3 `missing` «El plano que falta» (`missingPlane.ts`, 120601–120603): la ecuación del plano con un número tapado (□). Nivel 1: por un punto, paralelo a un plano o perpendicular a una recta (falta la d). Nivel 2: por tres puntos (un coeficiente del normal o la d). Nivel 3: por un punto y una recta. Opciones: la buena, su signo, su doble, la d o sus vecinos. Al responder, el plano y los datos en el tablero.
+  - J4 `detective` (`detective.ts`, 120701–120703): 12 errores (punto y director cambiados, signo del punto en la continua, la D en el normal, un normal como director; proporcionales tomadas por coincidentes, no paralelas tomadas por secantes, el mismo parámetro en las dos rectas, u·n = 0 tomado por paralela; olvidar A en el punto de corte, normales proporcionales sin comparar la d, solo rg M, la d del otro plano).
+- **Carrera** `race.ts` (120401–120405, 15 tipos de pregunta con `meta`) y **memoria** `boards.ts` (120801–120803: plano ↔ normal, continua ↔ director, punto de t ↔ punto).
+- **Test:** `tests/planoak-batx2z-games.test.ts` (cada respuesta de la carrera se recalcula con `meta`; J1 comprueba que solo la buena es la misma recta; J2 recalcula la posición; J3, que el plano cumple los datos y que ningún otro número los cumple; detective y memoria bien formados; ninguna fórmula con `:`, `+-`, `1x` ni `0y`).
+- **Revisión a 375 px** en eu y ar: hub, J1 (niveles 1 y 3), J2 con el tablero, J3 con el tablero, carrera, memoria (los tres niveles, midiendo el ancho de cada tarjeta) y detective.
+
 ## Trucos
 
 - Los de `bektoreak` siguen valiendo: `${z}$` en euskera; `numbers()` lee `(1,1,0)` como «1,1» y «0», así que el ejemplo no puede repetir pares como `1,0` o `0,1` de «Resolvamos»; `\qquad` entre igualdades; fórmulas largas en dos filas con `gathered`.
@@ -51,11 +61,18 @@ Segunda unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - El nombre de una recta en el tablero va al 86 % del tramo dibujado, hacia el final de su vector director: si cae encima de un punto, se dibuja la recta con el director cambiado de signo (la recta es la misma).
 - `MathText` convierte `:` en ÷ también dentro de las fórmulas: `r: (x,y,z)` sale «r ÷ …». En el laboratorio se escribe `r\colon`.
 - Un punto justo en el borde de la caja (coordenada igual a `range`) queda fuera del plano dibujado (los planos se recortan a 0,92·`range`): subir `range`.
+- `MathText` estropea `\displaystyle` delante de un paréntesis (sale «\displaysty ≤»): para fracciones grandes en los juegos se cambia `\frac` por `\dfrac`.
+- En la memoria la tarjeta deja unos 90 px a 375 px: la continua va en dos filas con `\tfrac`, el plano en dos filas (x e y; z = d) y el punto de una recta con `\footnotesize` y como mucho un signo menos en el director.
+- Un nivel de juego con «3z» en su descripción lo caza el test de sufijos vascos (dígito + z): usar otro ejemplo.
 
 ## Pendiente para la fusión
 
 - Enlaces «Antes de empezar» a Determinantes y a Sistemas (Rouché) de 2.º (bloque Álgebra, no están en esta rama): en `lines-cross`, `three-planes` y `planes-parameter`. Ahora se usan Sarrus y los rangos dentro de la lección y se enlaza a Sistemas de 1.º.
 
-## En curso
+## Cierre
 
-- Fases 1+2 y 3 terminadas (un commit cada una). Siguiente: fase 4, juegos (J1 «Rectas gemelas en el espacio», J2 «Clasifica la pareja», J3 «El plano que falta», J4 detective, J5 carrera y memoria; ids 120401–120899) y el cierre (tests, lint, build, inventario, 375 px en eu/es/ar, hoja de euskera con `hoja-revision.mjs` en la carpeta de notas compartidas).
+- Comprobación final: 3031 tests, lint y build en verde.
+- Inventario: 3 juegos propios (Rectas gemelas, Clasifica la pareja, El plano que falta) más el detective con los errores de esta unidad, y 5 herramientas propias → OK.
+- Revisión final a 375 px: las 15 lecciones con todos los pasos abiertos (eu, es y ar) y los 15 dibujos (eu y algunos en ar); las 5 herramientas antes y después de predecir (eu, es y ar); práctica y retos respondidos (eu, es y ar) y banco con las soluciones abiertas (eu, es y ar); juegos en eu, es y ar. Sin desbordes, sin fórmulas de menos de 13 px ni cortadas.
+- Hoja de euskera: `hoja-revision.mjs` con `--herramientas parameter-t,plane-normal,cut-or-cross,through-plane,three-planes --juegos race,twins,classify,missing,detective,memory`, en la carpeta de notas compartidas de la sesión (`planoak-batx2z-revision.html`).
+- Para revisar fuera de esta unidad: la memoria de `bektoreak` (ya publicada) usa tarjetas de dos filas como `(−3,−2,−2)` / `×(2,1,−1)` que pueden pasar de los 90 px útiles de una tarjeta a 375 px; no se ha medido.

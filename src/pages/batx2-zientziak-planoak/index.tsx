@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { linesPlanesChallenges, linesPlanesDiagnostic, linesPlanesExerciseBank, linesPlanesPractice } from './content'
 import { LinesPlanesHeroArt } from './figures'
+import { LinesPlanesGames } from './games'
+import { LINES_PLANES_GAME_RECORDS_KEY, linesPlanesGameProgressIds } from './games/info'
 import { LinesPlanesLaboratory } from './lab'
 import { linesPlanesLabChallengeIds, linesPlanesLabToolForTopic, linesPlanesLabTools } from './lab/labTools'
 import { linesPlanesStages, linesPlanesTopics } from './lessons'
@@ -37,6 +39,17 @@ const planoakBatx2zUnit: UnitDefinition = {
         progressIds: linesPlanesLabChallengeIds,
         toolForTopic: linesPlanesLabToolForTopic,
         render: (props) => <LinesPlanesLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, zuzen bikiak, sailkatu bikotea, falta den planoa, detektibea eta memoria.',
+            es: 'Seis juegos: carrera, rectas gemelas, clasifica la pareja, el plano que falta, detective y memoria.',
+            en: 'Six games: race, twin lines, classify the pair, the missing plane, detective and memory.',
+            ar: 'ست ألعاب: السباق، والمستقيمات التوأم، وصنّف الزوج، والمستوى الناقص، والمخبر، والذاكرة.'
+        },
+        progressIds: linesPlanesGameProgressIds,
+        recordsKey: LINES_PLANES_GAME_RECORDS_KEY,
+        render: (props) => <LinesPlanesGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, koefizientea, parametroa, determinantea edo t balioa. Adibidez 5, −3, 0,5 edo 3/2.', es: 'Escribe un solo número: la coordenada, el coeficiente, el parámetro, el determinante o el valor de t que se pide. Por ejemplo 5, −3, 0,5 o 3/2.', en: 'Write a single number: the coordinate, coefficient, parameter, determinant or value of t that is asked for. For example 5, −3, 0.5 or 3/2.', ar: 'اكتب عددًا واحدًا: المركّبة أو المعامل أو الوسيط أو المحدد أو قيمة t المطلوبة. مثلًا 5 أو ⁦−3⁩ أو 0.5 أو 3/2.' },

@@ -1,0 +1,15 @@
+/* The round games of Zuzenak eta planoak espazioan (Batxilergoa 2 · Zientziak) */
+.fraction-v2-games-card[data-game="twins"] { --game-tint: var(--violet-tint, #e7e0f6); }
+.fraction-v2-games-card[data-game="classify"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="missing"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+/* Tall formulas (fractions, systems) scroll sideways only, never up and down */
+.planes-games-big { text-align: center; font-size: 22px; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+.planes-games-pair { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 0; font-size: 18px; }
+.planes-games-pair > span { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+.planes-games-worked { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+.prop3-options.planes-games-equations { grid-template-columns: 1fr; }
+.prop3-options.planes-games-equations button { display: flex; align-items: center; gap: 10px; text-align: start; }
+.prop3-options.planes-games-equations button > span { flex: 1; min-width: 0; overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
+.prop3-options.planes-games-positions { grid-template-columns: 1fr 1fr; }
+.prop3-options.planes-games-numbers { grid-template-columns: 1fr 1fr; }
