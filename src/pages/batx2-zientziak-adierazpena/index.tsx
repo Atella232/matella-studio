@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2SketchChallenges, bach2SketchDiagnostic, bach2SketchExerciseBank, bach2SketchPractice } from './content'
 import { Bach2SketchHeroArt } from './figures'
+import { Bach2SketchLaboratory } from './lab'
+import { bach2SketchLabChallengeIds, bach2SketchLabToolForTopic, bach2SketchLabTools } from './lab/labTools'
 import { bach2SketchStages, bach2SketchTopics } from './lessons'
 
 const adierazpenaBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const adierazpenaBatx2zUnit: UnitDefinition = {
     guidedPractice: bach2SketchPractice,
     exerciseBank: bach2SketchExerciseBank,
     challenges: bach2SketchChallenges,
+    lab: {
+        description: {
+            eu: `${bach2SketchLabTools.length} tresna, erronkekin: kurba eta haren asintota, simetria eta periodoa, balio absolutuaren ispilua eta f′ grafikotik f grafikora, berriak; eta 1. mailako Aplikazioak unitateko muntatu grafikoa eta Funtzioak unitateko transformazioen tailerra.`,
+            es: `${bach2SketchLabTools.length} herramientas con retos: la curva y su asíntota, simetría y periodo, el espejo del valor absoluto y de f′ a f, nuevas; y de 1.º, monta la gráfica (Aplicaciones) y el taller de transformaciones (Funciones).`,
+            en: `${bach2SketchLabTools.length} tools with challenges: the curve and its asymptote, symmetry and period, the mirror of the absolute value and from f′ to f, new; and from 1st year, build the graph (Applications) and the transformation workshop (Functions).`,
+            ar: `${bach2SketchLabTools.length} أدوات مع تحديات: المنحنى ومقاربه، والتناظر والدور، ومرآة القيمة المطلقة، ومن f′ إلى f، وهي جديدة؛ ومن السنة الأولى: ابنِ الرسم (التطبيقات) وورشة التحويلات (الدوال).`
+        },
+        progressIds: bach2SketchLabChallengeIds,
+        toolForTopic: bach2SketchLabToolForTopic,
+        render: (props) => <Bach2SketchLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2.', es: 'Escribe un número: 5, −3, 0,25 o 3/2.', en: 'Write a number: 5, −3, 0.25 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2.' },
         defaultForm: 'any',

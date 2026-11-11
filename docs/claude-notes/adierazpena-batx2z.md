@@ -51,7 +51,20 @@ Cuarto y último tema del bloque Cálculo diferencial de 2.º Ciencias (reparto 
   - El test «el ejemplo tiene números propios» compara los números sin exponentes: `g(x)=x^4-2x^2` y `f(x)=-x^3+2x` cuentan como iguales (solo el 2).
   - Las oblicuas con raíz se explican en dos filas: la resta por el conjugado y, debajo, `n=\frac{4}{1+1}=2`.
 
+**Fase 3, laboratorio «Las gráficas de cerca» (6 herramientas):**
+- **Propias (cada una pide una predicción antes de dibujar y tiene 5 retos fijos y retos sin fin con `freshFrom`):**
+  - `asymptote.ts`, L1 «La curva y su asíntota» (125101–125105): g₁ = (x² + 1)/x, g₂ = (x² − 2)/x, g₃ = (x − 2)/(x² + 1) (corta su asíntota en x = 2), g₄ = (2x² + 1)/(x² + 1) y g₅ = √(x² + 4) (oblicua distinta a cada lado). x₀ va de −20 a 20 y el tablero se aleja con él; tras predecir se sombrea la diferencia (verde encima, rojo debajo). Predicción para x > 0: siempre debajo, la corta o siempre encima. Retos sin fin: un x con una diferencia exacta dada (fracción).
+  - `symmetry.ts`, L4 «Simetría y periodo» (125351–125355): seis funciones (dos impares, dos pares, dos ni una cosa ni otra; tres trigonométricas). En el mismo tablero, la copia f(−x), −f(−x) o f(x + T) con T = π/2 … 2π, y la lectura dice si cae sobre la curva. Predicción: impar, ninguna o par.
+  - `mirror.ts`, L2 «El espejo del valor absoluto» (125201–125205): cinco f y tres vistas (f, |f(x)|, f(|x|)), con los picos marcados y un punto x₀. Predicción: cuántos picos tendrá |f(x)| (menos de dos, dos, más). A diferencia de «Dobla el valor absoluto» de 4.º, añade f(|x|) y cuenta los picos.
+  - `fromDerivative.ts`, L3 «De f′ a f» (125301–125305): arriba f′, abajo f dibujada hasta x₀, con un paso para C = f(0). Predicción: el máximo de f en un x negativo, en 0 o en un x positivo. Retos sin fin: ponerse en un extremo o una inflexión, o elegir C para un máximo dado.
+- **Prestadas, con sus retos e ids:** «Monta la gráfica» (`layers` de Aplikazioak 1.º, etapa `review`) y «El taller de transformaciones» (`transform` de Funtzioak 1.º, etapa `roots`), sin tocarlas.
+- **Componentes:** `Bach2SketchTools.tsx` (copias de `curvePath`, `Grid` con paso de líneas y `useClip` de Aplikazioak 2.º), `labTools.ts` e `index.tsx`. Test `tests/adierazpena-batx2z-lab.test.ts` (5 pruebas: retos, retos sin fin, las tres respuestas de cada predicción y la matemática de cada herramienta).
+- **Comprobación:** las 6 herramientas a 375 px en eu, es y ar, con cada función y cada vista, antes y después de predecir y con los pasadores en sus dos extremos: sin desbordes, sin LaTeX sin dibujar y sin textos montados en los tableros (el selector de herramientas se desliza a propósito).
+- **Trucos:**
+  - Las opciones de una predicción no pasan por KaTeX: van en texto llano (`x = 0`, y en árabe con LRI/PDI).
+  - La lectura de «De f′ a f» va en cuatro líneas y con dos decimales: con tres, `f′(x₀)` y `f(x₀)` juntos no caben en 268 px.
+
 ## En curso
 
-- **Siguiente paso:** fase 3, laboratorio. Herramientas propias L1 «La curva y su asíntota» (125101–125105), L2 «El espejo del valor absoluto» (125201–125205), L3 «De f′ a f» (125301–125305) y L4 «Simetría y periodo» (125351–125355), cada una con predicción y 5 retos + retos sin fin; después las prestadas «Monta la gráfica» (`LayersTool` de Aplikazioak 1.º) y «El taller de transformaciones» (primera herramienta de Funtzioak 1.º).
-- **Después:** fase 4, juegos (J1 125501–03, J2 125601–03, J3 125651–53, detective 125701–03, carrera 125401–05, memoria 125801–03, «Sube o baja» 125811–13, «Caza las asíntotas» 125821–23) y el cierre (tests, inventario, 375 px, hoja de euskera).
+- **Siguiente paso:** fase 4, juegos. Propios: J1 «¿Qué gráfica es?» (125501–125503), J2 «Lee la derivada» (125601–125603), J3 «Asíntotas a la vista» (125651–125653) y el detective (125701–125703); genéricos: carrera (125401–125405) y memoria (125801–125803, función ↔ asíntota y función ↔ simetría); prestados: «Sube o baja» (`updown` de Aplikazioak 1.º, 125811–125813) y «Caza las asíntotas» (`asymptote` de Limiteak 1.º, 125821–125823).
+- **Después:** el cierre (tests, inventario, 375 px, hoja de euskera, nota sin «En curso»).
