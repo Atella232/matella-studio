@@ -45,6 +45,7 @@ Segundo tema de 2.º Ciencias (curso `batx2-zientziak`, tema `determinantes`), s
 
 - El test común `lesson-texts.test.ts` parte `\begin{vmatrix}` por filas y cambia `&` por espacios: una casilla negativa que no sea la primera de su fila (`1&-4`) se lee como una resta. En las fórmulas de `lessonTexts.ts` se escribe `{-4}`; el lector de `tests/matrix-latex.ts` quita esas llaves.
 - En el laboratorio, el título vasco «Determinantearen graduatzailea» no cabía junto al botón de la lección a 375 px (la palabra larga no se parte): se llama «Determinantea, k aldatzean». Las etiquetas de predicción han de ser cortas: tres botones en una fila.
+- `work()` y `same()` reciben solo la fórmula, nunca una frase: «$…$, zeroak eginez» salió en euskera en los cuatro idiomas (práctica 7 y 10, banco 14 y 24; corregido con `byZeros` y `alongColumn`). El test de contenido lo vigila ahora: nada de palabras latinas en árabe ni dos palabras vascas seguidas en es o en.
 - `-0`: `ad-bc` puede dar `-0` y `assert.equal` lo distingue de `0`; se suma `+ 0`.
 - En el test de contenido, la línea mala de un error típico puede tener pasos bien hechos (`|…|=1\cdot 4+2\cdot 3=10`): basta con que un paso falle.
 

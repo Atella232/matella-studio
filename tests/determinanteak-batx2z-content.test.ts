@@ -140,6 +140,35 @@ test('determinanteak batx2 z: each language in its own place, and Arabic never k
     }
 })
 
+/** Every text in four languages inside a value (lesson texts and checks are nested objects) */
+function localizedIn(value: unknown, found: LocalizedText[] = []): LocalizedText[] {
+    if (Array.isArray(value)) value.forEach((item) => localizedIn(item, found))
+    else if (value && typeof value === 'object') {
+        const record = value as Record<string, unknown>
+        if (['eu', 'es', 'en', 'ar'].every((key) => typeof record[key] === 'string')) found.push(record as unknown as LocalizedText)
+        else Object.values(record).forEach((item) => localizedIn(item, found))
+    }
+    return found
+}
+
+test('determinanteak batx2 z: no words of one language inside another (a phrase passed where only a formula goes)', () => {
+    const names = new Set(['Sarrus', 'Gauss', 'Laplace', 'Cramer', 'Rouché', 'Minus'])
+    const words = (text: string, size: number) => (text.replace(/\$[^$]+\$/g, ' ').match(new RegExp(`[A-Za-zÀ-ÿñÑ]{${size},}`, 'g')) ?? []).filter((word) => !names.has(word))
+    const texts = [...allTexts(), ...localizedIn(determinanteakLessonTexts), ...localizedIn(determinanteakLessonChecks)]
+    assert.ok(texts.length > 400, `only ${texts.length} texts`)
+    for (const text of texts) {
+        assert.deepEqual(words(text.ar, 4), [], `Latin words in Arabic: ${text.ar}`)
+        if (text.eu === text.es) continue
+        // One shared word is fine (determinante, Minus); two Basque words in a row are a Basque phrase
+        const pairs = (value: string) => { const list = words(value, 4); return list.slice(1).map((word, index) => `${list[index]} ${word}`) }
+        const basque = new Set(pairs(text.eu))
+        for (const language of ['es', 'en'] as const) {
+            const shared = pairs(text[language]).filter((pair) => basque.has(pair))
+            assert.deepEqual(shared, [], `Basque in ${language}: ${text[language]}`)
+        }
+    }
+})
+
 test('determinanteak batx2 z: Basque glues no case ending to a number or a formula', () => {
     for (const text of allTexts()) {
         assert.ok(!/\d[a-zñ]/.test(text.eu.replace(/\$[^$]+\$/g, '')) && !/\$(?:ri|ren|rekin|z|ra|tik|ei|ek|ak|en|ko|an)(?![a-zA-Z])/.test(text.eu), text.eu)
