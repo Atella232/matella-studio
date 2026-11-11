@@ -1,3 +1,4 @@
+import { Label } from '../dbh2-funtzioak-v2/plane'
 import { useState, type ReactNode } from 'react'
 import { MathText } from '../../components/MathText'
 import { localLatex, useGameText } from '../../features/unit-v2/games/gameHooks'
@@ -52,17 +53,17 @@ function DecisionTree({ right, chosen, language }: { right: Model; chosen: { ord
             <line x1="114" y1="112" x2="60" y2="168" stroke={stroke('repeat-yes')} strokeWidth={weight('repeat-yes')} />
             <line x1="114" y1="112" x2="168" y2="168" stroke={stroke('repeat-no')} strokeWidth={weight('repeat-no')} />
             <rect x="75" y="10" width="180" height="28" rx="14" fill="var(--paper-deep, #ece6da)" stroke={INK} strokeWidth="2" />
-            <text x="165" y="29" textAnchor="middle" fontSize="13" fontWeight="700" fill={INK}>{l(say('Ordenak axola du?', '¿Importa el orden?', 'هل يهم الترتيب؟', 'Does order matter?'))}</text>
-            <text x="124" y="66" textAnchor="end" fontSize="12" fontWeight="700" fill={MUTED}>{l(YES)}</text>
-            <text x="232" y="56" fontSize="12" fontWeight="700" fill={MUTED}>{l(NO)}</text>
+            <Label x="165" y="29" textAnchor="middle" fontSize="13" fontWeight="700" fill={INK}>{l(say('Ordenak axola du?', '¿Importa el orden?', 'هل يهم الترتيب؟', 'Does order matter?'))}</Label>
+            <Label x="124" y="66" textAnchor="end" fontSize="12" fontWeight="700" fill={MUTED}>{l(YES)}</Label>
+            <Label x="232" y="56" fontSize="12" fontWeight="700" fill={MUTED}>{l(NO)}</Label>
             <rect x="29" y="90" width="170" height="28" rx="14" fill="var(--paper-deep, #ece6da)" stroke={INK} strokeWidth="2" />
-            <text x="114" y="109" textAnchor="middle" fontSize="13" fontWeight="700" fill={INK}>{l(say('Errepikatu daiteke?', '¿Se repite?', 'هل يتكرر؟', 'Can it repeat?'))}</text>
-            <text x="78" y="138" textAnchor="end" fontSize="12" fontWeight="700" fill={MUTED}>{l(YES)}</text>
-            <text x="148" y="138" fontSize="12" fontWeight="700" fill={MUTED}>{l(NO)}</text>
+            <Label x="114" y="109" textAnchor="middle" fontSize="13" fontWeight="700" fill={INK}>{l(say('Errepikatu daiteke?', '¿Se repite?', 'هل يتكرر؟', 'Can it repeat?'))}</Label>
+            <Label x="78" y="138" textAnchor="end" fontSize="12" fontWeight="700" fill={MUTED}>{l(YES)}</Label>
+            <Label x="148" y="138" fontSize="12" fontWeight="700" fill={MUTED}>{l(NO)}</Label>
             {(Object.keys(leaves) as Array<keyof typeof leaves>).map((leaf) => (
                 <g key={leaf}>
                     <rect x={leaves[leaf][0] - 52} y={leaves[leaf][1]} width="104" height="30" rx="8" fill={leaf === rightLeaf ? 'var(--success-tint, #d9efe2)' : 'var(--card, #fffcf6)'} stroke={edge(leaf)} strokeWidth="2" />
-                    <text x={leaves[leaf][0]} y={leaves[leaf][1] + 20} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK}>{l(LEAF_NAMES[leaf])}</text>
+                    <Label x={leaves[leaf][0]} y={leaves[leaf][1] + 20} textAnchor="middle" fontSize="12" fontWeight="700" fill={INK}>{l(LEAF_NAMES[leaf])}</Label>
                 </g>
             ))}
         </svg>

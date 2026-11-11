@@ -22,3 +22,6 @@ Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 
 **Teoría con las mejoras de 2. DBH (2026-11-05, rama `claude/teoria-dbh4ak-d45b04`, commit 72d1d03, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 11 enlaces (3. DBH Estadística y probabilidad; Reales, Estadística y Combinatoria de 4.º); 3 «¿Por qué funciona?» (restar la intersección, dividir entre $P(B)$, la esperanza como media); 11 dibujos tras los pasos. Detalles en `teoria-dbh4ak.md`.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/ProbabilityAkTools.tsx`: el ayudante `Text` pasa a `Label` («الأولاد», «البنات», «المجموع»). Además `dbh4-games/ProbabilityGames.tsx`: la inicial de cada bola («ح», «ز») del árbol, que sale también en 2.º Bachillerato Probabilidad. Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

@@ -73,3 +73,6 @@ V1 repaso corto y lo nuevo a fondo; V2 sec, cosec y cotg aquí; V3 ecuaciones en
 ## Publicación
 
 Publicada en matella.net el 2026-11-06 junto con otros ocho temas de 1.º Ciencias (`main` 27c197e, bundle `index-7UBtIGbr.js`). Al fusionar solo chocaron `courses.ts`, el router y `paths.ts`, en las líneas de registro. Antes de publicar: 2501 tests, lint y build en verde, y sin choques de ids, claves de guardado ni CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/TrigonometryTools.tsx`: «n حلول» y la leyenda de las vueltas. Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

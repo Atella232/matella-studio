@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
@@ -134,7 +135,7 @@ function Readout({ language, latex, note }: { language: string; latex: string; n
 }
 
 function Tag({ x, y, children, color = INK, size = 15, anchor = 'middle' }: { x: number; y: number; children: ReactNode; color?: string; size?: number; anchor?: 'start' | 'middle' | 'end' }) {
-    return <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={700} fill={color}>{children}</text>
+    return <Label x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={700} fill={color}>{children}</Label>
 }
 
 /* ---------- 1. Dividing a segment ---------- */

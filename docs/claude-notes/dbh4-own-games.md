@@ -126,3 +126,6 @@ The academic reals unit had only one own mechanic (build the interval) besides i
 
 Published on matella.net on 2026-11-02 with the owner's go-ahead («Sí, publica»): main fast-forwarded to 885c2ac and pushed, deployed from a clean worktree of main (the folder had unrelated work in progress), bundle `index-BQ8PGQN9.js`. Checked live at 375 px in es, eu and ar (one game of each block, before and after answering): no overflow, no console errors.
 
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `CombinatoricsGames.tsx`: las dos preguntas del árbol y los «نعم / لا» y nombres de las hojas. Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

@@ -22,3 +22,6 @@ Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 
 **Teoría con las mejoras de 2. DBH (2026-11-05, rama `claude/teoria-dbh4ak-d45b04`, commit d7ec2bf, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 17 enlaces (3. DBH Estadística, Proporcionalidad y Funciones lineales; Reales y Polinómicas de 4.º); 3 «¿Por qué funciona?» (un atípico mueve la media y no la mediana, las desviaciones suman 0, el CV divide entre la media); 9 dibujos tras los pasos. El euskera escribe el porcentaje delante (% 25). Detalles en `teoria-dbh4ak.md`.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/StatisticsAkTools.tsx`: el ayudante `Text` pasa a `Label`. Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

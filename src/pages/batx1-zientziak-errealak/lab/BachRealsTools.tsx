@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState } from 'react'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
@@ -255,7 +256,7 @@ export function ErrorBandTool(props: LabToolProps) {
                         </g>
                     )
                     : <Hidden x={180} y={60} />}
-                <text x={180} y={y + 54} textAnchor="middle" fontSize={13} fill={MUTED}>{l(say('Banda: balio zehatza non egon daitekeen', 'Banda: dónde puede estar el valor exacto', 'الشريط: حيث يمكن أن تكون القيمة الدقيقة', 'Band: where the exact value can be'))}</text>
+                <Label x={180} y={y + 54} textAnchor="middle" fontSize={13} fill={MUTED}>{l(say('Banda: balio zehatza non egon daitekeen', 'Banda: dónde puede estar el valor exacto', 'الشريط: حيث يمكن أن تكون القيمة الدقيقة', 'Band: where the exact value can be'))}</Label>
             </Board>
         </ToolFrame>
     )

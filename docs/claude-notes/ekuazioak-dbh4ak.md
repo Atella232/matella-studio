@@ -22,3 +22,6 @@ Is it a solution?, paint the solution and the equations detective: see [dbh4-own
 
 
 **Teoría con las mejoras de 2. DBH (2026-11-04, rama `claude/teoria-dbh4ak-d45b04`, commits 7612033 y 0556f95, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 17 enlaces (3. DBH y Potencias, Polinomios y Reales de 4.º); 3 «¿Por qué funciona?» (suma y producto de raíces, soluciones falsas al elevar al cuadrado, signo constante entre raíces). En árabe, inecuación es «متراجحة», como en el resto de la unidad. Un paso de «Problemas de segundo grado» se salía 4 px: en dos filas. Las comprobaciones con logaritmos dan las respuestas como números sueltos (el test no lee logaritmos). Detalles en `teoria-dbh4ak.md`.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/EquationsInequalitiesTools.tsx`: el ayudante `Text` pasa a `Label` («كلتاهما»). Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

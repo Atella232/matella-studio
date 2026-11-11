@@ -6,7 +6,7 @@ import { useLabText } from '../../../features/unit-v2/lab/useLabText'
 import { fraction } from '../../../features/unit-v2/math/fraction'
 import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/types'
 import { decimalSeparatorFor } from '../../../utils/numberFormat'
-import { Plane, PlaneLine, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
+import { Label, Plane, PlaneLine, PlanePath, PlanePoint } from '../../dbh2-funtzioak-v2/plane'
 import type { PlaneMap } from '../../dbh2-funtzioak-v2/planeMap'
 import { region, type HalfPlane, type Linear, type Point, type Sense } from '../systems'
 import {
@@ -381,16 +381,16 @@ export function MixtureTool(props: LabToolProps) {
         <ToolFrame {...props} controls={controls} readout={<Readout latex={latex} note={note} />} challenges={mixtureChallenges} state={state}>
             <Board height={190} label={l(say('Bi motak eta guztizkoa', 'Las dos clases y el total', 'الصنفان والمجموع', 'The two types and the total'))}>
                 <rect x={60} y={20} width={240} height={64} rx={14} fill={STAGE_TINT} stroke={INK} strokeWidth={1.5} />
-                <text x={180} y={48} textAnchor="middle" fontSize={15} fill={MUTED}>{l(scenario.things[0])}</text>
+                <Label x={180} y={48} textAnchor="middle" fontSize={15} fill={MUTED}>{l(scenario.things[0])}</Label>
                 <text x={180} y={74} textAnchor="middle" fontSize={22} fontWeight={700} fill={STAGE}>{`x = ${state.x}`}</text>
                 <rect x={340} y={20} width={240} height={64} rx={14} fill={MUSTARD_TINT} stroke={INK} strokeWidth={1.5} />
-                <text x={460} y={48} textAnchor="middle" fontSize={15} fill={MUTED}>{l(scenario.things[1])}</text>
+                <Label x={460} y={48} textAnchor="middle" fontSize={15} fill={MUTED}>{l(scenario.things[1])}</Label>
                 <text x={460} y={74} textAnchor="middle" fontSize={22} fontWeight={700} fill={SECOND}>{`y = ${y}`}</text>
                 <rect x={60} y={112} width={width} height={28} rx={8} fill="var(--card, #fffcf6)" stroke={INK} strokeWidth={1.4} />
                 <rect x={60} y={112} width={width * fill} height={28} rx={8} fill={right ? GREEN : STAGE} opacity={0.75} />
                 <line x1={60 + width * target} x2={60 + width * target} y1={104} y2={148} stroke={SECOND} strokeWidth={3} />
-                <text x={60 + width * target} y={170} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{`${scenario.total} ${l(scenario.unit)}`}</text>
-                <text x={66} y={170} fontSize={15} fill={MUTED}>{`${total} ${l(scenario.unit)}`}</text>
+                <Label x={60 + width * target} y={170} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>{`${scenario.total} ${l(scenario.unit)}`}</Label>
+                <Label x={66} y={170} fontSize={15} fill={MUTED}>{`${total} ${l(scenario.unit)}`}</Label>
             </Board>
         </ToolFrame>
     )

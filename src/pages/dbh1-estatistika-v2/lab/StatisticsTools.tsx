@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { ResultAnswer, Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
@@ -193,7 +194,7 @@ function BarChart({ counts, language }: { counts: number[]; language: UnitLangua
             {counts.map((count, index) => (
                 <g key={index}>
                     <rect x={70 + index * 100} y={220 - count * unit} width={64} height={count * unit} fill={sportSurvey[index].color} fillOpacity={0.8} stroke={INK} strokeWidth={1.6} />
-                    <text x={102 + index * 100} y={244} textAnchor="middle" fontSize={13} fill={INK}>{l(sportSurvey[index].name)}</text>
+                    <Label x={102 + index * 100} y={244} textAnchor="middle" fontSize={13} fill={INK}>{l(sportSurvey[index].name)}</Label>
                 </g>
             ))}
             <line x1={50} x2={460} y1={220} y2={220} stroke={INK} strokeWidth={2} />
@@ -238,7 +239,7 @@ function PieChart({ counts, language }: { counts: number[]; language: UnitLangua
             {sportSurvey.map((row, index) => (
                 <g key={`legend${index}`}>
                     <rect x={280} y={62 + index * 36} width={18} height={18} fill={row.color} fillOpacity={0.8} stroke={INK} strokeWidth={1.4} />
-                    <text x={308} y={77 + index * 36} fontSize={15} fill={INK}>{l(row.name)}: {counts[index]}</text>
+                    <Label x={308} y={77 + index * 36} fontSize={15} fill={INK}>{l(row.name)}: {counts[index]}</Label>
                 </g>
             ))}
         </svg>

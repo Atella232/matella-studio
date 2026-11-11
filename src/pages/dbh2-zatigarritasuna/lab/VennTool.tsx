@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Segmented, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
@@ -63,11 +64,11 @@ export function VennTool(props: DivisibilityToolProps & { challenges?: LabChalle
                     <Factors values={regions.onlyFirst} cx={200} cy={160} />
                     <Factors values={regions.shared} cx={320} cy={160} />
                     <Factors values={regions.onlySecond} cx={440} cy={160} />
-                    <text x={320} y={292} textAnchor="middle" fontSize={15} fill="var(--muted)">
+                    <Label x={320} y={292} textAnchor="middle" fontSize={15} fill="var(--muted)">
                         {ask === 'gcd'
                             ? l({ eu: `${acronym(props.language, 'gcd')}: erdikoak bakarrik → ${shown ? product(regions.shared) : '?'}`, es: `${acronym(props.language, 'gcd')}: solo los del centro → ${shown ? product(regions.shared) : '?'}`, en: `${acronym(props.language, 'gcd')}: only the ones in the centre → ${shown ? product(regions.shared) : '?'}`, ar: `${acronym(props.language, 'gcd')}: عوامل الوسط فقط ← ${shown ? product(regions.shared) : '?'}` })
                             : l({ eu: `${acronym(props.language, 'lcm')}: diagramako guztiak → ${shown ? expected : '?'}`, es: `${acronym(props.language, 'lcm')}: todos los del diagrama → ${shown ? expected : '?'}`, en: `${acronym(props.language, 'lcm')}: all those in the diagram → ${shown ? expected : '?'}`, ar: `${acronym(props.language, 'lcm')}: كل عوامل المخطط ← ${shown ? expected : '?'}` })}
-                    </text>
+                    </Label>
                 </svg>
             </div>
         </ToolFrame>

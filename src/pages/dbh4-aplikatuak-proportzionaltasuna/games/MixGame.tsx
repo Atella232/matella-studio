@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState } from 'react'
 import { MathText } from '../../../components/MathText'
 import { GameTopbar, LevelPicker, ResultPanel } from '../../../features/unit-v2/games/GameKit'
@@ -78,8 +79,8 @@ function Load({ round, x, height, amount, side, language }: { round: MixRound; x
                         {!empty && <path d={`M${x - 8} ${top + 1} l8 -7 l8 7`} fill={fill} stroke={INK} strokeWidth={1.4} strokeLinejoin="round" />}
                     </>
                 )}
-            <text x={x} y={BEAM_Y - 3 - height / 2 + 5} textAnchor="middle" fontSize={13} fontWeight={700} fill={INK}>{amountText(round, amount, language)}</text>
-            <text x={x} y={top - (gold ? 6 : 12)} textAnchor="middle" fontSize={13} fontWeight={700} fill={MUTED}>{valueText(round, round.values[side], language)}</text>
+            <Label x={x} y={BEAM_Y - 3 - height / 2 + 5} textAnchor="middle" fontSize={13} fontWeight={700} fill={INK}>{amountText(round, amount, language)}</Label>
+            <Label x={x} y={top - (gold ? 6 : 12)} textAnchor="middle" fontSize={13} fontWeight={700} fill={MUTED}>{valueText(round, round.values[side], language)}</Label>
         </g>
     )
 }
@@ -255,7 +256,7 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
                 </g>
 
                 {/* Under the ground: the price asked for, and how far each value is from it */}
-                <text x={CX} y={GROUND + 18} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{valueText(round, round.target, language)}</text>
+                <Label x={CX} y={GROUND + 18} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{valueText(round, round.target, language)}</Label>
                 {([0, 1] as const).map((product) => {
                     const x = loadX[product]
                     const left = Math.min(x, CX)
@@ -265,7 +266,7 @@ export function ProportionDbh4ApMixGame({ language, records, onResult, onExit }:
                         <g key={product}>
                             <line x1={left} x2={right} y1={GROUND + 32} y2={GROUND + 32} stroke={MUTED} strokeWidth={1.6} />
                             {[left, right].map((end) => <line key={end} x1={end} x2={end} y1={GROUND + 27} y2={GROUND + 37} stroke={MUTED} strokeWidth={1.6} />)}
-                            <text x={(left + right) / 2} y={GROUND + 52} textAnchor="middle" fontSize={13} fontWeight={700} fill={MUTED}>{distanceText(round, distance, language)}</text>
+                            <Label x={(left + right) / 2} y={GROUND + 52} textAnchor="middle" fontSize={13} fontWeight={700} fill={MUTED}>{distanceText(round, distance, language)}</Label>
                         </g>
                     )
                 })}

@@ -55,3 +55,6 @@ Sexta unidad de 1.º Ciencias (curso `batx1-zientziak`, tema `estadistica-bidime
 ## Publicación
 
 Publicada en matella.net el 2026-11-06 junto con Cónicas y Aplicaciones de la derivada (`main` 5cec556, bundle `index-DOvfCVKR.js`). Al fusionar solo chocaron las líneas de registro del router y de `paths.ts`, y la nota de Estadística (las dos ramas apuntaban la misma decisión de los percentiles: se quedó la de `main`); `courses.ts` se unió solo. Antes de publicar: 2607 tests, lint y build en verde, y sin choques de claves de guardado ni de CSS con los otros temas. Comprobado en vivo a 375 px en eu, es y ar (portada, tres lecciones, laboratorio y juegos): sin desbordes, sin errores de KaTeX y sin errores en la consola.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/BivarTools.tsx`: cabeceras de la tabla de contingencia, filas, barras y la frase «الخط: نصيب…». Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

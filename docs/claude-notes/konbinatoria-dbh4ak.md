@@ -20,3 +20,6 @@ Deployed on matella.net 2026-11-02 (main 885c2ac, bundle index-BQ8PGQN9.js).
 
 
 **Teoría con las mejoras de 2. DBH (2026-11-05, rama `claude/teoria-dbh4ak-d45b04`, commit 2850b12, sin publicar):** `lessonTexts.ts` y `lessonChecks.ts` en las 15 lecciones; 4 enlaces (3. DBH Estadística y Geometría plana; Potencias y Polinomios de 4.º); 3 «¿Por qué funciona?» (dividir entre $k!$, la regla del triángulo, «al menos una» con el contrario); 10 dibujos tras los pasos. La notación V, VR, P y C es la misma en los cuatro idiomas. La respuesta buena de «Compruébalo» cambia de sitio (el test lo pide). Detalles en `teoria-dbh4ak.md`.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/CombinatoricsAkTools.tsx`: el ayudante `Text` pasa a `Label`. Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

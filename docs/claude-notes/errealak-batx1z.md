@@ -95,3 +95,6 @@ El 2026-11-05 el dueño dijo «Sí, publica», sin leer antes la hoja de euskera
   - los 3 juegos propios, con el primer nivel empezado.
 
   No se sale nada de la pantalla, no hay errores de KaTeX ni de consola, y cada página sale en su idioma.
+
+
+**Texto árabe de los dibujos SVG del laboratorio y los juegos (rama `feat/arabic-svg-labs-games`, 2026-11-11, sin publicar):** `lab/BachRealsTools.tsx`: la frase de la banda («الشريط: حيث يمكن أن تكون القيمة الدقيقة»). Antes iba en un `<text>` suelto dentro de `direction: ltr` y la frase árabe salía de izquierda a derecha. Ahora pasa por `Label` (`dbh2-funtzioak-v2/plane.tsx`) con los mismos atributos; eu, es y en no cambian. Detalle del método en `funtzioak-dbh2.md` (sección «feat/arabic-svg-labels») y en la sección del mismo nombre de esa nota.

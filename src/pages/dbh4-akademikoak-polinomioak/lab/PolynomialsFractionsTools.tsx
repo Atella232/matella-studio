@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useState, type ReactNode } from 'react'
 import { MathText } from '../../../components/MathText'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
@@ -112,7 +113,7 @@ function Readout({ latex, note }: { latex: string; note: string }) {
 }
 
 function Text({ x, y, children, color = INK, size = 18, anchor = 'middle', weight = 700 }: { x: number; y: number; children: ReactNode; color?: string; size?: number; anchor?: 'start' | 'middle' | 'end'; weight?: number }) {
-    return <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}>{children}</text>
+    return <Label x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={weight} fill={color}>{children}</Label>
 }
 
 /** A stacked fraction drawn with text, centred on x; y is the bar */

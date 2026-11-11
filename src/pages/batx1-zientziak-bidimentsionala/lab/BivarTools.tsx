@@ -1,3 +1,4 @@
+import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { useId, useRef, useState, type PointerEvent } from 'react'
 import { Segmented, Stepper, ToolFrame } from '../../../features/unit-v2/lab/LabKit'
 import type { LabToolProps } from '../../../features/unit-v2/lab/types'
@@ -270,10 +271,10 @@ export function IndependenceTool(props: LabToolProps) {
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={independenceChallenges} extraChallenges={independenceExtra} state={state}>
             <Board height={260} label={l(say('Sarrera bikoitzeko taula eta bi errenkadak barra gisa', 'La tabla de doble entrada y sus dos filas como barras', 'الجدول مزدوج المدخل وسطراه أعمدةً', 'The two-way table and its two rows as bars'))}>
-                {[l(say('bai', 'sí', 'نعم', 'yes')), l(say('ez', 'no', 'لا', 'no')), l(say('guztira', 'total', 'المجموع', 'total'))].map((name, index) => <text key={name} x={columnX[index]} y={26} textAnchor="middle" fontSize={12} fontWeight={700} fill={index === 0 ? GREEN : index === 1 ? SECOND : MUTED}>{name}</text>)}
+                {[l(say('bai', 'sí', 'نعم', 'yes')), l(say('ez', 'no', 'لا', 'no')), l(say('guztira', 'total', 'المجموع', 'total'))].map((name, index) => <Label key={name} x={columnX[index]} y={26} textAnchor="middle" fontSize={12} fontWeight={700} fill={index === 0 ? GREEN : index === 1 ? SECOND : MUTED}>{name}</Label>)}
                 <line x1={30} x2={350} y1={34} y2={34} stroke={INK} strokeWidth={1.4} />
                 <line x1={150} x2={150} y1={12} y2={118} stroke={INK} strokeWidth={1.4} />
-                {[...ROWS, say('Guztira', 'Total', 'المجموع', 'Total')].map((name, index) => <text key={index} x={90} y={rowY[index] + 4} textAnchor="middle" fontSize={12} fontWeight={700} fill={index < 2 ? STAGE : MUTED}>{l(name)}</text>)}
+                {[...ROWS, say('Guztira', 'Total', 'المجموع', 'Total')].map((name, index) => <Label key={index} x={90} y={rowY[index] + 4} textAnchor="middle" fontSize={12} fontWeight={700} fill={index < 2 ? STAGE : MUTED}>{l(name)}</Label>)}
                 {[0, 1].map((row) => [state.cells[row][0], state.cells[row][1], rowTotal(state, row as 0 | 1)].map((value, column) => <text key={`${row}-${column}`} x={columnX[column]} y={rowY[row] + 4} textAnchor="middle" fontSize={13} fontWeight={column === 2 ? 700 : 400} fill={INK}>{value}</text>))}
                 {[columnYes, total - columnYes, total].map((value, column) => <text key={`t${column}`} x={columnX[column]} y={rowY[2] + 4} textAnchor="middle" fontSize={13} fontWeight={700} fill={INK}>{value}</text>)}
                 <line x1={30} x2={350} y1={94} y2={94} stroke={INK} strokeWidth={1} />
@@ -283,7 +284,7 @@ export function IndependenceTool(props: LabToolProps) {
                     const yes = sum === 0 ? 0 : (state.cells[row][0] / sum) * barWidth
                     return (
                         <g key={row}>
-                            <text x={barLeft} y={y - 5} fontSize={11} fontWeight={700} fill={STAGE}>{l(ROWS[row])}</text>
+                            <Label x={barLeft} y={y - 5} fontSize={11} fontWeight={700} fill={STAGE}>{l(ROWS[row])}</Label>
                             {shown && sum > 0
                                 ? (
                                     <g>
@@ -297,7 +298,7 @@ export function IndependenceTool(props: LabToolProps) {
                     )
                 })}
                 {shown && total > 0 && <line x1={barLeft + (columnYes / total) * barWidth} x2={barLeft + (columnYes / total) * barWidth} y1={130} y2={228} stroke={INK} strokeWidth={1.6} strokeDasharray="5 4" />}
-                {shown && <text x={180} y={248} textAnchor="middle" fontSize={11} fill={MUTED}>{l(say('Marra: «bai» zatia guztira', 'Raya: la parte de «sí» en total', 'الخط: نصيب «نعم» في المجموع', 'Line: the share of «yes» overall'))}</text>}
+                {shown && <Label x={180} y={248} textAnchor="middle" fontSize={11} fill={MUTED}>{l(say('Marra: «bai» zatia guztira', 'Raya: la parte de «sí» en total', 'الخط: نصيب «نعم» في المجموع', 'Line: the share of «yes» overall'))}</Label>}
                 {!shown && <Hidden x={180} y={190} size={28} />}
             </Board>
         </ToolFrame>
