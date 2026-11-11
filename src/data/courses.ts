@@ -218,7 +218,7 @@ export const courses: Course[] = [
     topics: [
       { id: 'matrices', name: 'Matrices', nameEu: 'Matrizeak', nameAr: 'المصفوفات', nameEn: 'Matrices', icon: '🔲', active: true },
       { id: 'determinantes', name: 'Determinantes', nameEu: 'Determinanteak', nameAr: 'المحددات', nameEn: 'Determinants', icon: '▦', active: true },
-      { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', nameEn: 'Systems of Equations', icon: '📝' },
+      { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', nameEn: 'Systems of Equations', icon: '📝', active: true },
       { id: 'vectores-espacio', name: 'Vectores en el Espacio', nameEu: 'Espazioko Bektoreak', nameAr: 'المتجهات في الفضاء', nameEn: 'Vectors in Space', icon: '➡️', active: true },
       { id: 'rectas-planos', name: 'Rectas y Planos en el Espacio', nameEu: 'Zuzenak eta Planoak Espazioan', nameAr: 'المستقيمات والمستويات في الفضاء', nameEn: 'Lines and Planes in Space', icon: '🧊' },
       { id: 'angulos-distancias', name: 'Ángulos y Distancias', nameEu: 'Angeluak eta Distantziak', nameAr: 'الزوايا والمسافات', nameEn: 'Angles and Distances', icon: '📐' },
