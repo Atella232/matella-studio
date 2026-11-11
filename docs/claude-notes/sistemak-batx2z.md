@@ -25,6 +25,15 @@ Tercer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `sistemas`), tercero
 
 - **Fase 1+2 (lecciones y contenido):** 15 lecciones con `lessonTexts.ts` y `lessonChecks.ts` (cuatro «¿Por qué funciona?»: `rouche-theorem`, `cramer-rule`, `homogeneous-trivial`, `parameter-determinant`); diagnóstico 118001–118008; práctica 1–20, retos 101–115 y banco 1–50 (4/3/10 por etapa). Lógica exportada en `system.ts` (`classify`, `cramer`, `replaceColumn`, `augmentedRows`, `rankOf`, `detValue`, `satisfies`, `systemLatex`, `augmentedStarLatex`, `KIND_WORDS`) para el laboratorio, los juegos y 2.º Sociales. Dibujos en `figures.tsx`: `AugmentedFigure`, `RoucheFigure`, `ThreeLinesFigure`, `CramerFigure`, `ParameterMapFigure`, `SystemsHeroArt`. Test `tests/sistemak-batx2z-content.test.ts`: además de lo de siempre, lee cada `\begin{cases}` de los enunciados (con el parámetro sustituido por la respuesta) y comprueba con `system.ts` cada respuesta (Cramer, rangos, tipo, soluciones no triviales) y que el valor del parámetro es el único.
 
+- **Fase 3 (laboratorio):** cuatro herramientas propias en `lab/`, con predicción, 5 retos fijos y retos sin fin:
+  - L1 `rouche-light` (`roucheLight.ts`, 118101–118105): $A^*$ de tres sistemas (A, B, C); se cambian $b_1, b_2, b_3$ y la esquina $k$; se predice cuántas soluciones y se encienden los rangos con un semáforo.
+  - L4 `three-lines` (`threeLines.ts`, 118151–118155): tres rectas $ax+by=c$ que se cambian una a una; se predice cuántos puntos comunes; `commonPoint`.
+  - L2 `cramer-machine` (`cramerMachine.ts`, 118201–118205): tres sistemas de Cramer; se elige la incógnita, ▶ mete la columna $B$ y se ve $|A_j|/|A|$.
+  - L3 `discussion-map` (`discussionMap.ts`, 118301–118305): cuatro familias con $a$ de −4 a 4; cada valor visto se pinta (verde una, ámbar infinitas, rojo ninguna). Exporta `DISCUSSION_FAMILIES`, `kindAt`, `criticalValues`.
+  - M1: `SolutionFamilyTool` de 1.º, sin cambios y con sus ids.
+  - La predicción del tipo se pregunta como «cuántas soluciones» (ninguna, una, infinitas): las palabras largas del tipo no cabían en tres botones a 375 px.
+  - Test `tests/sistemak-batx2z-lab.test.ts`. Revisado a 375 px en eu, es y ar con la predicción hecha.
+
 ## Trucos
 
 - El test común `lesson-texts` y el de contenido buscan sufijos vascos con `\$(?:…|z|…)`: en euskera **ninguna fórmula puede empezar por la letra z** («$z=\lambda$» se lee como «$…$z»). Se escribe «hirugarren ezezaguna», se reordena ($x$ primero) o se pone `|A_z|` delante.
@@ -33,4 +42,4 @@ Tercer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `sistemas`), tercero
 
 ## En curso
 
-- Fase 1+2 hecha (ver commit). Siguiente: fase 3, laboratorio (L1–L4, ids 118101–118399, y M1 con sus ids de 1.º) y su test.
+- Fases 1+2 y 3 hechas (ver commits). Siguiente: fase 4, juegos (J1 Rouché exprés, J2 Cramer columna a columna, J4 detective, carrera y memoria; ids 118401–118899) y su test. Después, el cierre.

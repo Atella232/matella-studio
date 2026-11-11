@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { sistemakChallenges, sistemakDiagnostic, sistemakExerciseBank, sistemakPractice } from './content'
 import { SystemsHeroArt } from './figures'
+import { SistemakLaboratory } from './lab'
+import { sistemakLabChallengeIds, sistemakLabToolForTopic, sistemakLabTools } from './lab/labTools'
 import { sistemakStages, sistemakTopics } from './lessons'
 
 const sistemakBatx2zUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const sistemakBatx2zUnit: UnitDefinition = {
     guidedPractice: sistemakPractice,
     exerciseBank: sistemakExerciseBank,
     challenges: sistemakChallenges,
+    lab: {
+        description: {
+            eu: `${sistemakLabTools.length} tresna, erronkekin: Rouchéren semaforoa, hiru zuzen, Cramerren makina eta eztabaidaren mapa, berriak; eta 1. Batxilergoko soluzioen familia.`,
+            es: `${sistemakLabTools.length} herramientas con retos: el semáforo de Rouché, tres rectas, la máquina de Cramer y el mapa de la discusión, nuevas; y la familia de soluciones de 1.º de Bachillerato.`,
+            en: `${sistemakLabTools.length} tools with challenges: the Rouché traffic light, three lines, the Cramer machine and the discussion map, new; and the family of solutions from 1st Bachillerato.`,
+            ar: `${sistemakLabTools.length} أدوات مع تحديات: إشارة روشيه وثلاثة مستقيمات وآلة كرامر وخريطة المناقشة، وهي جديدة؛ وعائلة الحلول من البكالوريا الأولى.`
+        },
+        progressIds: sistemakLabChallengeIds,
+        toolForTopic: sistemakLabToolForTopic,
+        render: (props) => <SistemakLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',
