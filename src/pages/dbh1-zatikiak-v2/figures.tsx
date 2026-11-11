@@ -1,5 +1,6 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Bar, Caption, Figure, Frac } from '../dbh2-zatikiak-prototype/figures'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Zatikiak · 1. DBH — figures of their own (the three readings of 3/4, the
@@ -59,13 +60,13 @@ export function CheeseFigure({ language }: { language: UnitLanguage }) {
             <Pie cx={150} cy={110} r={86} parts={8} filled={3} />
             <Frac x={420} y={104} n={3} d={8} size={46} color={STAGE} />
             <line x1={470} x2={520} y1={80} y2={62} stroke={INK} strokeWidth={1.6} />
-            <text x={528} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'zenbakitzailea', es: 'numerador', en: 'numerator', ar: 'البسط' })}</text>
-            <text x={528} y={80} fontSize={14} fill={MUTED}>{pick(language, { eu: 'hartzen diren zatiak', es: 'partes que se toman', en: 'parts taken', ar: 'الأجزاء المأخوذة' })}</text>
+            <Label x={528} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'zenbakitzailea', es: 'numerador', en: 'numerator', ar: 'البسط' })}</Label>
+            <Label x={528} y={80} fontSize={14} fill={MUTED}>{pick(language, { eu: 'hartzen diren zatiak', es: 'partes que se toman', en: 'parts taken', ar: 'الأجزاء المأخوذة' })}</Label>
             <line x1={470} x2={520} y1={104} y2={104} stroke={INK} strokeWidth={1.6} />
-            <text x={528} y={110} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'zatiki-marra', es: 'raya de fracción', en: 'fraction bar', ar: 'خط الكسر' })}</text>
+            <Label x={528} y={110} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'zatiki-marra', es: 'raya de fracción', en: 'fraction bar', ar: 'خط الكسر' })}</Label>
             <line x1={470} x2={520} y1={128} y2={146} stroke={INK} strokeWidth={1.6} />
-            <text x={528} y={150} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'izendatzailea', es: 'denominador', en: 'denominator', ar: 'المقام' })}</text>
-            <text x={528} y={170} fontSize={14} fill={MUTED}>{pick(language, { eu: 'zati berdinak guztira', es: 'partes iguales en total', en: 'equal parts in total', ar: 'مجموع الأجزاء المتساوية' })}</text>
+            <Label x={528} y={150} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'izendatzailea', es: 'denominador', en: 'denominator', ar: 'المقام' })}</Label>
+            <Label x={528} y={170} fontSize={14} fill={MUTED}>{pick(language, { eu: 'zati berdinak guztira', es: 'partes iguales en total', en: 'equal parts in total', ar: 'مجموع الأجزاء المتساوية' })}</Label>
             <Caption y={222}>{pick(language, { eu: '«Hiru zortziren»: 8 zati berdinetatik 3', es: '«Tres octavos»: 3 de 8 partes iguales', en: '“Three eighths”: 3 of 8 equal parts', ar: '«ثلاثة أثمان»: 3 من 8 أجزاء متساوية' })}</Caption>
         </Figure>
     )
@@ -106,7 +107,7 @@ export function TypesLineFigure({ language }: { language: UnitLanguage }) {
                 <g key={mark.n}>
                     <circle cx={x(mark.value)} cy={120} r={8} fill={mark.color} stroke={INK} strokeWidth={2} />
                     <Frac x={x(mark.value)} y={62} n={mark.n} d={8} size={20} color={mark.color} />
-                    <text x={x(mark.value)} y={24} textAnchor="middle" fontSize={15} fontWeight={700} fill={mark.color}>{pick(language, mark.label)}</text>
+                    <Label x={x(mark.value)} y={24} textAnchor="middle" fontSize={15} fontWeight={700} fill={mark.color}>{pick(language, mark.label)}</Label>
                 </g>
             ))}
             <Caption y={200}>{pick(language, { eu: 'Zenbakitzailea < izendatzailea → 1 baino txikiagoa; berdinak → 1; handiagoa → 1 baino handiagoa', es: 'Numerador < denominador → menor que 1; iguales → 1; mayor → mayor que 1', en: 'Numerator < denominator → less than 1; equal → 1; greater → greater than 1', ar: 'البسط < المقام ← أصغر من 1؛ متساويان ← 1؛ أكبر ← أكبر من 1' })}</Caption>

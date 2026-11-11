@@ -1,6 +1,7 @@
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
 import { Caption, Figure } from '../dbh2-zatikiak-prototype/figures'
 import { decimalSeparatorFor } from '../../utils/numberFormat'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Geometria · 1. DBH — lesson figures in the notebook style: lines, angles,
@@ -58,24 +59,24 @@ export function LinesFigure({ language }: { language: UnitLanguage }) {
                 </marker>
             </defs>
             <line x1={40} x2={220} y1={40} y2={40} stroke={INK} strokeWidth={2.4} markerStart="url(#geometry-arrow)" markerEnd="url(#geometry-arrow)" />
-            <text x={130} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzena', es: 'recta', en: 'straight line', ar: 'مستقيم' })}</text>
+            <Label x={130} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzena', es: 'recta', en: 'straight line', ar: 'مستقيم' })}</Label>
             <line x1={270} x2={450} y1={40} y2={40} stroke={INK} strokeWidth={2.4} markerEnd="url(#geometry-arrow)" />
             <circle cx={270} cy={40} r={5} fill={STAGE} />
-            <text x={360} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzerdia', es: 'semirrecta', en: 'ray', ar: 'نصف مستقيم' })}</text>
+            <Label x={360} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzerdia', es: 'semirrecta', en: 'ray', ar: 'نصف مستقيم' })}</Label>
             <line x1={500} x2={680} y1={40} y2={40} stroke={INK} strokeWidth={2.4} />
             <circle cx={500} cy={40} r={5} fill={STAGE} />
             <circle cx={680} cy={40} r={5} fill={STAGE} />
-            <text x={590} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzenkia', es: 'segmento', en: 'line segment', ar: 'قطعة مستقيمة' })}</text>
+            <Label x={590} y={70} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'zuzenkia', es: 'segmento', en: 'line segment', ar: 'قطعة مستقيمة' })}</Label>
             <line x1={60} x2={220} y1={120} y2={120} stroke={STAGE} strokeWidth={2.4} />
             <line x1={60} x2={220} y1={150} y2={150} stroke={STAGE} strokeWidth={2.4} />
-            <text x={140} y={190} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'paraleloak', es: 'paralelas', en: 'parallel', ar: 'متوازيان' })}</text>
+            <Label x={140} y={190} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'paraleloak', es: 'paralelas', en: 'parallel', ar: 'متوازيان' })}</Label>
             <line x1={290} x2={440} y1={110} y2={170} stroke={STAGE} strokeWidth={2.4} />
             <line x1={290} x2={440} y1={170} y2={110} stroke={STAGE} strokeWidth={2.4} />
-            <text x={365} y={190} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'ebakitzaileak', es: 'secantes', en: 'intersecting', ar: 'متقاطعان' })}</text>
+            <Label x={365} y={190} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'ebakitzaileak', es: 'secantes', en: 'intersecting', ar: 'متقاطعان' })}</Label>
             <line x1={520} x2={660} y1={140} y2={140} stroke={STAGE} strokeWidth={2.4} />
             <line x1={590} x2={590} y1={100} y2={176} stroke={STAGE} strokeWidth={2.4} />
             <AngleMark x={590} y={140} from={0} size={90} radius={18} color={SECOND} />
-            <text x={590} y={196} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'perpendikularrak', es: 'perpendiculares', en: 'perpendicular', ar: 'متعامدان' })}</text>
+            <Label x={590} y={196} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, { eu: 'perpendikularrak', es: 'perpendiculares', en: 'perpendicular', ar: 'متعامدان' })}</Label>
             <Caption y={236}>{pick(language, { eu: 'Zuzenak ez du ez hasierarik ez amaierarik; zuzenkiak bi mutur ditu', es: 'La recta no tiene principio ni fin; el segmento tiene dos extremos', en: 'The straight line has no beginning or end; the line segment has two endpoints.', ar: 'المستقيم لا بداية له ولا نهاية؛ والقطعة لها طرفان' })}</Caption>
         </Figure>
     )
@@ -100,7 +101,7 @@ export function AngleTypesFigure({ language }: { language: UnitLanguage }) {
                         <Ray x={x} y={130} angle={type.size} length={type.size === 180 ? 40 : 90} />
                         <AngleMark x={x} y={130} from={0} size={type.size} radius={28} />
                         <circle cx={x} cy={130} r={4} fill={INK} />
-                        <text x={x + 40} y={170} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, type.name)}</text>
+                        <Label x={x + 40} y={170} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>{pick(language, type.name)}</Label>
                         <text x={x + 40} y={192} textAnchor="middle" fontSize={15} fill={STAGE} fontWeight={700}>{type.note}</text>
                     </g>
                 )
@@ -127,8 +128,8 @@ export function AnglePairsFigure({ language }: { language: UnitLanguage }) {
             <AngleMark x={500} y={160} from={0} size={120} radius={34} label="120°" />
             <AngleMark x={500} y={160} from={120} size={60} radius={50} color={SECOND} label="60°" />
             <text x={500} y={200} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>120° + 60° = 180°</text>
-            <text x={170} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'osagarriak', es: 'complementarios', en: 'complementary', ar: 'متتامتان' })}</text>
-            <text x={500} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'betegarriak', es: 'suplementarios', en: 'supplementary', ar: 'متكاملتان' })}</text>
+            <Label x={170} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'osagarriak', es: 'complementarios', en: 'complementary', ar: 'متتامتان' })}</Label>
+            <Label x={500} y={30} textAnchor="middle" fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'betegarriak', es: 'suplementarios', en: 'supplementary', ar: 'متكاملتان' })}</Label>
         </Figure>
     )
 }
@@ -143,10 +144,10 @@ export function PolygonFigure({ language }: { language: UnitLanguage }) {
             <path d={path} fill={STAGE_TINT} stroke={INK} strokeWidth={2.4} />
             <line x1={140} y1={40} x2={220} y2={190} stroke={SECOND} strokeWidth={2} strokeDasharray="6 5" />
             {points.map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={5} fill={INK} />)}
-            <text x={330} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '● erpinak: 5', es: '● vértices: 5', en: '● vertices: 5', ar: '● الرؤوس: 5' })}</text>
-            <text x={330} y={95} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '— aldeak: 5', es: '— lados: 5', en: '— sides: 5', ar: '— الأضلاع: 5' })}</text>
-            <text x={330} y={130} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: '- - diagonala', es: '- - diagonal', en: '- - diagonal', ar: '- - قطر' })}</text>
-            <text x={330} y={165} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'angeluak: 5', es: 'ángulos: 5', en: 'angles: 5', ar: 'الزوايا: 5' })}</text>
+            <Label x={330} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '● erpinak: 5', es: '● vértices: 5', en: '● vertices: 5', ar: '● الرؤوس: 5' })}</Label>
+            <Label x={330} y={95} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: '— aldeak: 5', es: '— lados: 5', en: '— sides: 5', ar: '— الأضلاع: 5' })}</Label>
+            <Label x={330} y={130} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: '- - diagonala', es: '- - diagonal', en: '- - diagonal', ar: '- - قطر' })}</Label>
+            <Label x={330} y={165} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'angeluak: 5', es: 'ángulos: 5', en: 'angles: 5', ar: 'الزوايا: 5' })}</Label>
             <Caption y={232}>{pick(language, { eu: 'Poligonoa: zuzenki-lerro itxi batek mugatutako planoaren zatia', es: 'Polígono: parte del plano limitada por una línea poligonal cerrada', en: 'Polygon: part of the plane bounded by a closed polygonal line.', ar: 'المضلع: جزء من المستوي تحدّه خطوط مستقيمة مغلقة' })}</Caption>
         </Figure>
     )
@@ -184,7 +185,7 @@ export function TriangleTypesFigure({ language }: { language: UnitLanguage }) {
         <Figure height={220} label={pick(language, { eu: 'Triangelu motak', es: 'Tipos de triángulos', en: 'Types of triangles.', ar: 'أنواع المثلثات' })}>
             {shapes.map((shape) => <path key={shape.d} d={shape.d} fill={STAGE_TINT} stroke={INK} strokeWidth={2.2} />)}
             <AngleMark x={540} y={150} from={0} size={90} radius={18} color={SECOND} />
-            {shapes.map((shape, index) => <text key={index} x={[90, 245, 415, 600][index]} y={180} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, shape.name)}</text>)}
+            {shapes.map((shape, index) => <Label key={index} x={[90, 245, 415, 600][index]} y={180} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, shape.name)}</Label>)}
             <Caption y={210}>{pick(language, { eu: 'Aldeen arabera (berdinak) edo angeluen arabera (zorrotza, zuzena, kamutsa)', es: 'Según sus lados (iguales) o según sus ángulos (agudo, recto, obtuso)', en: 'By their sides (equal) or by their angles (acute, right, obtuse).', ar: 'حسب الأضلاع (المتساوية) أو حسب الزوايا (حادة، قائمة، منفرجة)' })}</Caption>
         </Figure>
     )
@@ -213,8 +214,8 @@ export function PythagorasFigure({ language }: { language: UnitLanguage }) {
             <text x={250} y={120} fontSize={16} fontWeight={700} fill={INK}>5² = 25</text>
             <text x={60} y={180} textAnchor="end" fontSize={16} fontWeight={700} fill={INK}>3² = 9</text>
             <text x={152} y={290 - 8} textAnchor="middle" fontSize={16} fontWeight={700} fill={INK}>4² = 16</text>
-            <text x={420} y={90} fontSize={18} fontWeight={700} fill={INK}>{pick(language, { eu: 'katetoak: 3 eta 4', es: 'catetos: 3 y 4', en: 'legs: 3 and 4', ar: 'الضلعان القائمان: 3 و4' })}</text>
-            <text x={420} y={125} fontSize={18} fontWeight={700} fill={INK}>{pick(language, { eu: 'hipotenusa: 5', es: 'hipotenusa: 5', en: 'hypotenuse: 5', ar: 'الوتر: 5' })}</text>
+            <Label x={420} y={90} fontSize={18} fontWeight={700} fill={INK}>{pick(language, { eu: 'katetoak: 3 eta 4', es: 'catetos: 3 y 4', en: 'legs: 3 and 4', ar: 'الضلعان القائمان: 3 و4' })}</Label>
+            <Label x={420} y={125} fontSize={18} fontWeight={700} fill={INK}>{pick(language, { eu: 'hipotenusa: 5', es: 'hipotenusa: 5', en: 'hypotenuse: 5', ar: 'الوتر: 5' })}</Label>
             <text x={420} y={170} fontSize={22} fontWeight={700} fill={STAGE}>a² = b² + c²</text>
             <text x={420} y={205} fontSize={20} fontWeight={700} fill={INK}>25 = 9 + 16</text>
         </Figure>
@@ -234,7 +235,7 @@ export function QuadrilateralsFigure({ language }: { language: UnitLanguage }) {
     return (
         <Figure height={220} label={pick(language, { eu: 'Laukiak', es: 'Cuadriláteros', en: 'Quadrilaterals', ar: 'الرباعيات' })}>
             {shapes.map((shape, index) => <path key={index} d={shape.d} fill={index < 4 ? STAGE_TINT : 'var(--mustard-tint, #fbebc0)'} stroke={INK} strokeWidth={2.2} />)}
-            {shapes.map((shape, index) => <text key={`t${index}`} x={[70, 210, 340, 485, 640][index]} y={185} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, shape.name)}</text>)}
+            {shapes.map((shape, index) => <Label key={`t${index}`} x={[70, 210, 340, 485, 640][index]} y={185} textAnchor="middle" fontSize={15} fontWeight={700} fill={INK}>{pick(language, shape.name)}</Label>)}
             <Caption y={212}>{pick(language, { eu: 'Urdinak: paralelogramoak (aurkako aldeak paraleloak bikoteka)', es: 'En azul: paralelogramos (lados opuestos paralelos dos a dos)', en: 'In blue: parallelograms (opposite sides parallel in pairs).', ar: 'بالأزرق: متوازيات أضلاع (كل ضلعين متقابلين متوازيان)' })}</Caption>
         </Figure>
     )
@@ -250,10 +251,10 @@ export function CircleFigure({ language }: { language: UnitLanguage }) {
             <line x1={160} y1={120} x2={250} y2={120} stroke={SECOND} strokeWidth={2.4} />
             <line x1={160 - 90 * Math.cos(rad(60))} y1={120 - 90 * Math.sin(rad(60))} x2={160 + 90 * Math.cos(rad(60))} y2={120 + 90 * Math.sin(rad(60))} stroke={STAGE} strokeWidth={2.4} />
             <text x={205} y={112} textAnchor="middle" fontSize={15} fontWeight={700} fill={SECOND}>r</text>
-            <text x={400} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Zirkunferentzia: ertza (lerroa)', es: 'Circunferencia: el borde (línea)', en: 'Circumference: the edge (a line).', ar: 'الدائرة: الحافة (خط)' })}</text>
-            <text x={400} y={95} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Zirkulua: barrualdea ere bai', es: 'Círculo: también el interior', en: 'Circle: the inside as well.', ar: 'القرص: والداخل أيضًا' })}</text>
-            <text x={400} y={130} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'r: erradioa', es: 'r: radio', en: 'r: radius', ar: 'r: نصف القطر' })}</text>
-            <text x={400} y={165} fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'd = 2r: diametroa', es: 'd = 2r: diámetro', en: 'd = 2r: diameter', ar: 'd = 2r: القطر' })}</text>
+            <Label x={400} y={60} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Zirkunferentzia: ertza (lerroa)', es: 'Circunferencia: el borde (línea)', en: 'Circumference: the edge (a line).', ar: 'الدائرة: الحافة (خط)' })}</Label>
+            <Label x={400} y={95} fontSize={16} fontWeight={700} fill={INK}>{pick(language, { eu: 'Zirkulua: barrualdea ere bai', es: 'Círculo: también el interior', en: 'Circle: the inside as well.', ar: 'القرص: والداخل أيضًا' })}</Label>
+            <Label x={400} y={130} fontSize={16} fontWeight={700} fill={SECOND}>{pick(language, { eu: 'r: erradioa', es: 'r: radio', en: 'r: radius', ar: 'r: نصف القطر' })}</Label>
+            <Label x={400} y={165} fontSize={16} fontWeight={700} fill={STAGE}>{pick(language, { eu: 'd = 2r: diametroa', es: 'd = 2r: diámetro', en: 'd = 2r: diameter', ar: 'd = 2r: القطر' })}</Label>
         </Figure>
     )
 }

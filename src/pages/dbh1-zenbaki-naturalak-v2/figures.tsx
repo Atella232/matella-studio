@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react'
 import { formatNatural } from './format'
 import { pickText, type LocalizedText, type UnitLanguage } from '../../features/unit-v2/types'
+import { Label } from '../dbh2-funtzioak-v2/plane'
 
 /* ==========================================================================
    Zenbaki naturalak · lesson figures, drawn as SVG in the notebook style
@@ -48,8 +49,8 @@ export function PlaceValueFigure({ language }: { language: UnitLanguage }) {
                 return (
                     <g key={index}>
                         <rect x={x} y={34} width={column - 6} height={52} rx={8} fill={active ? STAGE_TINT : PAPER} stroke={INK} strokeWidth={1.4} />
-                        <text x={x + (column - 6) / 2} y={56} textAnchor="middle" fontSize={14} fill={INK}>{first}</text>
-                        <text x={x + (column - 6) / 2} y={73} textAnchor="middle" fontSize={14} fill={INK}>{second}</text>
+                        <Label x={x + (column - 6) / 2} y={56} textAnchor="middle" fontSize={14} fill={INK}>{first}</Label>
+                        <Label x={x + (column - 6) / 2} y={73} textAnchor="middle" fontSize={14} fill={INK}>{second}</Label>
                         <rect x={x} y={94} width={column - 6} height={70} rx={10} fill={active ? STAGE : PAPER} stroke={INK} strokeWidth={active ? 2.4 : 1.6} />
                         <text x={x + (column - 6) / 2} y={142} textAnchor="middle" fontSize={36} fontWeight={700} fill={active ? '#fff' : INK} fontFamily="Fraunces, serif">{digit}</text>
                         {index > 0 && <text x={x - 3} y={24} textAnchor="middle" fontSize={12} fontWeight={700} fill={MUTED}>·10</text>}
@@ -58,14 +59,14 @@ export function PlaceValueFigure({ language }: { language: UnitLanguage }) {
             })}
             <path d={`M${left + highlight * column + (column - 6) / 2} 168 L${left + highlight * column + (column - 6) / 2} 190`} stroke={STAGE} strokeWidth={2.4} />
             <text x={left + highlight * column + (column - 6) / 2} y={212} textAnchor="middle" fontSize={20} fontWeight={700} fill={STAGE}>{formatNatural(value, language)}</text>
-            <text x={360} y={242} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={360} y={242} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, {
                     eu: `8\u00a0706\u00a0265 zenbakian, 7 zifrak ${formatNatural(value, language)} balio du`,
                     es: `En 8\u00a0706\u00a0265, la cifra 7 vale ${formatNatural(value, language)}`,
                     en: `In 8,706,265, the digit 7 is worth ${formatNatural(value, language)}`,
                     ar: `في العدد 8\u00a0706\u00a0265 قيمة الرقم 7 هي ${formatNatural(value, language)}`
                 })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -88,18 +89,18 @@ export function PeriodsFigure({ language }: { language: UnitLanguage }) {
                     <g key={index}>
                         <rect x={x} y={30} width={width} height={74} rx={12} fill={index % 2 === 0 ? STAGE_TINT : PAPER} stroke={INK} strokeWidth={1.8} />
                         <text x={x + width / 2} y={80} textAnchor="middle" fontSize={34} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">{group}</text>
-                        <text x={x + width / 2} y={130} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{labels[language][index]}</text>
+                        <Label x={x + width / 2} y={130} textAnchor="middle" fontSize={14} fontWeight={700} fill={STAGE}>{labels[language][index]}</Label>
                     </g>
                 )
             })}
-            <text x={360} y={180} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={360} y={180} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, {
                     eu: '15 bilioi 350\u00a0000 milioi: hamabost bilioi hirurehun eta berrogeita hamar mila milioi',
                     es: '15 billones 350\u00a0000 millones: quince billones trescientos cincuenta mil millones',
                     en: '15 trillion 350,000 million: fifteen trillion three hundred and fifty billion',
                     ar: '15 تريليونًا و350 مليارًا'
                 })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -136,9 +137,9 @@ export function NumberLineJumpsFigure({ language }: { language: UnitLanguage }) 
                     </g>
                 )
             })}
-            <text x={360} y={190} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={360} y={190} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, { eu: '(830 − 430) : 4 = 100 → salto bakoitza 100 da', es: '(830 − 430) : 4 = 100 → cada salto vale 100', en: '(830 − 430) : 4 = 100 → each jump is worth 100', ar: '(830 − 430) : 4 = 100 ← كل قفزة تساوي 100' })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -198,9 +199,9 @@ export function RoundingFigure({ language }: { language: UnitLanguage }) {
                     <path d="M0 0 L10 5 L0 10 z" fill={STAGE} />
                 </marker>
             </defs>
-            <text x={360} y={200} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={360} y={200} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, { eu: '14\u00a0500 baino gehiago da: 15\u00a0000ra biribiltzen da', es: 'Pasa de 14\u00a0500: se redondea a 15\u00a0000', en: 'It is over 14,500: it rounds up to 15,000', ar: 'يتجاوز 14\u00a0500: نقرّبه إلى 15\u00a0000' })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -226,9 +227,9 @@ export function DistributiveFigure({ language }: { language: UnitLanguage }) {
             <text x={left - 20} y={top + (rows * cell) / 2 + 6} textAnchor="middle" fontSize={20} fontWeight={700} fill={INK}>6</text>
             <text x={left + (first * cell) / 2} y={top + rows * cell + 30} textAnchor="middle" fontSize={18} fontWeight={700} fill={STAGE}>6 · 8 = 48</text>
             <text x={left + first * cell + 12 + (second * cell) / 2} y={top + rows * cell + 30} textAnchor="middle" fontSize={18} fontWeight={700} fill={SECOND}>6 · 2 = 12</text>
-            <text x={360} y={288} textAnchor="middle" fontSize={16} fill={MUTED}>
+            <Label x={360} y={288} textAnchor="middle" fontSize={16} fill={MUTED}>
                 {pick(language, { eu: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 karratu', es: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 cuadrados', en: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 squares', ar: '6 · (8 + 2) = 6 · 8 + 6 · 2 = 48 + 12 = 60 مربعًا' })}
-            </text>
+            </Label>
         </svg>
     )
 }
@@ -255,12 +256,12 @@ export function DivisionFigure({ language }: { language: UnitLanguage }) {
             {Array.from({ length: remainder }, (_, index) => (
                 <circle key={index} cx={590 + index * 44} cy={85} r={14} fill={SECOND} stroke={INK} strokeWidth={1.6} />
             ))}
-            <text x={40 + (quotient * (groupWidth + 20) - 20) / 2} y={160} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>
+            <Label x={40 + (quotient * (groupWidth + 20) - 20) / 2} y={160} textAnchor="middle" fontSize={17} fontWeight={700} fill={STAGE}>
                 {pick(language, { eu: '3 talde (zatidura)', es: '3 grupos (cociente)', en: '3 groups (quotient)', ar: '3 مجموعات (خارج القسمة)' })}
-            </text>
-            <text x={612} y={160} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>
+            </Label>
+            <Label x={612} y={160} textAnchor="middle" fontSize={17} fontWeight={700} fill={SECOND}>
                 {pick(language, { eu: '2 (hondarra)', es: '2 (resto)', en: '2 (remainder)', ar: '2 (الباقي)' })}
-            </text>
+            </Label>
             <text x={360} y={204} textAnchor="middle" fontSize={17} fill={MUTED}>17 = 5 · 3 + 2     (2 &lt; 5)</text>
         </svg>
     )
@@ -313,7 +314,7 @@ export function SemaphoreFigure({ language }: { language: UnitLanguage }) {
             {legend.map((item, index) => (
                 <g key={index}>
                     <circle cx={150 + index * 170} cy={274} r={8} fill={item.color} />
-                    <text x={164 + index * 170} y={280} fontSize={15} fill={MUTED}>{pick(language, item.label)}</text>
+                    <Label x={164 + index * 170} y={280} fontSize={15} fill={MUTED}>{pick(language, item.label)}</Label>
                 </g>
             ))}
         </svg>
@@ -354,9 +355,9 @@ export function DpeFigure({ language }: { language: UnitLanguage }) {
                         <rect x={x} y={24} width={width} height={180} rx={16} fill={PAPER} stroke={INK} strokeWidth={2} />
                         <circle cx={x + 34} cy={58} r={22} fill={card.color} stroke={INK} strokeWidth={1.8} />
                         <text x={x + 34} y={67} textAnchor="middle" fontSize={24} fontWeight={700} fill="#fff" fontFamily="Fraunces, serif">{card.letter}</text>
-                        <text x={x + 66} y={65} fontSize={18} fontWeight={700} fill={INK}>{card.title}</text>
+                        <Label x={x + 66} y={65} fontSize={18} fontWeight={700} fill={INK}>{card.title}</Label>
                         {card.lines.map((line, lineIndex) => (
-                            <text key={lineIndex} x={x + width / 2} y={118 + lineIndex * 26} textAnchor="middle" fontSize={15} fill={INK}>{line}</text>
+                            <Label key={lineIndex} x={x + width / 2} y={118 + lineIndex * 26} textAnchor="middle" fontSize={15} fill={INK}>{line}</Label>
                         ))}
                     </g>
                 )
@@ -400,9 +401,9 @@ export function PowerFigure({ language }: { language: UnitLanguage }) {
             {faces}
             <text x={squareLeft + 1.5 * cell} y={top + 3 * cell + 44} textAnchor="middle" fontSize={24} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">3² = 3 · 3 = 9</text>
             <text x={cubeLeft + 1.5 * cell + depth / 2} y={top + 3 * cell + 44} textAnchor="middle" fontSize={24} fontWeight={700} fill={INK} fontFamily="Fraunces, serif">3³ = 3 · 3 · 3 = 27</text>
-            <text x={360} y={250} textAnchor="middle" fontSize={15} fill={MUTED}>
+            <Label x={360} y={250} textAnchor="middle" fontSize={15} fill={MUTED}>
                 {pick(language, { eu: 'Karratua: azalera. Kuboa: bolumena.', es: 'Cuadrado: área. Cubo: volumen.', en: 'Square: area. Cube: volume.', ar: 'المربع: مساحة. المكعب: حجم.' })}
-            </text>
+            </Label>
         </svg>
     )
 }
