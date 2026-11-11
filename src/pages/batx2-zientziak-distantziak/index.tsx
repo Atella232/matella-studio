@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { anglesDistancesChallenges, anglesDistancesDiagnostic, anglesDistancesExerciseBank, anglesDistancesPractice } from './content'
 import { AnglesDistancesHeroArt } from './figures'
+import { AnglesDistancesLaboratory } from './lab'
+import { anglesDistancesLabChallengeIds, anglesDistancesLabToolForTopic, anglesDistancesLabTools } from './lab/labTools'
 import { anglesDistancesStages, anglesDistancesTopics } from './lessons'
 
 const distantziakBatx2zUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const distantziakBatx2zUnit: UnitDefinition = {
     guidedPractice: anglesDistancesPractice,
     exerciseBank: anglesDistancesExerciseBank,
     challenges: anglesDistancesChallenges,
+    lab: {
+        description: {
+            eu: `${anglesDistancesLabTools.length} tresna, erronkekin, guztiak 3D taulan: garraiagailua, perpendikularraren oina, ispilua, distantziaren erregela eta gurutzatzen diren zuzenen kutxa.`,
+            es: `${anglesDistancesLabTools.length} herramientas con retos, todas en el tablero 3D: el transportador, el pie de la perpendicular, el espejo, la regla de la distancia y la caja de las que se cruzan.`,
+            en: `${anglesDistancesLabTools.length} tools with challenges, all on the 3D board: the protractor, the foot of the perpendicular, the mirror, the distance ruler and the box of skew lines.`,
+            ar: `${anglesDistancesLabTools.length} أدوات مع تحديات، كلها على اللوحة ثلاثية الأبعاد: المنقلة، ومسقط العمودي، والمرآة، ومسطرة المسافة، وصندوق المستقيمين المتخالفين.`
+        },
+        progressIds: anglesDistancesLabChallengeIds,
+        toolForTopic: anglesDistancesLabToolForTopic,
+        render: (props) => <AnglesDistancesLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bakar bat: angelua gradutan, koordenatua, parametroa edo distantzia. Adibidez 45, −3, 2,5 edo 11/3.', es: 'Escribe un solo número: el ángulo en grados, la coordenada, el parámetro o la distancia. Por ejemplo 45, −3, 2,5 o 11/3.', en: 'Write a single number: the angle in degrees, the coordinate, the parameter or the distance. For example 45, −3, 2.5 or 11/3.', ar: 'اكتب عددًا واحدًا: الزاوية بالدرجات أو المركّبة أو الوسيط أو المسافة. مثلًا 45 أو ⁦−3⁩ أو 2.5 أو 11/3.' },
         defaultForm: 'any',

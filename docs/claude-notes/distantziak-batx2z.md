@@ -30,10 +30,20 @@ Tercera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - **Comprobación:** 3054 tests, lint y build en verde.
 - **Revisión a 375 px** en eu, es y ar: las 15 lecciones con todos los pasos abiertos (dos fórmulas pasadas a dos filas); los 15 dibujos en eu.
 
+**Fase 3, laboratorio (ids 121101–121305):** cinco herramientas en `lab/`, cada una con predicción antes de ver el resultado, 5 retos y práctica sin fin.
+- **L1 El transportador 3D** (`protractor.ts`, 121101–05): recta–recta, recta–plano y plano–plano; predicción 0°, agudo o 90°.
+- **L2 El pie de la perpendicular** (`foot.ts`, 121151–55): proyección de un punto sobre plano o recta; el ▶ desliza el punto por la perpendicular.
+- **L3 El espejo** (`mirror.ts`, 121201–05): simétrico respecto de un plano ($P'=2M-P$); predicción debajo, en o encima.
+- **L4 La regla de la distancia** (`ruler.ts`, 121251–55): punto–plano (d de −9 a 9) y punto–recta; predicción menor, igual o mayor que 3.
+- **L5 La caja de las que se cruzan** (`skewBox.ts`, 121301–05): volumen $|[AB,u,v]|$ entre base $|u\times v|$; el ▶ mueve B por s y la distancia no cambia.
+- Comunes en `lab/common.ts` (`rootLatex`, `degreesLatex`, `angleFromSquare`; el resto se reexporta de `planoak`). Usa el CSS `.planoak-lab-equations` de `planoak` (importado, no copiado).
+- **Test nuevo:** `tests/distantziak-batx2z-lab.test.ts`. 3061 tests, lint y build en verde. Revisado a 375 px en eu, es y ar.
+
 ## Trucos
 
 - Los de `bektoreak` y `planoak` siguen valiendo (`${z}`, `\qquad`, `gathered`, `\colon` en vez de `:` dentro de fórmulas, `\dfrac` en vez de `\displaystyle`).
 - El test de textos compara el orden de las fórmulas en los cuatro idiomas: si en castellano sale «la recta $P+t\vec n$, que pasa por $P$», en euskera hay que mantener ese orden.
+- Herramientas del laboratorio: un título largo en euskera desborda la cabecera a 375 px (máximo unos 179 px); los marcadores con tres fórmulas van en filas separadas.
 - Ángulos con decimales (26,39°) no van como respuesta cerrada (el redondeo no casa con la fracción exacta): solo en soluciones del banco.
 
 ## Pendiente para la fusión
@@ -42,4 +52,4 @@ Tercera unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 
 ## En curso
 
-- Fase 1+2 hecha (commit de esta fase). Siguiente: fase 3, laboratorio (L1–L5, ids 121101–121305); fase 4, juegos (ids 121401–121803); cierre (tests, lint, build, inventario, 375 px en eu/es/ar, hoja de euskera con `hoja-revision.mjs` en la carpeta de notas compartidas).
+- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos (ids 121401–121803); cierre (tests, lint, build, inventario, 375 px en eu/es/ar, hoja de euskera con `hoja-revision.mjs` en la carpeta de notas compartidas).
