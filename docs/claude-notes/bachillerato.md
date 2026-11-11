@@ -191,25 +191,27 @@ El dueño pidió hacer 2.º Ciencias con varias sesiones a la vez. Los 14 temas 
 - Exámenes de EBAU del País Vasco (`LIBROS/EBAU/<comunidad>/Matematicas_II`): sirven para ver el estilo de los problemas de 2.º, nunca para copiarlos.
 - Las piezas que puedan servir a 2.º Sociales (matrices, límites, derivadas, integrales, probabilidad…) se dejan exportadas y reutilizables: la decisión de los gemelos Ciencias/Sociales se toma al empezar Sociales.
 
-| Bloque | Puerto | Tema (`id` del curso) | Nombre | Bloque de ids | Reutilizar de | Estado (2026-11-10) |
+| Bloque | Puerto | Tema (`id` del curso) | Nombre | Bloque de ids | Reutilizar de | Estado (2026-11-11) |
 |---|---|---|---|---|---|---|
 | Álgebra | 5181 | `matrices` | `matrizeak` | 116000–116999 | nuevo (Gauss de `batx1-zientziak-sistemak`) | Publicado 2026-11-10 |
-| Álgebra | 5181 | `determinantes` | `determinanteak` | 117000–117999 | `matrizeak` | En curso |
+| Álgebra | 5181 | `determinantes` | `determinanteak` | 117000–117999 | `matrizeak` | Publicado 2026-11-11 |
 | Álgebra | 5181 | `sistemas` | `sistemak` | 118000–118999 | `batx1-zientziak-sistemak`, `determinanteak` | En curso |
 | Espacio | 5182 | `vectores-espacio` | `bektoreak` | 119000–119999 | `batx1-zientziak-bektoreak` (tablero 3D nuevo, para todo el bloque) | Publicado 2026-11-10 |
-| Espacio | 5182 | `rectas-planos` | `planoak` | 120000–120999 | `batx1-zientziak-geometria`, `bektoreak` | En curso |
+| Espacio | 5182 | `rectas-planos` | `planoak` | 120000–120999 | `batx1-zientziak-geometria`, `bektoreak` | Publicado 2026-11-11 |
 | Espacio | 5182 | `angulos-distancias` | `distantziak` | 121000–121999 | `batx1-zientziak-geometria`, `planoak` | En curso |
 | Cálculo diferencial | 5183 | `limites-continuidad` | `limiteak` | 122000–122999 | `batx1-zientziak-limiteak` | Publicado 2026-11-10 |
 | Cálculo diferencial | 5183 | `derivadas` | `deribatuak` | 123000–123999 | `batx1-zientziak-deribatuak` | Publicado 2026-11-10 |
 | Cálculo diferencial | 5183 | `aplicaciones-derivada` | `aplikazioak` | 124000–124999 | `batx1-zientziak-aplikazioak` | Publicado 2026-11-10 |
-| Cálculo diferencial | 5183 | `representacion-funciones` | `adierazpena` | 125000–125999 | `batx1-zientziak-funtzioak`, `-limiteak`, `-aplikazioak` | En curso |
+| Cálculo diferencial | 5183 | `representacion-funciones` | `adierazpena` | 125000–125999 | `batx1-zientziak-funtzioak`, `-limiteak`, `-aplikazioak` | Publicado 2026-11-11 |
 | Integrales | 5184 | `integrales-indefinidas` | `mugagabeak` | 126000–126999 | `batx1-zientziak-integralak`, `-deribatuak` | Publicado 2026-11-10 |
 | Integrales | 5184 | `integral-definida` | `mugatua` | 127000–127999 | `batx1-zientziak-integralak`, `mugagabeak` | Publicado 2026-11-10 |
 | Probabilidad | 5185 | `probabilidad` | `probabilitatea` | 128000–128999 | `dbh4-akademikoak-probabilitatea`, `-konbinatoria` | Publicado 2026-11-10 |
-| Probabilidad | 5185 | `binomial-normal` | `banaketak` | 129000–129999 | `dbh4-akademikoak-probabilitatea`, `probabilitatea` | En curso |
+| Probabilidad | 5185 | `binomial-normal` | `banaketak` | 129000–129999 | `dbh4-akademikoak-probabilitatea`, `probabilitatea` | Publicado 2026-11-11 |
 
 **Ids reservados para más adelante:** 1.º Sociales 130000–140999 (11 temas) y 2.º Sociales 141000–153999 (13 temas), un bloque de mil por tema en el orden del curso.
 
 **Fuentes:** todas en Drive, `LIBROS/2_Bach/Santillana/Ciencias` (U1–U14) y `LIBROS/2_Bach/Anaya/Ciencias` (U1–U14, con los mismos temas y en el mismo orden).
 
 **2026-11-10: primera tanda de 2.º Ciencias publicada** (`main` 5e186b4, bundle `index-BiUKCFuE.js`): Matrices, Vectores en el espacio, Límites y continuidad, Derivadas, Aplicaciones de la derivada, Integrales indefinidas, Integral definida y Probabilidad. Se fusionaron las ramas finales `feat/matrizeak-`, `feat/bektoreak-`, `feat/aplikazioak-`, `feat/mugatua-` y `feat/probabilitatea-batx2z` en `feat/batx2z-tanda1`. Conflictos solo en `paths.ts`, el router y `courses.ts` (dos líneas `active: true` vecinas): se resolvieron con el script de unión. 2993 tests en verde. Quedan Determinantes, Sistemas, Rectas y planos, Ángulos y distancias, Representación de funciones y Binomial y normal.
+
+**2026-11-11: segunda tanda publicada** (`main` 9e5e40b, bundle `index-B542gguY.js`): Determinantes, Rectas y planos, Representación de funciones y Binomial y normal (12 de 14), junto con el arreglo del árabe en los dibujos (`feat/arabic-svg-formulas` + `feat/arabic-svg-labels`: las fórmulas dentro de frases árabes de los SVG se leen de izquierda a derecha también en Safari; 104 textos de 13 `figures.tsx` de 1.º y 2.º pasan por `Label`). Rama de unión `feat/batx2z-tanda2`; el script de unión ya resuelve también las líneas `active: true` vecinas de `courses.ts`. 3166 tests en verde. Quedan Sistemas y Ángulos y distancias (esperan la elección del dueño).

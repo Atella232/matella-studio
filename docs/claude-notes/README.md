@@ -80,3 +80,7 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [Integral mugagabeak · 2.º Bachillerato Ciencias](mugagabeak-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-10 (`main` 5e186b4, bundle `index-BiUKCFuE.js`)
 - [Integral mugatua · 2.º Bachillerato Ciencias](mugatua-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-10 (`main` 5e186b4, bundle `index-BiUKCFuE.js`)
 - [Probabilitatea · 2.º Bachillerato Ciencias](probabilitatea-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-10 (`main` 5e186b4, bundle `index-BiUKCFuE.js`)
+- [Determinanteak · 2.º Bachillerato Ciencias](determinanteak-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 9e5e40b, bundle `index-B542gguY.js`)
+- [Zuzenak eta planoak espazioan · 2.º Bachillerato Ciencias](planoak-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 9e5e40b, bundle `index-B542gguY.js`)
+- [Funtzioen adierazpen grafikoa · 2.º Bachillerato Ciencias](adierazpena-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 9e5e40b, bundle `index-B542gguY.js`)
+- [Banaketa binomiala eta normala · 2.º Bachillerato Ciencias](banaketak-batx2z.md) — tema de 2.º Ciencias hecho en una sesión en paralelo; publicada el 2026-11-11 (`main` 9e5e40b, bundle `index-B542gguY.js`)

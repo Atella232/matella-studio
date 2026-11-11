@@ -50,3 +50,7 @@ Segundo tema de 2.º Ciencias (curso `batx2-zientziak`, tema `determinantes`), s
 - En el test de contenido, la línea mala de un error típico puede tener pasos bien hechos (`|…|=1\cdot 4+2\cdot 3=10`): basta con que un paso falle.
 
 **Cierre (2026-11-11):** 3039 tests, lint y build en verde; inventario OK (2 juegos propios para el script, más el detective; 5 herramientas «propias» para el script, de verdad 4: el deslizador del rango es de `matrizeak`). Revisado a 375 px en eu, es y ar con medidas de la página y `getBBox`: las 16 lecciones (con los desplegables abiertos) y el resumen, las 5 herramientas con la predicción hecha, los 5 juegos (rondas enteras de J1 y J2 en los tres niveles, detective, carrera y memoria), los 50 ejercicios del banco, la práctica, los retos, el diagnóstico y la portada; sin desbordes ni errores de KaTeX. Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio, `~/Documents/Matella-fuentes/batx2z-algebra/hojas/determinanteak-euskara.html`) y mandada al dueño.
+
+## Publicación
+
+- **Publicada el 2026-11-11** en la segunda tanda de 2.º Ciencias, con el visto bueno del dueño («si»): `main` 9e5e40b, bundle `index-B542gguY.js`. 3166 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.

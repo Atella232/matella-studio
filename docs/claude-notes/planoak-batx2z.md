@@ -77,3 +77,7 @@ Segunda unidad del bloque Espacio (reparto en paralelo de 2.º Ciencias, ver `ba
 - Hoja de euskera: `hoja-revision.mjs` con `--herramientas parameter-t,plane-normal,cut-or-cross,through-plane,three-planes --juegos race,twins,classify,missing,detective,memory`, en la carpeta de notas compartidas de la sesión (`planoak-batx2z-revision.html`).
 - Después del primer cierre (2026-11-11): el detective jugado entero a 375 px en eu y ar (los tres niveles). Dos arreglos: las líneas largas (datos con dos vectores, `t(u − v) = AB`, `P = t·u`, `v = k·u`) van en dos filas con `gathered`; y la corrección (`fix`) no puede llevar `gathered`, porque el juego la parte en líneas en cada `\ \to\ ` (salía un error de KaTeX). El test lo comprueba trozo a trozo. También sin `+1t`, `-1t` ni `1a` en las soluciones (`termLatex` y `constantLatex` en `lab/common.ts`).
 - Memoria de `bektoreak` (ya publicada) medida a 375 px: tarjetas de hasta 116 px de 90 útiles. Arreglada en esta rama (commit aparte): `\footnotesize` en las preguntas y como mucho un signo menos por vector; ahora 87 px como mucho.
+
+## Publicación
+
+- **Publicada el 2026-11-11** en la segunda tanda de 2.º Ciencias, con el visto bueno del dueño («si»): `main` 9e5e40b, bundle `index-B542gguY.js`. 3166 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.

@@ -88,3 +88,7 @@ Cuarto y último tema del bloque Cálculo diferencial de 2.º Ciencias (reparto 
 - Hoja de euskera: `adierazpena-batx2z-euskera.html` en la carpeta compartida del bloque, enviada al dueño.
 - **Fallo de otra unidad (sin tocar, para el dueño):** la «y» del eje en árabe en «Sube o baja» de Aplikazioak 1.º (ver la fase 4).
 - **Para 2.º Sociales:** las figuras de `figures.tsx`, las herramientas de `lab/Bach2SketchTools.tsx` y los juegos están exportados.
+
+## Publicación
+
+- **Publicada el 2026-11-11** en la segunda tanda de 2.º Ciencias, con el visto bueno del dueño («si»): `main` 9e5e40b, bundle `index-B542gguY.js`. 3166 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.

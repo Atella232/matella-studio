@@ -60,3 +60,8 @@ La rama se puso al día con `main` (e4dc4f8, primera tanda de 2.º publicada, co
 - **Sin comprobar a la vista:** la animación del botón ▶ de «Kanpaiaren azpian» (con el panel del navegador oculto no corre `requestAnimationFrame`); revisada en el código.
 - **Al fusionar:** solo comparte con las otras sesiones las tres líneas de registro (`courses.ts`, el router y `paths.ts`).
 - **Para Sociales:** `normal.ts` (tabla, simetrías, búsqueda inversa) y `binomial.ts` (exacta y decimal) no dependen de nada de Ciencias.
+
+## Publicación
+
+- **Publicada el 2026-11-11** en la segunda tanda de 2.º Ciencias, con el visto bueno del dueño («si»): `main` 9e5e40b, bundle `index-B542gguY.js`. 3166 tests, lint y build en verde; revisada en matella.net a 375 px en eu, es y ar.
+- El ▶ de «Kanpaiaren azpian» se comprobó antes de publicar (con un `requestAnimationFrame` de sustitución, porque la página seguía oculta): el eje pasa de x a z y aparece z = (x − μ)/σ.
