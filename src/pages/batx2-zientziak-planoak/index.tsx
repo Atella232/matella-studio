@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readVectorsAnswer } from '../dbh4-akademikoak-bektoreak/answers'
 import { linesPlanesChallenges, linesPlanesDiagnostic, linesPlanesExerciseBank, linesPlanesPractice } from './content'
 import { LinesPlanesHeroArt } from './figures'
+import { LinesPlanesLaboratory } from './lab'
+import { linesPlanesLabChallengeIds, linesPlanesLabToolForTopic, linesPlanesLabTools } from './lab/labTools'
 import { linesPlanesStages, linesPlanesTopics } from './lessons'
 
 const planoakBatx2zUnit: UnitDefinition = {
@@ -25,8 +27,19 @@ const planoakBatx2zUnit: UnitDefinition = {
     guidedPractice: linesPlanesPractice,
     exerciseBank: linesPlanesExerciseBank,
     challenges: linesPlanesChallenges,
+    lab: {
+        description: {
+            eu: `${linesPlanesLabTools.length} tresna, erronkekin, guztiak 3D taulan: t parametroa, planoa eta haren normala, ebakitzen dira ala gurutzatzen?, planoa zeharkatzen duen zuzena eta hiru plano.`,
+            es: `${linesPlanesLabTools.length} herramientas con retos, todas en el tablero 3D: el parámetro t, el plano y su normal, ¿se cortan o se cruzan?, la recta que atraviesa y tres planos.`,
+            en: `${linesPlanesLabTools.length} tools with challenges, all on the 3D board: the parameter t, the plane and its normal, do they meet or are they skew?, the line that goes through and three planes.`,
+            ar: `${linesPlanesLabTools.length} أدوات مع تحديات، كلها على اللوحة ثلاثية الأبعاد: الوسيط t، والمستوى وناظمه، ومتقاطعان أم متخالفان؟، والمستقيم الذي يخترق، وثلاثة مستويات.`
+        },
+        progressIds: linesPlanesLabChallengeIds,
+        toolForTopic: linesPlanesLabToolForTopic,
+        render: (props) => <LinesPlanesLaboratory {...props} />
+    },
     answers: {
-        note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, koefizientea, parametroa, determinantea edo $t$ balioa. Adibidez 5, −3, 0,5 edo 3/2.', es: 'Escribe un solo número: la coordenada, el coeficiente, el parámetro, el determinante o el valor de $t$ que se pide. Por ejemplo 5, −3, 0,5 o 3/2.', en: 'Write a single number: the coordinate, coefficient, parameter, determinant or value of $t$ that is asked for. For example 5, −3, 0.5 or 3/2.', ar: 'اكتب عددًا واحدًا: المركّبة أو المعامل أو الوسيط أو المحدد أو قيمة $t$ المطلوبة. مثلًا 5 أو ⁦−3⁩ أو 0.5 أو 3/2.' },
+        note: { eu: 'Idatzi zenbaki bakar bat: eskatzen den koordenatua, koefizientea, parametroa, determinantea edo t balioa. Adibidez 5, −3, 0,5 edo 3/2.', es: 'Escribe un solo número: la coordenada, el coeficiente, el parámetro, el determinante o el valor de t que se pide. Por ejemplo 5, −3, 0,5 o 3/2.', en: 'Write a single number: the coordinate, coefficient, parameter, determinant or value of t that is asked for. For example 5, −3, 0.5 or 3/2.', ar: 'اكتب عددًا واحدًا: المركّبة أو المعامل أو الوسيط أو المحدد أو قيمة t المطلوبة. مثلًا 5 أو ⁦−3⁩ أو 0.5 أو 3/2.' },
         defaultForm: 'any',
         inputMode: 'text',
         normalizeInput: readVectorsAnswer,
