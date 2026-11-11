@@ -51,7 +51,12 @@ La rama se puso al día con `main` (e4dc4f8, primera tanda de 2.º publicada, co
 - **Tests:** `tests/banaketak-batx2z-games.test.ts`.
 - **Trucos:** con k = n − k, «p y q cambiadas» da el mismo número: no se pregunta; tampoco valores menores que 0,001 (en la prueba salían iguales a 0). El inventario (`inventario-unidad.mjs`) da OK: 3 juegos y 6 herramientas propios, más el detective de patrón con errores de esta unidad.
 
-## En curso
+## Cierre (2026-11-11)
 
-- Fases 1 y 2 con commit (bfc1a0e9, 35384ee9); fase 3 escrita y con sus tests en verde, a falta del commit y de la revisión a 375 px de los juegos.
-- Después: cierre (tests, lint y build completos; hoja de euskera con `hoja-revision.mjs`; quitar esta sección).
+- **Commits:** fase 1 `bfc1a0e9`, fase 2 `35384ee9`, fase 3 `21590e8a` y este cierre, en la rama `feat/banaketak-batx2z` (sin push ni fusión: lo hace el dueño).
+- 3036 tests, lint y build en verde; inventario OK (3 juegos y 6 herramientas propios, más el detective de errores de esta unidad).
+- Revisado a 375 px en eu, es y ar: las 15 lecciones (dibujos medidos con `getBBox`, sin desbordes ni textos que se pisen), las 7 herramientas con la predicción hecha y los 6 juegos en sus tres niveles, respondiendo una ronda. En el juego del área, las tres campanas van una debajo de otra en el móvil y las marcas cercanas se separan.
+- **Hoja de euskera:** `~/Documents/Matella-fuentes/batx2z-probabilitatea/hoja-euskera-banaketak.html` (fuera del repositorio), mandada al dueño.
+- **Sin comprobar a la vista:** la animación del botón ▶ de «Kanpaiaren azpian» (con el panel del navegador oculto no corre `requestAnimationFrame`); revisada en el código.
+- **Al fusionar:** solo comparte con las otras sesiones las tres líneas de registro (`courses.ts`, el router y `paths.ts`).
+- **Para Sociales:** `normal.ts` (tabla, simetrías, búsqueda inversa) y `binomial.ts` (exacta y decimal) no dependen de nada de Ciencias.
