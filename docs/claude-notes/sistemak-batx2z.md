@@ -34,12 +34,22 @@ Tercer tema de 2.º Ciencias (curso `batx2-zientziak`, tema `sistemas`), tercero
   - La predicción del tipo se pregunta como «cuántas soluciones» (ninguna, una, infinitas): las palabras largas del tipo no cabían en tres botones a 375 px.
   - Test `tests/sistemak-batx2z-lab.test.ts`. Revisado a 375 px en eu, es y ar con la predicción hecha.
 
+- **Fase 4 (juegos):** cinco juegos en `games/` (ids en `info.ts`):
+  - J1 `rouche-espresa` (`roucheExpress.ts`, 118501–118503): rangos, $A^*$ o un sistema con un valor de $a$; tres botones (ninguna, una, infinitas).
+  - J2 `cramer-zutabez` (`cramerColumns.ts`, 118601–118603): elegir $|A_x|$ (o el valor de la incógnita en el nivel 3) entre cuatro; exporta `vm`, `replaceRow`, `NAMES`, `roundSystem`.
+  - J4 `detektibea` (`detective.ts`, 118801–118803): 12 errores en 3 niveles con `createWorkedCases`.
+  - Carrera `lasterketa` (`race.ts`, 118401–118405): 15 tipos; usa `written()` de la carrera de 1.º.
+  - Memoria `memoria` (`boards.ts`, 118851–118853): $A^*$ ↔ $(x, y)$, $A^*$ ↔ $|A_x|$, $A^*$ homogénea con $k$ ↔ $k$.
+  - Test `tests/sistemak-batx2z-games.test.ts`: resuelve cada ronda con `system.ts` y lee las cartas de memoria (`augmentedIn`).
+
 ## Trucos
 
 - El test común `lesson-texts` y el de contenido buscan sufijos vascos con `\$(?:…|z|…)`: en euskera **ninguna fórmula puede empezar por la letra z** («$z=\lambda$» se lee como «$…$z»). Se escribe «hirugarren ezezaguna», se reordena ($x$ primero) o se pone `|A_z|` delante.
 - `\begin{vmatrix}…\end{vmatrix}` arrastra las letras «vmatrix» al test de la idea clave: si la idea clave usa $A$, la lección tiene que escribir $A$ en alguna fórmula.
+- Memoria: un sistema entero no cabe en una carta a 375 px; se enseña su $A^*$ en `\scriptstyle` con números pequeños (nivel 1: coeficientes 1..3, soluciones 0..3, $b$ de −9 a 12). Ocupa 87–101 px de 106.
+- `detValue` suma `+ 0` para no devolver `-0` (los tests comparan con `===`).
 - Los párrafos de Python con `$` en un heredoc de Bash los bloquea el control de seguridad: escribir el script en el scratchpad y ejecutarlo.
 
 ## En curso
 
-- Fases 1+2 y 3 hechas (ver commits). Siguiente: fase 4, juegos (J1 Rouché exprés, J2 Cramer columna a columna, J4 detective, carrera y memoria; ids 118401–118899) y su test. Después, el cierre.
+- Fases 1 a 4 hechas. Siguiente: el cierre (inventario, revisión a 375 px en eu, es y ar, hoja de euskera, nota final).

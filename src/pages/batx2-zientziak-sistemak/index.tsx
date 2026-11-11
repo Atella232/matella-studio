@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { sistemakChallenges, sistemakDiagnostic, sistemakExerciseBank, sistemakPractice } from './content'
 import { SystemsHeroArt } from './figures'
+import { SistemakGames } from './games'
+import { SISTEMAK_GAME_RECORDS_KEY, sistemakGameProgressIds } from './games/info'
 import { SistemakLaboratory } from './lab'
 import { sistemakLabChallengeIds, sistemakLabToolForTopic, sistemakLabTools } from './lab/labTools'
 import { sistemakStages, sistemakTopics } from './lessons'
@@ -36,6 +38,17 @@ const sistemakBatx2zUnit: UnitDefinition = {
         progressIds: sistemakLabChallengeIds,
         toolForTopic: sistemakLabToolForTopic,
         render: (props) => <SistemakLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bost joko: lasterketa, Rouché espresa, Cramer zutabez zutabe, sistemen detektibea eta memoria.',
+            es: 'Cinco juegos: carrera, Rouché exprés, Cramer columna a columna, detective de sistemas y memoria.',
+            en: 'Five games: race, Rouché express, Cramer column by column, systems detective and memory.',
+            ar: 'خمس ألعاب: السباق، وروشيه السريع، وكرامر عمودًا عمودًا، ومخبر الأنظمة، والذاكرة.'
+        },
+        progressIds: sistemakGameProgressIds,
+        recordsKey: SISTEMAK_GAME_RECORDS_KEY,
+        render: (props) => <SistemakGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },

@@ -50,7 +50,7 @@ export const replaceColumn = (a: number[][], b: number[], column: number) => a.m
 
 export const detValue = (rows: number[][]) => {
     const value = det(rows)
-    return value.numerator / value.denominator
+    return value.numerator / value.denominator + 0
 }
 
 /** Cramer: x_j = |A_j| / |A|, or null when A is not square or |A| = 0 */
