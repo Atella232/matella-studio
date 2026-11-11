@@ -25,8 +25,8 @@ function dotPair(random: Random): Pair | null {
     const u = small(random, 3)
     const v = small(random, 3)
     if (u.filter((value) => value === 0).length > 1 || v.filter((value) => value === 0).length > 1) return null
-    // Two short rows so the card is wide enough
-    return { question: `\\begin{gathered}${vec(u)}\\\\ \\cdot\\,${vec(v)}\\end{gathered}`, answer: String(dot(u, v) + 0) }
+    // Two short rows, a little smaller: a card leaves about 90 px at 375 px
+    return { question: `\\footnotesize\\begin{gathered}${vec(u)}\\\\ \\cdot\\,${vec(v)}\\end{gathered}`, answer: String(dot(u, v) + 0) }
 }
 
 const WHOLE: Vec3[] = [[1, 2, 2], [2, 3, 6], [1, 4, 8], [4, 4, 7], [2, 4, 4], [0, 3, 4], [2, 6, 9], [3, 4, 12], [2, 2, 1], [6, 6, 7]]
@@ -34,8 +34,10 @@ const WHOLE: Vec3[] = [[1, 2, 2], [2, 3, 6], [1, 4, 8], [4, 4, 7], [2, 4, 4], [0
 function magnitudePair(random: Random): Pair | null {
     if (pick(random, [true, true, false])) {
         const [x, y, z] = pick(random, WHOLE)
-        const p: Vec3 = [x * pick(random, [1, -1]), y * pick(random, [1, -1]), z * pick(random, [1, -1])]
-        return { question: `|${vec(p)}|`, answer: String(Math.sqrt(x * x + y * y + z * z)) }
+        // At most one minus sign, so that the card fits
+        const negative = randomInt(random, -1, 2)
+        const p: Vec3 = [negative === 0 ? -x : x, negative === 1 ? -y : y, negative === 2 ? -z : z]
+        return { question: `\\footnotesize|${vec(p)}|`, answer: String(Math.sqrt(x * x + y * y + z * z)) }
     }
     const p: Vec3 = [randomInt(random, 1, 3), randomInt(random, 0, 3), randomInt(random, 1, 3)]
     const square = dot(p, p)
@@ -47,8 +49,9 @@ function crossPair(random: Random): Pair | null {
     const u = small(random, 2)
     const v = small(random, 2)
     const n = cross(u, v)
-    if (n.every((value) => value === 0)) return null
-    return { question: `\\begin{gathered}${vec(u)}\\\\ \\times\\,${vec(v)}\\end{gathered}`, answer: vec(n) }
+    // At most one minus sign in each vector, so that the card fits
+    if (n.every((value) => value === 0) || [u, v].some((vector) => vector.filter((value) => value < 0).length > 1)) return null
+    return { question: `\\footnotesize\\begin{gathered}${vec(u)}\\\\ \\times\\,${vec(v)}\\end{gathered}`, answer: vec(n) }
 }
 
 /** Six pairs with different answers, so every card has exactly one partner */
