@@ -40,6 +40,7 @@ const ProbabilitateaDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-pr
 const ErrealakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-errealak').then((module) => ({ default: module.ErrealakBatx1zIntroPage })))
 const ErrealakBatx1gPage = lazy(() => import('../pages/batx1-gizarte-errealak').then((module) => ({ default: module.ErrealakBatx1gIntroPage })))
 const MerkataritzaBatx1gPage = lazy(() => import('../pages/batx1-gizarte-merkataritza').then((module) => ({ default: module.MerkataritzaBatx1gIntroPage })))
+const AljebraBatx1gPage = lazy(() => import('../pages/batx1-gizarte-aljebra').then((module) => ({ default: module.AljebraBatx1gIntroPage })))
 const SegidakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-segidak').then((module) => ({ default: module.SegidakBatx1zIntroPage })))
 const EkuazioakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-ekuazioak').then((module) => ({ default: module.EkuazioakBatx1zIntroPage })))
 const TriangeluakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-triangeluak').then((module) => ({ default: module.TriangeluakBatx1zIntroPage })))
@@ -417,6 +418,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx1-gizarte/aritmetica-mercantil/*',
                         element: <MerkataritzaBatx1gPage />,
+                    },
+                    // Álgebra de 1.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx1-gizarte/algebra/*',
+                        element: <AljebraBatx1gPage />,
                     },
                     // Sucesiones de 1.º Bachillerato (Ciencias): unidad V2
                     {

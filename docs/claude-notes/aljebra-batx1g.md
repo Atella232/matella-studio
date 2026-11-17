@@ -14,6 +14,19 @@ Tercer tema del bloque «Números y álgebra» de 1.º Sociales: curso `batx1-gi
 - **Fuente:** solo Anaya Matemáticas aplicadas a las CCSS I, U3 (edición `Suma_Piezas`, solucionario). Textos y ejercicios propios.
 - **Orden del libro:** polinomios y factorización → fracciones algebraicas → ecuaciones (bicuadradas, grado alto, radicales, racionales, exponenciales, logarítmicas) → sistemas (no lineales, Gauss) → inecuaciones de una incógnita → inecuaciones con dos incógnitas. Problemas con contextos económicos (recaudación, ventas, mezclas, presupuesto).
 
+## Diseño elegido (2026-11-17)
+
+El dueño eligió las recomendadas: V1 (13 lecciones de 1.º Ciencias + 4 propias), L1–L3 y J1–J3.
+
+## Fase 1+2 · lecciones y contenido
+
+- **Etapas:** `polynomials`, `equations`, `systems`, `inequalities`, `economy`.
+- **Lecciones (17):** de `batx1-zientziak-ekuazioak` ruffini-roots, factorize-high, algebraic-fractions, change-variable, rational-equations, radical-equations, exponential-equations, log-equations, polynomial-inequalities, rational-inequalities; de `batx1-zientziak-sistemak` nonlinear-substitution, gauss-method, half-plane-regions; propias `money-systems`, `break-even`, `supply-demand`, `budget-region` (con `BreakEvenFigure`, `SupplyDemandFigure`, `BudgetRegionFigure`).
+- **Contenido:** diagnóstico 132001–132008; práctica 1–20, retos 101–115, banco 1–50. Cada respuesta es un número: «la mayor solución», «cuántos enteros», «cuántas entradas». Los intervalos van en ejercicios del banco sin casilla.
+- **Notación:** oferta $O(p)$ y beneficio $B(x)$ en eu/es/ar; en inglés $S(p)$ y $P(x)$. El punto muerto en euskera es «errentagarritasun-atalasea». En la pregunta «Compruébalo» de oferta y demanda no hay nombres de función, porque `lesson-checks` exige fórmulas idénticas en los cuatro idiomas.
+- **Respuestas:** `inputMode: 'text'`, como Ciencias (hay negativos y fracciones).
+- **Truco:** el test de sufijos en euskera de la unidad mira solo detrás de una fórmula cerrada; `$z=2$` no es un sufijo.
+
 ## En curso
 
-- 2026-11-17: fuentes leídas y propuesta de diseño enviada al dueño (menú de letras). **Esperando su elección** antes de construir nada.
+- 2026-11-17: fase 1+2 hecha (tests, lint y build en verde; revisado a 375 px en eu/es/ar). **Siguiente:** laboratorio con L1 «El punto muerto», L2 «Oferta y demanda», L3 «La región del presupuesto» (ids 132101–132399) y las prestadas de Ciencias.
