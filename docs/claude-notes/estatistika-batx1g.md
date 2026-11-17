@@ -28,6 +28,16 @@ Tema `estadistica` del curso `batx1-gizarte`, primero del bloque «Estadística�
 - **Trucos:** en `group-means` la fórmula con $N_A$, $N_B$ (no $n$): el test de las ideas clave pide las letras de la lección. En árabe, el pie del dibujo de tres diagramas se salía por abajo: Figure más alta.
 - **Revisión:** las 18 lecciones a 375 px en eu, es y ar con todos los pasos abiertos (sin desbordes, sin textos fuera de los dibujos, medido con `getBBox`); en ar también portada, diagnóstico, práctica, ejercicios, retos y resumen.
 
+## Fase 3: laboratorio
+
+- **Propias** (en `lab/`, con predicción y retos infinitos):
+  - `widths` «Anchos distintos» (`widths.ts`): horas de televisión de 50 personas, hora a hora de 0 a 12 (`HOURS`), agrupadas en tres intervalos cuyos dos límites se arrastran. Antes de predecir, las barras van con altura = f (mal); después (y con ▶ se ve el cambio) con altura f / a, y una línea de puntos dibuja las personas por hora. Predicción: bien dibujada, ¿la 3.ª barra es más baja, igual o más alta que la 1.ª? Retos 137301–137303.
+  - `ogive` «El polígono acumulado» (`ogive.ts`): tres tablas (edades de la lección, minutos al trabajo, gasto semanal); en modo percentil se arrastra la raya a k % y se lee $P_k$; en modo valor, a x y se lee su percentil; salen los triángulos de la interpolación. Predicción: ¿$P_k$ queda antes, en o después de la marca de clase de su intervalo? (lo que daría Ciencias); en modo valor, ¿menos de la mitad, la mitad o más por debajo? Retos 137101–137103 (el 3.º: un $P_k$ que caiga justo en la marca).
+  - `between` «¿Cuántos caben?» (`between.ts`): dos cortes en un histograma (las 500 piezas de la lección y la espera de 50 pacientes con x̄ = 20, σ = 7); lo verde es lo que cuenta, partiendo en proporción los intervalos de los extremos. Predicción: ¿menos de la mitad, la mitad o más entre los cortes? ▶ abre los cortes desde el centro. Retos 137201–137203.
+- **Prestadas** con sus ids (como en Ciencias): `cumulative`, `intervals`, `centre`, `histogram`, `balance` (ahora para la media de dos grupos), `percentile`, `whiskers` y `table`. 11 herramientas.
+- **Trucos:** el texto árabe del tablero de `widths` va por `Label`. La etiqueta del resultado de `ogive` se salía por abajo: tablero de 244 de alto.
+- **Revisión:** las 11 herramientas a 375 px en eu, es y ar con la predicción hecha: sin desbordes ni textos fuera del tablero (medido con `getBBox`).
+
 ## En curso
 
-- Fase 3 (laboratorio): empezada la lógica de L1 (`lab/ogive.ts`). Siguiente: L2 `between`, L3 `widths`, la interfaz, las prestadas y `tests/estatistika-batx1g-lab.test.ts`.
+- Fase 4 (juegos): escrita la lógica de J1 `quality` (`games/quality.ts`) y J2 `hunt` (`games/hunt.ts`). Siguiente: detective, carrera, memoria, interfaz, `info.ts` (ids 137401–137899: carrera 137401–405, quality 137501–503, hunt 137601–603, detective 137701–703, memoria 137801–803, caja 137811–813, «¿Qué histograma?» 137821–823) y `tests/estatistika-batx1g-games.test.ts`.

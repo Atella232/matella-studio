@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { socialStatsChallenges, socialStatsDiagnostic, socialStatsExerciseBank, socialStatsPractice } from './content'
 import { SocialStatsHeroArt } from './figures'
+import { SocialStatsLaboratory } from './lab'
+import { socialStatsLabChallengeIds, socialStatsLabToolForTopic, socialStatsLabTools } from './lab/labTools'
 import { socialStatsStages, socialStatsTopics } from './lessons'
 
 const estatistikaBatx1gUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const estatistikaBatx1gUnit: UnitDefinition = {
     guidedPractice: socialStatsPractice,
     exerciseBank: socialStatsExerciseBank,
     challenges: socialStatsChallenges,
+    lab: {
+        description: {
+            eu: `${socialStatsLabTools.length} tresna, erronkekin: zabalera desberdinak, poligono metatua eta zenbat sartzen dira, berriak; eta 4. DBHko maiztasun metatuak, tarteak, batez bestekoa, mediana eta moda, histograma, bi taldeen balantza, pertzentilen zinta, biboteak eta taula baten σ.`,
+            es: `${socialStatsLabTools.length} herramientas con retos: anchos distintos, el polígono acumulado y ¿cuántos caben?, nuevas; y de 4.º ESO, frecuencias acumuladas, intervalos, media, mediana y moda, histograma, la balanza de dos grupos, la cinta de los percentiles, los bigotes y la σ de una tabla.`,
+            en: `${socialStatsLabTools.length} tools with challenges: different widths, the cumulative polygon and how many fit?, new; and from 4th ESO, cumulative frequencies, intervals, mean, median and mode, the histogram, the two-group balance, the percentile tape, the whiskers and the σ of a table.`,
+            ar: `${socialStatsLabTools.length} أداة مع تحديات: أطوال مختلفة والمضلّع المتجمّع وكم يتّسع، وهي جديدة؛ ومن الصف الرابع: التكرارات المتجمّعة والفئات والمتوسط والوسيط والمنوال والمدرّج وميزان المجموعتين وشريط المئينات والشاربان وσ لجدول.`
+        },
+        progressIds: socialStatsLabChallengeIds,
+        toolForTopic: socialStatsLabToolForTopic,
+        render: (props) => <SocialStatsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −2, 0,15 edo 3/4. Ehunekoak, % ikurrik gabe.', es: 'Escribe un número: 5, −2, 0,15 o 3/4. Los porcentajes, sin el signo %.', en: 'Write a number: 5, −2, 0.15 or 3/4. Percentages without the % sign.', ar: 'اكتب عددًا: 5 أو ⁦−2⁩ أو 0.15 أو 3/4. والنسب المئوية بلا علامة ٪.' },
         defaultForm: 'any',
