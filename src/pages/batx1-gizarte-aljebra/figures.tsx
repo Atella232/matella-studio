@@ -13,9 +13,10 @@ import { Figure } from '../dbh2-zatikiak-prototype/figures'
 
 const INK = 'var(--ink, #1d2733)'
 const MUTED = 'var(--muted, #58616e)'
-const STAGE = 'var(--stage, #2f6fdb)'
-const STAGE_TINT = 'var(--stage-tint, #dde7f7)'
-const SECOND = 'var(--second, #c4432a)'
+/** Fixed colours: the stage colour of «economy» is coral, and the captions name blue and red */
+const STAGE = '#2f6fdb'
+const STAGE_TINT = '#dde7f7'
+const SECOND = '#c4432a'
 const GREEN = '#2f8a57'
 const GREEN_TINT = '#d6eddf'
 const PAPER = '#fffcf6'

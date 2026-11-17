@@ -27,6 +27,12 @@ El dueño eligió las recomendadas: V1 (13 lecciones de 1.º Ciencias + 4 propia
 - **Respuestas:** `inputMode: 'text'`, como Ciencias (hay negativos y fracciones).
 - **Truco:** el test de sufijos en euskera de la unidad mira solo detrás de una fórmula cerrada; `$z=2$` no es un sufijo.
 
+## Fase 3 · laboratorio
+
+- **Propias:** L1 `break-even` (`breakEven.ts`, retos 132101–132105: mochilas, panadería y academia; precio y unidades), L2 `market` (`market.ts`, 132201–132205: tres mercados con equilibrio entero 25, 16 y 20), L3 `budget` (`budget.ts`, 132301–132305: taller y pastelería; sin función objetivo, que es de 2.º). Componentes en `GizAlgebraTools.tsx`.
+- **Prestadas (con sus ids):** ruffini, root-hunt, change-machine, radical, exponential, circle, gauss-machine, mixture, sign-table, half-plane, region. 14 herramientas en total.
+- **Trucos:** en la etapa `economy` el color de etapa es coral, así que `var(--stage)` sale rojo: las herramientas y los dibujos propios usan azul y rojo fijos, porque las leyendas nombran los colores. El título vasco largo «Errentagarritasun-atalasea» empujaba el botón «Ikusi ikasgaia» fuera de los 375 px: la herramienta se llama «Atalasea». La fórmula del beneficio va en tres líneas (I, C, B).
+
 ## En curso
 
-- 2026-11-17: fase 1+2 hecha (tests, lint y build en verde; revisado a 375 px en eu/es/ar). **Siguiente:** laboratorio con L1 «El punto muerto», L2 «Oferta y demanda», L3 «La región del presupuesto» (ids 132101–132399) y las prestadas de Ciencias.
+- 2026-11-17: fases 1+2 y 3 hechas (tests, lint y build en verde; revisado a 375 px en eu/es/ar). **Siguiente:** juegos con J1 «Cuadra la taquilla», J2 «¿Gana o pierde?», J3 detective, carrera y memoria (ids 132401–132899), y los reutilizados de Ciencias desde 132811.

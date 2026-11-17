@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { gizAlgebraChallenges, gizAlgebraDiagnostic, gizAlgebraExerciseBank, gizAlgebraPractice } from './content'
 import { GizAlgebraHeroArt } from './figures'
+import { GizAlgebraLaboratory } from './lab'
+import { gizAlgebraLabChallengeIds, gizAlgebraLabToolForTopic, gizAlgebraLabTools } from './lab/labTools'
 import { gizAlgebraStages, gizAlgebraTopics } from './lessons'
 
 const aljebraBatx1gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const aljebraBatx1gUnit: UnitDefinition = {
     guidedPractice: gizAlgebraPractice,
     exerciseBank: gizAlgebraExerciseBank,
     challenges: gizAlgebraChallenges,
+    lab: {
+        description: {
+            eu: `${gizAlgebraLabTools.length} tresna, erronkekin: errentagarritasun-atalasea, eskaintza eta eskaria, eta aurrekontuaren eskualdea, berriak; eta 1. Zientziakoak: Ruffiniren taula, erroen ehiza, aldagai-aldaketaren makina, erroak dituzten ekuazioak, berretzaileak, zuzena eta zirkunferentzia, Gaussen makina, nahastea, zeinuen taula, erdiplanoa eta eskualdea.`,
+            es: `${gizAlgebraLabTools.length} herramientas con retos: el punto muerto, oferta y demanda, y la región del presupuesto, nuevas; y de 1.º Ciencias, la tabla de Ruffini, la caza de raíces, la máquina del cambio de variable, las ecuaciones con radicales, los exponentes, recta y circunferencia, la máquina de Gauss, la mezcla, la tabla de signos, el semiplano y la región.`,
+            en: `${gizAlgebraLabTools.length} tools with challenges: the break-even point, supply and demand, and the budget region, new; and from 1st Sciences, Ruffini's table, the root hunt, the change of variable machine, radical equations, exponents, line and circle, the Gauss machine, the mixture, the sign table, the half-plane and the region.`,
+            ar: `${gizAlgebraLabTools.length} أداة مع تحديات: نقطة التعادل والعرض والطلب ومنطقة الميزانية، وهي جديدة؛ ومن الأول علوم: جدول روفيني وصيد الجذور وآلة تغيير المتغير والمعادلات الجذرية والأسس والمستقيم والدائرة وآلة غاوس والخليط وجدول الإشارات ونصف المستوى والمنطقة.`
+        },
+        progressIds: gizAlgebraLabChallengeIds,
+        toolForTopic: gizAlgebraLabToolForTopic,
+        render: (props) => <GizAlgebraLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Soluzio bat baino gehiago badago, eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si hay varias soluciones, solo la que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If there are several solutions, only the one asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت هناك عدة حلول فاكتب المطلوب فقط.' },
         defaultForm: 'any',
