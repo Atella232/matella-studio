@@ -123,7 +123,7 @@ function JoinBoard({ round, k, language }: { round: JoinRound; k: number | null;
             {leftEnd !== null && rightStart !== null && !joined && <line x1={X(round.a) + 9} x2={X(round.a) + 9} y1={Y(leftEnd)} y2={Y(rightStart)} stroke="var(--mustard, #e0a100)" strokeWidth={3.4} />}
             {leftEnd !== null && <circle cx={X(round.a)} cy={Y(leftEnd)} r={6} fill={joined ? 'var(--ink)' : 'var(--coral, #c4432a)'} stroke="var(--card, #fffcf6)" strokeWidth={1.5} />}
             {rightStart !== null && !joined && <circle cx={X(round.a)} cy={Y(rightStart)} r={6} fill="var(--card, #fffcf6)" stroke="var(--success, #267b53)" strokeWidth={2.4} />}
-            {k === null && <text x={W * 0.72} y={H / 2} textAnchor="middle" fontSize={30} fontWeight={700} fill="var(--muted)" opacity={0.6}>?</text>}
+            {k === null && <text x={W * (round.left.k ? 0.28 : 0.72)} y={H / 2} textAnchor="middle" fontSize={30} fontWeight={700} fill="var(--muted)" opacity={0.6}>?</text>}
         </svg>
     )
 }
@@ -166,7 +166,7 @@ export function JoinGame({ game, art, ...props }: GameProps & { game: GameInfo; 
                 art,
                 rounds: JOIN_ROUNDS,
                 rules: [
-                    say('Txartel bakoitzak bigarren zatia marrazten du bere $k$ balioarekin: begiratu jauzia.', 'Cada tarjeta dibuja el segundo trozo con su $k$: mira el salto.', 'كل بطاقة ترسم الجزء الثاني بقيمة $k$ الخاصة بها: انظر إلى القفزة.', 'Each card draws the second piece with its $k$: watch the jump.'),
+                    say('Txartel bakoitzak $k$ daraman zatia marrazten du bere balioarekin: begiratu jauzia.', 'Cada tarjeta dibuja el trozo que lleva $k$ con su valor: mira el salto.', 'كل بطاقة ترسم الجزء الذي فيه $k$ بقيمتها: انظر إلى القفزة.', 'Each card draws the piece with $k$ using its value: watch the jump.'),
                     say('Jarraitua: bi zatiek balio bera ematen dute lotura-puntuan.', 'Continua: los dos trozos dan lo mismo en el punto de unión.', 'متصلة: يعطي الجزآن القيمة نفسها عند نقطة الوصل.', 'Continuous: both pieces give the same at the joining point.'),
                     say('Aukeratu txartel bat eta egiaztatu.', 'Elige una tarjeta y comprueba.', 'اختر بطاقة وتحقّق.', 'Choose a card and check.')
                 ],
