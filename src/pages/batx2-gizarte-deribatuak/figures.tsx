@@ -342,6 +342,7 @@ export function MarginalFigure({ language }: Props) {
             box={{ xMin: 0, xMax: 8, yMin: 0, yMax: 8 }}
             cell={28}
             units={[5, 200]}
+            ox={54}
             curves={[{ fn: c, from: 0, to: 41, color: STAGE }, { fn: line(20, 600, 30), from: 0, to: 41, color: SECOND, dashed: true, width: 2.4 }]}
             dots={[{ at: [20, 600], color: SECOND }]}
             notes={[
@@ -349,7 +350,7 @@ export function MarginalFigure({ language }: Props) {
                 { y: 112, formula: 'C(21) − C(20) = 30,5', color: INK, size: 17 },
                 { y: 156, text: say('hurrengo unitatea', 'la unidad siguiente', 'الوحدة التالية', 'the next unit'), size: 16 }
             ]}
-            notesX={290}
+            notesX={310}
         />
     )
 }

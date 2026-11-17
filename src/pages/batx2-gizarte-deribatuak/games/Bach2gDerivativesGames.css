@@ -1,0 +1,7 @@
+/* ¿Cuánto cuesta la siguiente? and Une f con f′ (Deribatuak, Batxilergoa 2 · Gizarte Zientziak) */
+.fraction-v2-games-card[data-game="next-cost"] { --game-tint: var(--mustard-tint, #fbebc0); }
+.fraction-v2-games-card[data-game="match-slope"] { --game-tint: var(--success-tint, #d9efe2); }
+
+.bach2g-der-graphs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.bach2g-der-graphs button { padding: 4px; }
+.bach2g-der-graphs svg { display: block; width: 100%; height: auto; }

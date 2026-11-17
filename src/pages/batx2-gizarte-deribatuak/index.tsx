@@ -2,6 +2,10 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2gDerivativesChallenges, bach2gDerivativesDiagnostic, bach2gDerivativesExerciseBank, bach2gDerivativesPractice } from './content'
 import { Bach2gDerivativesHeroArt } from './figures'
+import { Bach2gDerivativesGames } from './games'
+import { BACH2G_DERIVATIVES_GAME_RECORDS_KEY, bach2gDerivativesGameProgressIds } from './games/info'
+import { Bach2gDerivativesLaboratory } from './lab'
+import { bach2gDerivativesLabChallengeIds, bach2gDerivativesLabToolForTopic, bach2gDerivativesLabTools } from './lab/labTools'
 import { bach2gDerivativesStages, bach2gDerivativesTopics } from './lessons'
 
 const deribatuakBatx2gUnit: UnitDefinition = {
@@ -24,6 +28,28 @@ const deribatuakBatx2gUnit: UnitDefinition = {
     guidedPractice: bach2gDerivativesPractice,
     exerciseBank: bach2gDerivativesExerciseBank,
     challenges: bach2gDerivativesChallenges,
+    lab: {
+        description: {
+            eu: `${bach2gDerivativesLabTools.length} tresna, erronkekin: batez bestekotik unean unekora, leundu tarifa eta hurrengo unitatea, berriak; eta 1. mailako Deribatuak unitateko deribagarria hemen?, f′ funtzioaren grafikoa eta makinen katea.`,
+            es: `${bach2gDerivativesLabTools.length} herramientas con retos: de la media a la instantánea, suaviza la tarifa y la unidad siguiente, nuevas; y de Derivadas de 1.º, ¿derivable aquí?, la gráfica de f′ y la cadena de máquinas.`,
+            en: `${bach2gDerivativesLabTools.length} tools with challenges: from the average to the instantaneous, smooth the tariff and the next unit, new; and from Derivatives of 1st year, differentiable here?, the graph of f′ and the chain of machines.`,
+            ar: `${bach2gDerivativesLabTools.length} أدوات مع تحديات: من المتوسط إلى اللحظي ونعّم التعريفة والوحدة التالية، وهي جديدة؛ ومن مشتقات السنة الأولى: قابلة للاشتقاق هنا؟ ورسم f′ وسلسلة الآلات.`
+        },
+        progressIds: bach2gDerivativesLabChallengeIds,
+        toolForTopic: bach2gDerivativesLabToolForTopic,
+        render: (props) => <Bach2gDerivativesLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bost joko: lasterketa, zenbat kostatzen da hurrengoa?, lotu f eta f′, deribatuen detektibea eta memoria.',
+            es: 'Cinco juegos: carrera, ¿cuánto cuesta la siguiente?, une f con f′, detective de derivadas y memoria.',
+            en: 'Five games: race, what does the next one cost?, match f with f′, derivatives detective and memory.',
+            ar: 'خمس ألعاب: السباق وكم تكلّف التالية؟ وصِل f بـ f′ ومخبر المشتقات والذاكرة.'
+        },
+        progressIds: bach2gDerivativesGameProgressIds,
+        recordsKey: BACH2G_DERIVATIVES_GAME_RECORDS_KEY,
+        render: (props) => <Bach2gDerivativesGames {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2.', es: 'Escribe un número: 5, −3, 0,25 o 3/2.', en: 'Write a number: 5, −3, 0.25 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2.' },
         defaultForm: 'any',
