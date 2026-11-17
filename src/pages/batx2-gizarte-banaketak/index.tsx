@@ -3,6 +3,10 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { distributionsBatx2gChallenges, distributionsBatx2gDiagnostic, distributionsBatx2gExerciseBank, distributionsBatx2gPractice } from './content'
 import { DistributionsBatx2gHeroArt } from './figures'
+import { DistributionsBatx2gGames } from './games'
+import { DISTRIBUTIONS_BATX2G_GAME_RECORDS_KEY, distributionsBatx2gGameProgressIds } from './games/info'
+import { DistributionsBatx2gLaboratory } from './lab'
+import { distributionsBatx2gLabChallengeIds, distributionsBatx2gLabToolForTopic, distributionsBatx2gLabTools } from './lab/labTools'
 import { distributionsBatx2gStages, distributionsBatx2gTopics } from './lessons'
 
 const banaketakBatx2gUnit: UnitDefinition = {
@@ -25,6 +29,28 @@ const banaketakBatx2gUnit: UnitDefinition = {
     guidedPractice: distributionsBatx2gPractice,
     exerciseBank: distributionsBatx2gExerciseBank,
     challenges: distributionsBatx2gChallenges,
+    lab: {
+        description: {
+            eu: `${distributionsBatx2gLabTools.length} tresna, erronkekin: mila inkesta eta % k-ko zerrenda, berriak; eta Zientzietako makina binomiala, kanpaiaren azpian, normalaren taula eta binomiala kanpaiaren azpian.`,
+            es: `${distributionsBatx2gLabTools.length} herramientas con retos: mil encuestas y la franja del k %, nuevas; y la máquina binomial, bajo la campana, la tabla de la normal y la binomial bajo la campana de Ciencias.`,
+            en: `${distributionsBatx2gLabTools.length} tools with challenges: a thousand polls and the band of k%, new; and the binomial machine, under the bell, the normal table and the binomial under the bell from Sciences.`,
+            ar: `${distributionsBatx2gLabTools.length} أدوات مع تحديات: ألف استطلاع وشريط k %، وهما جديدتان؛ والآلة الثنائية وتحت الجرس وجدول التوزيع الطبيعي والثنائي تحت الجرس من العلوم.`
+        },
+        progressIds: distributionsBatx2gLabChallengeIds,
+        toolForTopic: distributionsBatx2gLabToolForTopic,
+        render: (props) => <DistributionsBatx2gLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: ebaketa-nota, nork nabarmentzen du gehiago? eta banaketen detektibea, berriak; eta Zientzietako lasterketa, zein azalera da?, bilatu taulan eta memoria.',
+            es: 'Siete juegos: la nota de corte, ¿quién destaca más? y el detective de distribuciones, nuevos; y la carrera, ¿qué área es?, busca en la tabla y la memoria de Ciencias.',
+            en: 'Seven games: the cut-off mark, who stands out most? and the distributions detective, new; and the race, which area is it?, find it in the table and the memory from Sciences.',
+            ar: 'سبع ألعاب: درجة القبول ومن يتميز أكثر؟ ومخبر التوزيعات، وهي جديدة؛ والسباق وأي مساحة هي؟ وابحث في الجدول والذاكرة من العلوم.'
+        },
+        progressIds: distributionsBatx2gGameProgressIds,
+        recordsKey: DISTRIBUTIONS_BATX2G_GAME_RECORDS_KEY,
+        render: (props) => <DistributionsBatx2gGames {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,8944, 3/8 edo 12. Normalaren probabilitateak, taulako lau hamartarrekin.', es: 'Escribe un número exacto o una fracción: 0,8944, 3/8 o 12. Las probabilidades de la normal, con los cuatro decimales de la tabla.', en: 'Write an exact number or a fraction: 0.8944, 3/8 or 12. Normal probabilities with the four decimals of the table.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.8944 أو 3/8 أو 12. احتمالات التوزيع الطبيعي بأربعة أرقام عشرية من الجدول.' },
         defaultForm: 'any',
