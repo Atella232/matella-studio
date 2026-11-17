@@ -289,10 +289,14 @@ function billQuestion(round: BillRound, language: UnitLanguage): LocalizedText {
         return say(`${words.eu} Faktura ${bill} izan da. Zenbat ${unit.eu} kontsumitu dira?`, `${words.es} La factura ha sido de ${bill}. ¿Cuántas unidades se gastaron?`, `${words.ar} كانت الفاتورة ${bill}. كم وحدة استُهلكت؟`, `${words.en} The bill was ${bill}. How many units were used?`)
     }
     if (round.level === 1) return say(`${words.eu} Zenbat ordaintzen da ${round.amount} ${unit.eu} kontsumituta?`, `${words.es} ¿Cuánto se paga por ${round.amount} unidades?`, `${words.ar} كم يُدفع مقابل ${round.amount} وحدة؟`, `${words.en} How much is paid for ${round.amount} units?`)
+    return say(`Zenbat da $C(${round.amount})$, eurotan?`, `¿Cuánto vale $C(${round.amount})$, en euros?`, `كم تساوي $C(${round.amount})$ باليورو؟`, `What is $C(${round.amount})$, in euros?`)
+}
+
+/** The tariff as a piecewise formula (level 1), shown in its own block above the question */
+function billCases(round: BillRound): string {
     const first = `${round.fixed > 0 ? `${round.fixed}+` : ''}${tex(round.r1 / 100)}x`
     const second = `${round.fixed > 0 ? `${round.fixed}+` : ''}${tex((round.r1 * round.limit) / 100)}+${tex(round.r2 / 100)}(x-${round.limit})`
-    const cases = `C(x)=\\begin{cases}${first} & x\\le ${round.limit}\\\\ ${second} & x>${round.limit}\\end{cases}`
-    return say(`$${cases}$. Zenbat da $C(${round.amount})$, eurotan?`, `$${cases}$. ¿Cuánto vale $C(${round.amount})$, en euros?`, `$${cases}$. كم تساوي $C(${round.amount})$ باليورو؟`, `$${cases}$. What is $C(${round.amount})$, in euros?`)
+    return `C(x)=\\begin{cases}${first} & x\\le ${round.limit}\\\\ ${second} & x>${round.limit}\\end{cases}`
 }
 
 function BillPlay({ round, language, onAnswer, answered }: RoundProps<BillRound>) {
@@ -305,6 +309,7 @@ function BillPlay({ round, language, onAnswer, answered }: RoundProps<BillRound>
         : `${round.fixed > 0 ? `${round.fixed}+` : ''}${tex(round.r1 / 100)}\\cdot ${round.limit}+${tex(round.r2 / 100)}\\cdot ${round.amount - round.limit}=${tex(round.bill)}`
     return (
         <>
+            {round.level === 0 && <div className="dbh4-big-formula soc-fn-big" dir="ltr">{formula(billCases(round), language)}</div>}
             <p className="prop3-prompt"><MathText text={l(billQuestion(round, language))} /></p>
             <BillBoard round={round} answered={answered} />
             <Choices<number> values={round.options} label={(value) => (reverse ? String(value) : euros(value, language))} chosen={chosen} disabled={answered} onChoose={setChosen} />
