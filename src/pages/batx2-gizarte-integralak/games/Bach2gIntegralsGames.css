@@ -1,0 +1,5 @@
+/* ¿Qué primitiva es? and Área con signo (Integralak, Batxilergoa 2 · Gizarte Zientziak) */
+.fraction-v2-games-card[data-game="primitive"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="signed"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+.bach2g-int-options { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
