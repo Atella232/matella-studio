@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { socFunctionsChallenges, socFunctionsDiagnostic, socFunctionsExerciseBank, socFunctionsPractice } from './content'
 import { SocFunctionsHeroArt } from './figures'
+import { SocFunctionsGames } from './games'
+import { SOC_FUNCTIONS_GAME_RECORDS_KEY, socFunctionsGameProgressIds } from './games/info'
 import { SocFunctionsLaboratory } from './lab'
 import { socFunctionsLabChallengeIds, socFunctionsLabToolForTopic, socFunctionsLabTools } from './lab/labTools'
 import { socFunctionsStages, socFunctionsTopics } from './lessons'
@@ -36,6 +38,17 @@ const funtzioakBatx1gUnit: UnitDefinition = {
         progressIds: socFunctionsLabChallengeIds,
         toolForTopic: socFunctionsLabToolForTopic,
         render: (props) => <SocFunctionsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, estimatu datua, prezio zuzena, faktura zatika, funtzioen detektibea eta memoria, berriak; eta 4. DBHko margotu eremua eta kurben laserra.',
+            es: 'Ocho juegos: carrera, estima el dato, el precio justo, la factura a trozos, detective de funciones y memoria, nuevos; y de 4.º ESO, pinta el dominio y láser de curvas.',
+            en: 'Eight games: race, estimate the datum, the right price, the bill in stretches, functions detective and memory, new; and from 4th ESO, paint the domain and the curve laser.',
+            ar: 'ثماني ألعاب: السباق وقدّر البيانة والسعر المناسب والفاتورة على أجزاء ومخبر الدوال والذاكرة، وهي جديدة؛ ومن الصف الرابع: لوّن المجال وليزر المنحنيات.'
+        },
+        progressIds: socFunctionsGameProgressIds,
+        recordsKey: SOC_FUNCTIONS_GAME_RECORDS_KEY,
+        render: (props) => <SocFunctionsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Eurotan edo unitateetan eskatzen bada, zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide en euros o en unidades, solo el número.', en: 'Write a number: 5, −3, 1.5 or 3/2. If it is asked in euros or units, just the number.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا طُلب باليورو أو بالوحدات فاكتب العدد وحده.' },

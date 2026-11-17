@@ -38,6 +38,17 @@ Etapas propuestas (edición nueva): familias y dominio · funciones lineales e i
 - **Test:** `tests/funtzioak-batx1g-lab.test.ts`.
 - **Revisión a 375 px en eu, es y ar:** las 12 herramientas antes y después de predecir: sin desbordes ni errores de KaTeX. **Aviso para fusionar (no es de esta unidad):** en árabe, la «y» del eje de las herramientas prestadas de 4.º se corta 3 px por arriba (pasa igual en su unidad de origen, p. ej. `dbh4-aplikatuak/grafica-funcion`, parábola).
 
+**Fase 4, juegos:** 8 juegos, récords en `matella-funtzioak-batx1g-game-records`.
+- **Propios (3 + detective):**
+  - J1 `estimate` «Estima el dato», niveles 133501–133503: datos en la cuadrícula (`Plane` con `onPick`) y un x objetivo; se elige «interpolar» o «extrapolar» y se toca el punto estimado. Dos datos cerca; dos datos lejos y extrapolaciones lejanas; tres datos con la parábola de Newton (la recta de los dos datos más cercanos da otro punto). Lógica en `games/estimate.ts`.
+  - J2 `price` «El precio justo», niveles 133551–133553: demanda q = A − B·p y cuatro precios; cada tarjeta dibuja su rectángulo p × q (con coste, la parte roja es el coste). Ingresos; beneficio con coste por unidad; «por cada s € de subida vende d menos». La tarjeta buena da estrictamente más que las otras. Lógica en `games/price.ts`.
+  - J3 `bill` «La factura a trozos», niveles 133601–133603: tarifa con parte fija, un precio hasta un límite y otro después, con su gráfica. Desde la fórmula; desde el enunciado; al revés (se sabe la factura, ¿cuánto se gastó?). Precios múltiplos de 5 céntimos y cantidades de 20: todas las facturas en euros enteros. Lógica en `games/bill.ts`.
+  - J4 `detective`, niveles 133701–133703: 12 errores (raíz con >, olvidar el denominador, pendiente al revés, olvidar el coste fijo; vértice sin el menos, dar la x como beneficio, olvidar el coste en el beneficio, interpolar desde el dato equivocado; inversa hecha directa, asíntota con el signo cambiado, el trozo que no toca en el límite, el segundo precio para todas las unidades).
+- **Carrera** 133401–133405 (15 tipos, tres por etapa) y **memoria** 133801–133803 (dominios, vértices, asíntotas).
+- **De 4.º académicas:** «Pinta el dominio» 133811–133813 y «Láser de curvas» 133821–133823 (familias: recta y parábola; hipérbola y |x|; parábola, hipérbola y |x|).
+- **Test:** `tests/funtzioak-batx1g-games.test.ts`.
+- **Comprobación:** 3276 tests, lint y build en verde; inventario OK (el script cuenta como propios `point-slope`, `domain` y `laser`, que son de 4.º).
+
 ## Trucos
 
 - En `takeaway-notation`, una letra de la idea clave no puede salir en mayúscula en la lección: con $y=ax^2+bx+c$ y $y=mx+n$ en la idea clave, la lección no puede usar $A(x)$, $C(x)$ ni $M(t)$ (se usan $S$, $P$, $V$).
@@ -46,4 +57,4 @@ Etapas propuestas (edición nueva): familias y dominio · funciones lineales e i
 
 ## En curso
 
-- Fases 1–3 hechas. Siguiente: fase 4, juegos: J1 «Estima el dato», J2 «El precio justo», J3 «La factura a trozos», detective, carrera y parejas (ids 133401–133899), más «Pinta el dominio» y «Láser de curvas» de 4.º.
+- Fases 1–4 hechas. Falta: hoja de euskera, repaso final a 375 px y cerrar la nota. Después, tema 2: `funciones-exponenciales` (`esponentzialak`, 134000–134999), rama `feat/esponentzialak-batx1g` cortada de esta.
