@@ -1,0 +1,47 @@
+/* Aljebra (Batxilergoa 1 · Gizarte Zientziak) games: the tickets of the box
+   office and the options of earn or lose, small enough for a 375 px
+   screen. Built on .prop3-options of the 3. DBH games. */
+
+.giz-box-ticket {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 4px 0 8px;
+}
+
+.giz-box-ticket span {
+    padding: 6px 12px;
+    border: 2px dashed var(--ink, #1d2733);
+    border-radius: 8px;
+    background: var(--paper-deep, #f1ebdd);
+    font-weight: 700;
+    direction: ltr;
+    unicode-bidi: isolate;
+}
+
+.giz-box-ticket span.giz-box-asked {
+    background: var(--mustard-tint, #fbebc0);
+    border-style: solid;
+}
+
+.giz-box-relation {
+    font-style: italic;
+}
+
+.giz-box-options,
+.giz-gain-options {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.giz-box-options button,
+.giz-gain-options button {
+    min-width: 0;
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+}
+
+.giz-gain-formulas {
+    overflow-x: auto;
+    max-width: 100%;
+}

@@ -191,9 +191,9 @@ export const courses: Course[] = [
     descriptionEn: 'Mathematics Applied to the Social Sciences I',
     color: '#1d6f8a',
     topics: [
-      { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', nameEn: 'Real Numbers', icon: '∞' },
-      { id: 'aritmetica-mercantil', name: 'Aritmética Mercantil', nameEu: 'Merkataritza-aritmetika', nameAr: 'الرياضيات المالية', nameEn: 'Financial Arithmetic', icon: '💶' },
-      { id: 'algebra', name: 'Álgebra', nameEu: 'Aljebra', nameAr: 'الجبر', nameEn: 'Algebra', icon: '🔤' },
+      { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', nameEn: 'Real Numbers', icon: '∞', active: true },
+      { id: 'aritmetica-mercantil', name: 'Aritmética Mercantil', nameEu: 'Merkataritza-aritmetika', nameAr: 'الرياضيات المالية', nameEn: 'Financial Arithmetic', icon: '💶', active: true },
+      { id: 'algebra', name: 'Álgebra', nameEu: 'Aljebra', nameAr: 'الجبر', nameEn: 'Algebra', icon: '🔤', active: true },
       { id: 'funciones', name: 'Funciones Elementales', nameEu: 'Funtzio Elementalak', nameAr: 'الدوال الأساسية', nameEn: 'Elementary Functions', icon: '📈' },
       { id: 'funciones-exponenciales', name: 'Funciones Exponenciales, Logarítmicas y Trigonométricas', nameEu: 'Funtzio Esponentzialak, Logaritmikoak eta Trigonometrikoak', nameAr: 'الدوال الأسية واللوغاريتمية والمثلثية', nameEn: 'Exponential, Logarithmic and Trigonometric Functions', icon: '〰️' },
       { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→' },
