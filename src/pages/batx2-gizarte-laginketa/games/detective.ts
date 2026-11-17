@@ -169,7 +169,7 @@ function build(random: Random, error: SamplingBatx2gDetectiveError): Built | nul
             const z = criticalZ(95)
             return {
                 problem: say(`$N(${mean};\\,${sd})$ eta $n=${root * root}$. Batez bestekoen tartea, %\u00a095 probabilitatearekin.`, `$N(${mean};\\,${sd})$ y $n=${root * root}$. Intervalo del 95\u00a0% de las medias.`, `$N(${mean};\\,${sd})$ و$n=${root * root}$. فترة 95\u00a0% للمتوسطات.`, `$N(${mean};\\,${sd})$ and $n=${root * root}$. The 95% interval of the means.`),
-                lines: [line(LABELS.table, `P(Z\\le z)=0{,}95\\ \\to\\ ${d(wrongZ)}`), line(LABELS.step, `${d(wrongZ)}\\cdot ${d(s)}=${d(wrongZ * s)}`), line(LABELS.result, `${mean}\\pm ${d(wrongZ * s)}`)],
+                lines: [line(LABELS.table, `P(Z\\le z)=0{,}95`), line(LABELS.step, `${d(wrongZ)}\\cdot ${d(s)}=${d(wrongZ * s)}`), line(LABELS.result, `${mean}\\pm ${d(wrongZ * s)}`)],
                 wrong: 0, error, fix: `P(Z\\le z)=0{,}975\\ \\to\\ ${d(z)}\\cdot ${d(s)}=${d(z * s)}`, right: z * s, reached: wrongZ * s
             }
         }
