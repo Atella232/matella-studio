@@ -1,0 +1,6 @@
+/* Kalitate-kontrola and Ehizatu pertzentila (Estatistika unidimentsionala, Batxilergoa 1 · Gizarte Zientziak) */
+.fraction-v2-games-card[data-game="quality"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="hunt"] { --game-tint: var(--blue-tint, #dde7f7); }
+
+.social-stats-chart { display: block; width: 100%; max-width: 480px; height: auto; margin: 4px auto 10px; font-family: "Atkinson Hyperlegible", "Noto Sans Arabic", system-ui, sans-serif; }
+.prop3-options.social-stats-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }

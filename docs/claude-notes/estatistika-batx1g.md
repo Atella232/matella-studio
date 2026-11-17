@@ -38,6 +38,16 @@ Tema `estadistica` del curso `batx1-gizarte`, primero del bloque «Estadística�
 - **Trucos:** el texto árabe del tablero de `widths` va por `Label`. La etiqueta del resultado de `ogive` se salía por abajo: tablero de 244 de alto.
 - **Revisión:** las 11 herramientas a 375 px en eu, es y ar con la predicción hecha: sin desbordes ni textos fuera del tablero (medido con `getBBox`).
 
-## En curso
+## Fase 4: juegos
 
-- Fase 4 (juegos): escrita la lógica de J1 `quality` (`games/quality.ts`) y J2 `hunt` (`games/hunt.ts`). Siguiente: detective, carrera, memoria, interfaz, `info.ts` (ids 137401–137899: carrera 137401–405, quality 137501–503, hunt 137601–603, detective 137701–703, memoria 137801–803, caja 137811–813, «¿Qué histograma?» 137821–823) y `tests/estatistika-batx1g-games.test.ts`.
+- **Propios:**
+  - `quality` «Control de calidad» (`games/quality.ts`, niveles 137501–137503): las longitudes de las piezas en cinco intervalos y el tramo aceptable en verde; ¿cuántas son defectuosas? Los límites caen dentro del 2.º y el 4.º intervalo: a la mitad (nivel 1), a un cuarto o tres cuartos (nivel 2) y en porcentaje con 200, 400 o 500 piezas (nivel 3). Opciones falsas: contar enteros los intervalos cortados, dejarlos fuera o dar las aceptables. Recuentos múltiplos de 4 para que todo salga entero.
+  - `hunt` «Caza el percentil» (`games/hunt.ts`, 137601–137603): un polígono acumulado con cada punto rotulado; el valor de $P_k$ (falsas: la marca de clase, dividir entre $H_i$, el extremo), el percentil de un valor (falsas: el % del extremo superior o inferior, solo el tramo) y el porcentaje entre dos valores (falsas: intervalos enteros). $k$ nunca cae en un punto del polígono.
+  - `detective` (`games/detective.ts`, 137701–137703): altura = f, media de medias, acumulado con $f_i$, punto en la marca; dividir entre $H_i$, la marca como percentil, por el extremo en vez de la amplitud, el percentil de un valor en el extremo; intervalo del extremo entero, banda con $\sigma^2$, más datos en el tramo más largo entre cuartiles, CV al revés.
+- **Carrera** (`games/race.ts`, 137401–137405): cinco circuitos con 15 tipos de pregunta (porcentaje, acumulado, altura f / a; media, agrupada, dos grupos; $P_k$ interpolado, percentil de un valor, mediana; σ, varianza, CV; cuartiles, parte de un intervalo, x̄ + σ).
+- **Memoria** (`games/boards.ts`, 137801–137803): f y a ↔ altura; interpolación con números ↔ valor; dos grupos ↔ media conjunta.
+- **Prestados** con ids de esta unidad: «¿Qué histograma?» de 1.º Ciencias (`HistogramGame`, 137821–137823) y «Construye la caja» de 4.º (137811–137813). 7 juegos.
+- **Trucos:** el evaluador de los tests no lee `\frac` con `{,}` dentro: el test de juegos cambia `{,}` por `.` antes de evaluar. Las etiquetas de los valores del polígono de «Caza el percentil» se salían por abajo: viewBox de 206 de alto.
+- **Revisión:** a 375 px en eu, es y ar, el centro de juegos y los juegos con sus niveles (respondiendo): sin desbordes, sin fórmulas fuera de la pantalla ni textos fuera de los dibujos.
+
+**Cierre:** 3280 tests, lint y build en verde; inventario OK (4 juegos y 3 herramientas propios). Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio, `~/Documents/Matella-fuentes/batx1g-estadistica/hoja-euskera-estatistika-batx1g.html`; solo las 9 lecciones nuevas, las prestadas ya se revisaron en Ciencias). Al fusionar: este tema activa su línea de `courses.ts` y añade su ruta al final de `paths.ts` y tras la de la bidimensional de Ciencias en el router.

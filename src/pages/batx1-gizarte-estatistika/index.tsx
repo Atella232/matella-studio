@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { socialStatsChallenges, socialStatsDiagnostic, socialStatsExerciseBank, socialStatsPractice } from './content'
 import { SocialStatsHeroArt } from './figures'
+import { SocialStatsGames } from './games'
+import { SOCIAL_STATS_GAME_RECORDS_KEY, socialStatsGameProgressIds } from './games/info'
 import { SocialStatsLaboratory } from './lab'
 import { socialStatsLabChallengeIds, socialStatsLabToolForTopic, socialStatsLabTools } from './lab/labTools'
 import { socialStatsStages, socialStatsTopics } from './lessons'
@@ -37,6 +39,17 @@ const estatistikaBatx1gUnit: UnitDefinition = {
         progressIds: socialStatsLabChallengeIds,
         toolForTopic: socialStatsLabToolForTopic,
         render: (props) => <SocialStatsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: lasterketa, kalitate-kontrola, ehizatu pertzentila, estatistikaren detektibea eta memoria, berriak; eta Zientzietako zein histograma eta 4. DBHko kutxa-diagrama eraikitzea.',
+            es: 'Siete juegos: carrera, control de calidad, caza el percentil, detective de estadística y memoria, nuevos; y ¿qué histograma? de Ciencias y construye el diagrama de caja de 4.º ESO.',
+            en: 'Seven games: race, quality control, hunt the percentile, statistics detective and memory, new; and which histogram? from Sciences and build the box plot from 4th ESO.',
+            ar: 'سبع ألعاب: السباق ومراقبة الجودة واصطد المئين ومخبر الإحصاء والذاكرة، وهي جديدة؛ وأي مدرّج من العلوم وارسم مخطط الصندوق من الصف الرابع.'
+        },
+        progressIds: socialStatsGameProgressIds,
+        recordsKey: SOCIAL_STATS_GAME_RECORDS_KEY,
+        render: (props) => <SocialStatsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −2, 0,15 edo 3/4. Ehunekoak, % ikurrik gabe.', es: 'Escribe un número: 5, −2, 0,15 o 3/4. Los porcentajes, sin el signo %.', en: 'Write a number: 5, −2, 0.15 or 3/4. Percentages without the % sign.', ar: 'اكتب عددًا: 5 أو ⁦−2⁩ أو 0.15 أو 3/4. والنسب المئوية بلا علامة ٪.' },
