@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { socExpChallenges, socExpDiagnostic, socExpExerciseBank, socExpPractice } from './content'
 import { SocExpHeroArt } from './figures'
+import { SocExpGames } from './games'
+import { SOC_EXP_GAME_RECORDS_KEY, socExpGameProgressIds } from './games/info'
 import { SocExpLaboratory } from './lab'
 import { socExpLabChallengeIds, socExpLabToolForTopic, socExpLabTools } from './lab/labTools'
 import { socExpStages, socExpTopics } from './lessons'
@@ -36,6 +38,17 @@ const esponentzialakBatx1gUnit: UnitDefinition = {
         progressIds: socExpLabChallengeIds,
         toolForTopic: socExpLabToolForTopic,
         render: (props) => <SocExpLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Hamar joko: lasterketa, lineala ala esponentziala?, deskontua, BEZa eta bidalketa, funtzioen detektibea eta memoria, berriak; Zientzietako non erortzen da puntua?, ordenatu makinak eta desegin makina; eta 4. DBHko noiz bikoizten da? eta kurben laserra.',
+            es: 'Diez juegos: carrera, ¿lineal o exponencial?, descuento, IVA y envío, detective de funciones y memoria, nuevos; de Ciencias, ¿dónde cae el punto?, ordena las máquinas y deshaz la máquina; y de 4.º ESO, ¿cuándo se duplica? y láser de curvas.',
+            en: 'Ten games: race, linear or exponential?, discount, VAT and delivery, functions detective and memory, new; from Sciences, where does the point land?, put the machines in order and undo the machine; and from 4th ESO, when does it double? and the curve laser.',
+            ar: 'عشر ألعاب: السباق وخطية أم أسية؟ والخصم والضريبة والشحن ومخبر الدوال والذاكرة، وهي جديدة؛ ومن العلوم: أين تقع النقطة؟ ورتّب الآلات واعكس الآلة؛ ومن الصف الرابع: متى يتضاعف؟ وليزر المنحنيات.'
+        },
+        progressIds: socExpGameProgressIds,
+        recordsKey: SOC_EXP_GAME_RECORDS_KEY,
+        render: (props) => <SocExpGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Urte edo egun oso bat eskatzen bada, zenbaki osoa.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide un año o un día entero, el número entero.', en: 'Write a number: 5, −3, 1.5 or 3/2. If a whole year or day is asked for, the whole number.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا طُلبت سنة أو يوم كامل فاكتب العدد الصحيح.' },

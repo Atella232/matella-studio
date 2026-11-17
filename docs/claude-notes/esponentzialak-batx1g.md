@@ -40,6 +40,15 @@ Segundo tema del bloque Funciones de 1.º Sociales: curso `batx1-gizarte`, tema 
 - **Test:** `tests/esponentzialak-batx1g-lab.test.ts`.
 - **Revisión a 375 px (eu, es, ar):** las 2 propias antes y después de predecir, sin desbordes; en árabe, «mueve la exponencial» (la «y») y «crecimiento» (el 1000) cortan un texto del eje: son de 4.º, no se tocan.
 
-## En curso
+**Fase 4, juegos:** 10 juegos, récords en `matella-esponentzialak-batx1g-game-records`.
+- **Propios (2 + detective):** J1 `table` «¿Lineal o exponencial?», niveles 134501–134503 (`games/table.ts`): tabla de cuatro datos; se elige el modelo (diferencias o cocientes constantes) y el valor en x = 4 (o x = 5 en el nivel 3); las cartas falsas son el otro modelo y los cruces. J2 `checkout` «Descuento, IVA y envío», niveles 134551–134553 (`games/checkout.ts`): precio final con dos operaciones en orden; qué orden da el precio (2 operaciones); qué orden de 3 da el precio (4 cartas, solo una da el precio). Céntimos enteros. Detective 134701–134703 con 12 errores (x + a, f(−x), f ∘ g, f⁻¹; 1 − r, la raíz, (k·a)ˣ, dos subidas; c/a, log(c/a), dominio del log, 2ⁿ).
+- **Carrera** 134401–134405 (15 tipos) y **memoria** 134801–134803 (factores de %, logaritmos, inversas).
+- **Prestados:** de Ciencias, «¿Dónde cae el punto?» (solo niveles 1–2) 134811–134812, «Ordena las máquinas» 134821–134823, «Deshaz la máquina» 134831–134833; de 4.º, «¿Cuándo se duplica?» 134841–134843 y «Láser de curvas» 134851–134853 (exp y parábola; log e hipérbola; exp y log).
+- **Test:** `tests/esponentzialak-batx1g-games.test.ts`.
 
-- Fases 1–3 hechas y guardadas. Falta la fase 4, juegos: J1 «¿Lineal o exponencial?» (tabla → diferencias o cocientes constantes y siguiente dato), J2 «Descuento, IVA y envío» (ordenar operaciones para llegar al precio), J3 detective (errores de la lista de la propuesta), carrera y memoria (ids 134401–134899), y prestados: ¿dónde cae el punto? (niveles 1–2), ordena las máquinas, deshaz la máquina (Ciencias), ¿cuándo se duplica? y láser de curvas (4.º). Después: cierre (375 px, hoja de euskera) y los temas `limites-continuidad` y `derivadas`.
+## Cierre
+
+- **2026-11-17:** 3308 tests, lint y build en verde; inventario OK (el script cuenta como propios juegos y herramientas prestados; de verdad: 2 herramientas y 2 juegos propios más el detective, lo que eligió el dueño).
+- **Revisión a 375 px (eu, es, ar):** portada, las 15 lecciones, diagnóstico, ejercicios, las 9 herramientas (antes y después de predecir) y los juegos propios hasta el veredicto. Sin desbordes ni errores de KaTeX. Avisos de 4.º (no se tocan): en árabe, «mueve la exponencial» y «crecimiento» cortan un texto del eje.
+- **Hoja de euskera:** `hoja-revision.mjs batx1-gizarte-esponentzialak … --herramientas line-exp,logistic --juegos race,table,checkout,detective,memory`, en la carpeta de notas compartidas.
+- **Para fusionar:** el nombre del tema en `courses.ts` sigue diciendo «…y Trigonométricas»; el dueño quitó la trigonometría (decide la sesión coordinadora).

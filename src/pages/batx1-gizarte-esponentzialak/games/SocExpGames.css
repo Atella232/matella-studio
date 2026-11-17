@@ -1,0 +1,14 @@
+/* ¿Lineal o exponencial? and Descuento, IVA y envío (1.º Sociales · exponenciales) */
+.fraction-v2-games-card[data-game="table"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="checkout"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+.soc-exp-table { width: 100%; max-width: 360px; margin: 6px auto; border-collapse: collapse; text-align: center; font-size: 18px; }
+.soc-exp-table th, .soc-exp-table td { border: 2px solid var(--ink); padding: 6px 4px; }
+.soc-exp-table th { background: var(--paper-deep, #f1e9d8); font-weight: 700; }
+.soc-exp-table td.ask { background: var(--mustard-tint, #fbebc0); font-weight: 700; }
+.soc-exp-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 10px 0; }
+.soc-exp-choice { min-height: 48px; padding: 6px 10px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 17px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.soc-exp-choice.chosen { background: var(--mustard-tint, #fbebc0); }
+.soc-exp-choice:disabled { cursor: default; }
+.soc-exp-ops { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 6px 0; }
+.soc-exp-op { padding: 4px 10px; border: 2px solid var(--ink); border-radius: 10px; background: var(--paper-deep, #f1e9d8); font-size: 16px; font-weight: 700; }
