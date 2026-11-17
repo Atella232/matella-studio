@@ -44,6 +44,11 @@ Anaya 1.º Bach MACS, Suma Piezas U10 «Distribuciones de probabilidad de variab
 - **Trucos:** `inverseTable` solo vale para p ≥ 0,5; para «el x % de abajo», k = −inverseTable(1 − x). En euskera el porcentaje de las opciones va delante (`\%\,49{,}87`). La z de la carrera, dentro de `$…$` (`$${Z}$`): fuera, KaTeX no la dibuja. Inventario OK: 4 juegos propios y 3 herramientas propias de verdad.
 - Revisado a 375 px en eu, es y ar: los juegos de rondas en sus tres niveles, sin desbordes.
 
-## En curso
+## Cierre (2026-11-17)
 
-- Fases 1 (efa65b12), 2 (7c891c9c) y 3 hechas. Queda: hoja de euskera y cierre de la nota (quitar esta sección).
+- **Commits** en `feat/normala-batx1g` (cortada de `feat/diskretuak-batx1g`, así que la trae dentro): fase 1 `efa65b12` (con el WIP `8e8bed9b` antes), fase 2 `7c891c9c`, fase 3 `c47ddc44` y este cierre. Sin push ni fusión: lo hace la sesión coordinadora. **Basta con fusionar esta rama**: lleva las dos unidades del bloque.
+- 3314 tests, lint y build en verde. Inventario OK.
+- Revisado a 375 px en eu, es y ar: las 15 lecciones, las 7 herramientas y los juegos de rondas en sus tres niveles.
+- **Hoja de euskera:** `~/Documents/Matella-fuentes/batx1g-probabilidad/hoja-euskera-normala.html` (fuera del repositorio; copia en la carpeta de notas compartidas).
+- **Sin comprobar a la vista:** la carrera (necesita el panel visible para la cuenta atrás); revisada con su test.
+- **Al fusionar:** solo toca las líneas de registro (`courses.ts`, router, `paths.ts`). Si 1.º Sociales Estadística trae `charts` y `standard-scores`, se pueden cambiar a ellas los dos enlaces «Antes de empezar» que hoy van a 1.º Ciencias.
