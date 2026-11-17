@@ -30,6 +30,15 @@ Anaya 1.º Bach MACS, Suma Piezas U9 «Distribuciones de probabilidad de variabl
 - **Trucos:** el test de notación de la idea clave exige que las letras de la idea clave salgan en la lección (`x_i`, `p_i`, `P(X=k)`): se añadieron en definiciones y explicaciones. `coinFaces` vive en `coins.ts` (react-refresh no deja exportar funciones desde `figures.tsx`). Un `\u00a0` escrito tal cual en el archivo rompe el lint (irregular whitespace).
 - Revisado a 375 px en eu, es y ar: los 14 dibujos medidos con `getBBox`, sin textos fuera ni pisados.
 
+## Fase 2 · laboratorio
+
+- **Herramientas propias (3):** `galton` (Galtonen tresna: 1–10 filas, p en décimas para inclinar el tablero, +10/+100 bolas con semilla, ▶ «Suelta una bola» sigue su camino; elegir casilla muestra C(n, k) y P(k); predicción: la casilla más probable, a la izquierda, en el centro o a la derecha), `raffle` (Zozketa bidezkoa: 100/200/500 boletos, precio, premio gordo, premios pequeños; dinero que entra contra el que sale y ganancia media exacta en céntimos; predicción: desfavorable, justo o favorable), `fit` (Doitu datuak: tres tablas —80 grupos de 3 clientes, 100 piezas de 2 soldaduras, 50 familias de 4 hijos—, p de 0,05 en 0,05 y botón p = x̄/n; barras esperadas, |diferencias| y la regla del 5 %; predicción: menor, igual o mayor que el 5 %).
+- **Prestadas:** `pascal` (4.º ak Combinatoria), `build` y `machine` (2.º Ciencias Banaketak), con sus ids y retos. El inventario las cuenta como propias porque están en otra carpeta de Bachillerato: las propias de verdad son 3.
+- **Ids:** retos 139101–139103 (galton), 139111–139113 (fit), 139121–139123 (raffle); cada una con retos sin fin (`freshFrom`).
+- **Tests:** `tests/diskretuak-batx1g-lab.test.ts` (Galton: caminos, barras, moda, semilla, 2000 bolas cerca de la teoría; rifa: ganancia exacta; ajuste: p estimada, 3,75 %, 12 %, 2,5 %, ninguna p salva las soldaduras).
+- **Trucos:** los textos árabes de las pizarras van con `Label` (test `figures-arabic-label`); con `Label`, una etiqueta alineada a la izquierda se deja en x = 30 también en árabe (Label da la vuelta al ancla). El `x̄` con macron se ve mal en los botones: el botón usa `MathText`. Los «€» van con espacio no separable para que no salten de línea.
+- Revisado a 375 px en eu, es, en y ar: las 6 herramientas con la predicción hecha, sin textos fuera ni desbordes laterales.
+
 ## En curso
 
-- Fase 1 hecha (commit de este cambio). Siguiente: fase 2, laboratorio (L1 Galton, L2 Ajusta los datos, L3 La rifa justa, y prestadas `build`/`machine` de banaketak y `pascal` de 4.º), ids 139101–139399.
+- Fases 1 (0ea6b3c0) y 2 hechas. Siguiente: fase 3, juegos (J1 ¿A qué casilla?, J2 Traduce el suceso, J3 ¿Merece la pena?, J4 detective; prestados «¿Es binomial?», carrera y memoria), ids 139401–139899.

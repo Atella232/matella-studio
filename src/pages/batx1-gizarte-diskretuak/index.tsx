@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { discreteBatx1gChallenges, discreteBatx1gDiagnostic, discreteBatx1gExerciseBank, discreteBatx1gPractice } from './content'
 import { DiscreteBatx1gHeroArt } from './figures'
+import { DiscreteBatx1gLaboratory } from './lab'
+import { discreteBatx1gLabChallengeIds, discreteBatx1gLabToolForTopic, discreteBatx1gLabTools } from './lab/labTools'
 import { discreteBatx1gStages, discreteBatx1gTopics } from './lessons'
 
 const diskretuakBatx1gUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const diskretuakBatx1gUnit: UnitDefinition = {
     guidedPractice: discreteBatx1gPractice,
     exerciseBank: discreteBatx1gExerciseBank,
     challenges: discreteBatx1gChallenges,
+    lab: {
+        description: {
+            eu: `${discreteBatx1gLabTools.length} tresna, erronkekin: Galtonen tresna, zozketa bidezkoa eta doitu datuak, berriak; eta 4. DBHko Tartagliaren triangelua, eta 2. Batxilergoko eraiki banaketa eta makina binomiala.`,
+            es: `${discreteBatx1gLabTools.length} herramientas con retos: el aparato de Galton, la rifa justa y ajusta los datos, nuevas; y el triángulo de Tartaglia de 4.º ESO, y construye la distribución y la máquina binomial de 2.º de Bachillerato.`,
+            en: `${discreteBatx1gLabTools.length} tools with challenges: the Galton board, the fair raffle and fit the data, new; and Tartaglia's triangle from 4th ESO, and build the distribution and the binomial machine from 2nd Bachillerato.`,
+            ar: `${discreteBatx1gLabTools.length} أدوات مع تحديات: جهاز غالتون واليانصيب العادل وطابق البيانات، وهي جديدة؛ ومثلث تارتاليا من الصف الرابع، وابنِ التوزيع والآلة الثنائية من البكالوريا الثانية.`
+        },
+        progressIds: discreteBatx1gLabChallengeIds,
+        toolForTopic: discreteBatx1gLabToolForTopic,
+        render: (props) => <DiscreteBatx1gLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,384, 3/8 edo −1. Ehunekoak, % ikurrik gabe.', es: 'Escribe un número exacto o una fracción: 0,384, 3/8 o −1. Los porcentajes, sin el signo %.', en: 'Write an exact number or a fraction: 0.384, 3/8 or −1. Percentages without the % sign.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.384 أو 3/8 أو −1. والنسب دون الرمز ٪.' },
         defaultForm: 'any',
