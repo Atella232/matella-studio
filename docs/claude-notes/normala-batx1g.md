@@ -1,0 +1,54 @@
+# Normala · 1.º Bachillerato Ciencias Sociales
+
+Tema 11 de 1.º Sociales (curso `batx1-gizarte`, tema `distribucion-normal`), segundo y último del bloque «Probabilidad» del reparto en paralelo de 1.º Sociales (ver `bachillerato.md`). Unidad propia, más sencilla que la parte normal de `batx2-zientziak-banaketak`; reutiliza (importa, no edita) `normal.ts`, herramientas y juegos de esa unidad.
+
+- **Carpeta:** `src/pages/batx1-gizarte-normala`
+- **`storagePrefix`:** `matella-normala-batx1g`
+- **Rama:** `feat/normala-batx1g`, cortada de `feat/diskretuak-batx1g` (35505503)
+- **Bloque de ids:** 140000–140999 (diagnóstico 140001–140008, laboratorio propio 140101–140399, juegos 140401–140899)
+- **Servidor de pruebas:** puerto 5194 (el mismo `.claude/launch.json`, sin commit)
+
+## Fuentes
+
+Anaya 1.º Bach MACS, Suma Piezas U10 «Distribuciones de probabilidad de variable continua» (solucionario, pp. 273–291) + Estándar U11 (edición anterior). **Ojo:** la lista del curso dice A11 porque la edición Estándar la numera U11; en Suma Piezas es la U10. En el texto extraído faltan fracciones: todo se calcula con código. Ficha fuera del repositorio: `~/Documents/Matella-fuentes/batx1g-probabilidad/ficha-normala.md`.
+
+## Elección del dueño (2026-11-17)
+
+«Las recomendadas»: V1 (15 lecciones, 5 etapas), L1 Del histograma a la campana, L2 Construye una densidad, L3 Ajusta a una normal; J1 ¿Qué porcentaje?, J2 ¿Es una densidad?, J3 Nota de corte, J4 detective; prestados de Banaketak (bell, lookup, approx, area, hunt) y `score`. A1 N(μ; σ) y P(Z ≤ k); A2 densidades de trozos rectos; A3 regla del 5 % también aquí; A4 μ y σ redondos en los ejercicios cerrados.
+
+## Fase 1 · lecciones y contenido
+
+- **Etapas:** `review`, `continuous`, `normal`, `approximation`, `fit`. **Lecciones (15):** histogram, standard-score · density, straight-density · normal-curve, sigma-rule, standard-table, table-symmetry, standardize, inverse · binomial-to-normal, continuity · fit-parameters, fit-expected, fit-decision.
+- **Prestado (importado):** `normal.ts` (tabla, `below`/`above`/`between`, `inverseTable`, `tableLatex`, `phiDensity`) y `binomialPmfDecimal` de Banaketak.
+- **«Antes de empezar»:** 1.º Ciencias Estadística (`charts`, `standard-scores`) y Diskretuak de esta rama (`mean-sd`, `binomial-parameters`, `good-fit`).
+- **Contenido:** diagnóstico 140001–140008; práctica 20 (3/4/7/3/3), retos 101–115 (2/3/5/2/3), banco 50 (6/10/18/8/8). Ejemplo de ajuste: 80 estaturas 150–190 con 15, 25, 25, 15 → x̄ = 170, s = 10 exactos; esperados 12,696 y 27,304 con las clases extremas abiertas; mayor diferencia 2,304 = 2,88 %.
+- **Tests:** `tests/normala-batx1g-content.test.ts` (recuentos, ids, KaTeX, idiomas, igualdades, valores de la tabla recalculados y el ajuste de las 80 estaturas).
+- **Trucos:** en las plantillas, la z va como constante `Z = '{z}'`; un script de shell con `${...}` lo para la comprobación de seguridad: usar el editor. `const P` o `const T` en `lessons.tsx` rompen react-refresh (parecen componentes): se llaman `tableBelow`, `tableOf`. En euskera, «% 20k» y «% 50ek» pegan sufijo: se reescriben («etxeen % 20 da…», «herritarren erdiak…»).
+- Revisado a 375 px en eu, es y ar: los 15 dibujos medidos con `getBBox` y ninguna fórmula se sale.
+
+## Fase 2 · laboratorio
+
+- **Herramientas propias (3):** `histogram` (Histogramatik kanpaira: estaturas N(170; 10) con semilla, +100/+1000 datos, clases de 10, 5 o 2,5 cm dibujadas como densidad, la campana encima; la clase tocada da su parte frente a la probabilidad de la tabla —todos los bordes son z con dos decimales—; predicción: qué parte cae en 160–180), `density` (Eraiki dentsitate bat: rectángulo, rampa que sube o que baja, bases 2, 4, 5, 10, altura en centésimas; área total y P(a ≤ X ≤ b) exactas en diezmilésimas; predicción: área menor, igual o mayor que 1), `fitNormal` (Doitu normal batera: 80 estaturas, 100 esperas y 144 notas; μ y σ de 0,5 en 0,5 o el botón x̄, s; esperados con Φ y clases extremas abiertas; regla del 5 %; las esperas, torcidas, nunca se aceptan).
+- **Prestadas:** `score` (1.º Ciencias Estadística) y `lookup`, `bell`, `approx` (Banaketak), con sus ids.
+- **Ids:** 140101–140103 (histogram), 140111–140113 (density), 140121–140123 (fitNormal); retos sin fin en las tres.
+- **Tests:** `tests/normala-batx1g-lab.test.ts`.
+- **Aviso (pieza prestada, sin tocar):** en «Bajo la campana» los ejes x y z se dibujan uno encima del otro para la animación ▶ (el medidor de solapes lo marca en eu, es y ar). Es así también en 2.º Ciencias.
+- Revisado a 375 px en eu, es y ar: las 7 herramientas con la predicción hecha, sin textos fuera ni desbordes laterales.
+
+## Fase 3 · juegos
+
+- **Propios:** `percent` (¿Qué porcentaje?: N(μ; σ) y un intervalo en σ enteros con su campana pintada; 1) μ ± kσ, 2) un lado o una cola, 3) dos trozos; errores: la banda entera por la mitad y la vecina), `density` (¿Es una densidad?: 1) sí / no por el área / no por una parte negativa, dos de cada; 2) la altura que da área 1, con el ½ olvidado o doblado; 3) P(0 ≤ X ≤ a) como área), `cutoff` (Nota de corte: porcentajes 10, 15, 20, 25, 30, 40 —nunca el 5 %, empate en la tabla—; 1) k con el signo o el lado cambiados; 2) x = μ + kσ, con μ − kσ y μ + k; 3) lo mismo en plazas, becas y control de calidad), `detective` (12 errores en 3 niveles: tabla, tipificar y aproximar, ajuste).
+- **Prestados:** «¿Qué área es?» (`area`) y «Busca en la tabla» (`hunt`) de Banaketak, con la info y los ids de esta unidad. **Genéricos:** carrera de 5 circuitos (12 tipos, `meta` comprobada) y memoria (μ ± kσ ↔ %, P(Z > k) ↔ tabla, N(μ; σ) y x ↔ z).
+- **Ids:** carrera 140401–140405, porcentaje 140501–140503, densidad 140551–140553, nota de corte 140601–140603, área 140651–140653, tabla 140671–140673, detective 140701–140703, memoria 140801–140803.
+- **Tests:** `tests/normala-batx1g-games.test.ts`.
+- **Trucos:** `inverseTable` solo vale para p ≥ 0,5; para «el x % de abajo», k = −inverseTable(1 − x). En euskera el porcentaje de las opciones va delante (`\%\,49{,}87`). La z de la carrera, dentro de `$…$` (`$${Z}$`): fuera, KaTeX no la dibuja. Inventario OK: 4 juegos propios y 3 herramientas propias de verdad.
+- Revisado a 375 px en eu, es y ar: los juegos de rondas en sus tres niveles, sin desbordes.
+
+## Cierre (2026-11-17)
+
+- **Commits** en `feat/normala-batx1g` (cortada de `feat/diskretuak-batx1g`, así que la trae dentro): fase 1 `efa65b12` (con el WIP `8e8bed9b` antes), fase 2 `7c891c9c`, fase 3 `c47ddc44` y este cierre. Sin push ni fusión: lo hace la sesión coordinadora. **Basta con fusionar esta rama**: lleva las dos unidades del bloque.
+- 3314 tests, lint y build en verde. Inventario OK.
+- Revisado a 375 px en eu, es y ar: las 15 lecciones, las 7 herramientas y los juegos de rondas en sus tres niveles.
+- **Hoja de euskera:** `~/Documents/Matella-fuentes/batx1g-probabilidad/hoja-euskera-normala.html` (fuera del repositorio; copia en la carpeta de notas compartidas).
+- **Sin comprobar a la vista:** la carrera (necesita el panel visible para la cuenta atrás); revisada con su test.
+- **Al fusionar:** solo toca las líneas de registro (`courses.ts`, router, `paths.ts`). Si 1.º Sociales Estadística trae `charts` y `standard-scores`, se pueden cambiar a ellas los dos enlaces «Antes de empezar» que hoy van a 1.º Ciencias.

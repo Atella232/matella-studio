@@ -200,8 +200,8 @@ export const courses: Course[] = [
       { id: 'derivadas', name: 'Derivadas y sus Aplicaciones', nameEu: 'Deribatuak eta haien Aplikazioak', nameAr: 'المشتقات وتطبيقاتها', nameEn: 'Derivatives and their Applications', icon: '📉' },
       { id: 'estadistica', name: 'Estadística Unidimensional', nameEu: 'Estatistika Unidimentsionala', nameAr: 'الإحصاء أحادي المتغير', nameEn: 'One-Variable Statistics', icon: '📊', active: true },
       { id: 'estadistica-bidimensional', name: 'Estadística Bidimensional', nameEu: 'Estatistika Bidimentsionala', nameAr: 'الإحصاء ثنائي المتغير', nameEn: 'Two-Variable Statistics', icon: '⁘', active: true },
-      { id: 'distribuciones-discretas', name: 'Distribuciones de Probabilidad Discretas', nameEu: 'Probabilitate-banaketa Diskretuak', nameAr: 'التوزيعات الاحتمالية المتقطعة', nameEn: 'Discrete Probability Distributions', icon: '🎲' },
-      { id: 'distribucion-normal', name: 'Distribuciones Continuas: la Normal', nameEu: 'Banaketa Jarraituak: Normala', nameAr: 'التوزيعات المتصلة: التوزيع الطبيعي', nameEn: 'Continuous Distributions: the Normal', icon: '🔔' },
+      { id: 'distribuciones-discretas', name: 'Distribuciones de Probabilidad Discretas', nameEu: 'Probabilitate-banaketa Diskretuak', nameAr: 'التوزيعات الاحتمالية المتقطعة', nameEn: 'Discrete Probability Distributions', icon: '🎲', active: true },
+      { id: 'distribucion-normal', name: 'Distribuciones Continuas: la Normal', nameEu: 'Banaketa Jarraituak: Normala', nameAr: 'التوزيعات المتصلة: التوزيع الطبيعي', nameEn: 'Continuous Distributions: the Normal', icon: '🔔', active: true },
     ]
   },
   {

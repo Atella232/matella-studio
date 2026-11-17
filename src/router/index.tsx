@@ -86,6 +86,8 @@ const BanaketakBatx2gPage = lazy(() => import('../pages/batx2-gizarte-banaketak'
 const LaginketaBatx2gPage = lazy(() => import('../pages/batx2-gizarte-laginketa').then((module) => ({ default: module.LaginketaBatx2gIntroPage })))
 const InferentziaBatx2gPage = lazy(() => import('../pages/batx2-gizarte-inferentzia').then((module) => ({ default: module.InferentziaBatx2gIntroPage })))
 const BanaketakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-banaketak').then((module) => ({ default: module.BanaketakBatx2zIntroPage })))
+const DiskretuakBatx1gPage = lazy(() => import('../pages/batx1-gizarte-diskretuak').then((module) => ({ default: module.DiskretuakBatx1gIntroPage })))
+const NormalaBatx1gPage = lazy(() => import('../pages/batx1-gizarte-normala').then((module) => ({ default: module.NormalaBatx1gIntroPage })))
 const PolinomikoakDBH4AkPage = lazy(() => import('../pages/dbh4-akademikoak-polinomikoak').then((module) => ({ default: module.PolinomikoakDbh4AkIntroPage })))
 const AreakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-areak').then((module) => ({ default: module.AreakDbh4ApIntroPage })))
 const EkuazioakDBH4ApPage = lazy(() => import('../pages/dbh4-aplikatuak-ekuazioak').then((module) => ({ default: module.EkuazioakDbh4ApIntroPage })))
@@ -662,6 +664,16 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx2-gizarte/inferencia/*',
                         element: <InferentziaBatx2gPage />,
+                    },
+                    // Distribuciones discretas de 1.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx1-gizarte/distribuciones-discretas/*',
+                        element: <DiskretuakBatx1gPage />,
+                    },
+                    // Distribución normal de 1.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx1-gizarte/distribucion-normal/*',
+                        element: <NormalaBatx1gPage />,
                     },
                     // Números reales y porcentajes de 4.º ESO (matemáticas académicas): unidad V2
                     {
