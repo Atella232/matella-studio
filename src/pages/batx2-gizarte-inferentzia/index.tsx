@@ -3,6 +3,10 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { inferenceBatx2gChallenges, inferenceBatx2gDiagnostic, inferenceBatx2gExerciseBank, inferenceBatx2gPractice } from './content'
 import { InferenceBatx2gHeroArt } from './figures'
+import { InferenceBatx2gGames } from './games'
+import { INFERENCE_BATX2G_GAME_RECORDS_KEY, inferenceBatx2gGameProgressIds } from './games/info'
+import { InferenceBatx2gLaboratory } from './lab'
+import { inferenceBatx2gLabChallengeIds, inferenceBatx2gLabToolForTopic, inferenceBatx2gLabTools } from './lab/labTools'
 import { inferenceBatx2gStages, inferenceBatx2gTopics } from './lessons'
 
 const inferentziaBatx2gUnit: UnitDefinition = {
@@ -25,6 +29,28 @@ const inferentziaBatx2gUnit: UnitDefinition = {
     guidedPractice: inferenceBatx2gPractice,
     exerciseBank: inferenceBatx2gExerciseBank,
     challenges: inferenceBatx2gChallenges,
+    lab: {
+        description: {
+            eu: `${inferenceBatx2gLabTools.length} tresna, erronkekin: ehun tarte eta errore-marjina, berriak; eta normalaren taula eta % k-ko zerrenda, Banaketak gaitik.`,
+            es: `${inferenceBatx2gLabTools.length} herramientas con retos: cien intervalos y el margen de error, nuevas; y la tabla de la normal y la franja del k %, del tema de distribuciones.`,
+            en: `${inferenceBatx2gLabTools.length} tools with challenges: a hundred intervals and the margin of error, new; and the normal table and the band of k%, from the distributions unit.`,
+            ar: `${inferenceBatx2gLabTools.length} أدوات مع تحديات: مئة فترة وهامش الخطأ، وهما جديدتان؛ وجدول التوزيع الطبيعي وشريط k % من وحدة التوزيعات.`
+        },
+        progressIds: inferenceBatx2gLabChallengeIds,
+        toolForTopic: inferenceBatx2gLabToolForTopic,
+        render: (props) => <InferenceBatx2gLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bost joko, denak berriak: egia ala gezurra?, tartetik datuetara, inferentziaren detektibea, lasterketa eta memoria.',
+            es: 'Cinco juegos, todos nuevos: ¿verdadero o falso?, del intervalo a los datos, el detective de la inferencia, la carrera y la memoria.',
+            en: 'Five games, all new: true or false?, from the interval to the data, the inference detective, the race and the memory.',
+            ar: 'خمس ألعاب، كلها جديدة: صحيح أم خطأ؟ ومن الفترة إلى البيانات ومخبر الاستدلال والسباق والذاكرة.'
+        },
+        progressIds: inferenceBatx2gGameProgressIds,
+        recordsKey: INFERENCE_BATX2G_GAME_RECORDS_KEY,
+        render: (props) => <InferenceBatx2gGames {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat: 0,0392, 97 edo 1,645. Laginaren tamaina, gorantz biribilduta.', es: 'Escribe un número exacto: 0,0392, 97 o 1,645. El tamaño de muestra, redondeado hacia arriba.', en: 'Write an exact number: 0.0392, 97 or 1.645. Sample sizes rounded up.', ar: 'اكتب عددًا مضبوطًا: 0.0392 أو 97 أو 1.645. وحجم العيّنة مقرّبًا إلى الأعلى.' },
         defaultForm: 'any',
