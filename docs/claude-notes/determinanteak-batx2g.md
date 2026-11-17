@@ -43,6 +43,6 @@ Segundo tema de 2.º Sociales (curso `batx2-gizarte`, tema `determinantes`), seg
 - **De Ciencias, renumerados:** «¿Qué le pasa al determinante?» (142701–142703) y memoria (142851–142853). **Carrera** (`games/race.ts`, 142401–142405): la de Ciencias sin el tipo `block` (orden 4), con tipos propios `bundles` (circuito 1, |A| de dos lotes) y `critical-bundle` (circuito 5, la $a$ que deja los precios sin fijar). Ojo: Ciencias ya tiene un tipo `critical`; por eso el propio se llama `critical-bundle`. Descripciones de los circuitos 1, 3 y 5 propias (sin «orden 4»).
 - Clave de récords `matella-determinanteak-batx2g-game-records`. Tests en `tests/determinanteak-batx2g-games.test.ts`. Revisados a 375 px en es y eu.
 
-## En curso
+## Cierre (2026-11-17)
 
-- Fases 1+2 (09148b8), 3 (eb4e012) y 4 hechas. Falta el cierre: inventario, hoja en euskera para el dueño y quitar esta sección. Después, `sistemak`.
+3314 tests, lint y build en verde. Inventario: 3 juegos propios (J1, J2 y el detective) más «¿Qué le pasa al determinante?», carrera y memoria de Ciencias; 4 herramientas, 2 propias. Revisado a 375 px en eu, es y ar con `getBBox` y el ancho de la página: la lección propia (en el dibujo se agrandaron los textos, que quedaban pequeños en el móvil), las dos herramientas propias y los juegos propios. Hoja de euskera en `~/Documents/Matella-fuentes/batx2g-algebra/hojas/determinanteak-batx2g.html` (sale de `sheet.py`, que lee los `say(...)` de la carpeta), mandada al dueño. Sin publicar ni fusionar.
