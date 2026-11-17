@@ -40,6 +40,8 @@ El dueño eligió las recomendadas: V1 (13 lecciones de 1.º Ciencias + 4 propia
 - **Reutilizados de Ciencias** con sus textos: `zero` (132811–132813, etapa systems), `valid` (132821–132823, equations), `signs` (132831–132833, inequalities). «Lee la última fila» no se usa: discute parámetros, que no están en el libro de Sociales.
 - **Trucos:** en la carrera, una opción equivocada que no sale entera no se ofrece (`wrongAs` devuelve `null`). Los beneficios se limitan a 450 unidades para que ningún número llegue a cinco cifras (el `written` de Ciencias no agrupa miles). Cambiar de idioma en los juegos vuelve a la lista: al revisar, cambia el idioma primero y abre el juego después.
 
-## En curso
+## Cierre (2026-11-17)
 
-- 2026-11-17: fases 1+2, 3 y 4 hechas (tests, lint y build en verde; revisado a 375 px en eu/es/ar; inventario OK: 5 juegos propios, 8 herramientas propias). **Siguiente:** hoja de revisión de euskera y cerrar la nota.
+- Unidad completa en `feat/aljebra-batx1g`: tests, lint y build en verde; revisada a 375 px en eu/es/ar; inventario OK.
+- Hoja de revisión de euskera: `~/Documents/Matella-fuentes/batx1g-aljebra/hojas/aljebra-batx1g-euskara.html` (enviada al dueño). Palabras a confirmar: «errentagarritasun-atalasea» (punto muerto; la herramienta se llama «Atalasea»), «oreka-prezioa», «soberakina» y «eskasia», «eskualde bideragarria».
+- Sin fusionar ni publicar: lo hace el coordinador.
