@@ -48,6 +48,11 @@ Anaya 1.º Bach MACS, Suma Piezas U9 «Distribuciones de probabilidad de variabl
 - **Trucos:** en «¿Merece la pena?» el nivel 1 no saca juegos justos (ganancia 0 = precio − μ, dos opciones iguales). En el detective, la suma P(X = k) + … se salía a 375 px: se escribe 1 − P(X ≤ k − 1). Inventario OK: 4 juegos propios y 3 herramientas propias de verdad (el script cuenta como propias las prestadas de otra carpeta de Bachillerato).
 - Revisado a 375 px en es y ar: los seis juegos de rondas en sus tres niveles, sin desbordes.
 
-## En curso
+## Cierre (2026-11-17)
 
-- Fases 1 (0ea6b3c0), 2 (a377edc6) y 3 hechas. Queda: repaso a 375 px en eu de lecciones y laboratorio con la versión final, hoja de euskera, y después el tema `normala` (rama `feat/normala-batx1g` cortada de esta).
+- **Commits** en `feat/diskretuak-batx1g`: fase 1 `0ea6b3c0`, fase 2 `a377edc6`, fase 3 `d60da601` y este cierre. Sin push ni fusión: lo hace la sesión coordinadora.
+- 3278 tests, lint y build en verde. Inventario OK.
+- Revisado a 375 px en eu, es, en y ar: las 14 lecciones (dibujos medidos con `getBBox`), las 6 herramientas con la predicción hecha, los juegos de rondas en sus tres niveles, y el diagnóstico, la práctica, los retos, el banco y el resumen (ninguna fórmula se sale).
+- **Hoja de euskera:** `~/Documents/Matella-fuentes/batx1g-probabilidad/hoja-euskera-diskretuak.html` (fuera del repositorio; copia en la carpeta de notas compartidas).
+- **Sin comprobar a la vista:** la bola animada del ▶ de Galton con el panel oculto (revisada en el código; el resto de la herramienta sí).
+- **Al fusionar:** solo toca las tres líneas de registro (`courses.ts`, router, `paths.ts`). Si 1.º Sociales Estadística trae lecciones de varianza y coeficiente de variación, se pueden cambiar a ellas los dos enlaces «Antes de empezar» que hoy van a 1.º Ciencias.
