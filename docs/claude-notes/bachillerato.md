@@ -243,3 +243,32 @@ El dueño eligió (2026-11-17):
 | Estadística | 5193 | `estadistica-bidimensional` | `bidimentsionala` | 138000–138999 | `batx1-zientziak-bidimentsionala` | Por hacer |
 | Probabilidad | 5194 | `distribuciones-discretas` | `diskretuak` | 139000–139999 | `dbh4-akademikoak-konbinatoria`, `-probabilitatea`, `batx2-zientziak-probabilitatea`, `-banaketak` | Por hacer |
 | Probabilidad | 5194 | `distribucion-normal` | `normala` | 140000–140999 | `batx2-zientziak-banaketak` | Por hacer |
+
+## Reparto en paralelo de 2.º Sociales (2026-11-17)
+
+El dueño pidió empezar 2.º Sociales a la vez que 1.º Sociales («Sí, arráncalas»). Los 13 temas van en **3 sesiones, una por bloque**. Dentro de cada bloque los temas se hacen en orden y la rama de cada tema se corta de la del anterior. La sesión principal no hace temas: fusiona en `main` y publica, un bloque cada vez y con el visto bueno del dueño.
+
+**Gemelos:** igual que en 1.º Sociales. Cada tema es **su propia unidad**, más sencilla y con contextos de economía y sociedad, que **reutiliza** (importa, sin copiar ni editar) lecciones, laboratorio, juegos y generadores de su gemelo de 2.º Ciencias, de 1.º Ciencias o de 4.º. No se mete contenido que los libros de Sociales no traen (nada de geometría en el espacio ni integración por partes si el libro no la trae).
+
+**Reglas comunes:** las mismas que en 2.º Ciencias (ver arriba), con estos cambios:
+- Carpeta `src/pages/batx2-gizarte-<nombre>`, `storagePrefix` `matella-<nombre>-batx2g`, rama `feat/<nombre>-batx2g`, nota `docs/claude-notes/<nombre>-batx2g.md` (con «En curso» mientras dure).
+- Fuentes: `LIBROS/2_Bach/Santillana/Sociales` (12 unidades) y `LIBROS/2_Bach/Anaya/Sociales` (13). Capítulos de cada tema: tabla de `batx2-gizarte` más arriba. Exámenes de EBAU del País Vasco de Matemáticas Aplicadas a las CCSS II para ver el estilo, nunca para copiarlos.
+- Una pieza prestada que necesite cambios no se edita: se envuelve o se hace una variante en la carpeta propia, o se apunta en la nota.
+- 1.º Sociales se está haciendo a la vez: no se importa nada de `batx1-gizarte-*` hasta que esté en `main`.
+- Puertos 5201–5203.
+
+| Bloque | Puerto | Tema (`id` del curso) | Nombre | Bloque de ids | Reutilizar de | Estado |
+|---|---|---|---|---|---|---|
+| Álgebra | 5201 | `matrices` | `matrizeak` | 141000–141999 | `batx2-zientziak-matrizeak` | Por hacer |
+| Álgebra | 5201 | `determinantes` | `determinanteak` | 142000–142999 | `batx2-zientziak-determinanteak` | Por hacer |
+| Álgebra | 5201 | `sistemas` | `sistemak` | 143000–143999 | `batx2-zientziak-sistemak`, `batx1-zientziak-sistemak` | Por hacer |
+| Álgebra | 5201 | `programacion-lineal` | `programazioa` | 144000–144999 | nuevo (inecuaciones 2D de `dbh4-akademikoak-sistemak`) | Por hacer |
+| Análisis | 5202 | `limites-continuidad` | `limiteak` | 145000–145999 | `batx2-zientziak-limiteak` | Por hacer |
+| Análisis | 5202 | `derivadas` | `deribatuak` | 146000–146999 | `batx2-zientziak-deribatuak` | Por hacer |
+| Análisis | 5202 | `aplicaciones-derivada` | `aplikazioak` | 147000–147999 | `batx2-zientziak-aplikazioak` (optimización con economía) | Por hacer |
+| Análisis | 5202 | `representacion-funciones` | `adierazpena` | 148000–148999 | `batx2-zientziak-adierazpena` | Por hacer |
+| Análisis | 5202 | `integrales` | `integralak` | 149000–149999 | `batx2-zientziak-mugagabeak`, `-mugatua` (un solo tema) | Por hacer |
+| Probabilidad e inferencia | 5203 | `probabilidad` | `probabilitatea` | 150000–150999 | `batx2-zientziak-probabilitatea` | Por hacer |
+| Probabilidad e inferencia | 5203 | `binomial-normal` | `banaketak` | 151000–151999 | `batx2-zientziak-banaketak` | Por hacer |
+| Probabilidad e inferencia | 5203 | `muestreo` | `laginketa` | 152000–152999 | nuevo (`banaketak`, `dbh4-akademikoak-estatistika`) | Por hacer |
+| Probabilidad e inferencia | 5203 | `inferencia` | `inferentzia` | 153000–153999 | nuevo (`laginketa`, `banaketak`) | Por hacer |
