@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { socFunctionsChallenges, socFunctionsDiagnostic, socFunctionsExerciseBank, socFunctionsPractice } from './content'
 import { SocFunctionsHeroArt } from './figures'
+import { SocFunctionsLaboratory } from './lab'
+import { socFunctionsLabChallengeIds, socFunctionsLabToolForTopic, socFunctionsLabTools } from './lab/labTools'
 import { socFunctionsStages, socFunctionsTopics } from './lessons'
 
 const funtzioakBatx1gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const funtzioakBatx1gUnit: UnitDefinition = {
     guidedPractice: socFunctionsPractice,
     exerciseBank: socFunctionsExerciseBank,
     challenges: socFunctionsChallenges,
+    lab: {
+        description: {
+            eu: `${socFunctionsLabTools.length} tresna, erronkekin: bi (edo hiru) datuen artean, gehien ematen duen prezioa eta batez besteko kostua, berriak; eta 4. DBHko izate-eremua eraikitzea, azalerarik handieneko markoa, puntua eta malda, parabola, parabola erroetatik, hiperbola, erroa, bi zati lotzea eta balio absolutua tolestea.`,
+            es: `${socFunctionsLabTools.length} herramientas con retos: entre dos (o tres) datos, el precio que más da y el coste medio, nuevas; y de 4.º ESO, construye el dominio, el marco de mayor área, punto y pendiente, la parábola, la parábola desde sus raíces, la hipérbola, la raíz, une dos trozos y dobla el valor absoluto.`,
+            en: `${socFunctionsLabTools.length} tools with challenges: between two (or three) data, the price that brings in most and the average cost, new; and from 4th ESO, build the domain, the frame of greatest area, point and slope, the parabola, a parabola from its roots, the hyperbola, the root, join two pieces and fold the absolute value.`,
+            ar: `${socFunctionsLabTools.length} أداة مع تحديات: بين بيانتين (أو ثلاث) والسعر الذي يعطي أكثر والتكلفة المتوسطة، وهي جديدة؛ ومن الصف الرابع: ابنِ المجال والإطار ذو المساحة الأكبر والنقطة والميل والقطع المكافئ والقطع المكافئ من جذريه والقطع الزائد والجذر وصِل جزأين واطوِ القيمة المطلقة.`
+        },
+        progressIds: socFunctionsLabChallengeIds,
+        toolForTopic: socFunctionsLabToolForTopic,
+        render: (props) => <SocFunctionsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Eurotan edo unitateetan eskatzen bada, zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide en euros o en unidades, solo el número.', en: 'Write a number: 5, −3, 1.5 or 3/2. If it is asked in euros or units, just the number.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا طُلب باليورو أو بالوحدات فاكتب العدد وحده.' },
         defaultForm: 'any',

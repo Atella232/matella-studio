@@ -29,6 +29,15 @@ Etapas propuestas (edición nueva): familias y dominio · funciones lineales e i
 - **Registro:** `active: true` en `courses.ts`, ruta en el router y la dirección en `paths.ts`.
 - **Test nuevo:** `tests/funtzioak-batx1g-content.test.ts`.
 
+**Fase 3, laboratorio:** 12 herramientas.
+- **Propias (3),** con predicción antes del resultado, retos infinitos (`freshFrom`) y ▶:
+  - L1 `estimate` «Entre dos (o tres) datos», retos 133101–133105: datos A(0, a), B(4, b) y, con tres, C(8, c); un objetivo x. Se predice si estimar ahí es interpolar, un dato o extrapolar; ▶ dibuja la recta o la parábola de Newton (con tres datos, la recta queda discontinua para comparar). Zona de los datos en verde y fuera en rojo. Lógica en `lab/estimate.ts`.
+  - L2 `price` «El precio que más da», retos 133201–133205: demanda q = Q − k·p; el rectángulo p × q son los ingresos (con coste v por unidad, la parte de costes en rojo y la de beneficio en verde). Se predice si subir 1 € hace subir, quedar igual o bajar los ingresos (o el beneficio); ▶ lleva un punto al vértice (antes de ▶ no aparece). Lógica en `lab/price.ts`.
+  - L3 `average` «Coste medio», retos 133301–133305: F, v y x; la barra de x tiene dos partes, v y F/x, sobre la hipérbola que baja hacia la asíntota y = v. Se predice si el coste medio es mayor, igual o menor que 2v (igual cuando F/x = v); ▶ recorre la producción de 10 a 200. Lógica en `lab/average.ts`.
+- **Prestadas (9),** con sus retos e ids de 4.º: construye el dominio, une dos trozos (académicas, Funciones), marco de mayor área, punto y pendiente, parábola, hipérbola, raíz (aplicadas, Gráfica), parábola desde sus raíces y dobla el valor absoluto (académicas, Polinómicas).
+- **Test:** `tests/funtzioak-batx1g-lab.test.ts`.
+- **Revisión a 375 px en eu, es y ar:** las 12 herramientas antes y después de predecir: sin desbordes ni errores de KaTeX. **Aviso para fusionar (no es de esta unidad):** en árabe, la «y» del eje de las herramientas prestadas de 4.º se corta 3 px por arriba (pasa igual en su unidad de origen, p. ej. `dbh4-aplikatuak/grafica-funcion`, parábola).
+
 ## Trucos
 
 - En `takeaway-notation`, una letra de la idea clave no puede salir en mayúscula en la lección: con $y=ax^2+bx+c$ y $y=mx+n$ en la idea clave, la lección no puede usar $A(x)$, $C(x)$ ni $M(t)$ (se usan $S$, $P$, $V$).
@@ -37,4 +46,4 @@ Etapas propuestas (edición nueva): familias y dominio · funciones lineales e i
 
 ## En curso
 
-- Fases 1–2 hechas (ver commit). Siguiente: fase 3, laboratorio: L1 «Entre dos (o tres) datos», L2 «El precio que más da», L3 «Coste medio» (ids 1331xx–1333xx) y las prestadas de 4.º.
+- Fases 1–3 hechas. Siguiente: fase 4, juegos: J1 «Estima el dato», J2 «El precio justo», J3 «La factura a trozos», detective, carrera y parejas (ids 133401–133899), más «Pinta el dominio» y «Láser de curvas» de 4.º.
