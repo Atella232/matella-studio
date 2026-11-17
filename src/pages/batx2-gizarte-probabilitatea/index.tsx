@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { probabilityBatx2gChallenges, probabilityBatx2gDiagnostic, probabilityBatx2gExerciseBank, probabilityBatx2gPractice } from './content'
 import { ProbabilityBatx2gHeroArt } from './figures'
+import { ProbabilityBatx2gLaboratory } from './lab'
+import { probabilityBatx2gLabChallengeIds, probabilityBatx2gLabToolForTopic, probabilityBatx2gLabTools } from './lab/labTools'
 import { probabilityBatx2gStages, probabilityBatx2gTopics } from './lessons'
 
 const probabilitateaBatx2gUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const probabilitateaBatx2gUnit: UnitDefinition = {
     guidedPractice: probabilityBatx2gPractice,
     exerciseBank: probabilityBatx2gExerciseBank,
     challenges: probabilityBatx2gChallenges,
+    lab: {
+        description: {
+            eu: `${probabilityBatx2gLabTools.length} tresna, erronkekin: inkesta eta hodien zuhaitza, berriak; 4. DBHko laukiak, n-tik k aukeratzea eta batera ateratzea; eta Zientzietako lau zonak, probabilitatearen karratua, kausak eta 10\u00a0000 pertsona.`,
+            es: `${probabilityBatx2gLabTools.length} herramientas con retos: la encuesta y el árbol de tuberías, nuevas; las casillas, elegir k de n y sacar varias a la vez de 4.º ESO; y las cuatro zonas, el cuadrado de probabilidad, las causas y las 10\u00a0000 personas de Ciencias.`,
+            en: `${probabilityBatx2gLabTools.length} tools with challenges: the poll and the tree of pipes, new; the slots, choosing k of n and drawing several at once from 4th ESO; and the four zones, the probability square, the causes and the 10,000 people from Sciences.`,
+            ar: `${probabilityBatx2gLabTools.length} أدوات مع تحديات: الاستطلاع وشجرة الأنابيب، وهما جديدتان؛ والخانات واختيار k من n والسحب دفعة واحدة من الصف الرابع؛ والمناطق الأربع ومربع الاحتمال والأسباب و\u206610\u00a0000\u2069 شخص من العلوم.`
+        },
+        progressIds: probabilityBatx2gLabChallengeIds,
+        toolForTopic: probabilityBatx2gLabToolForTopic,
+        render: (props) => <ProbabilityBatx2gLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,25, 3/7 edo 120.', es: 'Escribe un número exacto o una fracción: 0,25, 3/7 o 120.', en: 'Write an exact number or a fraction: 0.25, 3/7 or 120.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.25 أو 3/7 أو 120.' },
         defaultForm: 'any',

@@ -31,6 +31,15 @@ Los cuatro temas en un solo mensaje, con letras por tema (P-, B-, M-, I-) y una 
 - **Fuera de la carpeta:** `courses.ts` (línea de `probabilidad` de `batx2-gizarte` con `active: true`), router, `paths.ts` y `tests/probabilitatea-batx2z-content.test.ts` (decía que la Probabilidad de Sociales no estaba activa; ahora remite a este test).
 - **Trucos:** en euskera, nada de «% 45ek», «260k», «1etik»: se reescribe con «artean» («gaixoen artean % 95 positibo ateratzen dira»). Número y % con espacio no separable (`\u00a0`), si no el árabe parte «10 %» en dos líneas. En árabe, «10 000» dentro de una frase se ve «000 10»: se aísla con LRI/PDI (`\u2066…\u2069`). Un enunciado de «Otro ejemplo» no pasa de 30 palabras.
 
+## Fase 2: laboratorio
+
+- **Propias** (lógica pura en `lab/*.ts`, con predicción y retos sin fin):
+  - `survey` «Inkesta / La encuesta» (`survey.ts`, retos 150101–150103): 100 personas, jóvenes (G) en decenas y «sí» (S) de cada grupo en cincos; una condición (todos, jóvenes, adultos, «sí») apaga a los demás. Predicción: P(S/G) frente a P(S). Independencia = misma proporción de «sí» en los dos grupos.
+  - `pipes` «Hodien zuhaitza / El árbol de tuberías» (`pipes.ts`, 150121–150123): 10 000 litros repartidos entre A, B, C (cincos de %) con su tasa a D (% entero), así que cada chorro son litros enteros. Predicción: el tubo que más agua lleva a D. ▶ «Junta el agua de D» llena una barra con los tres chorros (Bayes).
+- **Prestadas** con sus ids: `slots`, `choose` (4.º ak Combinatoria), `draw` (4.º ak Probabilidad), `zones`, `mosaic`, `causes`, `people` (2.º Ciencias). 9 herramientas.
+- **Test** `tests/probabilitatea-batx2g-lab.test.ts`.
+- **Trucos:** los colores `STAGE`/`STAGE_TINT` cambian con la etapa (en «conditional» son mostaza, en «bayes» coral): para distinguir grupos o tubos se usan colores fijos. `\u00a0` escrito tal cual dentro de una plantilla ``…`` rompe el lint (no-irregular-whitespace): se escribe como escape.
+
 ## En curso
 
-- Fase 1 de Probabilidad hecha. Siguiente: laboratorio (P-L1 La encuesta, P-L2 El árbol de tuberías + prestadas de Ciencias) y juegos (P-J1 ¿Entre cuántos divido?, P-J2 ¿Importa el orden?, P-J3 detective + prestados, carrera y memoria).
+- Fases 1 y 2 de Probabilidad hechas. Siguiente: juegos (P-J1 ¿Entre cuántos divido?, P-J2 ¿Importa el orden?, P-J3 detective; prestados «Rellena el Venn» y «¿Quién fue?» de Ciencias; carrera y memoria).
