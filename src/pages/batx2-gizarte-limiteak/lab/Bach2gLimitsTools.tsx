@@ -38,6 +38,9 @@ function texAmount(value: number, language: UnitLanguage, digits = 2): string {
     return part ? `${groupLatex(whole)}${language === 'ar' ? '.' : '{,}'}${part}` : groupLatex(whole)
 }
 
+/** Arabic writes the decimal point in formulas too */
+const arabicPoint = (latex: string, language: UnitLanguage) => (language === 'ar' ? latex.replace(/\{,\}/g, '.') : latex)
+
 /** Euros in each language's order */
 const euro = (value: number, language: UnitLanguage, digits = 2) => (language === 'en' ? `€${amount(value, language, digits)}` : `${amount(value, language, digits)} €`)
 
@@ -111,7 +114,7 @@ export function AverageCostTool(props: LabToolProps) {
             tip={say('Zatitu $C(x)$ zati $x$ eta begiratu zer geratzen den $x$ oso handia denean.', 'Divide $C(x)$ entre $x$ y mira qué queda cuando $x$ es muy grande.', 'اقسم $C(x)$ على $x$ وانظر ماذا يبقى عندما يكون $x$ كبيرًا جدًا.', 'Divide $C(x)$ by $x$ and see what is left when $x$ is very large.')}
             onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
         >
-            <Readout latex={[setup.latex, `\\frac{C(${groupLatex(x)})}{${groupLatex(x)}}=${texAmount(average, lang)}`]} note={l(notes[state.firm])} />
+            <Readout latex={[arabicPoint(setup.latex, lang), `\\frac{C(${groupLatex(x)})}{${groupLatex(x)}}=${texAmount(average, lang)}`]} note={l(notes[state.firm])} />
         </Predict>
     )
     const samples: string[] = []
@@ -188,7 +191,7 @@ export function TariffTool(props: LabToolProps) {
             tip={say(`Kalkulatu bi zatiak $${letter}=${setup.boundary}$ puntuan eta alderatu.`, `Calcula los dos trozos en $${letter}=${setup.boundary}$ y compáralos.`, `احسب الجزأين عند $${letter}=${setup.boundary}$ وقارن بينهما.`, `Work out both pieces at $${letter}=${setup.boundary}$ and compare them.`)}
             onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
         >
-            <Readout latex={[tariffLatex(state), `f(${setup.boundary})=${ar(Math.round(left * 100) / 100)}\\qquad\\lim_{${letter}\\to ${setup.boundary}^+}f=${ar(Math.round(right * 100) / 100)}`]} note={l(note)} />
+            <Readout latex={[arabicPoint(tariffLatex(state), lang), `f(${setup.boundary})=${ar(Math.round(left * 100) / 100)}\\qquad\\lim_{${letter}\\to ${setup.boundary}^+}f=${ar(Math.round(right * 100) / 100)}`]} note={l(note)} />
         </Predict>
     )
     const walking = shown && playback.progress !== null

@@ -55,6 +55,11 @@ Primer tema del bloque Análisis de 2.º Sociales (reparto en paralelo del 2026-
 - Las piezas de Ciencias se importan tal cual: `LimitPlot` para las figuras, y las herramientas y juegos prestados con sus ids (el progreso se guarda con el `storagePrefix` de esta unidad).
 - Las tablas de las herramientas propias llevan los títulos de los ejes debajo de la cuadrícula: el `Board` mide 264 de alto para que quepan.
 
-## En curso
+## Cierre (2026-11-17)
 
-- Fases 1–4 hechas y comprobadas (3275 tests, lint y build en verde; lecciones, laboratorio y juegos revisados a 375 px en eu, es y ar sin desbordes ni errores de KaTeX). **Siguiente paso:** propuestas de Derivadas, Aplicaciones, Representación e Integrales al dueño; luego cerrar esta nota.
+- **Comprobado:** 3275 tests, lint y build en verde; inventario OK.
+- **375 px en eu, es y ar:** lecciones y resumen, banco con soluciones abiertas (la solución del 45 desbordaba: las cadenas con `\qquad` de práctica y banco pasan a `gathered`), las 8 herramientas (antes y después de predecir, cajas de texto del SVG dentro), detective (6 rondas por nivel), ¿a largo plazo? y cierra la tarifa (todas las rondas), carrera (circuito de continuidad). Práctica, retos y diagnóstico: revisión automática empezada, sin terminar por el límite de uso.
+- **Árabe:** las lecturas del laboratorio con decimales pasan por `arabicPoint`.
+- **Hoja de euskera:** `limiteak-batx2g-euskera.html` en la carpeta de notas compartidas.
+- **Al fusionar:** `paths.ts` es una sola línea que tocan varias sesiones; las líneas `active: true` de `courses.ts` están juntas.
+- **Siguiente tema:** propuestas de Derivadas, Aplicaciones, Representación e Integrales en `analisis-batx2g-propuestas.md` (carpeta compartida), esperando la elección del dueño.
