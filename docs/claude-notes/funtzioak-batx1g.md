@@ -55,6 +55,9 @@ Etapas propuestas (edición nueva): familias y dominio · funciones lineales e i
 - El selector de etapas de «Ejercicios» se ensancha con el nombre más largo: «Alderantzizko proportzionaltasuna eta erroak» desbordaba a 375 px; queda «Alderantzizkoak eta erroak».
 - En los dibujos, los ejes con números de 4 cifras necesitan `ox` ≥ 70.
 
-## En curso
+## Cierre
 
-- Fases 1–4 hechas. Falta: hoja de euskera, repaso final a 375 px y cerrar la nota. Después, tema 2: `funciones-exponenciales` (`esponentzialak`, 134000–134999), rama `feat/esponentzialak-batx1g` cortada de esta.
+- **2026-11-17:** 3276 tests, lint y build en verde; inventario OK.
+- **Revisión a 375 px en eu, es y ar:** portada, las 15 lecciones (con los pasos y los «¿Por qué funciona?» abiertos), diagnóstico, resumen, práctica, ejercicios, retos, las 12 herramientas antes y después de predecir y los juegos propios. Sin desbordes ni errores de KaTeX. Arreglado por el camino: el selector de etapas (nombre en euskera demasiado largo), la «y» del dibujo de portada y los números de los ejes de los dibujos de ingresos y del juego del precio.
+- **Hoja de euskera:** `hoja-revision.mjs batx1-gizarte-funtzioak … --herramientas estimate,price,average --juegos race,estimate,price,bill,detective,memory`, mandada al dueño (fuera del repositorio, en la carpeta de notas compartidas de la sesión).
+- **Para fusionar:** al publicar, cambiar en `courses.ts` el nombre del tema 5 («…y Trigonométricas»): con la edición nueva de Anaya ese tema no tiene trigonometría (lo decide la sesión coordinadora).
