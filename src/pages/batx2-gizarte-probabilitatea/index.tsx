@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { probabilityBatx2gChallenges, probabilityBatx2gDiagnostic, probabilityBatx2gExerciseBank, probabilityBatx2gPractice } from './content'
 import { ProbabilityBatx2gHeroArt } from './figures'
+import { ProbabilityBatx2gGames } from './games'
+import { PROBABILITY_BATX2G_GAME_RECORDS_KEY, probabilityBatx2gGameProgressIds } from './games/info'
 import { ProbabilityBatx2gLaboratory } from './lab'
 import { probabilityBatx2gLabChallengeIds, probabilityBatx2gLabToolForTopic, probabilityBatx2gLabTools } from './lab/labTools'
 import { probabilityBatx2gStages, probabilityBatx2gTopics } from './lessons'
@@ -37,6 +39,17 @@ const probabilitateaBatx2gUnit: UnitDefinition = {
         progressIds: probabilityBatx2gLabChallengeIds,
         toolForTopic: probabilityBatx2gLabToolForTopic,
         render: (props) => <ProbabilityBatx2gLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: zeren artean zatitu?, ordenak axola du? eta probabilitatearen detektibea, berriak; lasterketa (zenbatzeko zirkuitu berriarekin) eta memoria; eta Zientzietako «Bete Venn diagrama» eta «Nork egin du?».',
+            es: 'Siete juegos: ¿entre cuántos divido?, ¿importa el orden? y el detective de probabilidad, nuevos; la carrera (con un circuito nuevo de contar) y la memoria; y «Rellena el Venn» y «¿Quién fue?» de Ciencias.',
+            en: 'Seven games: what do I divide by?, does the order matter? and the probability detective, new; the race (with a new counting circuit) and the memory; and «Fill in the Venn diagram» and «Who did it?» from Sciences.',
+            ar: 'سبع ألعاب: على ماذا أقسم؟ وهل يهم الترتيب؟ ومخبر الاحتمالات، وهي جديدة؛ والسباق (مع حلبة جديدة للعدّ) والذاكرة؛ و«املأ مخطط فن» و«من الفاعل؟» من العلوم.'
+        },
+        progressIds: probabilityBatx2gGameProgressIds,
+        recordsKey: PROBABILITY_BATX2G_GAME_RECORDS_KEY,
+        render: (props) => <ProbabilityBatx2gGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,25, 3/7 edo 120.', es: 'Escribe un número exacto o una fracción: 0,25, 3/7 o 120.', en: 'Write an exact number or a fraction: 0.25, 3/7 or 120.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.25 أو 3/7 أو 120.' },

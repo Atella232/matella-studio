@@ -40,6 +40,21 @@ Los cuatro temas en un solo mensaje, con letras por tema (P-, B-, M-, I-) y una 
 - **Test** `tests/probabilitatea-batx2g-lab.test.ts`.
 - **Trucos:** los colores `STAGE`/`STAGE_TINT` cambian con la etapa (en «conditional» son mostaza, en «bayes» coral): para distinguir grupos o tubos se usan colores fijos. `\u00a0` escrito tal cual dentro de una plantilla ``…`` rompe el lint (no-irregular-whitespace): se escribe como escape.
 
-## En curso
+## Fase 3: juegos
 
-- Fases 1 y 2 de Probabilidad hechas. Siguiente: juegos (P-J1 ¿Entre cuántos divido?, P-J2 ¿Importa el orden?, P-J3 detective; prestados «Rellena el Venn» y «¿Quién fue?» de Ciencias; carrera y memoria).
+- **Propios** (lógica pura en `games/*.ts`, pantallas con `RoundGame` en `ProbabilityBatx2gGames.tsx`):
+  - `divide` «Zeren artean zatitu? / ¿Entre cuántos divido?» (`divide.ts`, niveles 150501–150503): tabla de una encuesta (3 contextos) y una pregunta en palabras; se toca la casilla de arriba y la de abajo. Nivel 1 sobre el total, 2 dentro de una fila, 3 dentro de una columna. El error típico (el total general bajo una condicionada) siempre está mal: el total de la fila y el de la columna nunca coinciden.
+  - `order` «Ordenak axola du? / ¿Importa el orden?» (`order.ts`, 150601–150603): una situación (cargos, podio, PIN, encuesta sí/no, quiniela, cola, anuncios, comisión, helados, premios iguales) y los cuatro modelos V, VR, P, C; nivel 1 solo V/C; nivel 3 elige el número entre los recuentos de los otros modelos.
+  - `detective` (`detective.ts`, 150701–150703): errores de esta unidad: orden en una comisión, repetición en cargos, favorables con orden y posibles sin él; total general bajo una condicionada, condición al revés, fila + columna sin quitar la común, segunda rama sin quitar a la persona; media simple de tasas, Bayes sin a priori, sensibilidad como P(E/+).
+- **Carrera** (`race.ts`, 150401–150404): circuito 0 propio (cargos, PIN, colas, comisiones, sorteo con combinaciones; las opciones malas son los otros modelos) y circuitos 1–3 de 2.º Ciencias tal cual.
+- **Prestados** de 2.º Ciencias con los ids de esta unidad: «Rellena el Venn» (150811–150813), «¿Quién fue?» (150821–150823) y la memoria (150801–150803).
+- **Test** `tests/probabilitatea-batx2g-games.test.ts`.
+- **Truco:** el evaluador de los tests no lee `V_{8,3}` ni `C_{6,3}`: en el detective se comprueba que el último valor del arreglo es el correcto.
+
+## Cierre (2026-11-17)
+
+- Commits: fase 1 `08b166fa`, fase 2 `8790498a`, fase 3 y nota en la rama `feat/probabilitatea-batx2g` (sin push ni fusión).
+- 3276 tests, lint y build en verde. Inventario OK: 4 juegos propios (contando el detective) y 6 herramientas «propias» (el script cuenta como propias las de 2.º Ciencias; las de verdad propias son `survey` y `pipes`).
+- Revisado a 375 px en eu, es y ar: las 15 lecciones con todos los pasos abiertos (textos de los dibujos medidos con `getBBox`, sin desbordes), el banco de ejercicios, las dos herramientas propias con la predicción hecha y los juegos propios respondiendo una ronda.
+- Hoja de euskera: `~/Documents/Matella-fuentes/batx2g-probabilidad/hoja-euskera-probabilitatea.html` (fuera del repositorio).
+- **Al fusionar:** comparte con las otras sesiones solo las líneas de registro (`courses.ts`, router, `paths.ts`) y una línea de `tests/probabilitatea-batx2z-content.test.ts`.
