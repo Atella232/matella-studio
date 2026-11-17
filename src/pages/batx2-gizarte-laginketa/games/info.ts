@@ -19,8 +19,8 @@ export const samplingBatx2gGames: GameInfo<SamplingBatx2gGameId>[] = [
         levels: [
             { progressId: 152401, stage: 'sampling', title: { eu: 'Laginketa', es: 'Muestreo', en: 'Sampling', ar: 'المعاينة' }, description: { eu: 'Jauzia eta aukeratuak.', es: 'El salto y los elegidos.', en: 'The step and those chosen.', ar: 'القفزة والمختارون.' } },
             { progressId: 152402, stage: 'strata', title: { eu: 'Geruzak', es: 'Estratos', en: 'Strata', ar: 'الطبقات' }, description: { eu: 'Esleipen proportzionala eta berdina.', es: 'Afijación proporcional e igual.', en: 'Proportional and equal allocation.', ar: 'التوزيع التناسبي والمتساوي.' } },
-            { progressId: 152403, stage: 'means', title: { eu: 'Batez bestekoa', es: 'La media', en: 'The mean', ar: 'المتوسط' }, description: { eu: '$\\frac{\\sigma}{\\sqrt{n}}$ eta probabilitateak.', es: '$\\frac{\\sigma}{\\sqrt{n}}$ y probabilidades.', en: '$\\frac{\\sigma}{\\sqrt{n}}$ and probabilities.', ar: '$\\frac{\\sigma}{\\sqrt{n}}$ والاحتمالات.' } },
-            { progressId: 152404, stage: 'proportions', title: { eu: 'Proportzioa', es: 'La proporción', en: 'The proportion', ar: 'النسبة' }, description: { eu: '$\\hat{p}$ eta haren desbideratzea.', es: '$\\hat{p}$ y su desviación.', en: '$\\hat{p}$ and its deviation.', ar: '$\\hat{p}$ وانحرافه.' } },
+            { progressId: 152403, stage: 'means', title: { eu: 'Batez bestekoa', es: 'La media', en: 'The mean', ar: 'المتوسط' }, description: { eu: 'σ / √n eta probabilitateak.', es: 'σ / √n y probabilidades.', en: 'σ / √n and probabilities.', ar: 'σ / √n والاحتمالات.' } },
+            { progressId: 152404, stage: 'proportions', title: { eu: 'Proportzioa', es: 'La proporción', en: 'The proportion', ar: 'النسبة' }, description: { eu: 'p̂ eta haren desbideratzea.', es: 'p̂ y su desviación.', en: 'p̂ and its deviation.', ar: 'p̂ وانحرافه.' } },
             { progressId: 152405, stage: 'characteristic', title: { eu: 'Tarteak', es: 'Intervalos', en: 'Intervals', ar: 'الفترات' }, description: { eu: 'Erradioa eta mugak.', es: 'El radio y los extremos.', en: 'The radius and the ends.', ar: 'نصف القطر والطرفان.' } }
         ]
     },
@@ -50,10 +50,10 @@ export const samplingBatx2gGames: GameInfo<SamplingBatx2gGameId>[] = [
         id: 'detective',
         title: { eu: 'Laginketaren detektibea', es: 'Detective del muestreo', en: 'Sampling detective', ar: 'مخبر المعاينة' },
         tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: جده وقل ما الخطأ.' },
-        skills: { eu: 'Jauzia, geruzak, $\\sqrt{n}$ eta tarteak', es: 'Salto, estratos, $\\sqrt{n}$ e intervalos', en: 'Step, strata, $\\sqrt{n}$ and intervals', ar: 'القفزة والطبقات و$\\sqrt{n}$ والفترات' },
+        skills: { eu: 'Jauzia, geruzak, √n eta tarteak', es: 'Salto, estratos, √n e intervalos', en: 'Step, strata, √n and intervals', ar: 'القفزة والطبقات و√n والفترات' },
         levels: [
             { progressId: 152701, stage: 'strata', title: { eu: 'Laginketa', es: 'Muestreo', en: 'Sampling', ar: 'المعاينة' }, description: { eu: 'Jauzia eta banaketa.', es: 'Salto y reparto.', en: 'Step and split.', ar: 'القفزة والتوزيع.' } },
-            { progressId: 152702, stage: 'means', title: { eu: 'Batez bestekoa', es: 'La media', en: 'The mean', ar: 'المتوسط' }, description: { eu: '$\\sqrt{n}$ non doan.', es: 'Dónde va $\\sqrt{n}$.', en: 'Where $\\sqrt{n}$ goes.', ar: 'أين يوضع $\\sqrt{n}$.' } },
+            { progressId: 152702, stage: 'means', title: { eu: 'Batez bestekoa', es: 'La media', en: 'The mean', ar: 'المتوسط' }, description: { eu: '√n non doan.', es: 'Dónde va √n.', en: 'Where √n goes.', ar: 'أين يوضع √n.' } },
             { progressId: 152703, stage: 'characteristic', title: { eu: 'Proportzioak eta tarteak', es: 'Proporciones e intervalos', en: 'Proportions and intervals', ar: 'النسب والفترات' }, description: { eu: 'Erroa, balio kritikoa eta erradioa.', es: 'Raíz, valor crítico y radio.', en: 'Root, critical value and radius.', ar: 'الجذر والقيمة الحرجة ونصف القطر.' } }
         ]
     },
