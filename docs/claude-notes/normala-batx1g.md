@@ -12,8 +12,12 @@ Tema 11 de 1.º Sociales (curso `batx1-gizarte`, tema `distribucion-normal`), se
 
 Anaya 1.º Bach MACS, Suma Piezas U10 «Distribuciones de probabilidad de variable continua» (solucionario, pp. 273–291) + Estándar U11 (edición anterior). **Ojo:** la lista del curso dice A11 porque la edición Estándar la numera U11; en Suma Piezas es la U10. En el texto extraído faltan fracciones: todo se calcula con código. Ficha fuera del repositorio: `~/Documents/Matella-fuentes/batx1g-probabilidad/ficha-normala.md`.
 
+## Elección del dueño (2026-11-17)
+
+«Las recomendadas»: V1 (15 lecciones, 5 etapas), L1 Del histograma a la campana, L2 Construye una densidad, L3 Ajusta a una normal; J1 ¿Qué porcentaje?, J2 ¿Es una densidad?, J3 Nota de corte, J4 detective; prestados de Banaketak (bell, lookup, approx, area, hunt) y `score`. A1 N(μ; σ) y P(Z ≤ k); A2 densidades de trozos rectos; A3 regla del 5 % también aquí; A4 μ y σ redondos en los ejercicios cerrados.
+
 ## En curso
 
-- Propuesta de diseño enviada el 2026-11-17 (texto completo en la carpeta de notas compartidas, `propuesta-normala.md`). **Esperando la elección del dueño; no se ha construido nada.**
-- Siguiente paso: con la elección, fase 1 (lecciones y contenido).
-- Si el dueño manda arreglos de euskera de Diskretuak: hacerlos en `feat/diskretuak-batx1g` y fusionar esa rama en esta.
+- Fase 1 a medias (commit WIP de este cambio): `lessonChecks.ts`, `lessons.tsx`, `lessonTexts.ts`, `figures.tsx`, `content.ts` e `index.tsx` escritos y registrados (courses, router, paths). Pasan los tests de lecciones, tsc y lint de la carpeta.
+- Falta de la fase 1: `tests/normala-batx1g-content.test.ts` (copiar el de diskretuak y comprobar los valores de la tabla y las z exactas), `npm test` completo, build, y revisar los 15 dibujos a 375 px en eu, es y ar (con `getBBox`).
+- Después: fase 2 (laboratorio L1–L3 + prestadas, ids 140101–140399) y fase 3 (juegos J1–J4 + prestados, carrera de 5 circuitos, memoria; ids 140401–140899), hoja de euskera.
