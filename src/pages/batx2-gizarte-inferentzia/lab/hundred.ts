@@ -30,7 +30,7 @@ export interface HundredState {
     prediction: Prediction | null
 }
 
-export const initialHundredState: HundredState = { level: 1, size: 3, batch: 1, prediction: null }
+export const initialHundredState: HundredState = { level: 1, size: 3, batch: 7, prediction: null }
 
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, Math.round(value)))
 
