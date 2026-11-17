@@ -95,10 +95,10 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
             { text: say('Kendu txartelaren prezioa.', 'Resta el precio de la papeleta.', 'اطرح ثمن الورقة.', 'Take away the price of the ticket.'), math: same('$1-2=-1$') }
         ],
         takeaway: say(
-            'Espero den irabazia $\\mu=\\sum x_i\\,p_i$ da, $x_i$ irabazi edo galdutakoa izanik. Joko bat bidezkoa da $\\mu=0$ bada; negatiboa bada, jokalariak galtzen du batez beste.',
-            'La ganancia esperada es $\\mu=\\sum x_i\\,p_i$, con $x_i$ lo que se gana o se pierde. Un juego es justo si $\\mu=0$; si es negativa, el jugador pierde en promedio.',
-            'الربح المتوقع هو $\\mu=\\sum x_i\\,p_i$ حيث $x_i$ ما يُربح أو يُخسر. واللعبة عادلة إذا كان $\\mu=0$؛ وإذا كان سالبًا يخسر اللاعب في المتوسط.',
-            'The expected gain is $\\mu=\\sum x_i\\,p_i$, with $x_i$ what is won or lost. A game is fair if $\\mu=0$; if it is negative, the player loses on average.'
+            'Espero den irabazia irabazien batez bestekoa da: irabazi edo galera bakoitza bider bere probabilitatea, batuta. Joko bat bidezkoa da $\\mu=0$ bada; negatiboa bada, jokalariak galtzen du batez beste.',
+            'La ganancia esperada es la media de las ganancias: cada ganancia o pérdida por su probabilidad, sumadas. Un juego es justo si $\\mu=0$; si es negativa, el jugador pierde en promedio.',
+            'الربح المتوقع هو متوسط الأرباح: كل ربح أو خسارة في احتمالها ثم الجمع. واللعبة عادلة إذا كان $\\mu=0$؛ وإذا كان سالبًا يخسر اللاعب في المتوسط.',
+            'The expected gain is the mean of the gains: each gain or loss times its probability, added up. A game is fair if $\\mu=0$; if it is negative, the player loses on average.'
         ),
         figure: (language) => <RaffleFigure language={language} />
     },
@@ -211,12 +211,12 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         id: 'standardize',
         stage: 'normal',
         title: say('Tipifikatzea', 'Tipificar', 'التوحيد المعياري', 'Standardising'),
-        goal: say('$N(\\mu;\\,\\sigma)$ edozein banaketa $N(0;\\,1)$ bihurtzea $z=\\frac{x-\\mu}{\\sigma}$ eginez, taula erabiltzeko.', 'Pasar cualquier $N(\\mu;\\,\\sigma)$ a la $N(0;\\,1)$ con $z=\\frac{x-\\mu}{\\sigma}$ para poder usar la tabla.', 'تحويل أي $N(\\mu;\\,\\sigma)$ إلى $N(0;\\,1)$ بـ $z=\\frac{x-\\mu}{\\sigma}$ لاستعمال الجدول.', 'Turn any $N(\\mu;\\,\\sigma)$ into $N(0;\\,1)$ with $z=\\frac{x-\\mu}{\\sigma}$ so the table can be used.'),
+        goal: say('$N(\\mu;\\,\\sigma)$ edozein banaketa $N(0;\\,1)$ bihurtzea ${z}=\\frac{x-\\mu}{\\sigma}$ eginez, taula erabiltzeko.', 'Pasar cualquier $N(\\mu;\\,\\sigma)$ a la $N(0;\\,1)$ con ${z}=\\frac{x-\\mu}{\\sigma}$ para poder usar la tabla.', 'تحويل أي $N(\\mu;\\,\\sigma)$ إلى $N(0;\\,1)$ بـ ${z}=\\frac{x-\\mu}{\\sigma}$ لاستعمال الجدول.', 'Turn any $N(\\mu;\\,\\sigma)$ into $N(0;\\,1)$ with ${z}=\\frac{x-\\mu}{\\sigma}$ so the table can be used.'),
         needs: [need.scores],
-        problem: say('Enpresa bateko soldatak $N(1800;\\,300)$ banaketa dira, eurotan. Zein da 2250 eurotik behera irabazteko probabilitatea? Eta 1500 eta 2250 euro artean?', 'Los sueldos de una empresa siguen una $N(1800;\\,300)$ en euros. ¿Qué probabilidad hay de cobrar menos de 2250 €? ¿Y entre 1500 y 2250 €?', 'تتبع رواتب شركة $N(1800;\\,300)$ باليورو. ما احتمال تقاضي أقل من 2250 €؟ وبين 1500 و2250 €؟', 'The salaries of a firm follow an $N(1800;\\,300)$ in euros. What is the probability of earning less than €2250? And between €1500 and €2250?'),
+        problem: say('Enpresa bateko soldatak $N(1800;\\,300)$ banaketa dira, eurotan. Zein da 2250 eurotik behera irabazteko probabilitatea? Eta 1500 eta 2250 euro artean?', 'Los sueldos de una empresa siguen una $N(1800;\\,300)$ en euros. ¿Qué probabilidad hay de cobrar menos de 2250 €? ¿Y entre 1500 y 2250 €?', 'تتبع رواتب شركة $N(1800;\\,300)$ باليورو. ما احتمال تقاضي أقل من 2250 €؟ وبين 1500 و2250 €؟', 'The salaries of a firm follow an $N(1800;\\,300)$ in euros. What is the probability of earning less than €2,250? And between €1,500 and €2,250?'),
         stepsKind: 'steps',
         steps: [
-            { text: say('Tipifikatu bi mugak.', 'Tipifica los dos extremos.', 'وحّد الطرفين.', 'Standardise the two ends.'), math: same('$z=\\frac{2250-1800}{300}=1{,}5\\qquad z=\\frac{1500-1800}{300}=-1$') },
+            { text: say('Tipifikatu bi mugak.', 'Tipifica los dos extremos.', 'وحّد الطرفين.', 'Standardise the two ends.'), math: same('${z}=\\frac{2250-1800}{300}=1{,}5\\qquad z=\\frac{1500-1800}{300}=-1$') },
             { text: say('Taula.', 'La tabla.', 'الجدول.', 'The table.'), math: same('$P(X<2250)=P(Z<1{,}5)=0{,}9332$') },
             { text: say('Tartea: bi irakurketen kenketa, negatiboa simetriaz.', 'El intervalo: resta de las dos lecturas, la negativa por simetría.', 'الفترة: فرق القراءتين، والسالبة بالتماثل.', 'The interval: subtract the two readings, the negative one by symmetry.'), math: same('$0{,}9332-(1-0{,}8413)=0{,}7745$') }
         ],
@@ -237,15 +237,15 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('Anek 7 atera du $N(6;\\,0{,}8)$ banaketako azterketa batean, eta Jonek 75 $N(65;\\,10)$ banaketako beste batean. Zeinek emaitza hobea lortu du bere taldean?', 'Ane ha sacado un 7 en un examen que sigue una $N(6;\\,0{,}8)$, y Jon un 75 en otro que sigue una $N(65;\\,10)$. ¿Quién ha quedado mejor en su grupo?', 'حصلت آنِه على 7 في امتحان يتبع $N(6;\\,0{,}8)$، وحصل جون على 75 في امتحان آخر يتبع $N(65;\\,10)$. من حلّ في مرتبة أفضل في مجموعته؟', 'Ane scored 7 in an exam that follows an $N(6;\\,0{,}8)$, and Jon 75 in another that follows an $N(65;\\,10)$. Who did better within their group?'),
         stepsKind: 'steps',
         steps: [
-            { text: say('Ane:', 'Ane:', 'آنِه:', 'Ane:'), math: same('$z=\\frac{7-6}{0{,}8}=1{,}25$') },
-            { text: say('Jon:', 'Jon:', 'جون:', 'Jon:'), math: same('$z=\\frac{75-65}{10}=1$') },
-            { text: say('Anek $z$ handiagoa du: bere taldean hobeto geratu da, nahiz eta notak ezin konparatu zuzenean.', 'Ane tiene mayor $z$: ha quedado mejor en su grupo, aunque las notas no se puedan comparar directamente.', 'لآنِه $z$ أكبر: حلّت أفضل في مجموعتها، رغم أن الدرجتين لا تُقارنان مباشرة.', 'Ane has the bigger $z$: she did better within her group, even though the marks cannot be compared directly.') }
+            { text: say('Ane:', 'Ane:', 'آنِه:', 'Ane:'), math: same('${z}=\\frac{7-6}{0{,}8}=1{,}25$') },
+            { text: say('Jon:', 'Jon:', 'جون:', 'Jon:'), math: same('${z}=\\frac{75-65}{10}=1$') },
+            { text: say('Anek ${z}$ handiagoa du: bere taldean hobeto geratu da, nahiz eta notak ezin konparatu zuzenean.', 'Ane tiene mayor ${z}$: ha quedado mejor en su grupo, aunque las notas no se puedan comparar directamente.', 'لآنِه ${z}$ أكبر: حلّت أفضل في مجموعتها، رغم أن الدرجتين لا تُقارنان مباشرة.', 'Ane has the bigger ${z}$: she did better within her group, even though the marks cannot be compared directly.') }
         ],
         takeaway: say(
-            'Puntuazio tipikoak $z=\\frac{x-\\mu}{\\sigma}$ esaten du zenbat $\\sigma$ dagoen emaitza bat batez bestekoaren gainetik edo azpitik. Banaketa desberdinetako emaitzak konparatzeko, konparatu haien $z$.',
-            'La puntuación tipificada $z=\\frac{x-\\mu}{\\sigma}$ dice cuántas $\\sigma$ está un resultado por encima o por debajo de la media. Para comparar resultados de distribuciones distintas se comparan sus $z$.',
-            'تقول الدرجة المعيارية $z=\\frac{x-\\mu}{\\sigma}$ كم $\\sigma$ تبعد النتيجة فوق المتوسط أو تحته. ولمقارنة نتائج من توزيعات مختلفة نقارن قيم $z$.',
-            'The standard score $z=\\frac{x-\\mu}{\\sigma}$ tells how many $\\sigma$ a result is above or below the mean. To compare results from different distributions, compare their $z$.'
+            'Puntuazio tipikoak, $\\frac{x-\\mu}{\\sigma}$, esaten du zenbat $\\sigma$ dagoen emaitza bat batez bestekoaren gainetik edo azpitik. Banaketa desberdinetako emaitzak konparatzeko, konparatu haien puntuazio tipikoak.',
+            'La puntuación tipificada, $\\frac{x-\\mu}{\\sigma}$, dice cuántas $\\sigma$ está un resultado por encima o por debajo de la media. Para comparar resultados de distribuciones distintas se comparan sus puntuaciones tipificadas.',
+            'تقول الدرجة المعيارية، $\\frac{x-\\mu}{\\sigma}$، كم $\\sigma$ تبعد النتيجة فوق المتوسط أو تحته. ولمقارنة نتائج من توزيعات مختلفة نقارن درجاتها المعيارية.',
+            'The standard score, $\\frac{x-\\mu}{\\sigma}$, tells how many $\\sigma$ a result is above or below the mean. To compare results from different distributions, compare their standard scores.'
         ),
         figure: (language) => <CompareFigure language={language} />
     },
@@ -322,7 +322,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         steps: [
             { text: say('$B(100;\\,0{,}5)\\approx N(50;\\,5)$.', '$B(100;\\,0{,}5)\\approx N(50;\\,5)$.', '$B(100;\\,0{,}5)\\approx N(50;\\,5)$.', '$B(100;\\,0{,}5)\\approx N(50;\\,5)$.') },
             { text: say('«Gutxienez 58»: 58 barra osoa sartzen da, 57,5 zenbakitik hasita.', '«Al menos 58»: entra toda la barra del 58, desde 57,5.', '«58 على الأقل»: يدخل عمود 58 كله ابتداءً من 57.5.', '‘At least 58’: the whole bar of 58 goes in, from 57.5.'), math: same('$P(X\\ge 58)\\approx P(Y\\ge 57{,}5)$') },
-            { text: say('Tipifikatu eta taula.', 'Tipifica y tabla.', 'وحّد واستعمل الجدول.', 'Standardise and use the table.'), math: same('$z=\\frac{57{,}5-50}{5}=1{,}5\\ \\to\\ 1-0{,}9332=0{,}0668$') }
+            { text: say('Tipifikatu eta taula.', 'Tipifica y tabla.', 'وحّد واستعمل الجدول.', 'Standardise and use the table.'), math: same('${z}=\\frac{57{,}5-50}{5}=1{,}5\\ \\to\\ 1-0{,}9332=0{,}0668$') }
         ],
         takeaway: say(
             'Balio oso bakoitza barra bat da, zabalera 1 duena: $P(X\\ge k)\\approx P(Y\\ge k-0{,}5)$, $P(X\\le k)\\approx P(Y\\le k+0{,}5)$ eta $P(X=k)\\approx P(k-0{,}5\\le Y\\le k+0{,}5)$.',

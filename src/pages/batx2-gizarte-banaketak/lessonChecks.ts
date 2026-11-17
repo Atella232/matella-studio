@@ -21,7 +21,7 @@ export const distributionsBatx2gLessonChecks: Record<DistributionsBatx2gTopicId,
     /* ---------- 1. Discrete random variables ---------- */
     'random-variable': {
         mistake: {
-            wrong: say('$0{,}25$, $0{,}5$ eta $0{,}35$ probabilitateek banaketa bat osatzen dute.', 'Las probabilidades $0{,}25$, $0{,}5$ y $0{,}35$ forman una distribución.', 'الاحتمالات $0{,}25$ و$0{,}5$ و$0{,}35$ تكوّن توزيعًا.', 'The probabilities $0{,}25$, $0{,}5$ and $0{,}35$ make a distribution.'),
+            wrong: say('$0{,}45$, $0{,}5$ eta $0{,}15$ probabilitateek banaketa bat osatzen dute.', 'Las probabilidades $0{,}45$, $0{,}5$ y $0{,}15$ forman una distribución.', 'الاحتمالات $0{,}45$ و$0{,}5$ و$0{,}15$ تكوّن توزيعًا.', 'The probabilities $0{,}45$, $0{,}5$ and $0{,}15$ make a distribution.'),
             right: say('$1{,}1$ egiten dute batuta: ezin da; 1 egin behar dute.', 'Suman $1{,}1$: no puede ser; tienen que sumar 1.', 'مجموعها $1{,}1$: هذا غير ممكن؛ يجب أن يكون 1.', 'They add up to $1{,}1$: impossible; they must add up to 1.')
         },
         check: {
@@ -125,26 +125,26 @@ export const distributionsBatx2gLessonChecks: Record<DistributionsBatx2gTopicId,
     },
     standardize: {
         mistake: {
-            wrong: say('$N(50;\\,4)$ banaketan: $z=\\frac{58-50}{16}=0{,}5$.', 'En una $N(50;\\,4)$: $z=\\frac{58-50}{16}=0{,}5$.', 'في $N(50;\\,4)$: $z=\\frac{58-50}{16}=0{,}5$.', 'In an $N(50;\\,4)$: $z=\\frac{58-50}{16}=0{,}5$.'),
-            right: say('$\\sigma$ zenbakiaz zatitzen da, ez bariantzaz: $z=\\frac{58-50}{4}=2$.', 'Se divide entre $\\sigma$, no entre la varianza: $z=\\frac{58-50}{4}=2$.', 'نقسم على $\\sigma$ لا على التباين: $z=\\frac{58-50}{4}=2$.', 'Divide by $\\sigma$, not by the variance: $z=\\frac{58-50}{4}=2$.')
+            wrong: say('$N(50;\\,4)$ banaketan: ${z}=\\frac{58-50}{16}=0{,}5$.', 'En una $N(50;\\,4)$: ${z}=\\frac{58-50}{16}=0{,}5$.', 'في $N(50;\\,4)$: ${z}=\\frac{58-50}{16}=0{,}5$.', 'In an $N(50;\\,4)$: ${z}=\\frac{58-50}{16}=0{,}5$.'),
+            right: say('$\\sigma$ zenbakiaz zatitzen da, ez bariantzaz: ${z}=\\frac{58-50}{4}=2$.', 'Se divide entre $\\sigma$, no entre la varianza: ${z}=\\frac{58-50}{4}=2$.', 'نقسم على $\\sigma$ لا على التباين: ${z}=\\frac{58-50}{4}=2$.', 'Divide by $\\sigma$, not by the variance: ${z}=\\frac{58-50}{4}=2$.')
         },
         check: {
-            prompt: say('$N(30;\\,5)$ banaketan, zein da $x=22$ balioaren $z$?', 'En una $N(30;\\,5)$, ¿cuál es la $z$ de $x=22$?', 'في $N(30;\\,5)$، ما قيمة $z$ لـ $x=22$؟', 'In an $N(30;\\,5)$, what is the $z$ of $x=22$?'),
+            prompt: say('$N(30;\\,5)$ banaketan, zein da $x=22$ balioaren ${z}$?', 'En una $N(30;\\,5)$, ¿cuál es la ${z}$ de $x=22$?', 'في $N(30;\\,5)$، ما قيمة ${z}$ لـ $x=22$؟', 'In an $N(30;\\,5)$, what is the ${z}$ of $x=22$?'),
             options: [same('$1{,}6$'), same('$-8$'), same('$-1{,}6$')],
             correctIndex: 2,
-            explanation: same('$z=\\frac{22-30}{5}=-1{,}6$')
+            explanation: same('${z}=\\frac{22-30}{5}=-1{,}6$')
         }
     },
     'compare-scores': {
         mistake: {
             wrong: say('80 puntuko emaitza bat 7 nota baino hobea da, 80 handiagoa delako.', 'Un resultado de 80 puntos es mejor que un 7 porque 80 es mayor.', 'نتيجة 80 نقطة أفضل من 7 لأن 80 أكبر.', 'A result of 80 points is better than a 7 because 80 is bigger.'),
-            right: say('Eskala desberdinak dira: haien $z$ konparatzen dira, ez notak.', 'Son escalas distintas: se comparan sus $z$, no las notas.', 'إنهما مقياسان مختلفان: نقارن قيم $z$ لا الدرجات.', 'They are different scales: compare their $z$, not the marks.')
+            right: say('Eskala desberdinak dira: haien ${z}$ konparatzen dira, ez notak.', 'Son escalas distintas: se comparan sus ${z}$, no las notas.', 'إنهما مقياسان مختلفان: نقارن قيم ${z}$ لا الدرجات.', 'They are different scales: compare their ${z}$, not the marks.')
         },
         check: {
             prompt: say('Mikelek 62 $N(50;\\,8)$ banaketan; Leirek 8 $N(6;\\,1{,}6)$ banaketan. Nork nabarmentzen du gehiago?', 'Mikel saca 62 en una $N(50;\\,8)$; Leire, 8 en una $N(6;\\,1{,}6)$. ¿Quién destaca más?', 'حصل ميكيل على 62 في $N(50;\\,8)$، وليري على 8 في $N(6;\\,1{,}6)$. من يتميز أكثر؟', 'Mikel scores 62 in an $N(50;\\,8)$; Leire, 8 in an $N(6;\\,1{,}6)$. Who stands out more?'),
-            options: [say('Mikel', 'Mikel', 'ميكيل', 'Mikel'), say('Leire', 'Leire', 'ليري', 'Leire'), say('Berdin', 'Igual', 'متساويان', 'The same')],
+            options: [say('Mikelek', 'Mikel', 'ميكيل', 'Mikel does'), say('Leirek', 'Leire', 'ليري', 'Leire does'), say('Berdin', 'Igual', 'متساويان', 'The same')],
             correctIndex: 0,
-            explanation: same('$z=\\frac{62-50}{8}=1{,}5\\qquad z=\\frac{8-6}{1{,}6}=1{,}25$')
+            explanation: same('${z}=\\frac{62-50}{8}=1{,}5\\qquad z=\\frac{8-6}{1{,}6}=1{,}25$')
         }
     },
     'inverse-normal': {
