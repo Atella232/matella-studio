@@ -17,9 +17,24 @@ Primer tema del bloque Funciones de 1.º Sociales: curso `batx1-gizarte`, tema `
 
 ## Propuesta (2026-11-17)
 
-Etapas propuestas (edición nueva): familias y dominio · funciones lineales e interpolación · cuadráticas (vértice, máximos de ingresos y beneficio, parábola por tres puntos) · proporcionalidad inversa y raíz (coste medio) · a trozos y valor absoluto. Menú de letras enviado al dueño.
+Etapas propuestas (edición nueva): familias y dominio · funciones lineales e interpolación · cuadráticas (vértice, máximos de ingresos y beneficio, parábola por tres puntos) · proporcionalidad inversa y raíz (coste medio) · a trozos y valor absoluto. El dueño eligió «Las recomendadas» (2026-11-17): edición nueva (Suma_Piezas), V1 lecciones propias con dibujos prestados; L1 «Entre dos (o tres) datos», L2 «El precio que más da», L3 «Coste medio»; M prestadas de 4.º (dominio, unir trozos, valor absoluto, punto-pendiente, parábola, hipérbola); J1 «Estima el dato», J2 «El precio justo», J3 «La factura a trozos», J5 detective, J6 carrera, parejas, «Pinta el dominio» y «Láser de curvas». Fuera: L4, J4, parte entera y transformaciones (van al tema 5).
+
+## Hecho
+
+**Fase 1+2, lecciones y contenido:**
+- **Etapas y lecciones (ids):** `families` (`families`, `domain`, `context-domain`) · `linear` (`line`, `interpolation`, `linear-models`) · `quadratic` (`parabola`, `optimum`, `three-points`) · `inverse` (`inverse-prop`, `average-cost`, `root`) · `piecewise` (`piecewise`, `piecewise-model`, `absolute`).
+- Lecciones con las mejoras de la teoría (`lessonTexts.ts`, `lessonChecks.ts`, enlaces «Antes de empezar» a 4.º y a Ciencias). `text.ts` reexporta `say`/`same`/`plain` del gemelo de Ciencias.
+- **Dibujos nuevos (8):** `AreaFigure`, `InterpolationFigure`, `TariffLinesFigure`, `RevenueFigure`, `ThreePointsFigure`, `AverageCostFigure`, `ParkingFigure`, `CopiesFigure`, más `SocFunctionsHeroArt`. Prestados de 4.º: `ModelsFigure`, `VertexFigure`, `HyperbolaFigure`, `RootGraphFigure` (aplicadas, Gráfica), `DomainCasesFigure` (académicas, Funciones), `LineKindsFigure`, `AbsQuadraticFigure` (académicas, Polinómicas).
+- **Contenido:** diagnóstico 133001–133008, práctica 1–20, retos 101–115, banco 1–50. Respuestas: un número (euros, unidades, minutos…).
+- **Registro:** `active: true` en `courses.ts`, ruta en el router y la dirección en `paths.ts`.
+- **Test nuevo:** `tests/funtzioak-batx1g-content.test.ts`.
+
+## Trucos
+
+- En `takeaway-notation`, una letra de la idea clave no puede salir en mayúscula en la lección: con $y=ax^2+bx+c$ y $y=mx+n$ en la idea clave, la lección no puede usar $A(x)$, $C(x)$ ni $M(t)$ (se usan $S$, $P$, $V$).
+- El selector de etapas de «Ejercicios» se ensancha con el nombre más largo: «Alderantzizko proportzionaltasuna eta erroak» desbordaba a 375 px; queda «Alderantzizkoak eta erroak».
+- En los dibujos, los ejes con números de 4 cifras necesitan `ox` ≥ 70.
 
 ## En curso
 
-- Propuesta de diseño enviada al dueño; **esperando su elección** (edición del libro y letras del menú). No hay código todavía.
-- Siguiente paso: con la elección, fases 1–2 (lecciones y contenido) en `src/pages/batx1-gizarte-funtzioak`.
+- Fases 1–2 hechas (ver commit). Siguiente: fase 3, laboratorio: L1 «Entre dos (o tres) datos», L2 «El precio que más da», L3 «Coste medio» (ids 1331xx–1333xx) y las prestadas de 4.º.
