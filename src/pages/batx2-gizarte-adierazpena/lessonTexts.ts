@@ -63,7 +63,7 @@ export const bach2gSketchLessonTexts: Record<Bach2gSketchTopicId, LessonTexts> =
             'The intercepts give the first points of the graph. On the $Y$ axis, substitute $x=0$. On the $X$ axis, solve $f(x)=0$; in a fraction, numerator zero. Then the sign tells whether the graph is above or below the axis on each interval.'
         ),
         examplePrompt: say('Aurkitu $g(x)=x^2-x-6$ funtzioaren ebaki-puntuak.', 'Halla los puntos de corte de $g(x)=x^2-x-6$.', 'أوجد نقاط تقاطع $g(x)=x^2-x-6$.', 'Find the intercepts of $g(x)=x^2-x-6$.'),
-        example: same('$g(0)=-6\\qquad x^2-x-6=0\\ \\to\\ x=-2,\\ x=3$'),
+        example: same('$\\begin{gathered}g(0)=-6\\\\ x^2-x-6=0\\ \\to\\ x=-2,\\ x=3\\end{gathered}$'),
         exampleAnswer: say('$(0,-6)$, $(-2,0)$ eta $(3,0)$.', '$(0,-6)$, $(-2,0)$ y $(3,0)$.', '$(0,-6)$ و$(-2,0)$ و$(3,0)$.', '$(0,-6)$, $(-2,0)$ and $(3,0)$.')
     },
 

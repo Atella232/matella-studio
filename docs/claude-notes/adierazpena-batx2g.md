@@ -38,6 +38,8 @@ Cuarto tema del bloque Análisis de 2.º Sociales (reparto en paralelo del 2026-
 
 - En las definiciones, las fórmulas tienen que ir en el mismo orden en los cuatro idiomas (el test las compara una a una).
 
-## En curso
+## Cierre (2026-11-17)
 
-- Falta la revisión a 375 px en eu, es y ar. Siguiente paso: recargar el servidor (ruta nueva) y pasar el escaneo de lecciones, laboratorio, juegos y fórmulas.
+- **Comprobado:** 3373 tests, lint y build en verde; inventario OK (2 juegos propios, 5 herramientas).
+- **375 px en eu, es y ar:** la portada y las 15 lecciones, las 5 herramientas (cada variante, antes y después de predecir y con los pasos al máximo), ¿qué gráfica es? y completa la ficha (las 6 rondas de los tres niveles), detective (6 rondas por nivel), carrera y memoria al empezar. Arreglos: el ejemplo de `intercepts` en dos filas, la lectura de `oblique` en dos líneas y 8 soluciones del banco en filas; medidas con KaTeX a 22 px, ninguna fórmula de práctica, retos o banco pasa de 400 px.
+- **Al fusionar:** `paths.ts` es una sola línea; las líneas `active: true` de `courses.ts` están juntas.

@@ -104,7 +104,7 @@ export function ObliqueTool(props: LabToolProps) {
             tip={say('Egin zatiketa eta begiratu hondarraren zeinua.', 'Haz la división y mira el signo del resto.', 'أجرِ القسمة وانظر إلى إشارة الباقي.', 'Do the division and look at the sign of the remainder.')}
             onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
         >
-            <Readout latex={[`${setup.latex}=${setup.division}`, `y=${setup.n === 0 ? 'x' : `x${setup.n < 0 ? '-' : '+'}${Math.abs(setup.n)}`}`, `f(${x0})-(${x0}${setup.n === 0 ? '' : setup.n < 0 ? `-${-setup.n}` : `+${setup.n}`})=${gapLatex(state)}`]} note={l(note)} />
+            <Readout latex={[setup.latex, `f(x)=${setup.division}`, `y=${setup.n === 0 ? 'x' : `x${setup.n < 0 ? '-' : '+'}${Math.abs(setup.n)}`}`, `f(${x0})-(${x0}${setup.n === 0 ? '' : setup.n < 0 ? `-${-setup.n}` : `+${setup.n}`})=${gapLatex(state)}`]} note={l(note)} />
         </Predict>
     )
     const fy = obliqueF(state.curve, x0)
