@@ -256,7 +256,7 @@ export const courses: Course[] = [
       { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲', active: true },
       { id: 'binomial-normal', name: 'Distribuciones Binomial y Normal', nameEu: 'Banaketa Binomiala eta Normala', nameAr: 'التوزيع الثنائي والتوزيع الطبيعي', nameEn: 'Binomial and Normal Distributions', icon: '🔔', active: true },
       { id: 'muestreo', name: 'Muestras Estadísticas', nameEu: 'Lagin Estatistikoak', nameAr: 'العينات الإحصائية', nameEn: 'Statistical Samples', icon: '🧪', active: true },
-      { id: 'inferencia', name: 'Inferencia Estadística: Estimación', nameEu: 'Inferentzia Estatistikoa: Estimazioa', nameAr: 'الاستدلال الإحصائي: التقدير', nameEn: 'Statistical Inference: Estimation', icon: '🎯' },
+      { id: 'inferencia', name: 'Inferencia Estadística: Estimación', nameEu: 'Inferentzia Estatistikoa: Estimazioa', nameAr: 'الاستدلال الإحصائي: التقدير', nameEn: 'Statistical Inference: Estimation', icon: '🎯', active: true },
     ]
   },
 ]
