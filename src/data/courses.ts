@@ -191,7 +191,7 @@ export const courses: Course[] = [
     descriptionEn: 'Mathematics Applied to the Social Sciences I',
     color: '#1d6f8a',
     topics: [
-      { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', nameEn: 'Real Numbers', icon: '∞' },
+      { id: 'numeros-reales', name: 'Números Reales', nameEu: 'Zenbaki Errealak', nameAr: 'الأعداد الحقيقية', nameEn: 'Real Numbers', icon: '∞', active: true },
       { id: 'aritmetica-mercantil', name: 'Aritmética Mercantil', nameEu: 'Merkataritza-aritmetika', nameAr: 'الرياضيات المالية', nameEn: 'Financial Arithmetic', icon: '💶' },
       { id: 'algebra', name: 'Álgebra', nameEu: 'Aljebra', nameAr: 'الجبر', nameEn: 'Algebra', icon: '🔤' },
       { id: 'funciones', name: 'Funciones Elementales', nameEu: 'Funtzio Elementalak', nameAr: 'الدوال الأساسية', nameEn: 'Elementary Functions', icon: '📈' },
