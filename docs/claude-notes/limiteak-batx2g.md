@@ -58,7 +58,7 @@ Primer tema del bloque Análisis de 2.º Sociales (reparto en paralelo del 2026-
 ## Cierre (2026-11-17)
 
 - **Comprobado:** 3275 tests, lint y build en verde; inventario OK.
-- **375 px en eu, es y ar:** lecciones y resumen, banco con soluciones abiertas (la solución del 45 desbordaba: las cadenas con `\qquad` de práctica y banco pasan a `gathered`), las 8 herramientas (antes y después de predecir, cajas de texto del SVG dentro), detective (6 rondas por nivel), ¿a largo plazo? y cierra la tarifa (todas las rondas), carrera (circuito de continuidad). Práctica, retos y diagnóstico: revisión automática empezada, sin terminar por el límite de uso.
+- **375 px en eu, es y ar:** lecciones y resumen, banco con soluciones abiertas (la solución del 45 desbordaba: las cadenas con `\qquad` de práctica y banco pasan a `gathered`), las 8 herramientas (antes y después de predecir, cajas de texto del SVG dentro), detective (6 rondas por nivel), ¿a largo plazo? y cierra la tarifa (todas las rondas), carrera (circuito de continuidad). Práctica guiada (las 20, en eu, es y ar, con pista y explicación), retos y diagnóstico: sin desbordes. Todas las fórmulas de esas secciones se midieron con KaTeX a 22 px: la más ancha que queda (355 px) es más estrecha que la mayor que ya cabe en el banco (417 px).
 - **Árabe:** las lecturas del laboratorio con decimales pasan por `arabicPoint`.
 - **Hoja de euskera:** `limiteak-batx2g-euskera.html` en la carpeta de notas compartidas.
 - **Al fusionar:** `paths.ts` es una sola línea que tocan varias sesiones; las líneas `active: true` de `courses.ts` están juntas.
