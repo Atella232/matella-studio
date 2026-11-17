@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { gizMoneyChallenges, gizMoneyDiagnostic, gizMoneyExerciseBank, gizMoneyPractice } from './content'
 import { GizMoneyHeroArt } from './figures'
+import { GizMoneyLaboratory } from './lab'
+import { gizMoneyLabChallengeIds, gizMoneyLabToolForTopic, gizMoneyLabTools } from './lab/labTools'
 import { gizMoneyStages, gizMoneyTopics } from './lessons'
 
 const merkataritzaBatx1gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const merkataritzaBatx1gUnit: UnitDefinition = {
     guidedPractice: gizMoneyPractice,
     exerciseBank: gizMoneyExerciseBank,
     challenges: gizMoneyChallenges,
+    lab: {
+        description: {
+            eu: `${gizMoneyLabTools.length} tresna, erronkekin: noiz bikoizten da, urteko tasa baliokidea hazten da eta amortizazio-taula, berriak; eta 4. DBHko ehunekoen barra, ehuneko kateatuak, erosketaren tiketa, bakuna ala konposatua eta interesa hilabete eta egunetan.`,
+            es: `${gizMoneyLabTools.length} herramientas con retos: ¿cuándo se duplica?, la TAE crece y el cuadro de amortización, nuevas; y de 4.º ESO, la barra del 100 %, los porcentajes encadenados, el tique de la compra, simple o compuesto e interés en meses y días.`,
+            en: `${gizMoneyLabTools.length} tools with challenges: when does it double, the APR grows and the repayment table, new; and from 4th ESO, the 100% bar, chained percentages, the shopping receipt, simple or compound, and interest in months and days.`,
+            ar: `${gizMoneyLabTools.length} أدوات مع تحديات: متى يتضاعف والمعدل السنوي المكافئ ينمو وجدول الإطفاء، وهي جديدة؛ ومن الصف الرابع: شريط 100 ٪ والنسب المتتالية وإيصال الشراء والبسيطة أم المركبة والفائدة بالأشهر والأيام.`
+        },
+        progressIds: gizMoneyLabChallengeIds,
+        toolForTopic: gizMoneyLabToolForTopic,
+        render: (props) => <GizMoneyLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, 1,05 edo 2122,73. Ehunekoak, % ikurrik gabe; dirua, zentimoetara eskatzen bada.', es: 'Escribe un número: 5, 1,05 o 2122,73. Los porcentajes, sin el signo %; el dinero, a los céntimos si se pide.', en: 'Write a number: 5, 1.05 or 2122.73. Percentages without the % sign; money to the cent when asked.', ar: 'اكتب عددًا: 5 أو 1.05 أو 2122.73. النسب دون الرمز %، والمال إلى السنتات إذا طُلب ذلك.' },
         defaultForm: 'any',

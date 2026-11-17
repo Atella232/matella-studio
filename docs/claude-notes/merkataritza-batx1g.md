@@ -30,12 +30,22 @@ V1 + L1, L2, L3 + J1, J2, J3.
 - Diagnóstico 131001–131008, práctica 1–20, retos 101–115 y banco 1–50 (4/3/10 por etapa). Todos los resultados con decimales se calcularon con Python.
 - Test `tests/merkataritza-batx1g-content.test.ts`. Tests, lint y `tsc -b` en verde. Revisado a 375 px en eu, es y ar: las 14 lecciones, resumen, práctica, banco, retos y diagnóstico.
 
+**Fase 3 (laboratorio), 8 herramientas:**
+- **Propias (3),** con predicción y retos sin fin:
+  - L1 `double` «¿Cuándo se duplica?», retos 131101–131105: interés 1–12 % y objetivo ×1,5, ×2 o ×3; escalera de capitales; predice si hacen falta menos, justo o más de 10 años; regla del 72.
+  - L2 `table` «El cuadro de amortización», retos 131201–131205: tres préstamos, anualidad en pasos de 100 €; barras de la deuda año a año; predice si queda deuda, a cero o de más (a cero = la anualidad a la centena).
+  - L3 `tae` «La TAE crece», retos 131301–131305: interés 1–12 % y pago anual, semestral, trimestral, mensual o diario; barras de lo que la TAE pasa al nominal; predice si pasa de 0,25 puntos.
+- **Prestadas (5)** de 4.º aplicadas con sus ids: barra del 100 %, encadenados (de 2.º), tique, simple o compuesto, meses y días.
+- Test `tests/merkataritza-batx1g-lab.test.ts`. Tests y lint en verde; revisado a 375 px en eu, es y ar sin desbordes.
+
 ## Trucos
 
 - Euskera: «% 15eko», «% 4an» llevan sufijo pegado al número y los tests lo prohíben: se escribe «interesa % 4 dela», «BEZa % 21 bada», «komisioa % 2 da».
 - Inglés: los números de 4 cifras fuera de las fórmulas van con coma (2,000) también en los enunciados de las lecciones.
 - TAE en euskera: «urteko tasa baliokidea».
 
+- `(1+0,08/12)^12` da 8,29995 %: «al menos 8,3 %» no se cumple con el 8 %. Comprobar los umbrales con código.
+
 ## En curso
 
-- Fase 1+2 hecha. Sigue la fase 3 (laboratorio: L1 `double`, L2 `table`, L3 `tae`, y las prestadas de 4.º aplicadas).
+- Fases 1+2 y 3 hechas. Sigue la fase 4 (juegos: J1 `offer`, J2 `gaps`, J3 detective; carrera, memoria; banco y caja de 4.º aplicadas).
