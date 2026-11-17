@@ -17,13 +17,13 @@ Tema `estadistica-bidimensional` del curso `batx1-gizarte`, segundo del bloque �
 
 «Las recomendadas»: F1 (tablas de contingencia al final, edición nueva), R1 (recta de X sobre Y también con y despejada, como Anaya), V1, L1–L2, M, J1–J4. «¿Qué rectas?» de Ciencias no se presta (escribe x = …); en su lugar, «Adivina la correlación» de 4.º.
 
-## Hecho (sin revisar del todo en el navegador)
+## Hecho (commit b67bbb9a)
 
 - 18 lecciones: 14 prestadas de Ciencias con `borrow()` y 4 nuevas (`reading-r`, `line-xy`, `both-lines`, `marginal-measures`); contenido 138001–138008, práctica 1–20, retos 101–115, banco 1–50.
 - Laboratorio: `relation` (138101–103) y `reliable` (138201–203) propias; prestadas quadrants, scissors, independence (Ciencias), scatter y contingency (4.º ap).
 - Juegos: `which-r` (138501–503), `predict` (138601–603), detective (138701–703), carrera (138401–405), memoria (138801–803); prestados `sign` (138811–813) y `cloud` (138821–823).
 - Fuera de la carpeta: courses, router, paths y una línea de `tests/bidimentsionala-batx1z-content.test.ts` (comprobaba que Sociales seguía inactivo).
 
-## En curso
+## Cierre
 
-- Falta: `npm test` completo, lint y build; revisión a 375 px en eu, es y ar de lecciones, laboratorio y juegos (las lecciones nuevas y el laboratorio se estaban revisando cuando se cortó la sesión); hoja de euskera con `hoja-revision.mjs batx1-gizarte-bidimentsionala … --herramientas relation,reliable --juegos which-r,predict,detective,race,memory`.
+3315 tests, lint y build en verde. Revisado a 375 px en eu, es y ar: las 18 lecciones con todos los pasos abiertos, las 7 herramientas con la predicción hecha, portada, diagnóstico, práctica, ejercicios, retos, resumen y los 7 juegos con sus niveles (respondiendo): sin desbordes, sin errores de KaTeX ni textos fuera de los dibujos de esta unidad. Única marca: en el juego prestado «Adivina la correlación» (`dbh4-games/StatisticsGames`, `CloudGame`) la letra «y» del eje se sale unos píxeles del dibujo; es una pieza de 4.º que no se edita desde aquí (también pasa en Ciencias y en 4.º). Hoja de euskera hecha con `hoja-revision.mjs` (fuera del repositorio, `~/Documents/Matella-fuentes/batx1g-estadistica/hoja-euskera-bidimentsionala-batx1g.html`; las 4 lecciones nuevas, las 2 herramientas y los 5 juegos propios). Al fusionar: este tema activa su línea de `courses.ts` y añade su ruta al final de `paths.ts` y tras la de `estadistica` de Sociales en el router.
