@@ -28,6 +28,13 @@ Segundo tema de 2.º Sociales (curso `batx2-gizarte`, tema `determinantes`), seg
 - **Tests:** `tests/determinanteak-batx2g-content.test.ts` (también comprueba que no quede orden 4, áreas ni $x^2$). Quitada la línea «only the Ciencias course» de `tests/determinanteak-batx2z-content.test.ts`.
 - **Truco:** dos tests comunes suponían muchas lecciones propias por unidad. `tests/lesson-checks.test.ts` pedía que la respuesta correcta de «Compruébalo» no esté siempre en el mismo sitio (imposible con una sola lección) y `tests/lessons-basque-suffixes.test.ts` pedía más de 20 textos en euskera en `lessons.tsx`. Ahora aceptan una unidad con una sola lección propia o que importa `…Topics` de un gemelo (umbral 4). Lo necesitarán también `sistemak` y `programazioa` si importan lecciones.
 
+## Fase 3: laboratorio
+
+- **L1 «¿Se deducen los precios?»** (`lab/bundles.ts`, id de herramienta `bundles`, retos 142101–142105): frutería y papelería (2 × 2) y panadería (3 × 3). Las cantidades son $A$; los totales $B$ salen de precios escondidos. Se predice el signo de $|A|$; con $|A|\neq 0$ salen los precios, con $|A|=0$ dice qué lote es múltiplo (`multipleOf`) o que es mezcla. Infinito: «haz que $|A|$ valga t» cambiando un número de un lote.
+- **L2 «La adjunta, casilla a casilla»** (`lab/adjugate.ts`, `adjugate`, retos 142151–142155): tres matrices 3 × 3 con $|A|$ = 3, 1 y 5. Vistas «Adjunto» (fila y columna tachadas, signos del tablero), «Adj A» e «Inversa» (el adjunto (i, j) cae en (j, i) de $A^{-1}$). Se predice el signo del adjunto. Infinito: «enciende el elemento (i, j) de $A^{-1}$».
+- **De Ciencias, tal cual:** la máquina de propiedades y el deslizador del determinante, con sus ids.
+- Componentes en `lab/SocialTools.tsx`; tests en `tests/determinanteak-batx2g-lab.test.ts` (A⁻¹B devuelve los precios, la traspuesta de la adjunta coincide con la inversa, retos resolubles y ninguno resuelto al empezar). Revisado a 375 px en ar y es.
+
 ## En curso
 
-- Fase 1+2 hecha (commit siguiente a 51abf80). Falta: fase 3 laboratorio (L1 «¿Se deducen los precios?», L2 «La adjunta, casilla a casilla», 142101–142399; M1 y M2 de Ciencias), fase 4 juegos (J1, J2, J3 propios; J4, carrera y memoria de Ciencias renumerados, 142401–142899), cierre (375 px eu/es/ar, inventario, hoja en euskera).
+- Fases 1+2 (09148b8) y 3 hechas. Falta: fase 4 juegos (J1 «¿Hay precios únicos?», J2 «Adjunto exprés», J3 detective propio; «¿Qué le pasa al determinante?», carrera y memoria de Ciencias renumerados, 142401–142899) y cierre (375 px eu/es/ar, inventario, hoja en euskera).

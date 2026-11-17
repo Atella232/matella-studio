@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { DeterminantsHeroArt } from '../batx2-zientziak-determinanteak/figures'
 import { gizarteDeterminanteakChallenges, gizarteDeterminanteakDiagnostic, gizarteDeterminanteakExerciseBank, gizarteDeterminanteakPractice } from './content'
+import { GizarteDeterminanteakLaboratory } from './lab'
+import { gizarteDeterminanteakLabChallengeIds, gizarteDeterminanteakLabToolForTopic, gizarteDeterminanteakLabTools } from './lab/labTools'
 import { gizarteDeterminanteakStages, gizarteDeterminanteakTopics } from './lessons'
 
 const determinanteakBatx2gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const determinanteakBatx2gUnit: UnitDefinition = {
     guidedPractice: gizarteDeterminanteakPractice,
     exerciseBank: gizarteDeterminanteakExerciseBank,
     challenges: gizarteDeterminanteakChallenges,
+    lab: {
+        description: {
+            eu: `${gizarteDeterminanteakLabTools.length} tresna, erronkekin: sortak (ondoriozta daitezke prezioak?) eta adjuntua laukiz lauki, berriak; eta Zientzietako propietateen makina eta determinantearen graduatzailea.`,
+            es: `${gizarteDeterminanteakLabTools.length} herramientas con retos: los lotes (¿se deducen los precios?) y la adjunta casilla a casilla, nuevas; y la máquina de propiedades y el deslizador del determinante de Ciencias.`,
+            en: `${gizarteDeterminanteakLabTools.length} tools with challenges: the bundles (can the prices be found?) and the adjugate cell by cell, new; and the property machine and the determinant slider from Sciences.`,
+            ar: `${gizarteDeterminanteakLabTools.length} أدوات مع تحديات: المجموعات (هل تُستنتج الأسعار؟) والمرافقة خانةً خانة، وهما جديدتان؛ وآلة الخواص ومنزلقة المحدد من العلوم.`
+        },
+        progressIds: gizarteDeterminanteakLabChallengeIds,
+        toolForTopic: gizarteDeterminanteakLabToolForTopic,
+        render: (props) => <GizarteDeterminanteakLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',
