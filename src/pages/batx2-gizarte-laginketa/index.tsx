@@ -3,6 +3,10 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { samplingBatx2gChallenges, samplingBatx2gDiagnostic, samplingBatx2gExerciseBank, samplingBatx2gPractice } from './content'
 import { SamplingBatx2gHeroArt } from './figures'
+import { SamplingBatx2gGames } from './games'
+import { SAMPLING_BATX2G_GAME_RECORDS_KEY, samplingBatx2gGameProgressIds } from './games/info'
+import { SamplingBatx2gLaboratory } from './lab'
+import { samplingBatx2gLabChallengeIds, samplingBatx2gLabToolForTopic, samplingBatx2gLabTools } from './lab/labTools'
 import { samplingBatx2gStages, samplingBatx2gTopics } from './lessons'
 
 const laginketaBatx2gUnit: UnitDefinition = {
@@ -25,6 +29,28 @@ const laginketaBatx2gUnit: UnitDefinition = {
     guidedPractice: samplingBatx2gPractice,
     exerciseBank: samplingBatx2gExerciseBank,
     challenges: samplingBatx2gChallenges,
+    lab: {
+        description: {
+            eu: `${samplingBatx2gLabTools.length} tresna, erronkekin: batez bestekoen kutxa eta lagin asko, berriak; eta DBHko lagina eta lagin geruzatua.`,
+            es: `${samplingBatx2gLabTools.length} herramientas con retos: la urna de las medias y muchas muestras, nuevas; y la muestra y la muestra estratificada de la ESO.`,
+            en: `${samplingBatx2gLabTools.length} tools with challenges: the urn of the means and many samples, new; and the sample and the stratified sample from ESO.`,
+            ar: `${samplingBatx2gLabTools.length} أدوات مع تحديات: صندوق المتوسطات وعيّنات كثيرة، وهما جديدتان؛ والعيّنة والعيّنة الطبقية من المرحلة الثانوية.`
+        },
+        progressIds: samplingBatx2gLabChallengeIds,
+        toolForTopic: samplingBatx2gLabToolForTopic,
+        render: (props) => <SamplingBatx2gLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bost joko, denak berriak: alboratuta dago?, banatu lagina, laginketaren detektibea, lasterketa eta memoria.',
+            es: 'Cinco juegos, todos nuevos: ¿hay sesgo?, reparte la muestra, el detective del muestreo, la carrera y la memoria.',
+            en: 'Five games, all new: is it biased?, split the sample, the sampling detective, the race and the memory.',
+            ar: 'خمس ألعاب، كلها جديدة: هل هناك تحيّز؟ ووزّع العيّنة ومخبر المعاينة والسباق والذاكرة.'
+        },
+        progressIds: samplingBatx2gGameProgressIds,
+        recordsKey: SAMPLING_BATX2G_GAME_RECORDS_KEY,
+        render: (props) => <SamplingBatx2gGames {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat: 0,1587, 25 edo 5,88. Normalaren probabilitateak, taulako lau hamartarrekin.', es: 'Escribe un número exacto: 0,1587, 25 o 5,88. Las probabilidades de la normal, con los cuatro decimales de la tabla.', en: 'Write an exact number: 0.1587, 25 or 5.88. Normal probabilities with the four decimals of the table.', ar: 'اكتب عددًا مضبوطًا: 0.1587 أو 25 أو 5.88. احتمالات التوزيع الطبيعي بأربعة أرقام عشرية من الجدول.' },
         defaultForm: 'any',
