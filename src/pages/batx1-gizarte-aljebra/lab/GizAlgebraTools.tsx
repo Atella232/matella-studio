@@ -6,7 +6,7 @@ import type { UnitLanguage } from '../../../features/unit-v2/types'
 import { groupDigits } from '../../../utils/numberFormat'
 import { Label } from '../../dbh2-funtzioak-v2/plane'
 import { Board, Hidden, Predict, Readout } from '../../dbh3-segidak/lab/LabParts'
-import { GREEN, INK, MUTED, say } from '../../dbh3-segidak/lab/labStyle'
+import { dec, GREEN, INK, MUTED, say } from '../../dbh3-segidak/lab/labStyle'
 import { setPrediction } from '../../dbh3-segidak/lab/prediction'
 import { BUSINESSES, breakEvenChallenges, breakEvenExtra, breakEvenPrediction, breakEvenUnits, costs, income, initialBreakEvenState, profit, setBreakEven, type BreakEvenState } from './breakEven'
 import { budgetChallenges, budgetExtra, budgetPrediction, initialBudgetState, SCENARIOS, setBudget, uses, type BudgetState } from './budget'
@@ -114,7 +114,7 @@ export function BreakEvenTool(props: LabToolProps) {
                             <circle cx={at} cy={Y(income(state))} r={4.5} fill={BLUE} />
                             <circle cx={at} cy={Y(costs(state))} r={4.5} fill={RED} />
                             {point <= business.units.max && <circle cx={X(point)} cy={Y(state.price * point)} r={6} fill="none" stroke={INK} strokeWidth={2} />}
-                            {point <= business.units.max && <text x={X(point)} y={BASE + 15} textAnchor="middle" fontSize={11} fontWeight={700} fill={INK} direction="ltr">{texDecimal(point, props.language).replace('{,}', ',').replace('\\,', ' ')}</text>}
+                            {point <= business.units.max && <text x={X(point)} y={BASE + 15} textAnchor="middle" fontSize={11} fontWeight={700} fill={INK} direction="ltr">{Number.isInteger(point) ? written(point, props.language) : dec(point, props.language)}</text>}
                         </>
                     )
                     : <Hidden x={200} y={100} />}
@@ -226,7 +226,7 @@ export function BudgetTool(props: LabToolProps) {
     const controls = (
         <>
             <Segmented<string>
-                label={l(say('Lantegia', 'Negocio', 'المشروع', 'Business'))}
+                label={l(say('Negozioa', 'Negocio', 'المشروع', 'Business'))}
                 value={String(state.scenario)}
                 options={SCENARIOS.map((item, index) => ({ value: String(index), label: l(item.name) }))}
                 onChange={(value) => setState((s) => setBudget(s, { scenario: Number(value) }))}

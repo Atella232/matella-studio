@@ -37,11 +37,13 @@ El dueño eligió las recomendadas: V1 (13 lecciones de 1.º Ciencias + 4 propia
 
 - **Propios:** J1 `box` «Cuadra la taquilla» (`boxOffice.ts`, 132501–132503: dos precios; tres precios con «el doble/triple»; tres precios con «tantas como las otras dos»; el generador comprueba que el determinante no es 0 y `solveBox` devuelve la solución), J2 `gain` «¿Gana o pierde?» (`gain.ts`, 132601–132603: veredicto con datos, con I(x) y C(x), y el punto muerto entre tres), J3 detective (`detective.ts`, 132701–132703, 12 errores en 3 niveles: ecuaciones, sistemas e inecuaciones, economía).
 - **Carrera** 132401–132405 (16 tipos, `race.ts`) y **memoria** 132801–132803 (raíces, exponenciales, puntos muertos).
-- **Reutilizados de Ciencias** con sus textos: `zero` (132811–132813, etapa systems), `valid` (132821–132823, equations), `signs` (132831–132833, inequalities). «Lee la última fila» no se usa: discute parámetros, que no están en el libro de Sociales.
+- **Reutilizados de Ciencias** con sus textos: `zero` (132811–132813, etapa systems), `valid` (132821–132823, equations), `signs` (132831–132833, inequalities). «Lee la última fila» no se usa: discute sistemas con parámetro, y la ficha del libro de Sociales no recoge la discusión.
 - **Trucos:** en la carrera, una opción equivocada que no sale entera no se ofrece (`wrongAs` devuelve `null`). Los beneficios se limitan a 450 unidades para que ningún número llegue a cinco cifras (el `written` de Ciencias no agrupa miles). Cambiar de idioma en los juegos vuelve a la lista: al revisar, cambia el idioma primero y abre el juego después.
 
 ## Cierre (2026-11-17)
 
 - Unidad completa en `feat/aljebra-batx1g`: tests, lint y build en verde; revisada a 375 px en eu/es/ar; inventario OK.
 - Hoja de revisión de euskera: `~/Documents/Matella-fuentes/batx1g-aljebra/hojas/aljebra-batx1g-euskara.html` (enviada al dueño). Palabras a confirmar: «errentagarritasun-atalasea» (punto muerto; la herramienta se llama «Atalasea»), «oreka-prezioa», «soberakina» y «eskasia», «eskualde bideragarria».
+- **Fuera de la unidad:** las ecuaciones con valor absoluto (el libro las trae como ejercicio resuelto) y el apartado «Igualdades» (identidades y ecuaciones). Si el dueño las quiere, basta importar `absolute-equations` y la herramienta `absolute-fold` de `batx1-zientziak-ekuazioak`.
+- La hoja lleva un apéndice hecho con un script aparte (retos del laboratorio, nombres y pantallas de varias líneas), porque `hoja-revision.mjs` no lee los `.ts` del laboratorio ni los `say(` de varias líneas.
 - Sin fusionar ni publicar: lo hace el coordinador.
