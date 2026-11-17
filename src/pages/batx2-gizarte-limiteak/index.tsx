@@ -2,6 +2,10 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { bach2gLimitsChallenges, bach2gLimitsDiagnostic, bach2gLimitsExerciseBank, bach2gLimitsPractice } from './content'
 import { Bach2gLimitsHeroArt } from './figures'
+import { Bach2gLimitsGames } from './games'
+import { BACH2G_LIMITS_GAME_RECORDS_KEY, bach2gLimitsGameProgressIds } from './games/info'
+import { Bach2gLimitsLaboratory } from './lab'
+import { bach2gLimitsLabChallengeIds, bach2gLimitsLabToolForTopic, bach2gLimitsLabTools } from './lab/labTools'
 import { bach2gLimitsStages, bach2gLimitsTopics } from './lessons'
 
 const limiteakBatx2gUnit: UnitDefinition = {
@@ -24,6 +28,28 @@ const limiteakBatx2gUnit: UnitDefinition = {
     guidedPractice: bach2gLimitsPractice,
     exerciseBank: bach2gLimitsExerciseBank,
     challenges: bach2gLimitsChallenges,
+    lab: {
+        description: {
+            eu: `${bach2gLimitsLabTools.length} tresna, erronkekin: batez besteko kostua epe luzera, tarifa tarteka eta interesa gero eta maizago, berriak; 1. mailako Limiteak unitateko lupa, maila handienak irabazten du, 0/0 zuloa eta bi zati lotu; eta 2. mailako Zientzietako doitu a eta b.`,
+            es: `${bach2gLimitsLabTools.length} herramientas con retos: coste medio a largo plazo, la tarifa por tramos e interés cada vez más a menudo, nuevas; de Límites de 1.º, la lupa, gana el de mayor grado, el agujero del 0/0 y une dos trozos; y de 2.º Ciencias, ajusta a y b.`,
+            en: `${bach2gLimitsLabTools.length} tools with challenges: average cost in the long run, the tariff by brackets and interest more and more often, new; from Limits of 1st year, the lens, the highest degree wins, the hole of 0/0 and join two pieces; and from 2nd year Sciences, adjust a and b.`,
+            ar: `${bach2gLimitsLabTools.length} أدوات مع تحديات: متوسط التكلفة على المدى الطويل والتعريفة حسب الشرائح وفائدة بتكرار أكبر فأكبر، وهي جديدة؛ ومن نهايات السنة الأولى: العدسة وتفوز الدرجة الأكبر وثقب 0/0 وصِل جزأين؛ ومن علوم السنة الثانية: اضبط a وb.`
+        },
+        progressIds: bach2gLimitsLabChallengeIds,
+        toolForTopic: bach2gLimitsLabToolForTopic,
+        render: (props) => <Bach2gLimitsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: lasterketa, epe luzera?, itxi tarifa, limiteen detektibea eta memoria, berriak; eta 1. mailako Limiteak unitateko indeterminazioa ala ez? eta zer etenune?',
+            es: 'Siete juegos: carrera, ¿a largo plazo?, cierra la tarifa, detective de límites y memoria, nuevos; y de Límites de 1.º, ¿indeterminación o no? y ¿qué discontinuidad?',
+            en: 'Seven games: race, in the long run?, close the tariff, limits detective and memory, new; and from Limits of 1st year, indeterminate or not? and which discontinuity?',
+            ar: 'سبع ألعاب: السباق وعلى المدى الطويل؟ وأغلق التعريفة ومخبر النهايات والذاكرة، وهي جديدة؛ ومن نهايات السنة الأولى: عدم تعيين أم لا؟ وأي انقطاع؟'
+        },
+        progressIds: bach2gLimitsGameProgressIds,
+        recordsKey: BACH2G_LIMITS_GAME_RECORDS_KEY,
+        render: (props) => <Bach2gLimitsGames {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 0,25 edo 3/2. Emaitza eᵃ bada, a bakarrik.', es: 'Escribe un número: 5, −3, 0,25 o 3/2. Si el resultado es eᵃ, solo a.', en: 'Write a number: 5, −3, 0.25 or 3/2. If the result is eᵃ, only a.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 0.25 أو 3/2. وإذا كانت النتيجة eᵃ فاكتب a وحدها.' },
         defaultForm: 'any',
