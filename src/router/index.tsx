@@ -57,6 +57,8 @@ const SistemakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-sistemak'
 const EstatistikaBatx1zPage = lazy(() => import('../pages/batx1-zientziak-estatistika').then((module) => ({ default: module.EstatistikaBatx1zIntroPage })))
 const KonikakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-konikak').then((module) => ({ default: module.KonikakBatx1zIntroPage })))
 const BidimentsionalaBatx1zPage = lazy(() => import('../pages/batx1-zientziak-bidimentsionala').then((module) => ({ default: module.BidimentsionalaBatx1zIntroPage })))
+const EstatistikaBatx1gPage = lazy(() => import('../pages/batx1-gizarte-estatistika').then((module) => ({ default: module.EstatistikaBatx1gIntroPage })))
+const BidimentsionalaBatx1gPage = lazy(() => import('../pages/batx1-gizarte-bidimentsionala').then((module) => ({ default: module.BidimentsionalaBatx1gIntroPage })))
 const AplikazioakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-aplikazioak').then((module) => ({ default: module.AplikazioakBatx1zIntroPage })))
 const IntegralakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-integralak').then((module) => ({ default: module.IntegralakBatx1zIntroPage })))
 const MugagabeakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-mugagabeak').then((module) => ({ default: module.MugagabeakBatx2zIntroPage })))
@@ -516,6 +518,16 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx1-zientziak/estadistica-bidimensional/*',
                         element: <BidimentsionalaBatx1zPage />,
+                    },
+                    // Estadística unidimensional de 1.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx1-gizarte/estadistica/*',
+                        element: <EstatistikaBatx1gPage />,
+                    },
+                    // Estadística bidimensional de 1.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx1-gizarte/estadistica-bidimensional/*',
+                        element: <BidimentsionalaBatx1gPage />,
                     },
                     // Aplicaciones de la derivada de 1.º Bachillerato (Ciencias): unidad V2
                     {

@@ -26,15 +26,12 @@ const allTexts = (): LocalizedText[] => [
     ...bivarExerciseBank.flatMap((section) => [section.title, ...section.items.flatMap((item) => [item.question, item.solution])])
 ]
 
-test('bidimentsionala batx1 z: the unit is active and routed, and only in Ciencias', () => {
+test('bidimentsionala batx1 z: the unit is active and routed', () => {
     const course = courses.find((item) => item.id === 'batx1-zientziak')!
     assert.ok(course.topics.find((topic) => topic.id === 'estadistica-bidimensional')!.active)
     assert.ok(isUnitV2Path('/matematika/batx1-zientziak/estadistica-bidimensional'))
     assert.ok(isUnitV2Path('/matematika/batx1-zientziak/estadistica-bidimensional/ariketak'))
-    // The Sociales topic of the same name stays as it was
-    for (const social of courses.filter((item) => item.id.startsWith('batx1') && item.id !== 'batx1-zientziak')) {
-        assert.ok(!social.topics.find((topic) => topic.id === 'estadistica-bidimensional')?.active, social.id)
-    }
+    // The Sociales topic of the same name is its own unit (batx1-gizarte-bidimentsionala), with its own test
 })
 
 test('bidimentsionala batx1 z: diagnostic, practice, challenges and bank are consistent', () => {
