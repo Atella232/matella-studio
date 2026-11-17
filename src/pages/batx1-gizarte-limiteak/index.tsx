@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { socLimitsChallenges, socLimitsDiagnostic, socLimitsExerciseBank, socLimitsPractice } from './content'
 import { SocLimitsHeroArt } from './figures'
+import { SocLimitsGames } from './games'
+import { SOC_LIMITS_GAME_RECORDS_KEY, socLimitsGameProgressIds } from './games/info'
 import { SocLimitsLaboratory } from './lab'
 import { socLimitsLabChallengeIds, socLimitsLabToolForTopic, socLimitsLabTools } from './lab/labTools'
 import { socLimitsStages, socLimitsTopics } from './lessons'
@@ -36,6 +38,17 @@ const limiteakBatx1gUnit: UnitDefinition = {
         progressIds: socLimitsLabChallengeIds,
         toolForTopic: socLimitsLabToolForTopic,
         render: (props) => <SocLimitsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, eta epe luzera?, lotu zatiak, limiteen detektibea eta memoria, berriak; eta Zientzietako indeterminazioa ala ez?, ehizatu asintotak eta zer etenune?',
+            es: 'Ocho juegos: carrera, ¿y a la larga?, empalma los trozos, detective de límites y memoria, nuevos; y de Ciencias, ¿indeterminación o no?, caza las asíntotas y ¿qué discontinuidad?',
+            en: 'Eight games: race, and in the long run?, join the pieces, limits detective and memory, new; and from Sciences, indeterminate or not?, hunt the asymptotes and which discontinuity?',
+            ar: 'ثماني ألعاب: السباق ووعلى المدى البعيد؟ وصِل الأجزاء ومخبر النهايات والذاكرة، وهي جديدة؛ ومن العلوم: عدم تعيين أم لا؟ واصطد المقاربات وأي انقطاع؟'
+        },
+        progressIds: socLimitsGameProgressIds,
+        recordsKey: SOC_LIMITS_GAME_RECORDS_KEY,
+        render: (props) => <SocLimitsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 2,5 edo 5/6.', es: 'Escribe un número: 5, −3, 2,5 o 5/6.', en: 'Write a number: 5, −3, 2.5 or 5/6.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 2.5 أو 5/6.' },

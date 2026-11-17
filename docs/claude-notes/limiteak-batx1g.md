@@ -36,6 +36,18 @@ Tercer tema del bloque Funciones de 1.º Sociales: curso `batx1-gizarte`, tema `
 - Test: `tests/limiteak-batx1g-lab.test.ts`.
 - Truco: una fila con cuatro fórmulas no cabe a 375 px; la tabla va en dos filas.
 
+## Fase 4: juegos
+
+- 8 juegos. Propios:
+  - `long` «¿Y a la larga?» (`epe-luzera`): una función y hacia dónde va x; cuatro tarjetas (número, 0, ±∞). Niveles: polinomios y aˣ; cocientes y coste medio; −∞ y raíces. 135501–135503.
+  - `join` «Empalma los trozos» (`lotu`): cada tarjeta dibuja el segundo trozo con su k y el salto se ve en el tablero. Niveles: dos rectas; parábola y recta (k sumando o coeficiente); tarifas en euros. 135551–135553.
+  - `detective` (12 errores de este tema): 135701–135703.
+- Carrera 135401–135405 (15 tipos, todos con respuesta numérica) y memoria 135801–135803.
+- Prestados de Ciencias: `forms` solo niveles 1–2 (el 3 es 1^∞ y e) 135811–135812; `asymptote` 135821–135823; `discontinuity` solo niveles 1–2 (el 3 trae E(x)) 135831–135832. Las reglas fijas de `forms` nombran 1^∞ entre las indeterminaciones: es texto de Ciencias, no se edita.
+- Test: `tests/limiteak-batx1g-games.test.ts` (comprueba «¿Y a la larga?» con el valor de la función en x = ±10⁶).
+- Trucos: en el barrido de juegos el botón «Jolastu/العب» de la barra lleva al índice; los niveles son los botones que empiezan por cifra tras `.fraction-v2-game-back`. En árabe, Noto Sans Arabic da cajas altas a los números del SVG: deja 10 px bajo la etiqueta.
+- Sin arreglar (pieza prestada): en árabe la «y» del eje del juego de discontinuidades de Ciencias se corta un poco.
+
 ## En curso
 
-- Fases 1–3 hechas. Siguiente: fase 4, juegos (J1 «¿Y a la larga?», J2 «Empalma los trozos», detective, carrera, memoria e indeterminaciones, asíntotas y discontinuidades de Ciencias).
+- Fases 1–4 hechas. Falta el cierre: hoja de euskera y nota final.

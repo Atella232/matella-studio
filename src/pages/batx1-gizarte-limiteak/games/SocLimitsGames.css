@@ -1,0 +1,9 @@
+/* ¿Y a la larga? and Empalma los trozos (1.º Sociales · límites) */
+.fraction-v2-games-card[data-game="long"] { --game-tint: var(--blue-tint, #dde7f7); }
+.fraction-v2-games-card[data-game="join"] { --game-tint: var(--success-tint, #d9efe2); }
+
+.soc-lim-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 10px 0; }
+.soc-lim-choice { min-height: 48px; padding: 6px 10px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 18px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.soc-lim-choice.chosen { background: var(--mustard-tint, #fbebc0); }
+.soc-lim-choice:disabled { cursor: default; }
+.soc-lim-board { display: block; width: 100%; max-width: 420px; height: auto; margin: 8px auto; border: 2px solid var(--ink); border-radius: 14px; }
