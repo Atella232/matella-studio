@@ -251,7 +251,7 @@ export const courses: Course[] = [
       { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→', active: true },
       { id: 'derivadas', name: 'Derivadas', nameEu: 'Deribatuak', nameAr: 'المشتقات', nameEn: 'Derivatives', icon: '📉', active: true },
       { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️', active: true },
-      { id: 'representacion-funciones', name: 'Representación de Funciones', nameEu: 'Funtzioen Adierazpen Grafikoa', nameAr: 'التمثيل البياني للدوال', nameEn: 'Curve Sketching', icon: '📈' },
+      { id: 'representacion-funciones', name: 'Representación de Funciones', nameEu: 'Funtzioen Adierazpen Grafikoa', nameAr: 'التمثيل البياني للدوال', nameEn: 'Curve Sketching', icon: '📈', active: true },
       { id: 'integrales', name: 'Integrales', nameEu: 'Integralak', nameAr: 'التكاملات', nameEn: 'Integrals', icon: '∫' },
       { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲' },
       { id: 'binomial-normal', name: 'Distribuciones Binomial y Normal', nameEu: 'Banaketa Binomiala eta Normala', nameAr: 'التوزيع الثنائي والتوزيع الطبيعي', nameEn: 'Binomial and Normal Distributions', icon: '🔔' },

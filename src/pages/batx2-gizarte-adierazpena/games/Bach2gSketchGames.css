@@ -1,0 +1,8 @@
+/* ¿Qué gráfica es? and Completa la ficha (Funtzioen adierazpena, Batxilergoa 2 · Gizarte Zientziak) */
+.fraction-v2-games-card[data-game="which"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="sheet"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+.bach2g-sketch-graphs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.bach2g-sketch-graphs button { padding: 4px; }
+.bach2g-sketch-graphs svg { display: block; width: 100%; height: auto; }
+.bach2g-sketch-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
