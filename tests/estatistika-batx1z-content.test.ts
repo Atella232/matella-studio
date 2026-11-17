@@ -48,9 +48,7 @@ test('estatistika batx1 z: the unit is active and routed', () => {
     assert.ok(course.topics.find((topic) => topic.id === 'estadistica')!.active)
     assert.ok(isUnitV2Path('/matematika/batx1-zientziak/estadistica'))
     assert.ok(isUnitV2Path('/matematika/batx1-zientziak/estadistica/ariketak'))
-    // Only Ciencias for now: the Sociales topic of the same name stays as it was
-    const social = courses.find((item) => item.id === 'batx1-gizarte')
-    if (social) assert.ok(!social.topics.find((topic) => topic.id === 'estadistica')?.active)
+    // The Sociales topic of the same name is its own unit (batx1-gizarte-estatistika), with its own test
 })
 
 test('estatistika batx1 z: diagnostic, practice, challenges and bank are consistent', () => {
