@@ -55,6 +55,8 @@ V1 + L1, L2, L3 + J1, J2, J3.
 - **Prestados de Ciencias:** sitúa en la recta 130811–813, intervalo 130821–823, radical 130831–833, exponente 130841–843.
 - Test `tests/errealak-batx1g-games.test.ts`. 3275 tests, lint y build en verde; inventario OK. Revisado a 375 px en eu, es y ar: centro y los 9 juegos (niveles 1 y 3), sin desbordes ni errores de KaTeX.
 
+**Hoja de euskera:** `~/Documents/Matella-fuentes/batx1g-errealak/hojas/errealak-batx1g-euskara.html` (fuera del repositorio), enviada al dueño el 2026-11-17.
+
 ## Trucos
 
 - `lesson-texts`: «3,4» dentro de `\{3,4,5\}` se lee como el decimal 3,4: el ejemplo no puede repetir esas parejas del error típico.
@@ -62,7 +64,3 @@ V1 + L1, L2, L3 + J1, J2, J3.
 - Las definiciones tienen que llevar las fórmulas en el mismo orden en los cuatro idiomas.
 
 - `lab/labTools.ts` importa el tipo de etapa de `lessons.tsx` con `import type`: así los tests de node lo pueden cargar.
-
-## En curso
-
-- Fases 1–4 de Números reales hechas (rama `feat/errealak-batx1g`). Falta: hoja de euskera (`node .claude/skills/matella-nueva-unidad/scripts/hoja-revision.mjs batx1-gizarte-errealak <salida.html> "Zenbaki errealak · Batx 1 Gizarte" --herramientas weight,digits,comma --juegos order,headline,detective`) y después los temas `merkataritza` y `aljebra` (cada uno: fuentes, propuesta con menú de letras, esperar elección).
