@@ -47,6 +47,15 @@ Fuera: `what-is-a-matrix` (la sustituye `data-tables`), `matrix-applications` (l
 - **Prestadas (2):** el deslizador del rango y la máquina de Gauss-Jordan de Ciencias, con sus retos 116301–116305 y 116201–116205.
 - **Test:** `tests/matrizeak-batx2g-lab.test.ts`. Revisado a 375 px en eu, es, ar y en con `getBBox`: nada se sale y los nombres caben en sus cajas.
 
+**Fase 4, juegos:** 6 juegos, récords en `matella-matrizeak-batx2g-game-records`.
+- **Propios (3):**
+  - J1 `which-product` «¿Qué producto lo calcula?», niveles 141501–141503: una historia nombra 2 o 3 matrices (qué son filas y columnas, y su dimensión) y pregunta algo; cuatro expresiones, una buena (QV, NW, PQ; Q(V − C), AB, ABP, (Q + R)V, 2QV; QᵗV, VᵗQ, ABᵗ, QPᵗ, AᵗB). 15 plantillas en `games/whichProduct.ts`.
+  - J2 `hidden-ticket` «El ticket escondido», niveles 141601–141603: Q·P = totales con un número tapado (un precio; una cantidad con 3 productos; un coste en Q(V − C)); una fila es una ecuación. `games/hiddenTicket.ts`.
+  - J3 `detective`, niveles 141801–141803: 11 errores de Sociales (a_ij al revés, casilla a casilla, columna en vez de fila, QV − C; BA, 2Q con una fila, traspuesta girada; coeficientes por columnas, lado de A⁻¹, A en vez de A⁻¹, A + 1). `games/detective.ts`.
+- **Prestado:** «Despeja la X» de Ciencias (componente `SolveXGame`) con niveles 141701–141703.
+- **Carrera** 141401–141405: la de Ciencias sin las preguntas de combinación lineal ni de matrices que conmutan, y con preguntas propias la mitad de las veces en los circuitos 1, 2 y 5 (tabla, ingreso de una tienda, piezas de un pedido, x de AX = B). **Memoria** 141851–141853: fila de cantidades × columna de precios ↔ total, tabla ↔ traspuesta, sistema ↔ matriz de coeficientes.
+- **Test:** `tests/matrizeak-batx2g-games.test.ts` (en «¿Qué producto…?» se dan números a las matrices y ninguna opción mala da lo mismo que la buena ni su traspuesta; el número tapado es el único que cuadra; casos del detective; la carrera no saca lo que los libros no traen). 3277 tests, lint y tipos en verde.
+
 ## Trucos
 
 - El test común de lecciones parte las fórmulas por `\\`: un producto de matrices con columnas (`…\end{pmatrix}=\begin{pmatrix}228\\289…`) no pasa en el ejemplo. Escribe el ejemplo como cuentas (`12\cdot 9+30\cdot 4=228`).
@@ -54,4 +63,4 @@ Fuera: `what-is-a-matrix` (la sustituye `data-tables`), `matrix-applications` (l
 
 ## En curso
 
-- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos (J1 «¿Qué producto lo calcula?», J2 «El ticket escondido», J3 detective, «Despeja la X» de Ciencias, carrera y memoria propias; niveles en 141401–141899).
+- Fases 1–4 hechas. Falta el cierre: revisar los juegos a 375 px en eu, es y ar, inventario y hoja de euskera; luego cerrar esta nota y empezar Determinantes (`feat/determinanteak-batx2g`, cortada de esta rama).

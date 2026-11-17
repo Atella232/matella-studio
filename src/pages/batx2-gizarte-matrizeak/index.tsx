@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { MatricesHeroArt } from '../batx2-zientziak-matrizeak/figures'
 import { gizarteMatrizeakChallenges, gizarteMatrizeakDiagnostic, gizarteMatrizeakExerciseBank, gizarteMatrizeakPractice } from './content'
+import { GizarteMatrizeakGames } from './games'
+import { GIZARTE_MATRIZEAK_GAME_RECORDS_KEY, gizarteMatrizeakGameProgressIds } from './games/info'
 import { GizarteMatrizeakLaboratory } from './lab'
 import { gizarteMatrizeakLabChallengeIds, gizarteMatrizeakLabToolForTopic, gizarteMatrizeakLabTools } from './lab/labTools'
 import { gizarteMatrizeakStages, gizarteMatrizeakTopics } from './lessons'
@@ -36,6 +38,17 @@ const matrizeakBatx2gUnit: UnitDefinition = {
         progressIds: gizarteMatrizeakLabChallengeIds,
         toolForTopic: gizarteMatrizeakLabToolForTopic,
         render: (props) => <GizarteMatrizeakLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, zein biderkadurak kalkulatzen du?, tiket ezkutua, askatu X, matrizeen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿qué producto lo calcula?, el ticket escondido, despeja la X, detective de matrices y memoria.',
+            en: 'Six games: race, which product works it out?, the hidden receipt, solve for X, matrix detective and memory.',
+            ar: 'ست ألعاب: السباق وأي جداء يحسبه؟ والفاتورة المخفية واستخرج X ومخبر المصفوفات والذاكرة.'
+        },
+        progressIds: gizarteMatrizeakGameProgressIds,
+        recordsKey: GIZARTE_MATRIZEAK_GAME_RECORDS_KEY,
+        render: (props) => <GizarteMatrizeakGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Matrize bat eskatzen bada, eskatzen den elementua bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide una matriz, solo el elemento que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If a matrix is involved, only the entry that is asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كان المطلوب من مصفوفة فاكتب العنصر المطلوب فقط.' },
