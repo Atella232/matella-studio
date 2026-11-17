@@ -27,3 +27,12 @@
     overflow-x: auto;
     max-width: 100%;
 }
+
+.soc-hidden .katex {
+    white-space: nowrap;
+}
+
+/* Q[V − C] = totals is wider than a phone: a little smaller, on one line */
+.soc-hidden-wide .katex {
+    font-size: 0.76em;
+}

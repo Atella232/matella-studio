@@ -61,6 +61,6 @@ Fuera: `what-is-a-matrix` (la sustituye `data-tables`), `matrix-applications` (l
 - El test común de lecciones parte las fórmulas por `\\`: un producto de matrices con columnas (`…\end{pmatrix}=\begin{pmatrix}228\\289…`) no pasa en el ejemplo. Escribe el ejemplo como cuentas (`12\cdot 9+30\cdot 4=228`).
 - Node no importa `.tsx` en los tests: el orden de las lecciones se lee del fuente (`const order = [...]`).
 
-## En curso
+**Cierre (2026-11-17):** 3277 tests, lint y build en verde; inventario OK (3 juegos propios más el detective, 4 herramientas, 2 de ellas propias). Revisado a 375 px en eu, es y ar con `getBBox` y medidas de la página: laboratorio, los seis juegos (en el nivel 3 del ticket escondido, $Q[V-C]$ no cabía: clase `soc-hidden-wide`, más pequeña y en una línea) y las lecciones propias. Hoja de euskera en `~/Documents/Matella-fuentes/batx2g-algebra/hojas/matrizeak-batx2g.html`, mandada al dueño.
 
-- Fases 1–4 hechas. Falta el cierre: revisar los juegos a 375 px en eu, es y ar, inventario y hoja de euskera; luego cerrar esta nota y empezar Determinantes (`feat/determinanteak-batx2g`, cortada de esta rama).
+**Al fusionar:** cambiar el «Antes de empezar» de `data-tables` y `matrix-form-system` a 1.º Sociales «Álgebra» si ya está en `main`.

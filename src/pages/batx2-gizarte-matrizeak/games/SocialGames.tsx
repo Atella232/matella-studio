@@ -101,7 +101,7 @@ function HiddenPlay({ round, language, onAnswer, answered }: RoundProps<HiddenRo
     const { picked, choose, state } = usePick(onAnswer, round.answer, answered)
     return (
         <>
-            <div className="dbh4-big-formula mat-equation soc-hidden" dir="ltr">{formula(hiddenLatex(round), language)}</div>
+            <div className={`dbh4-big-formula mat-equation soc-hidden ${round.hidden.kind === 'cost' ? 'soc-hidden-wide' : ''}`} dir="ltr">{formula(hiddenLatex(round), language)}</div>
             <p className="prop3-prompt"><MathText text={l(HIDDEN_QUESTION[round.hidden.kind])} /></p>
             <div className="prop3-options" dir="ltr">
                 {round.options.map((option, index) => (
