@@ -248,7 +248,7 @@ export const courses: Course[] = [
       { id: 'determinantes', name: 'Determinantes', nameEu: 'Determinanteak', nameAr: 'المحددات', nameEn: 'Determinants', icon: '▦' },
       { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', nameEn: 'Systems of Equations', icon: '📝' },
       { id: 'programacion-lineal', name: 'Programación Lineal', nameEu: 'Programazio Lineala', nameAr: 'البرمجة الخطية', nameEn: 'Linear Programming', icon: '📐' },
-      { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→' },
+      { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→', active: true },
       { id: 'derivadas', name: 'Derivadas', nameEu: 'Deribatuak', nameAr: 'المشتقات', nameEn: 'Derivatives', icon: '📉' },
       { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️' },
       { id: 'representacion-funciones', name: 'Representación de Funciones', nameEu: 'Funtzioen Adierazpen Grafikoa', nameAr: 'التمثيل البياني للدوال', nameEn: 'Curve Sketching', icon: '📈' },
