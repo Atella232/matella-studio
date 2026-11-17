@@ -38,6 +38,14 @@ V1 + L1, L2, L3 + J1, J2, J3.
 - **Prestadas (5)** de 4.º aplicadas con sus ids: barra del 100 %, encadenados (de 2.º), tique, simple o compuesto, meses y días.
 - Test `tests/merkataritza-batx1g-lab.test.ts`. Tests y lint en verde; revisado a 375 px en eu, es y ar sin desbordes.
 
+**Fase 4 (juegos), 7 juegos:**
+- **Propios:** `offer` «¿Qué oferta es mejor?» 131501–131503 (depósitos con el mismo interés y distinto pago; un interés mayor que no siempre gana; préstamos a un año con comisión); `gaps` «La tabla con huecos» 131601–131603 (casilla de intereses, amortización o deuda pendiente, tres valores con los errores típicos); `detective` 131701–131703 (12 errores de esta unidad).
+- **Carrera** 131401–131405 (5 circuitos propios, 11 tipos de pregunta con `meta`). **Memoria** 131801–131803 (índices, factores, sumas geométricas).
+- **Prestados de 4.º aplicadas:** banco 131811–131813 y caja 131821–131823 (sus componentes tal cual; el centro usa los ids de esta unidad).
+- Test `tests/merkataritza-batx1g-games.test.ts`. 3308 tests, lint y build en verde; inventario OK. Revisado a 375 px en eu, es y ar: centro y los 7 juegos (niveles 1 y 3), sin desbordes ni errores de KaTeX.
+
+**Hoja de euskera:** `~/Documents/Matella-fuentes/batx1g-merkataritza/hojas/merkataritza-batx1g-euskara.html` (fuera del repositorio), enviada al dueño.
+
 ## Trucos
 
 - Euskera: «% 15eko», «% 4an» llevan sufijo pegado al número y los tests lo prohíben: se escribe «interesa % 4 dela», «BEZa % 21 bada», «komisioa % 2 da».
@@ -45,7 +53,3 @@ V1 + L1, L2, L3 + J1, J2, J3.
 - TAE en euskera: «urteko tasa baliokidea».
 
 - `(1+0,08/12)^12` da 8,29995 %: «al menos 8,3 %» no se cumple con el 8 %. Comprobar los umbrales con código.
-
-## En curso
-
-- Fases 1+2 y 3 hechas. Sigue la fase 4 (juegos: J1 `offer`, J2 `gaps`, J3 detective; carrera, memoria; banco y caja de 4.º aplicadas).

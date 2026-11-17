@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { gizMoneyChallenges, gizMoneyDiagnostic, gizMoneyExerciseBank, gizMoneyPractice } from './content'
 import { GizMoneyHeroArt } from './figures'
+import { GizMoneyGames } from './games'
+import { GIZ_MONEY_GAME_RECORDS_KEY, gizMoneyGameProgressIds } from './games/info'
 import { GizMoneyLaboratory } from './lab'
 import { gizMoneyLabChallengeIds, gizMoneyLabToolForTopic, gizMoneyLabTools } from './lab/labTools'
 import { gizMoneyStages, gizMoneyTopics } from './lessons'
@@ -36,6 +38,17 @@ const merkataritzaBatx1gUnit: UnitDefinition = {
         progressIds: gizMoneyLabChallengeIds,
         toolForTopic: gizMoneyLabToolForTopic,
         render: (props) => <GizMoneyLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: lasterketa, zein eskaintza da hobea, hutsuneak dituen taula, diruaren detektibea eta memoria, berriak; eta 4. DBHko bankua eta kutxa.',
+            es: 'Siete juegos: carrera, ¿qué oferta es mejor?, la tabla con huecos, detective del dinero y memoria, nuevos; y de 4.º ESO, el banco y la caja.',
+            en: 'Seven games: race, which offer is better, the table with gaps, money detective and memory, new; and from 4th ESO, the bank and the till.',
+            ar: 'سبع ألعاب: السباق وأيّ العرضين أفضل والجدول الناقص ومخبر المال والذاكرة، وهي جديدة؛ ومن الصف الرابع: المصرف والصندوق.'
+        },
+        progressIds: gizMoneyGameProgressIds,
+        recordsKey: GIZ_MONEY_GAME_RECORDS_KEY,
+        render: (props) => <GizMoneyGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, 1,05 edo 2122,73. Ehunekoak, % ikurrik gabe; dirua, zentimoetara eskatzen bada.', es: 'Escribe un número: 5, 1,05 o 2122,73. Los porcentajes, sin el signo %; el dinero, a los céntimos si se pide.', en: 'Write a number: 5, 1.05 or 2122.73. Percentages without the % sign; money to the cent when asked.', ar: 'اكتب عددًا: 5 أو 1.05 أو 2122.73. النسب دون الرمز %، والمال إلى السنتات إذا طُلب ذلك.' },
