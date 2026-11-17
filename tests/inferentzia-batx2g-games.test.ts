@@ -43,6 +43,8 @@ test('inferentzia batx2 g games: the hub, its levels and progress ids', () => {
     for (const game of inferenceBatx2gGames) {
         for (const level of game.levels) assert.ok(['estimation', 'mean-ci', 'error-size', 'proportion-ci', 'decisions'].includes(level.stage), `${game.id}: ${level.stage}`)
         checkTexts([game.title, game.tagline, game.skills, ...game.levels.flatMap((level) => [level.title, level.description])])
+        // The hub and the level cards print these texts as they are, with no formulas
+        for (const text of [game.title, game.tagline, game.skills, ...game.levels.flatMap((level) => [level.title, level.description])]) for (const language of languages) assert.ok(!text[language].includes('$'), `${game.id}: ${text[language]}`)
         assert.equal(inferenceBatx2gGameModeForPath(`/x/jokuak/${inferenceBatx2gGameSlugs[game.id]}`), game.id)
     }
 })

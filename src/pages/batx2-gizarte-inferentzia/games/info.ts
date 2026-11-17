@@ -17,9 +17,9 @@ export const inferenceBatx2gGames: GameInfo<InferenceBatx2gGameId>[] = [
         tagline: { eu: 'Erantzun ondo eta azkar: zure autoa aurrera doa, akatsek irrist egiten dute.', es: 'Responde bien y rápido: tu coche avanza, los errores le hacen derrapar.', en: 'Answer correctly and quickly: your car moves forward, mistakes make it skid.', ar: 'أجب بسرعة وبشكل صحيح: تتقدم سيارتك والأخطاء تجعلها تنزلق.' },
         skills: { eu: 'Bost zirkuitu, etapa bakoitzeko bat', es: 'Cinco circuitos, uno por etapa', en: 'Five circuits, one per stage', ar: 'خمس حلبات، واحدة لكل مرحلة' },
         levels: [
-            { progressId: 153401, stage: 'estimation', title: { eu: 'Estimazioa', es: 'Estimación', en: 'Estimation', ar: 'التقدير' }, description: { eu: '$\\hat{p}$ eta balio kritikoa.', es: '$\\hat{p}$ y el valor crítico.', en: '$\\hat{p}$ and the critical value.', ar: '$\\hat{p}$ والقيمة الحرجة.' } },
+            { progressId: 153401, stage: 'estimation', title: { eu: 'Estimazioa', es: 'Estimación', en: 'Estimation', ar: 'التقدير' }, description: { eu: 'p̂ eta balio kritikoa.', es: 'p̂ y el valor crítico.', en: 'p̂ and the critical value.', ar: 'p̂ والقيمة الحرجة.' } },
             { progressId: 153402, stage: 'mean-ci', title: { eu: 'Batez bestekoa', es: 'La media', en: 'The mean', ar: 'المتوسط' }, description: { eu: 'Errorea eta mugak.', es: 'El error y los extremos.', en: 'The error and the ends.', ar: 'الخطأ والطرفان.' } },
-            { progressId: 153403, stage: 'error-size', title: { eu: 'Tamaina', es: 'Tamaño', en: 'Size', ar: 'الحجم' }, description: { eu: '$n$, gorantz biribilduta.', es: '$n$, redondeada hacia arriba.', en: '$n$, rounded up.', ar: '$n$ مقرّبًا إلى الأعلى.' } },
+            { progressId: 153403, stage: 'error-size', title: { eu: 'Tamaina', es: 'Tamaño', en: 'Size', ar: 'الحجم' }, description: { eu: 'n, gorantz biribilduta.', es: 'n, redondeada hacia arriba.', en: 'n, rounded up.', ar: 'n مقرّبًا إلى الأعلى.' } },
             { progressId: 153404, stage: 'proportion-ci', title: { eu: 'Proportzioa', es: 'La proporción', en: 'The proportion', ar: 'النسبة' }, description: { eu: 'Errorea eta tamaina.', es: 'Error y tamaño.', en: 'Error and size.', ar: 'الخطأ والحجم.' } },
             { progressId: 153405, stage: 'decisions', title: { eu: 'Inkestak', es: 'Encuestas', en: 'Polls', ar: 'الاستطلاعات' }, description: { eu: 'Marjina eta tartearen erdia.', es: 'Margen y mitad del intervalo.', en: 'Margin and half the interval.', ar: 'الهامش ونصف الفترة.' } }
         ]
@@ -31,7 +31,7 @@ export const inferenceBatx2gGames: GameInfo<InferenceBatx2gGameId>[] = [
         skills: { eu: 'Konfiantza ondo interpretatzea', es: 'Interpretar bien la confianza', en: 'Reading confidence properly', ar: 'تفسير الثقة جيدًا' },
         levels: [
             { progressId: 153501, stage: 'mean-ci', title: { eu: 'Esanahia', es: 'Significado', en: 'Meaning', ar: 'المعنى' }, description: { eu: 'Zer esan nahi du % 95 batek?', es: '¿Qué quiere decir un 95 %?', en: 'What does 95% mean?', ar: 'ماذا تعني 95 %؟' } },
-            { progressId: 153502, stage: 'error-size', title: { eu: 'Aldaketak', es: 'Cambios', en: 'Changes', ar: 'التغييرات' }, description: { eu: 'Maila, $n$ eta $\\sigma$.', es: 'Nivel, $n$ y $\\sigma$.', en: 'Level, $n$ and $\\sigma$.', ar: 'المستوى و$n$ و$\\sigma$.' } },
+            { progressId: 153502, stage: 'error-size', title: { eu: 'Aldaketak', es: 'Cambios', en: 'Changes', ar: 'التغييرات' }, description: { eu: 'Maila, n eta σ.', es: 'Nivel, n y σ.', en: 'Level, n and σ.', ar: 'المستوى وn وσ.' } },
             { progressId: 153503, stage: 'decisions', title: { eu: 'Zenbakiekin', es: 'Con números', en: 'With numbers', ar: 'بالأعداد' }, description: { eu: 'Tarte jakin bat.', es: 'Un intervalo concreto.', en: 'A given interval.', ar: 'فترة معيّنة.' } }
         ]
     },
@@ -39,10 +39,10 @@ export const inferenceBatx2gGames: GameInfo<InferenceBatx2gGameId>[] = [
         id: 'backwards',
         title: { eu: 'Tartetik datuetara', es: 'Del intervalo a los datos', en: 'From the interval to the data', ar: 'من الفترة إلى البيانات' },
         tagline: { eu: 'Tarte bat duzu: aurkitu zer datuk eman duten.', es: 'Tienes un intervalo: descubre qué datos lo dieron.', en: 'You have an interval: find the data that gave it.', ar: 'لديك فترة: اكتشف البيانات التي أعطتها.' },
-        skills: { eu: '$\\bar{x}$, $E$, $n$ eta maila tartetik', es: '$\\bar{x}$, $E$, $n$ y el nivel desde el intervalo', en: '$\\bar{x}$, $E$, $n$ and the level from the interval', ar: '$\\bar{x}$ و$E$ و$n$ والمستوى من الفترة' },
+        skills: { eu: 'x̄, E, n eta maila tartetik', es: 'x̄, E, n y el nivel desde el intervalo', en: 'x̄, E, n and the level from the interval', ar: 'x̄ وE وn والمستوى من الفترة' },
         levels: [
-            { progressId: 153601, stage: 'mean-ci', title: { eu: 'Erdia eta errorea', es: 'Centro y error', en: 'Centre and error', ar: 'الوسط والخطأ' }, description: { eu: '$\\bar{x}$ edo $E$.', es: '$\\bar{x}$ o $E$.', en: '$\\bar{x}$ or $E$.', ar: '$\\bar{x}$ أو $E$.' } },
-            { progressId: 153602, stage: 'error-size', title: { eu: 'Tamaina', es: 'Tamaño', en: 'Size', ar: 'الحجم' }, description: { eu: '$n$ aurkitu.', es: 'Halla $n$.', en: 'Find $n$.', ar: 'جد $n$.' } },
+            { progressId: 153601, stage: 'mean-ci', title: { eu: 'Erdia eta errorea', es: 'Centro y error', en: 'Centre and error', ar: 'الوسط والخطأ' }, description: { eu: 'x̄ edo E.', es: 'x̄ o E.', en: 'x̄ or E.', ar: 'x̄ أو E.' } },
+            { progressId: 153602, stage: 'error-size', title: { eu: 'Tamaina', es: 'Tamaño', en: 'Size', ar: 'الحجم' }, description: { eu: 'n aurkitu.', es: 'Halla n.', en: 'Find n.', ar: 'جد n.' } },
             { progressId: 153603, stage: 'estimation', title: { eu: 'Maila', es: 'Nivel', en: 'Level', ar: 'المستوى' }, description: { eu: 'Zein konfiantzarekin?', es: '¿Con qué confianza?', en: 'At what confidence?', ar: 'بأي ثقة؟' } }
         ]
     },

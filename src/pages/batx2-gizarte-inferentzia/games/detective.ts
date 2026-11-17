@@ -80,7 +80,7 @@ function build(random: Random, error: InferenceBatx2gDetectiveError): Built | nu
             const z = criticalZ(95)
             return {
                 problem: say(`$\\bar{x}=${mean}$, $\\sigma=${root * s}$ eta $n=${root * root}$. Tartea, %\u00a095 mailan.`, `$\\bar{x}=${mean}$, $\\sigma=${root * s}$ y $n=${root * root}$. Intervalo al 95\u00a0%.`, `$\\bar{x}=${mean}$ و$\\sigma=${root * s}$ و$n=${root * root}$. الفترة عند 95\u00a0%.`, `$\\bar{x}=${mean}$, $\\sigma=${root * s}$ and $n=${root * root}$. The interval at 95%.`),
-                lines: [line(LABELS.table, `P(Z\\le z)=0{,}95\\ \\to\\ ${d(wrong)}`), line(LABELS.step, `E=${d(wrong)}\\cdot ${s}=${d(wrong * s)}`), line(LABELS.result, `${mean}\\pm ${d(wrong * s)}`)],
+                lines: [line(LABELS.table, `P(Z\\le z)=0{,}95`), line(LABELS.step, `E=${d(wrong)}\\cdot ${s}=${d(wrong * s)}`), line(LABELS.result, `${mean}\\pm ${d(wrong * s)}`)],
                 wrong: 0, error, fix: `P(Z\\le z)=0{,}975\\ \\to\\ E=${d(z)}\\cdot ${s}=${d(z * s)}`, right: z * s, reached: wrong * s
             }
         }
@@ -101,8 +101,8 @@ function build(random: Random, error: InferenceBatx2gDetectiveError): Built | nu
             const e = pick(random, [1.96, 3.29, 2.575, 3.92, 5.15])
             return {
                 problem: say(`Tartea $(${d(mean - e)};\\ ${d(mean + e)})$ da. Zenbat dira $\\bar{x}$ eta $E$?`, `El intervalo es $(${d(mean - e)};\\ ${d(mean + e)})$. ¿Cuánto valen $\\bar{x}$ y $E$?`, `الفترة $(${d(mean - e)};\\ ${d(mean + e)})$. كم يساوي $\\bar{x}$ و$E$؟`, `The interval is $(${d(mean - e)};\\ ${d(mean + e)})$. What are $\\bar{x}$ and $E$?`),
-                lines: [line(LABELS.step, `\\bar{x}=\\frac{${d(mean - e)}+${d(mean + e)}}{2}=${mean}`), line(LABELS.step, `E=${d(mean + e)}-${d(mean - e)}=${d(2 * e)}`), line(LABELS.result, `\\bar{x}=${mean},\\ E=${d(2 * e)}`)],
-                wrong: 1, error, fix: `E=\\frac{${d(mean + e)}-${d(mean - e)}}{2}=${d(e)}`, right: e, reached: 2 * e
+                lines: [line(LABELS.step, `\\bar{x}=\\frac{a+b}{2}=${mean}`), line(LABELS.step, `E=b-a=${d(2 * e)}`), line(LABELS.result, `\\bar{x}=${mean},\\ E=${d(2 * e)}`)],
+                wrong: 1, error, fix: `E=\\frac{b-a}{2}=${d(e)}`, right: e, reached: 2 * e
             }
         }
         case 'round-down': {
