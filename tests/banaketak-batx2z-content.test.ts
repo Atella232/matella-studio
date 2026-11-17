@@ -95,8 +95,7 @@ test('banaketak batx2 z: the unit is active and routed, and only in Ciencias', (
     assert.ok(course.topics.find((topic) => topic.id === 'binomial-normal')!.active)
     assert.ok(isUnitV2Path('/matematika/batx2-zientziak/binomial-normal'))
     assert.ok(isUnitV2Path('/matematika/batx2-zientziak/binomial-normal/ariketak'))
-    const social = courses.find((item) => item.id === 'batx2-gizarte')
-    if (social) assert.ok(!social.topics.find((topic) => topic.id === 'binomial-normal')?.active)
+    // 2.º Sociales has its own binomial and normal (batx2-gizarte-banaketak), with its own test
 })
 
 test('banaketak batx2 z: diagnostic, practice, challenges and bank are consistent', () => {
