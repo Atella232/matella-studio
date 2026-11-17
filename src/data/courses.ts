@@ -196,7 +196,7 @@ export const courses: Course[] = [
       { id: 'algebra', name: 'Álgebra', nameEu: 'Aljebra', nameAr: 'الجبر', nameEn: 'Algebra', icon: '🔤' },
       { id: 'funciones', name: 'Funciones Elementales', nameEu: 'Funtzio Elementalak', nameAr: 'الدوال الأساسية', nameEn: 'Elementary Functions', icon: '📈', active: true },
       { id: 'funciones-exponenciales', name: 'Funciones Exponenciales, Logarítmicas y Trigonométricas', nameEu: 'Funtzio Esponentzialak, Logaritmikoak eta Trigonometrikoak', nameAr: 'الدوال الأسية واللوغاريتمية والمثلثية', nameEn: 'Exponential, Logarithmic and Trigonometric Functions', icon: '〰️', active: true },
-      { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→' },
+      { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→', active: true },
       { id: 'derivadas', name: 'Derivadas y sus Aplicaciones', nameEu: 'Deribatuak eta haien Aplikazioak', nameAr: 'المشتقات وتطبيقاتها', nameEn: 'Derivatives and their Applications', icon: '📉' },
       { id: 'estadistica', name: 'Estadística Unidimensional', nameEu: 'Estatistika Unidimentsionala', nameAr: 'الإحصاء أحادي المتغير', nameEn: 'One-Variable Statistics', icon: '📊' },
       { id: 'estadistica-bidimensional', name: 'Estadística Bidimensional', nameEu: 'Estatistika Bidimentsionala', nameAr: 'الإحصاء ثنائي المتغير', nameEn: 'Two-Variable Statistics', icon: '⁘' },
