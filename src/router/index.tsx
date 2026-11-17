@@ -65,6 +65,7 @@ const DistantziakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-distan
 const LimiteakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-limiteak').then((module) => ({ default: module.LimiteakBatx2zIntroPage })))
 const LimiteakBatx2gPage = lazy(() => import('../pages/batx2-gizarte-limiteak').then((module) => ({ default: module.LimiteakBatx2gIntroPage })))
 const DeribatuakBatx2gPage = lazy(() => import('../pages/batx2-gizarte-deribatuak').then((module) => ({ default: module.DeribatuakBatx2gIntroPage })))
+const AplikazioakBatx2gPage = lazy(() => import('../pages/batx2-gizarte-aplikazioak').then((module) => ({ default: module.AplikazioakBatx2gIntroPage })))
 const DeribatuakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-deribatuak').then((module) => ({ default: module.DeribatuakBatx2zIntroPage })))
 const AplikazioakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-aplikazioak').then((module) => ({ default: module.AplikazioakBatx2zIntroPage })))
 const ProbabilitateaBatx2zPage = lazy(() => import('../pages/batx2-zientziak-probabilitatea').then((module) => ({ default: module.ProbabilitateaBatx2zIntroPage })))
@@ -542,6 +543,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx2-gizarte/derivadas/*',
                         element: <DeribatuakBatx2gPage />,
+                    },
+                    // Aplicaciones de la derivada de 2.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx2-gizarte/aplicaciones-derivada/*',
+                        element: <AplikazioakBatx2gPage />,
                     },
                     // Derivadas de 2.º Bachillerato (Ciencias): unidad V2
                     {

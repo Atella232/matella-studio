@@ -1,0 +1,6 @@
+/* ¿Máximo, mínimo o nada? and Optimiza la empresa (Deribatuaren aplikazioak, Batxilergoa 2 · Gizarte Zientziak) */
+.fraction-v2-games-card[data-game="extreme"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="optimize"] { --game-tint: var(--mustard-tint, #fbebc0); }
+
+.bach2g-app-table { overflow-x: auto; max-width: 100%; }
+.bach2g-app-step { display: block; }

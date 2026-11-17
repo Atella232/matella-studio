@@ -250,7 +250,7 @@ export const courses: Course[] = [
       { id: 'programacion-lineal', name: 'Programación Lineal', nameEu: 'Programazio Lineala', nameAr: 'البرمجة الخطية', nameEn: 'Linear Programming', icon: '📐' },
       { id: 'limites-continuidad', name: 'Límites y Continuidad', nameEu: 'Limiteak eta Jarraitutasuna', nameAr: 'النهايات والاتصال', nameEn: 'Limits and Continuity', icon: '→', active: true },
       { id: 'derivadas', name: 'Derivadas', nameEu: 'Deribatuak', nameAr: 'المشتقات', nameEn: 'Derivatives', icon: '📉', active: true },
-      { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️' },
+      { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️', active: true },
       { id: 'representacion-funciones', name: 'Representación de Funciones', nameEu: 'Funtzioen Adierazpen Grafikoa', nameAr: 'التمثيل البياني للدوال', nameEn: 'Curve Sketching', icon: '📈' },
       { id: 'integrales', name: 'Integrales', nameEu: 'Integralak', nameAr: 'التكاملات', nameEn: 'Integrals', icon: '∫' },
       { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲' },
