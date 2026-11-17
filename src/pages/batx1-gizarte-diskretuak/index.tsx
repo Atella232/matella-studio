@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { discreteBatx1gChallenges, discreteBatx1gDiagnostic, discreteBatx1gExerciseBank, discreteBatx1gPractice } from './content'
 import { DiscreteBatx1gHeroArt } from './figures'
+import { DiscreteBatx1gGames } from './games'
+import { DISCRETE_BATX1G_GAME_RECORDS_KEY, discreteBatx1gGameProgressIds } from './games/info'
 import { DiscreteBatx1gLaboratory } from './lab'
 import { discreteBatx1gLabChallengeIds, discreteBatx1gLabToolForTopic, discreteBatx1gLabTools } from './lab/labTools'
 import { discreteBatx1gStages, discreteBatx1gTopics } from './lessons'
@@ -37,6 +39,17 @@ const diskretuakBatx1gUnit: UnitDefinition = {
         progressIds: discreteBatx1gLabChallengeIds,
         toolForTopic: discreteBatx1gLabToolForTopic,
         render: (props) => <DiscreteBatx1gLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: lasterketa, zein kutxatilatara?, itzuli gertaera, merezi du? eta banaketen detektibea, berriak; binomiala da? 2. Batxilergotik; eta memoria.',
+            es: 'Siete juegos: carrera, ¿a qué casilla?, traduce el suceso, ¿merece la pena? y detective de distribuciones, nuevos; ¿es binomial?, de 2.º de Bachillerato; y memoria.',
+            en: 'Seven games: race, which bin?, translate the event, is it worth it? and distributions detective, new; is it binomial?, from 2nd Bachillerato; and memory.',
+            ar: 'سبع ألعاب: السباق، وإلى أي خانة؟، وترجم الحدث، وهل يستحق؟، ومخبر التوزيعات، وهي جديدة؛ وهل هو ثنائي؟ من البكالوريا الثانية؛ والذاكرة.'
+        },
+        progressIds: discreteBatx1gGameProgressIds,
+        recordsKey: DISCRETE_BATX1G_GAME_RECORDS_KEY,
+        render: (props) => <DiscreteBatx1gGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,384, 3/8 edo −1. Ehunekoak, % ikurrik gabe.', es: 'Escribe un número exacto o una fracción: 0,384, 3/8 o −1. Los porcentajes, sin el signo %.', en: 'Write an exact number or a fraction: 0.384, 3/8 or −1. Percentages without the % sign.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.384 أو 3/8 أو −1. والنسب دون الرمز ٪.' },

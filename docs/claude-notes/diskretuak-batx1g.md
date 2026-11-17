@@ -39,6 +39,15 @@ Anaya 1.º Bach MACS, Suma Piezas U9 «Distribuciones de probabilidad de variabl
 - **Trucos:** los textos árabes de las pizarras van con `Label` (test `figures-arabic-label`); con `Label`, una etiqueta alineada a la izquierda se deja en x = 30 también en árabe (Label da la vuelta al ancla). El `x̄` con macron se ve mal en los botones: el botón usa `MathText`. Los «€» van con espacio no separable para que no salten de línea.
 - Revisado a 375 px en eu, es, en y ar: las 6 herramientas con la predicción hecha, sin textos fuera ni desbordes laterales.
 
+## Fase 3 · juegos
+
+- **Propios:** `galton` (¿A qué casilla?: 1) flechas → casilla, con «contar las de la izquierda» y «numerar desde 1» como errores; 2) cuántos caminos, con 2ⁿ y la fila de encima de Tartaglia; 3) probabilidad con tablero recto, con 1/(n + 1) y 1/2ⁿ), `events` (Traduce el suceso: 1) palabra → símbolo ≥, >, ≤, <, =; 2) el contrario: 1 − P(X = 0), 1 − P(X = 0) − P(X = 1), 1 − P(X = n), qⁿ; 3) el número en B(3 o 4; p en décimas), con el borde movido y el complementario), `worth` (¿Merece la pena?: rifas, dados y dos monedas; 1) ganancia media; 2) desfavorable/justo/favorable, dos de cada; 3) precio justo, con la media simple de los premios y el premio gordo solo), `detective` (12 errores de esta unidad en 3 niveles: tabla, binomial, ajuste).
+- **Prestado:** `binomial` («¿Es binomial?» de 2.º Ciencias, el componente importado con la info y los ids de esta unidad). **Genéricos:** carrera de 4 circuitos (12 tipos de pregunta, `meta` comprobada en los tests) y memoria (casilla ↔ C(n, k), B(n; p) ↔ μ, N y B(n; 0,5) ↔ esperado).
+- **Ids:** carrera 139401–139404, casilla 139501–139503, suceso 139551–139553, merece 139601–139603, binomial 139651–139653, detective 139701–139703, memoria 139801–139803.
+- **Tests:** `tests/diskretuak-batx1g-games.test.ts`.
+- **Trucos:** en «¿Merece la pena?» el nivel 1 no saca juegos justos (ganancia 0 = precio − μ, dos opciones iguales). En el detective, la suma P(X = k) + … se salía a 375 px: se escribe 1 − P(X ≤ k − 1). Inventario OK: 4 juegos propios y 3 herramientas propias de verdad (el script cuenta como propias las prestadas de otra carpeta de Bachillerato).
+- Revisado a 375 px en es y ar: los seis juegos de rondas en sus tres niveles, sin desbordes.
+
 ## En curso
 
-- Fases 1 (0ea6b3c0) y 2 hechas. Siguiente: fase 3, juegos (J1 ¿A qué casilla?, J2 Traduce el suceso, J3 ¿Merece la pena?, J4 detective; prestados «¿Es binomial?», carrera y memoria), ids 139401–139899.
+- Fases 1 (0ea6b3c0), 2 (a377edc6) y 3 hechas. Queda: repaso a 375 px en eu de lecciones y laboratorio con la versión final, hoja de euskera, y después el tema `normala` (rama `feat/normala-batx1g` cortada de esta).
