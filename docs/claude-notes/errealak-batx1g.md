@@ -49,6 +49,12 @@ V1 + L1, L2, L3 + J1, J2, J3.
 - **Prestadas (7)** de `batx1-zientziak-errealak/lab/labTools.ts` con sus ids: intervalos, distancia, índice común, sacar factores, conjugado, cambio de base y redondeo.
 - Test `tests/errealak-batx1g-lab.test.ts`. 3269 tests y lint en verde. Revisado a 375 px en eu, es y ar: las 10 herramientas con la predicción hecha; sin desbordes ni texto fuera del tablero.
 
+**Fase 4 (juegos), 9 juegos:**
+- **Propios:** `order` «Ordena la economía» 130501–130503 (cuatro datos, tocar de menor a mayor; niveles: notación científica, formas mezcladas, números pequeños); `headline` «El titular justo» 130601–130603 (redondeos a 1–4 cifras, el más corto con error relativo bajo 5 %, 1 %, 0,1 %); `detective` 130701–130703 (12 errores de esta unidad).
+- **Carrera** 130401–130405: circuitos 0, 2 y 3 propios; 1 y parte del 4 usan `generateBachRealsRaceQuestion` de Ciencias. **Memoria** 130801–130803 (raíces, logaritmos, notación científica).
+- **Prestados de Ciencias:** sitúa en la recta 130811–813, intervalo 130821–823, radical 130831–833, exponente 130841–843.
+- Test `tests/errealak-batx1g-games.test.ts`. 3275 tests, lint y build en verde; inventario OK. Revisado a 375 px en eu, es y ar: centro y los 9 juegos (niveles 1 y 3), sin desbordes ni errores de KaTeX.
+
 ## Trucos
 
 - `lesson-texts`: «3,4» dentro de `\{3,4,5\}` se lee como el decimal 3,4: el ejemplo no puede repetir esas parejas del error típico.
@@ -59,4 +65,4 @@ V1 + L1, L2, L3 + J1, J2, J3.
 
 ## En curso
 
-- Fases 1+2 y 3 hechas. Sigue la fase 4 (juegos: J1 «Ordena la economía», J2 «El titular justo», J3 detective; carrera, memoria y los cuatro prestados de Ciencias).
+- Fases 1–4 de Números reales hechas (rama `feat/errealak-batx1g`). Falta: hoja de euskera (`node .claude/skills/matella-nueva-unidad/scripts/hoja-revision.mjs batx1-gizarte-errealak <salida.html> "Zenbaki errealak · Batx 1 Gizarte" --herramientas weight,digits,comma --juegos order,headline,detective`) y después los temas `merkataritza` y `aljebra` (cada uno: fuentes, propuesta con menú de letras, esperar elección).

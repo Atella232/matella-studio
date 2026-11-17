@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { gizRealsChallenges, gizRealsDiagnostic, gizRealsExerciseBank, gizRealsPractice } from './content'
 import { GizRealsHeroArt } from './figures'
+import { GizRealsGames } from './games'
+import { GIZ_REALS_GAME_RECORDS_KEY, gizRealsGameProgressIds } from './games/info'
 import { GizRealsLaboratory } from './lab'
 import { gizRealsLabChallengeIds, gizRealsLabToolForTopic, gizRealsLabTools } from './lab/labTools'
 import { gizRealsStages, gizRealsTopics } from './lessons'
@@ -36,6 +38,17 @@ const errealakBatx1gUnit: UnitDefinition = {
         progressIds: gizRealsLabChallengeIds,
         toolForTopic: gizRealsLabToolForTopic,
         render: (props) => <GizRealsLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bederatzi joko: lasterketa, ordenatu ekonomia, titular zuzena, errealen detektibea eta memoria, berriak; eta 1. Zientziakoak: zuzenean kokatu, tartea eraiki, sinplifikatu errokizuna eta aurkitu berretzailea.',
+            es: 'Nueve juegos: carrera, ordena la economía, el titular justo, detective de los reales y memoria, nuevos; y de 1.º Ciencias, sitúa en la recta, construye el intervalo, simplifica el radical y encuentra el exponente.',
+            en: 'Nine games: race, order the economy, the fair headline, real numbers detective and memory, new; and from 1st Sciences, place on the line, build the interval, simplify the radical and find the exponent.',
+            ar: 'تسع ألعاب: السباق ورتّب الاقتصاد والعنوان المنصف ومخبر الأعداد الحقيقية والذاكرة، وهي جديدة؛ ومن الأول علوم: ضع على المستقيم وابنِ الفترة وبسّط الجذر وأوجد الأس.'
+        },
+        progressIds: gizRealsGameProgressIds,
+        recordsKey: GIZ_REALS_GAME_RECORDS_KEY,
+        render: (props) => <GizRealsGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza tarte, multzo edo erradikal bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es un intervalo, un conjunto o un radical, solo el número que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If the result is an interval, a set or a radical, only the number asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة فترة أو مجموعة أو جذرًا فاكتب العدد المطلوب فقط.' },
