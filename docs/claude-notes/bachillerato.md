@@ -217,3 +217,29 @@ El dueño pidió hacer 2.º Ciencias con varias sesiones a la vez. Los 14 temas 
 **2026-11-11: segunda tanda publicada** (`main` 9e5e40b, bundle `index-B542gguY.js`): Determinantes, Rectas y planos, Representación de funciones y Binomial y normal (12 de 14), junto con el arreglo del árabe en los dibujos (`feat/arabic-svg-formulas` + `feat/arabic-svg-labels`: las fórmulas dentro de frases árabes de los SVG se leen de izquierda a derecha también en Safari; 104 textos de 13 `figures.tsx` de 1.º y 2.º pasan por `Label`). Rama de unión `feat/batx2z-tanda2`; el script de unión ya resuelve también las líneas `active: true` vecinas de `courses.ts`. 3166 tests en verde. Quedan Sistemas y Ángulos y distancias (esperan la elección del dueño).
 
 **2026-11-11: tercera tanda publicada** (`main` 39ce689, bundle `index-D6LgGDvF.js`): Sistemas y Ángulos y distancias. **2.º Ciencias completo, con sus 14 temas en la web.** 3241 tests en verde. Los dos arreglos del árabe que faltaban (`feat/arabic-svg-labs-games`, `feat/numberline-language`) se publicaron el mismo día (`main` e21dc6d, bundle `index-D2MmycQM.js`; ver `funtzioak-dbh2.md`). Siguen sin hacer los dos cursos de Ciencias Sociales.
+
+## Reparto en paralelo de 1.º Sociales (2026-11-17)
+
+El dueño eligió (2026-11-17):
+- **Gemelos:** cada tema de Sociales es **su propia unidad**, más sencilla y con contextos de economía y sociedad, que **reutiliza** (importa, sin copiar ni editar) lecciones, laboratorio, juegos y generadores de su gemelo de 1.º Ciencias o de 4.º. Como 4.º aplicadas y académicas. Nada de trigonometría ni contenido que el libro de Sociales (Anaya, solo) no trae.
+- **Reparto:** 4 sesiones a la vez, una por bloque. Esta sesión principal no hace temas: fusiona en `main` y publica, un bloque cada vez y con el visto bueno del dueño.
+
+**Reglas comunes:** las mismas que en 2.º Ciencias (ver arriba), con estos cambios:
+- Carpeta `src/pages/batx1-gizarte-<nombre>`, `storagePrefix` `matella-<nombre>-batx1g`, rama `feat/<nombre>-batx1g`, nota `docs/claude-notes/<nombre>-batx1g.md` (con «En curso» mientras dure).
+- Fuentes: solo Anaya, `LIBROS/1_Bach/Anaya/Sociales` (la carpeta `Santillana/Sociales` es una copia de Ciencias y no sirve). Algún PDF puede no estar descargado (`Suma_Piezas/Unidad_05.pdf`): si falta, avisar al dueño.
+- Una pieza prestada de Ciencias que necesite cambios no se edita: se envuelve o se hace una variante en la carpeta propia, o se apunta en la nota.
+- Puertos 5191–5194.
+
+| Bloque | Puerto | Tema (`id` del curso) | Nombre | Bloque de ids | Reutilizar de | Estado |
+|---|---|---|---|---|---|---|
+| Números y álgebra | 5191 | `numeros-reales` | `errealak` | 130000–130999 | `batx1-zientziak-errealak`, `dbh4-akademikoak-errealak` | Por hacer |
+| Números y álgebra | 5191 | `aritmetica-mercantil` | `merkataritza` | 131000–131999 | `dbh4-aplikatuak-proportzionaltasuna`, `dbh4-akademikoak-errealak` (%) | Por hacer |
+| Números y álgebra | 5191 | `algebra` | `aljebra` | 132000–132999 | `batx1-zientziak-ekuazioak`, `-sistemak`, `dbh4-akademikoak-polinomioak` | Por hacer |
+| Funciones | 5192 | `funciones` | `funtzioak` | 133000–133999 | `batx1-zientziak-funtzioak` | Por hacer |
+| Funciones | 5192 | `funciones-exponenciales` | `esponentzialak` | 134000–134999 | `dbh4-akademikoak-esponentzialak`, `batx1-zientziak-funtzioak` | Por hacer |
+| Funciones | 5192 | `limites-continuidad` | `limiteak` | 135000–135999 | `batx1-zientziak-limiteak` | Por hacer |
+| Funciones | 5192 | `derivadas` | `deribatuak` | 136000–136999 | `batx1-zientziak-deribatuak`, `-aplikazioak` (un solo tema) | Por hacer |
+| Estadística | 5193 | `estadistica` | `estatistika` | 137000–137999 | `batx1-zientziak-estatistika` | Por hacer |
+| Estadística | 5193 | `estadistica-bidimensional` | `bidimentsionala` | 138000–138999 | `batx1-zientziak-bidimentsionala` | Por hacer |
+| Probabilidad | 5194 | `distribuciones-discretas` | `diskretuak` | 139000–139999 | `dbh4-akademikoak-konbinatoria`, `-probabilitatea`, `batx2-zientziak-probabilitatea`, `-banaketak` | Por hacer |
+| Probabilidad | 5194 | `distribucion-normal` | `normala` | 140000–140999 | `batx2-zientziak-banaketak` | Por hacer |
