@@ -52,7 +52,7 @@ export function UrnTool(props: LabToolProps) {
     const mean = populationMean(state)
     const controls = (
         <>
-            <Segmented<string> label={l(say('Kutxa', 'Urna', 'الصندوق', 'Urn'))} value={String(state.urn)} options={URNS.map((urn, index) => ({ value: String(index), label: `{${urn.join(', ')}}` }))} onChange={(value) => setState((s) => setUrn(s, { urn: Number(value) }))} />
+            <Segmented<string> label={l(say('Kutxa', 'Urna', 'الصندوق', 'Urn'))} value={String(state.urn)} options={URNS.map((urn, index) => ({ value: String(index), label: `⁦{${urn.join(', ')}}⁩` }))} onChange={(value) => setState((s) => setUrn(s, { urn: Number(value) }))} />
             <Stepper label="n" value={state.n} min={URN_LIMITS.n.min} max={URN_LIMITS.n.max} onChange={(n) => setState((s) => setUrn(s, { n }))} language={props.language} />
         </>
     )
