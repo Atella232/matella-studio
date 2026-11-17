@@ -30,7 +30,7 @@ Quinto y último tema del bloque Análisis de 2.º Sociales (reparto en paralelo
 ## Hecho
 
 **Fases 1–4 (commit en esta rama):**
-- 15 lecciones con las diez mejoras («¿Por qué funciona?» en `primitive`, `barrow` y `cost-from-marginal»); 15 figuras con `AreaPlot` de Integral mugagabeak 2.º Ciencias (importado) y la portada.
+- 15 lecciones con las diez mejoras («¿Por qué funciona?» en `primitive`, `barrow` y `cost-from-marginal`); 15 figuras con `AreaPlot` de Integral mugagabeak 2.º Ciencias (importado) y la portada.
 - Diagnóstico 149001–149008, práctica 1–20, retos 101–115, banco 1–50.
 - Laboratorio (5): propias `total` (`lab/total.ts`, 149101–149105: C(x) = K + ∫₀ˣ C′ en tres empresas) y `payback` (`lab/payback.ts`, 149201–149205: beneficio mensual b(t) = mt − c, pérdida en rojo y ganancia en verde hasta A(t) = 0). Prestadas de Integrales 1.º: `rectangles`, `signed`, `between`.
 - Juegos (5): propios J1 `primitive` (`games/whichPrimitive.ts`, 149501–149503; el test deriva cada candidata y solo la correcta da f) y J2 `signed` (`games/signedArea.ts`, 149601–149603: ¿es el área, con el signo cambiado o hay que partir?); detective (`games/detective.ts`, 149701–149703); carrera (`games/race.ts`, 149401–149405, el test recalcula cada respuesta con integrales numéricas) y memoria (`games/boards.ts`, 149801–149803).
