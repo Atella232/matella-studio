@@ -112,7 +112,8 @@ for (const unit of units) {
                 assert.equal(new Set(check.options.map((option) => option[language])).size, check.options.length, `${id}: distinct answers in ${language}`)
             }
         }
-        assert.ok(indexes.size > 1, 'the right answer is not always in the same place')
+        // A unit with a single lesson of its own (the rest borrowed from a twin) has one right answer to place
+        assert.ok(indexes.size > 1 || Object.keys(unit.checks).length === 1, 'the right answer is not always in the same place')
     })
 
     test(`${unit.folder}: texts in four languages, same formulas, all drawn by KaTeX`, () => {
