@@ -57,6 +57,7 @@ const MugagabeakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-mugagab
 const MugatuaBatx2zPage = lazy(() => import('../pages/batx2-zientziak-mugatua').then((module) => ({ default: module.MugatuaBatx2zIntroPage })))
 const KonplexuakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-konplexuak').then((module) => ({ default: module.KonplexuakBatx1zIntroPage })))
 const MatrizeakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-matrizeak').then((module) => ({ default: module.MatrizeakBatx2zIntroPage })))
+const MatrizeakBatx2gPage = lazy(() => import('../pages/batx2-gizarte-matrizeak').then((module) => ({ default: module.MatrizeakBatx2gIntroPage })))
 const DeterminanteakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-determinanteak').then((module) => ({ default: module.DeterminanteakBatx2zIntroPage })))
 const SistemakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-sistemak').then((module) => ({ default: module.SistemakBatx2zIntroPage })))
 const BektoreakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-bektoreak').then((module) => ({ default: module.BektoreakBatx2zIntroPage })))
@@ -504,6 +505,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx1-zientziak/numeros-complejos/*',
                         element: <KonplexuakBatx1zPage />,
+                    },
+                    // Matrices de 2.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx2-gizarte/matrices/*',
+                        element: <MatrizeakBatx2gPage />,
                     },
                     // Matrices de 2.º Bachillerato (Ciencias): unidad V2
                     {
