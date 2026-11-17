@@ -41,12 +41,22 @@ V1 + L1, L2, L3 + J1, J2, J3.
 - Diagnóstico 130001–130008, práctica 1–20, retos 101–115 y banco 1–50 (4/3/10 por etapa), con datos de votos, presupuestos, sueldos, precios y población.
 - Test `tests/errealak-batx1g-content.test.ts`. 3265 tests, lint y `tsc -b` en verde. Revisado a 375 px en eu, es y ar: 16 lecciones, resumen, inicio, diagnóstico, práctica, banco y retos; sin desbordes ni errores de KaTeX.
 
+**Fase 3 (laboratorio), 10 herramientas:**
+- **Propias (3),** con predicción y retos sin fin (`freshFrom`):
+  - L1 `weight` «El mismo error, distinto peso», retos 130101–130105: sueldo y café, país y pueblo, piso y menú; un paso de error para cada cantidad; predice qué error relativo pesa más; barras con el error como parte del valor (barra entera = 26 %).
+  - L2 `digits` «¿Cuántas cifras tiene?», retos 130201–130205: N = m · 10ᵉ en una regla logarítmica de cuatro potencias; predice si log N está más cerca de e o de e + 1 (el punto medio es 3,16).
+  - L3 `comma` «La coma viajera», retos 130301–130305: cinco datos económicos (deuda, PIB, parados, un mensaje, votos); al cambiar el exponente la coma se mueve; predice si el exponente científico baja, se queda o sube; ▶ lleva la coma hasta la notación científica (solo el dibujo).
+- **Prestadas (7)** de `batx1-zientziak-errealak/lab/labTools.ts` con sus ids: intervalos, distancia, índice común, sacar factores, conjugado, cambio de base y redondeo.
+- Test `tests/errealak-batx1g-lab.test.ts`. 3269 tests y lint en verde. Revisado a 375 px en eu, es y ar: las 10 herramientas con la predicción hecha; sin desbordes ni texto fuera del tablero.
+
 ## Trucos
 
 - `lesson-texts`: «3,4» dentro de `\{3,4,5\}` se lee como el decimal 3,4: el ejemplo no puede repetir esas parejas del error típico.
 - `takeaway-notation`: la idea clave no puede usar `n` y `N` a la vez (lo lee como la misma letra en mayúscula): en `log-integer` va `k`.
 - Las definiciones tienen que llevar las fórmulas en el mismo orden en los cuatro idiomas.
 
+- `lab/labTools.ts` importa el tipo de etapa de `lessons.tsx` con `import type`: así los tests de node lo pueden cargar.
+
 ## En curso
 
-- Fase 1+2 hecha. Sigue la fase 3 (laboratorio: L1–L3 y prestadas).
+- Fases 1+2 y 3 hechas. Sigue la fase 4 (juegos: J1 «Ordena la economía», J2 «El titular justo», J3 detective; carrera, memoria y los cuatro prestados de Ciencias).

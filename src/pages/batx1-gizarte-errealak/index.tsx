@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { gizRealsChallenges, gizRealsDiagnostic, gizRealsExerciseBank, gizRealsPractice } from './content'
 import { GizRealsHeroArt } from './figures'
+import { GizRealsLaboratory } from './lab'
+import { gizRealsLabChallengeIds, gizRealsLabToolForTopic, gizRealsLabTools } from './lab/labTools'
 import { gizRealsStages, gizRealsTopics } from './lessons'
 
 const errealakBatx1gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const errealakBatx1gUnit: UnitDefinition = {
     guidedPractice: gizRealsPractice,
     exerciseBank: gizRealsExerciseBank,
     challenges: gizRealsChallenges,
+    lab: {
+        description: {
+            eu: `${gizRealsLabTools.length} tresna, erronkekin: errore bera pisu desberdinarekin, zenbat zifra ditu eta koma bidaiaria, berriak; eta tarteak, distantzia zuzenean, indize komuna, faktoreak ateratzea, konjokatua, oinarri-aldaketa eta biribiltzea.`,
+            es: `${gizRealsLabTools.length} herramientas con retos: el mismo error con distinto peso, ¿cuántas cifras tiene? y la coma viajera, nuevas; y los intervalos, la distancia en la recta, el índice común, sacar factores, el conjugado, el cambio de base y el redondeo.`,
+            en: `${gizRealsLabTools.length} tools with challenges: same error with a different weight, how many digits and the travelling point, new; and intervals, distance on the line, the common index, taking factors out, the conjugate, change of base and rounding.`,
+            ar: `${gizRealsLabTools.length} أدوات مع تحديات: الخطأ نفسه بوزن مختلف وكم رقمًا فيه والفاصلة المتنقلة، وهي جديدة؛ والفترات والمسافة على المستقيم والدليل المشترك وإخراج العوامل والمرافق وتغيير الأساس والتدوير.`
+        },
+        progressIds: gizRealsLabChallengeIds,
+        toolForTopic: gizRealsLabToolForTopic,
+        render: (props) => <GizRealsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Emaitza tarte, multzo edo erradikal bat bada, eskatzen den zenbakia bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si el resultado es un intervalo, un conjunto o un radical, solo el número que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If the result is an interval, a set or a radical, only the number asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت النتيجة فترة أو مجموعة أو جذرًا فاكتب العدد المطلوب فقط.' },
         defaultForm: 'any',
