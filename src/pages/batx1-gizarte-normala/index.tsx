@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { normalBatx1gChallenges, normalBatx1gDiagnostic, normalBatx1gExerciseBank, normalBatx1gPractice } from './content'
 import { NormalBatx1gHeroArt } from './figures'
+import { NormalBatx1gGames } from './games'
+import { NORMAL_BATX1G_GAME_RECORDS_KEY, normalBatx1gGameProgressIds } from './games/info'
 import { NormalBatx1gLaboratory } from './lab'
 import { normalBatx1gLabChallengeIds, normalBatx1gLabToolForTopic, normalBatx1gLabTools } from './lab/labTools'
 import { normalBatx1gStages, normalBatx1gTopics } from './lessons'
@@ -37,6 +39,17 @@ const normalaBatx1gUnit: UnitDefinition = {
         progressIds: normalBatx1gLabChallengeIds,
         toolForTopic: normalBatx1gLabToolForTopic,
         render: (props) => <NormalBatx1gLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, zer ehuneko?, dentsitatea da?, ebaketa-nota eta normalaren detektibea, berriak; zein azalera da? eta bilatu taulan, 2. Batxilergotik; eta memoria.',
+            es: 'Ocho juegos: carrera, ¿qué porcentaje?, ¿es una densidad?, nota de corte y detective de la normal, nuevos; ¿qué área es? y busca en la tabla, de 2.º de Bachillerato; y memoria.',
+            en: 'Eight games: race, which percentage?, is it a density?, cut-off mark and the normal detective, new; which area is it? and find it in the table, from 2nd Bachillerato; and memory.',
+            ar: 'ثماني ألعاب: السباق، وأي نسبة؟، وهل هي كثافة؟، والعلامة الدنيا، ومخبر التوزيع الطبيعي، وهي جديدة؛ وأي مساحة هي؟ وابحث في الجدول من البكالوريا الثانية؛ والذاكرة.'
+        },
+        progressIds: normalBatx1gGameProgressIds,
+        recordsKey: NORMAL_BATX1G_GAME_RECORDS_KEY,
+        render: (props) => <NormalBatx1gGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,8944, 3/8 edo 12. Normalaren probabilitateak, taulako lau hamartarrekin; ehunekoak, % ikurrik gabe.', es: 'Escribe un número exacto o una fracción: 0,8944, 3/8 o 12. Las probabilidades de la normal, con los cuatro decimales de la tabla; los porcentajes, sin el signo %.', en: 'Write an exact number or a fraction: 0.8944, 3/8 or 12. Normal probabilities with the four decimals of the table; percentages without the % sign.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.8944 أو 3/8 أو 12. احتمالات التوزيع الطبيعي بأربعة أرقام عشرية من الجدول، والنسب دون الرمز ٪.' },

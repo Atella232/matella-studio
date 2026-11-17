@@ -35,6 +35,15 @@ Anaya 1.º Bach MACS, Suma Piezas U10 «Distribuciones de probabilidad de variab
 - **Aviso (pieza prestada, sin tocar):** en «Bajo la campana» los ejes x y z se dibujan uno encima del otro para la animación ▶ (el medidor de solapes lo marca en eu, es y ar). Es así también en 2.º Ciencias.
 - Revisado a 375 px en eu, es y ar: las 7 herramientas con la predicción hecha, sin textos fuera ni desbordes laterales.
 
+## Fase 3 · juegos
+
+- **Propios:** `percent` (¿Qué porcentaje?: N(μ; σ) y un intervalo en σ enteros con su campana pintada; 1) μ ± kσ, 2) un lado o una cola, 3) dos trozos; errores: la banda entera por la mitad y la vecina), `density` (¿Es una densidad?: 1) sí / no por el área / no por una parte negativa, dos de cada; 2) la altura que da área 1, con el ½ olvidado o doblado; 3) P(0 ≤ X ≤ a) como área), `cutoff` (Nota de corte: porcentajes 10, 15, 20, 25, 30, 40 —nunca el 5 %, empate en la tabla—; 1) k con el signo o el lado cambiados; 2) x = μ + kσ, con μ − kσ y μ + k; 3) lo mismo en plazas, becas y control de calidad), `detective` (12 errores en 3 niveles: tabla, tipificar y aproximar, ajuste).
+- **Prestados:** «¿Qué área es?» (`area`) y «Busca en la tabla» (`hunt`) de Banaketak, con la info y los ids de esta unidad. **Genéricos:** carrera de 5 circuitos (12 tipos, `meta` comprobada) y memoria (μ ± kσ ↔ %, P(Z > k) ↔ tabla, N(μ; σ) y x ↔ z).
+- **Ids:** carrera 140401–140405, porcentaje 140501–140503, densidad 140551–140553, nota de corte 140601–140603, área 140651–140653, tabla 140671–140673, detective 140701–140703, memoria 140801–140803.
+- **Tests:** `tests/normala-batx1g-games.test.ts`.
+- **Trucos:** `inverseTable` solo vale para p ≥ 0,5; para «el x % de abajo», k = −inverseTable(1 − x). En euskera el porcentaje de las opciones va delante (`\%\,49{,}87`). La z de la carrera, dentro de `$…$` (`$${Z}$`): fuera, KaTeX no la dibuja. Inventario OK: 4 juegos propios y 3 herramientas propias de verdad.
+- Revisado a 375 px en eu, es y ar: los juegos de rondas en sus tres niveles, sin desbordes.
+
 ## En curso
 
-- Fases 1 (efa65b12) y 2 hechas. Siguiente: fase 3, juegos (J1 ¿Qué porcentaje?, J2 ¿Es una densidad?, J3 Nota de corte, J4 detective; prestados «¿Qué área es?» y «Busca en la tabla» de Banaketak, carrera de 5 circuitos y memoria), ids 140401–140899. Después, hoja de euskera y cierre.
+- Fases 1 (efa65b12), 2 (7c891c9c) y 3 hechas. Queda: hoja de euskera y cierre de la nota (quitar esta sección).
