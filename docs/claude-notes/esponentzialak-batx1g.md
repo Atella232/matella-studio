@@ -34,6 +34,12 @@ Segundo tema del bloque Funciones de 1.º Sociales: curso `batx1-gizarte`, tema 
 - `lesson-checks` comprueba los puntos de las opciones en la fórmula: una pregunta del tipo «¿por qué punto pasa siempre $y=a^x$?» falla porque no puede evaluar $a^x$; se pregunta el valor en $x=0$.
 - Los dibujos con planos altos necesitan `oy` ≈ 42 y la altura del dibujo a la medida (la «y» del eje y los números de abajo se cortaban).
 
+**Fase 3, laboratorio:** 9 herramientas.
+- **Propias (2):** L1 `line-exp` «¿Recta o exponencial?», retos 134101–134105 (`lab/lineExp.ts`): A(0, a) y B(1, b) dan la recta y la exponencial; se predice cuál da más en x; ▶ dibuja las dos. L2 `logistic` «La curva en S», retos 134201–134205 (`lab/logistic.ts`): M, b, a ∈ {1,5; 2; 3} y un día x; se predice si ya se ha pasado de M/2 (aˣ frente a b); la curva y la línea M/2 solo aparecen tras predecir; ▶ recorre los días.
+- **Prestadas (7):** dos máquinas en cadena y espejo y = x (Ciencias); función exponencial, mueve la exponencial, crecimiento, escalera de logaritmos, mueve el logaritmo (4.º).
+- **Test:** `tests/esponentzialak-batx1g-lab.test.ts`.
+- **Revisión a 375 px (eu, es, ar):** las 2 propias antes y después de predecir, sin desbordes; en árabe, «mueve la exponencial» (la «y») y «crecimiento» (el 1000) cortan un texto del eje: son de 4.º, no se tocan.
+
 ## En curso
 
-- Fases 1–2 hechas. Siguiente: fase 3, laboratorio: L1 «¿Recta o exponencial?» y L2 «La curva en S» (ids 1341xx–1342xx) y las prestadas.
+- Fases 1–3 hechas y guardadas. Falta la fase 4, juegos: J1 «¿Lineal o exponencial?» (tabla → diferencias o cocientes constantes y siguiente dato), J2 «Descuento, IVA y envío» (ordenar operaciones para llegar al precio), J3 detective (errores de la lista de la propuesta), carrera y memoria (ids 134401–134899), y prestados: ¿dónde cae el punto? (niveles 1–2), ordena las máquinas, deshaz la máquina (Ciencias), ¿cuándo se duplica? y láser de curvas (4.º). Después: cierre (375 px, hoja de euskera) y los temas `limites-continuidad` y `derivadas`.

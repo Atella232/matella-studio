@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { socExpChallenges, socExpDiagnostic, socExpExerciseBank, socExpPractice } from './content'
 import { SocExpHeroArt } from './figures'
+import { SocExpLaboratory } from './lab'
+import { socExpLabChallengeIds, socExpLabToolForTopic, socExpLabTools } from './lab/labTools'
 import { socExpStages, socExpTopics } from './lessons'
 
 const esponentzialakBatx1gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const esponentzialakBatx1gUnit: UnitDefinition = {
     guidedPractice: socExpPractice,
     exerciseBank: socExpExerciseBank,
     challenges: socExpChallenges,
+    lab: {
+        description: {
+            eu: `${socExpLabTools.length} tresna, erronkekin: zuzena ala esponentziala? eta S kurba, berriak; Zientzietako bi makina segidan eta y = x ispilua; eta 4. DBHko funtzio esponentziala, esponentziala mugitzen, hazkundea eta beherakuntza, logaritmoen eskailera eta logaritmoa mugitzen.`,
+            es: `${socExpLabTools.length} herramientas con retos: ¿recta o exponencial? y la curva en S, nuevas; de Ciencias, dos máquinas en cadena y el espejo y = x; y de 4.º ESO, la función exponencial, mueve la exponencial, crecimiento y decrecimiento, la escalera de los logaritmos y mueve el logaritmo.`,
+            en: `${socExpLabTools.length} tools with challenges: line or exponential? and the S curve, new; from Sciences, two machines in a row and the mirror y = x; and from 4th ESO, the exponential function, move the exponential, growth and decay, the ladder of logarithms and move the logarithm.`,
+            ar: `${socExpLabTools.length} أدوات مع تحديات: مستقيم أم أسية؟ والمنحنى على شكل S، وهما جديدتان؛ ومن العلوم: آلتان متتاليتان ومرآة y = x؛ ومن الصف الرابع: الدالة الأسية وحرّك الأسية والنمو والتناقص وسُلّم اللوغاريتمات وحرّك اللوغاريتم.`
+        },
+        progressIds: socExpLabChallengeIds,
+        toolForTopic: socExpLabToolForTopic,
+        render: (props) => <SocExpLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Urte edo egun oso bat eskatzen bada, zenbaki osoa.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide un año o un día entero, el número entero.', en: 'Write a number: 5, −3, 1.5 or 3/2. If a whole year or day is asked for, the whole number.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا طُلبت سنة أو يوم كامل فاكتب العدد الصحيح.' },
         defaultForm: 'any',
