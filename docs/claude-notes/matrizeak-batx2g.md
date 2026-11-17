@@ -13,6 +13,9 @@ Primer tema de 2.º Sociales (curso `batx2-gizarte`, tema `matrices`), primero d
 
 - **Libros:** Santillana 2.º Bach CCSS U1 «Matrices» (solucionario; capa de texto rota, leído por las marcas de página y algunas páginas como imagen; mismo orden que el de Ciencias, con más problemas de contexto al final) y Anaya MACS II U2 «Álgebra de matrices» (solucionario; sin la sección de n-uplas de Ciencias y con «Forma matricial de un sistema»). EBAU País Vasco MACS II 2019–2022 para el estilo. Ficha fuera del repositorio: `~/Documents/Matella-fuentes/batx2g-algebra/ficha-matrices.md`.
 - **Textos y ejercicios:** todos propios.
+- **Frontera con los otros temas del bloque:** aquí la inversa solo por Gauss-Jordan (y por sistema en 2 × 2) y el rango solo por Gauss; «¿inversa según k?» se decide por el rango. La forma matricial $AX=B$ (Anaya §7) solo como «resolver con $A^{-1}$»; la discusión va en `sistemak`. Determinantes y adjunta, en `determinanteak`.
+- **Matrices de transición (cuotas de mercado):** no salen en ninguno de los dos libros; se ofrecen como extra.
+- **«Antes de empezar»:** solo a `batx1-zientziak/sistemas` (Gauss, matriz ampliada) o a 4.º. El enlace a 1.º Sociales «Álgebra» se pone al fusionar, cuando esté en `main`.
 
 ## En curso
 
