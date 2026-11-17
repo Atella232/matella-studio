@@ -121,7 +121,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('Aztertu $f(x)=x^3-3x^2$ funtzioaren hazkundea.', 'Estudia el crecimiento de $f(x)=x^3-3x^2$.', 'ادرس تزايد $f(x)=x^3-3x^2$.', 'Study the increase and decrease of $f(x)=x^3-3x^2$.'),
         stepsKind: 'steps',
         steps: [
-            { text: say('$f\'(x)=0$ ebatzi.', 'Resuelve $f\'(x)=0$.', 'حُلّ $f\'(x)=0$.', 'Solve $f\'(x)=0$.'), math: same("$f'(x)=3x^2-6x=3x(x-2)=0\\ \\to\\ x=0,\\ x=2$") },
+            { text: say('$f\'(x)=0$ ebatzi.', 'Resuelve $f\'(x)=0$.', 'حُلّ $f\'(x)=0$.', 'Solve $f\'(x)=0$.'), math: same("$\\begin{gathered}f'(x)=3x^2-6x=3x(x-2)=0\\\\ x=0\\qquad x=2\\end{gathered}$") },
             { text: say('Zeinua tarte bakoitzean (proba-balio batekin).', 'El signo en cada intervalo (con un valor de prueba).', 'الإشارة في كل فترة (بقيمة اختبار).', 'The sign on each interval (with a test value).'), math: same("$f'(-1)=9\\qquad f'(1)=-3\\qquad f'(3)=9$") },
             { text: say('Gorakorra $(-\\infty,0)\\cup(2,+\\infty)$ tartean; beherakorra $(0,2)$ tartean.', 'Crece en $(-\\infty,0)\\cup(2,+\\infty)$; decrece en $(0,2)$.', 'متزايدة في $(-\\infty,0)\\cup(2,+\\infty)$ ومتناقصة في $(0,2)$.', 'Increasing on $(-\\infty,0)\\cup(2,+\\infty)$; decreasing on $(0,2)$.') }
         ],
@@ -274,7 +274,7 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         problem: say('Unitate bakoitza 50 eurotan saltzen da eta $x$ unitate egiteak $C(x)=x^2+10x+100$ euro balio du. Zenbat unitaterekin da irabazia handiena?', 'Cada unidad se vende a 50 € y hacer $x$ unidades cuesta $C(x)=x^2+10x+100$ euros. ¿Con cuántas unidades es máximo el beneficio?', 'تُباع كل وحدة بـ 50 € وتكلّف $x$ وحدة $C(x)=x^2+10x+100$ يورو. بكم وحدة يكون الربح أعظميًا؟', 'Each unit sells for €50 and making $x$ units costs $C(x)=x^2+10x+100$ euros. With how many units is the profit highest?'),
         stepsKind: 'steps',
         steps: [
-            { text: say('Irabazia: diru-sarrerak ken kostua.', 'Beneficio: ingresos menos coste.', 'الربح: الإيراد ناقص التكلفة.', 'Profit: income minus cost.'), math: same('$B(x)=50x-(x^2+10x+100)=-x^2+40x-100$') },
+            { text: say('Irabazia: diru-sarrerak ken kostua.', 'Beneficio: ingresos menos coste.', 'الربح: الإيراد ناقص التكلفة.', 'Profit: income minus cost.'), math: same('$\\begin{gathered}B(x)=50x-(x^2+10x+100)\\\\ B(x)=-x^2+40x-100\\end{gathered}$') },
             { text: say('$B\'=0$.', '$B\'=0$.', '$B\'=0$.', '$B\'=0$.'), math: same("$B'(x)=-2x+40=0\\ \\to\\ x=20$") },
             { text: say('$B\'\'=-2<0$: maximoa. 20 unitaterekin 300 euro irabazten dira.', '$B\'\'=-2<0$: máximo. Con 20 unidades se ganan 300 €.', '$B\'\'=-2<0$: عظمى. مع 20 وحدة يُربح 300 €.', '$B\'\'=-2<0$: a maximum. With 20 units €300 is earned.'), math: same('$B(20)=-400+800-100=300$') }
         ],

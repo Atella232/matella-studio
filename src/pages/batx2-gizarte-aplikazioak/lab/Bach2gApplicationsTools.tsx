@@ -6,7 +6,7 @@ import type { LocalizedText, UnitLanguage } from '../../../features/unit-v2/type
 import { decimalSeparatorFor, groupDigits, groupLatex } from '../../../utils/numberFormat'
 import { say } from '../../batx1-zientziak-funtzioak/text'
 import { Board, Hidden, Predict, Readout } from '../../dbh3-segidak/lab/LabParts'
-import { GREEN, INK, MUTED, PAPER, SECOND, STAGE } from '../../dbh3-segidak/lab/labStyle'
+import { INK, MUSTARD, MUTED, PAPER, SECOND, STAGE } from '../../dbh3-segidak/lab/labStyle'
 import { setPrediction } from '../../dbh3-segidak/lab/prediction'
 import { AVERAGE_LIMITS, AVERAGE_TOP, averageChallenges, averageExtra, averageOf, averagePrediction, initialAverageState, nextOf, PLANT_SETUP, PLANTS, setAverage, type AverageState, type Plant } from './average'
 import { customersOf, incomeAt, incomeLatex, incomeSlope, initialPriceState, priceChallenges, priceExtra, priceOf, pricePrediction, setPrice, VENUE_SETUP, VENUES, type PriceState, type Venue } from './price'
@@ -138,12 +138,12 @@ export function ProfitTool(props: LabToolProps) {
                             <path d={path((t) => incomeOf(firm, t), 0, 40, X, Y)} fill="none" stroke={INK} strokeWidth={3} />
                             <path d={path((t) => costOf(firm, t), 0, 40, X, Y)} fill="none" stroke={STAGE} strokeWidth={3} />
                         </g>
-                        <line x1={X(x)} x2={X(x)} y1={Y(incomeOf(firm, x))} y2={Y(costOf(firm, x))} stroke={profit >= 0 ? GREEN : SECOND} strokeWidth={4} />
+                        <line x1={X(x)} x2={X(x)} y1={Y(incomeOf(firm, x))} y2={Y(costOf(firm, x))} stroke={profit >= 0 ? MUSTARD : SECOND} strokeWidth={4} />
                         <circle cx={X(x)} cy={Y(incomeOf(firm, x))} r={5} fill={INK} />
                         <circle cx={X(x)} cy={Y(costOf(firm, x))} r={5} fill={STAGE} />
                         <text x={LEFT + 6} y={TOP + 16} fontSize={13} fontWeight={700} fill={INK} direction="ltr">I</text>
                         <text x={LEFT + 24} y={TOP + 16} fontSize={13} fontWeight={700} fill={STAGE} direction="ltr">C</text>
-                        <text x={LEFT + 42} y={TOP + 16} fontSize={13} fontWeight={700} fill={profit >= 0 ? GREEN : SECOND} direction="ltr">{`B = ${dec(profit, lang)}`}</text>
+                        <text x={LEFT + 42} y={TOP + 16} fontSize={13} fontWeight={700} fill={profit >= 0 ? INK : SECOND} direction="ltr">{`B = ${dec(profit, lang)}`}</text>
                     </g>
                 ) : <Hidden x={196} y={120} />}
             </Board>

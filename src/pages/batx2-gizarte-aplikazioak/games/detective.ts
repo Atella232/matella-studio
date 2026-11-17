@@ -104,7 +104,7 @@ function build(random: Random, error: Bach2gApplicationsDetectiveError): Built |
             const top = end ** 3 - 3 * k * k * end
             return {
                 problem: say(`Zein da $f(x)=x^3-${3 * k * k}x$ funtzioaren maximo absolutua $[-${k},${end}]$ tartean?`, `¿Cuál es el máximo absoluto de $f(x)=x^3-${3 * k * k}x$ en $[-${k},${end}]$?`, `ما القيمة العظمى المطلقة للدالة $f(x)=x^3-${3 * k * k}x$ على $[-${k},${end}]$؟`, `What is the absolute maximum of $f(x)=x^3-${3 * k * k}x$ on $[-${k},${end}]$?`),
-                lines: [line(LABELS.derivative, `f'(x)=3x^2-${3 * k * k}=0\\ \\to\\ x=\\pm ${k}`), line(LABELS.substitute, `f(-${k})=${2 * k ** 3}`), line(LABELS.result, `${2 * k ** 3}`)],
+                lines: [line(LABELS.derivative, `f'(\\pm ${k})=0`), line(LABELS.substitute, `f(-${k})=${2 * k ** 3}`), line(LABELS.result, `${2 * k ** 3}`)],
                 wrong: 2, error, fix: `f(${end})=${top}>${2 * k ** 3}\\ \\to\\ ${top}`, right: top, reached: 2 * k ** 3
             }
         }
@@ -152,7 +152,7 @@ function build(random: Random, error: Bach2gApplicationsDetectiveError): Built |
             const q = k * (2 * rise + p)
             return {
                 problem: say(`Negozio batek ${p} euro kobratzen ditu eta ${q} bezero ditu; euro bakoitzeko igoerak ${k} bezero galtzen ditu. Zein prezio da onena?`, `Un negocio cobra ${p} € y tiene ${q} clientes; cada euro de subida pierde ${k} clientes. ¿Qué precio es el mejor?`, `يتقاضى نشاط تجاري ${p} € وله ${q} زبونًا؛ وكل يورو زيادة يُفقده ${k} زبائن. ما أفضل سعر؟`, `A business charges €${p} and has ${q} customers; each euro of rise loses ${k} customers. Which price is best?`),
-                lines: [line(LABELS.function, `I(x)=(${p}+x)(${q}-${k}x)`), line(LABELS.derivative, `I'(x)=${q - k * p}-${2 * k}x=0\\ \\to\\ x=${rise}`), line(LABELS.result, `${rise}`)],
+                lines: [line(LABELS.function, `I(x)=(${p}+x)(${q}-${k}x)`), line(LABELS.derivative, `I'(x)=0\\ \\to\\ x=${rise}`), line(LABELS.result, `${rise}`)],
                 wrong: 2, error, fix: `${p}+${rise}=${p + rise}`, right: p + rise, reached: rise
             }
         }

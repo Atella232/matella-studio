@@ -288,7 +288,7 @@ export const bach2gApplicationsLessonTexts: Record<Bach2gApplicationsTopicId, Le
             'The average cost is the total cost divided by the units. At first it falls, because the fixed cost is shared, and then it rises, because the factory fills up. The minimum is found by solving $M\'(x)=0$; as it has fractions, take care when differentiating.'
         ),
         examplePrompt: say('$C(x)=2x^2+8x+50$ bada, zenbat unitaterekin da batez besteko kostua minimoa?', 'Si $C(x)=2x^2+8x+50$, ¿con cuántas unidades es mínimo el coste medio?', 'إذا كانت $C(x)=2x^2+8x+50$ فبكم وحدة يكون متوسط التكلفة أصغريًا؟', 'If $C(x)=2x^2+8x+50$, with how many units is the average cost lowest?'),
-        example: same("$M(x)=2x+8+\\frac{50}{x}\\qquad M'(x)=2-\\frac{50}{x^2}=0\\ \\to\\ x=5$"),
+        example: same("$\\begin{gathered}M(x)=2x+8+\\frac{50}{x}\\\\ M'(x)=2-\\frac{50}{x^2}=0\\ \\to\\ x=5\\end{gathered}$"),
         exampleAnswer: say('5 unitaterekin: $M(5)=28$ euro unitateko.', 'Con 5 unidades: $M(5)=28$ € por unidad.', 'مع 5 وحدات: $M(5)=28$ € للوحدة.', 'With 5 units: $M(5)=28$ euros per unit.'),
         why: {
             text: say(
@@ -314,7 +314,7 @@ export const bach2gApplicationsLessonTexts: Record<Bach2gApplicationsTopicId, Le
             'In optimisation problems, the hard part is writing the function. Choose a variable (the rise in price, the side of the box…), write what is to be optimised in terms of it, differentiate and set to zero. Finally, check the result and answer the question.'
         ),
         examplePrompt: say('Bi zenbaki positiboren batura 18 da. Zein dira, haien biderkadura handiena izan dadin?', 'Dos números positivos suman 18. ¿Cuáles son si su producto es máximo?', 'مجموع عددين موجبين 18. ما هما إذا كان جداؤهما أعظميًا؟', 'Two positive numbers add up to 18. Which are they if their product is highest?'),
-        example: same("$P(x)=x(18-x)\\qquad P'(x)=18-2x=0\\ \\to\\ x=9$"),
+        example: same("$\\begin{gathered}P(x)=x(18-x)\\\\ P'(x)=18-2x=0\\ \\to\\ x=9\\end{gathered}$"),
         exampleAnswer: say('9 eta 9: biderkadura 81 da.', '9 y 9: el producto es 81.', '9 و9: الجداء 81.', '9 and 9: the product is 81.')
     }
 }
