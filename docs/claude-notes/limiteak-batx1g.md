@@ -48,6 +48,9 @@ Tercer tema del bloque Funciones de 1.º Sociales: curso `batx1-gizarte`, tema `
 - Trucos: en el barrido de juegos el botón «Jolastu/العب» de la barra lleva al índice; los niveles son los botones que empiezan por cifra tras `.fraction-v2-game-back`. En árabe, Noto Sans Arabic da cajas altas a los números del SVG: deja 10 px bajo la etiqueta.
 - Sin arreglar (pieza prestada): en árabe la «y» del eje del juego de discontinuidades de Ciencias se corta un poco.
 
-## En curso
+## Cierre
 
-- Fases 1–4 hechas. Falta el cierre: hoja de euskera y nota final.
+- **2026-11-17:** 3340 tests, lint y build en verde; inventario OK (el script cuenta como propios los prestados; de verdad: 2 herramientas y 2 juegos propios más el detective, lo que eligió el dueño).
+- **Revisión a 375 px (eu, es, ar), con barridos de JS (anchura, KaTeX, `$` sueltos, cajas de texto de los SVG) y capturas:** portada, las 15 lecciones con sus pasos abiertos, diagnóstico, práctica, retos, ejercicios con soluciones abiertas, las 5 herramientas antes y después de predecir, y los 8 juegos en cada nivel con una tarjeta elegida. La carrera solo se vio al empezar (la cuenta atrás no se probó jugando). Aviso de Ciencias (no se toca): en árabe la «y» del eje de «¿Qué discontinuidad?» se corta un poco.
+- **Hoja de euskera:** `hoja-revision.mjs batx1-gizarte-limiteak … --herramientas long-run,tariff --juegos long,join,detective,race,memory`, en la carpeta de notas compartidas (`hoja-euskera-limiteak-batx1g.html`).
+- **Para fusionar:** nada especial; registro en `courses.ts` (línea de `limites-continuidad` de `batx1-gizarte`), router y `paths.ts`.
