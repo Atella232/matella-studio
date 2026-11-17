@@ -244,7 +244,7 @@ export const courses: Course[] = [
     descriptionEn: 'Mathematics Applied to the Social Sciences II',
     color: '#8a5a12',
     topics: [
-      { id: 'matrices', name: 'Matrices', nameEu: 'Matrizeak', nameAr: 'المصفوفات', nameEn: 'Matrices', icon: '🔲' },
+      { id: 'matrices', name: 'Matrices', nameEu: 'Matrizeak', nameAr: 'المصفوفات', nameEn: 'Matrices', icon: '🔲', active: true },
       { id: 'determinantes', name: 'Determinantes', nameEu: 'Determinanteak', nameAr: 'المحددات', nameEn: 'Determinants', icon: '▦' },
       { id: 'sistemas', name: 'Sistemas de Ecuaciones', nameEu: 'Ekuazio-sistemak', nameAr: 'أنظمة المعادلات', nameEn: 'Systems of Equations', icon: '📝' },
       { id: 'programacion-lineal', name: 'Programación Lineal', nameEu: 'Programazio Lineala', nameAr: 'البرمجة الخطية', nameEn: 'Linear Programming', icon: '📐' },

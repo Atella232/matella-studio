@@ -17,7 +17,34 @@ Primer tema de 2.º Sociales (curso `batx2-gizarte`, tema `matrices`), primero d
 - **Matrices de transición (cuotas de mercado):** no salen en ninguno de los dos libros; se ofrecen como extra.
 - **«Antes de empezar»:** solo a `batx1-zientziak/sistemas` (Gauss, matriz ampliada) o a 4.º. El enlace a 1.º Sociales «Álgebra» se pone al fusionar, cuando esté en `main`.
 
+**Lo que eligió el dueño (2026-11-17):** «Las recomendadas» (V1, V2, L1 «El ticket», L2 «La cadena de producción», M1 Gauss-Jordan y M2 deslizador del rango de Ciencias, J1 «¿Qué producto lo calcula?», J2 «El ticket escondido», J3 detective, J4 «Despeja la X» de Ciencias, J6 carrera y memoria). Después, «Sí, importa»: las lecciones de cálculo se importan de Ciencias tal cual y solo se escriben nuevas las de contexto económico (vale para los cuatro temas del bloque).
+
+**Etapas y lecciones** (las mismas cinco etapas de Ciencias; ★ = propia):
+
+| Etapa | Lecciones |
+|---|---|
+| `basics` | ★`data-tables`, `matrix-types`, `transpose-symmetric` |
+| `operations` | `sum-scalar`, `matrix-product`, `product-properties`, ★`costs-profits`, ★`production-chain` |
+| `rank` | `rank-gauss`, `rank-parameter` |
+| `inverse` | `inverse-definition`, `gauss-jordan`, `matrix-powers` |
+| `equations` | `matrix-equations`, `equation-systems`, ★`matrix-form-system` |
+
+Fuera: `what-is-a-matrix` (la sustituye `data-tables`), `matrix-applications` (la sustituyen las dos de economía), `linear-dependence` y `commuting-matrices`.
+
+## Hecho
+
+**Fase 1+2, lecciones y contenido:**
+- `lessons.tsx` mezcla las 4 lecciones propias (con `lessonTexts.ts`, `lessonChecks.ts` y 4 dibujos nuevos en `figures.tsx`: tabla → matriz, Q·(V − C), la cadena casas → ventanas → piezas y AX = B) con las 12 de `batx2-zientziak-matrizeak` (`matrizeakTopics`, importadas por id). Los tests comunes de lecciones leen el archivo fuente, así que solo ven las 4 propias; las importadas ya las prueba Ciencias.
+- `content.ts`: diagnóstico 141001–141008 (6 de Ciencias con id nuevo y 2 propios), práctica 1–20 (5 propias), retos 101–115 (4 propios: ventas por días, cajas de botellas, beneficio anual (B − A)·D, A = Aᵗ sin inversa al estilo de la EBAU), banco 1–50 (10 propios: notas, autobuses, gastos, conservera, viviendas y ventanas, proveedores, rango con contexto, entradas de museo con AX = B, XA + 2I = A²). Lo de Ciencias se importa y se renumera con `{ ...item, id }`.
+- Registro: `courses.ts` (`active: true`), router, `paths.ts`.
+- **Test de otra unidad tocado:** `tests/matrizeak-batx2z-content.test.ts` comprobaba que la Matrices de Sociales no estaba activa; se quitó esa línea (lo mismo pasará con Determinantes y Sistemas).
+- Test nuevo `tests/matrizeak-batx2g-content.test.ts`. 3267 tests, lint y tipos en verde.
+
+## Trucos
+
+- El test común de lecciones parte las fórmulas por `\\`: un producto de matrices con columnas (`…\end{pmatrix}=\begin{pmatrix}228\\289…`) no pasa en el ejemplo. Escribe el ejemplo como cuentas (`12\cdot 9+30\cdot 4=228`).
+- Node no importa `.tsx` en los tests: el orden de las lecciones se lee del fuente (`const order = [...]`).
+
 ## En curso
 
-- Ficha de fuentes hecha. Propuesta con menú de letras enviada al dueño el 2026-11-17; **esperando su elección**. Nada construido todavía.
-- Siguiente paso: con la elección, fases 1+2 (lecciones y contenido), 3 (laboratorio) y 4 (juegos), una por commit.
+- Fase 1+2 hecha. Siguiente: fase 3, laboratorio (L1 «El ticket», L2 «La cadena de producción», M1 Gauss-Jordan y M2 deslizador del rango de Ciencias), luego fase 4, juegos.
