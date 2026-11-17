@@ -35,6 +35,14 @@ Segundo tema de 2.º Sociales (curso `batx2-gizarte`, tema `determinantes`), seg
 - **De Ciencias, tal cual:** la máquina de propiedades y el deslizador del determinante, con sus ids.
 - Componentes en `lab/SocialTools.tsx`; tests en `tests/determinanteak-batx2g-lab.test.ts` (A⁻¹B devuelve los precios, la traspuesta de la adjunta coincide con la inversa, retos resolubles y ninguno resuelto al empezar). Revisado a 375 px en ar y es.
 
+## Fase 4: juegos
+
+- **J1 «¿Hay precios únicos?»** (`games/uniquePrices.ts`, slug `prezio-bakarrak`, niveles 142501–142503): matriz de lotes y cuatro veredictos «Sí: |A| = v» / «No: |A| = 0» (errores: ad + bc, Sarrus todo sumado, signo, sí/no cambiado); entre 2 y 3 rondas de cada 5 con $|A|=0$ (lote múltiplo o suma). Nivel 3: la $a$ de $|p\ a; r\ s|=0$.
+- **J2 «Adjunto exprés»** (`games/quickCofactor.ts`, `adjuntu-azkarra`, 142601–142603): un adjunto de 3 × 3 (elemento recuadrado con `\boxed`), luego un elemento de $A^{-1}$ 2 × 2 y 3 × 3 (errores: sin trasponer, sin dividir, signo).
+- **J3 detective** (`games/detective.ts`, 142801–142803): ad + bc, Sarrus sumando todo, |kA| = k|A|; signo del adjunto, fila y columna cambiadas, desarrollo sin los elementos; adjunta sin trasponer, sin dividir entre |A|, |A⁻¹| = |A|.
+- **De Ciencias, renumerados:** «¿Qué le pasa al determinante?» (142701–142703) y memoria (142851–142853). **Carrera** (`games/race.ts`, 142401–142405): la de Ciencias sin el tipo `block` (orden 4), con tipos propios `bundles` (circuito 1, |A| de dos lotes) y `critical-bundle` (circuito 5, la $a$ que deja los precios sin fijar). Ojo: Ciencias ya tiene un tipo `critical`; por eso el propio se llama `critical-bundle`. Descripciones de los circuitos 1, 3 y 5 propias (sin «orden 4»).
+- Clave de récords `matella-determinanteak-batx2g-game-records`. Tests en `tests/determinanteak-batx2g-games.test.ts`. Revisados a 375 px en es y eu.
+
 ## En curso
 
-- Fases 1+2 (09148b8) y 3 hechas. Falta: fase 4 juegos (J1 «¿Hay precios únicos?», J2 «Adjunto exprés», J3 detective propio; «¿Qué le pasa al determinante?», carrera y memoria de Ciencias renumerados, 142401–142899) y cierre (375 px eu/es/ar, inventario, hoja en euskera).
+- Fases 1+2 (09148b8), 3 (eb4e012) y 4 hechas. Falta el cierre: inventario, hoja en euskera para el dueño y quitar esta sección. Después, `sistemak`.

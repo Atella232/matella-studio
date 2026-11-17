@@ -1,6 +1,8 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { DeterminantsHeroArt } from '../batx2-zientziak-determinanteak/figures'
+import { GizarteDeterminanteakGames } from './games'
+import { GIZARTE_DETERMINANTEAK_GAME_RECORDS_KEY, gizarteDeterminanteakGameProgressIds } from './games/info'
 import { gizarteDeterminanteakChallenges, gizarteDeterminanteakDiagnostic, gizarteDeterminanteakExerciseBank, gizarteDeterminanteakPractice } from './content'
 import { GizarteDeterminanteakLaboratory } from './lab'
 import { gizarteDeterminanteakLabChallengeIds, gizarteDeterminanteakLabToolForTopic, gizarteDeterminanteakLabTools } from './lab/labTools'
@@ -36,6 +38,17 @@ const determinanteakBatx2gUnit: UnitDefinition = {
         progressIds: gizarteDeterminanteakLabChallengeIds,
         toolForTopic: gizarteDeterminanteakLabToolForTopic,
         render: (props) => <GizarteDeterminanteakLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Sei joko: lasterketa, prezio bakarrak?, adjuntu azkarra, zer gertatzen zaio determinanteari, determinanteen detektibea eta memoria.',
+            es: 'Seis juegos: carrera, ¿hay precios únicos?, adjunto exprés, qué le pasa al determinante, detective de determinantes y memoria.',
+            en: 'Six games: race, unique prices?, quick cofactor, what happens to the determinant, determinant detective and memory.',
+            ar: 'ست ألعاب: السباق وأسعار وحيدة؟ والمتمم السريع وماذا يحدث للمحدد ومخبر المحددات والذاكرة.'
+        },
+        progressIds: gizarteDeterminanteakGameProgressIds,
+        recordsKey: GIZARTE_DETERMINANTEAK_GAME_RECORDS_KEY,
+        render: (props) => <GizarteDeterminanteakGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },

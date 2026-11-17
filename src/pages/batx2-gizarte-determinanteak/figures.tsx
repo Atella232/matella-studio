@@ -31,16 +31,16 @@ function Card({ x, cells, value, verdict, ok, language }: { x: number; cells: nu
     return (
         <g>
             <rect x={x} y={30} width={320} height={270} rx={16} fill={PAPER} stroke={INK} strokeWidth={1.8} />
-            <DeterminantBlock x={x + 100} y={58} cells={cells} cell={56} rowGap={50} size={24} tint={() => (ok ? GREEN_TINT : CORAL_TINT)} />
-            <F x={x + 160} y={200} size={26} color={color}>{value}</F>
-            <Label x={x + 160} y={250} textAnchor="middle" fontSize={20} fill={color}>{pickText(language, verdict)}</Label>
+            <DeterminantBlock x={x + 88} y={52} cells={cells} cell={64} rowGap={56} size={30} tint={() => (ok ? GREEN_TINT : CORAL_TINT)} />
+            <F x={x + 160} y={210} size={32} color={color}>{value}</F>
+            <Label x={x + 160} y={262} textAnchor="middle" fontSize={27} fill={color}>{pickText(language, verdict)}</Label>
         </g>
     )
 }
 
 export function UniquePricesFigure({ language }: { language: UnitLanguage }) {
     return (
-        <Figure height={350} label={pickText(language, say(
+        <Figure height={354} label={pickText(language, say(
             'Ezkerrean, 2 eta 1 kilo eta 3 eta 2 kilo dituzten sortak: |A| = 1, eta prezioak bakarrak dira. Eskuinean, 2 eta 3 eta 4 eta 6: bigarrena lehenaren bikoitza da, |A| = 0, eta prezioak ezin dira ondorioztatu',
             'A la izquierda, lotes de 2 y 1 kilos y de 3 y 2 kilos: |A| = 1 y los precios son únicos. A la derecha, 2 y 3 y 4 y 6: el segundo es el doble del primero, |A| = 0 y los precios no se pueden deducir',
             'على اليسار مجموعتان من 2 و1 كيلوغرام ومن 3 و2 كيلوغرام: |A| = 1 والأسعار وحيدة. وعلى اليمين 2 و3 و4 و6: الثانية ضعف الأولى، |A| = 0، ولا يمكن استنتاج الأسعار',
@@ -48,7 +48,7 @@ export function UniquePricesFigure({ language }: { language: UnitLanguage }) {
         ))}>
             <Card x={24} cells={[[2, 1], [3, 2]]} value="|A| = 1 ≠ 0" verdict={say('Prezio bakarrak', 'Precios únicos', 'أسعار وحيدة', 'Unique prices')} ok language={language} />
             <Card x={376} cells={[[2, 3], [4, 6]]} value="|A| = 0" verdict={say('Ez dira ondorioztatzen', 'No se deducen', 'لا تُستنتج', 'Cannot be found')} ok={false} language={language} />
-            <Label x={360} y={334} textAnchor="middle" fontSize={18} fill={MUTED}>{pickText(language, say('Errenkada bat sorta bakoitzeko', 'Una fila por lote', 'صف لكل مجموعة', 'One row per bundle'))}</Label>
+            <Label x={360} y={338} textAnchor="middle" fontSize={24} fill={MUTED}>{pickText(language, say('Errenkada bat sorta bakoitzeko', 'Una fila por lote', 'صف لكل مجموعة', 'One row per bundle'))}</Label>
         </Figure>
     )
 }
