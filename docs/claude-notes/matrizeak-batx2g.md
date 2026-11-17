@@ -40,6 +40,13 @@ Fuera: `what-is-a-matrix` (la sustituye `data-tables`), `matrix-applications` (l
 - **Test de otra unidad tocado:** `tests/matrizeak-batx2z-content.test.ts` comprobaba que la Matrices de Sociales no estaba activa; se quitó esa línea (lo mismo pasará con Determinantes y Sistemas).
 - Test nuevo `tests/matrizeak-batx2g-content.test.ts`. 3267 tests, lint y tipos en verde.
 
+**Fase 3, laboratorio:** 4 herramientas.
+- **Propias (2)**, con predicción antes del resultado y retos infinitos (`freshFrom`):
+  - L1 `ticket` «El ticket», retos 141101–141105: tres tablas (frutería, papelería, panadería) de 2 tiendas × 3 productos; se elige tiendas en filas ($Q$) o en columnas ($Q^t$), precios en columna o en fila, el orden y si el precio es de venta, coste o beneficio ($V-C$); de las ocho formas solo se pueden $QP$ y $P^tQ^t$, y las demás dicen por qué no. Se predice qué tienda tiene más. Pasos para las cantidades de la tienda elegida. Lógica en `lab/ticket.ts`.
+  - L2 `production-chain` «La cadena de producción», retos 141151–141155: muebles, ropa y comedores; clientes → productos ($A$) → piezas ($B$) dibujados con los números de los caminos del cliente y la pieza elegidos; se cambia el pedido o la receta; $AB$ da clientes × piezas y $BA$ no se puede. Se predice qué cliente necesita más. Lógica en `lab/chain.ts`.
+- **Prestadas (2):** el deslizador del rango y la máquina de Gauss-Jordan de Ciencias, con sus retos 116301–116305 y 116201–116205.
+- **Test:** `tests/matrizeak-batx2g-lab.test.ts`. Revisado a 375 px en eu, es, ar y en con `getBBox`: nada se sale y los nombres caben en sus cajas.
+
 ## Trucos
 
 - El test común de lecciones parte las fórmulas por `\\`: un producto de matrices con columnas (`…\end{pmatrix}=\begin{pmatrix}228\\289…`) no pasa en el ejemplo. Escribe el ejemplo como cuentas (`12\cdot 9+30\cdot 4=228`).
@@ -47,4 +54,4 @@ Fuera: `what-is-a-matrix` (la sustituye `data-tables`), `matrix-applications` (l
 
 ## En curso
 
-- Fase 1+2 hecha. Siguiente: fase 3, laboratorio (L1 «El ticket», L2 «La cadena de producción», M1 Gauss-Jordan y M2 deslizador del rango de Ciencias), luego fase 4, juegos.
+- Fases 1+2 y 3 hechas. Siguiente: fase 4, juegos (J1 «¿Qué producto lo calcula?», J2 «El ticket escondido», J3 detective, «Despeja la X» de Ciencias, carrera y memoria propias; niveles en 141401–141899).

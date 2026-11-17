@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { MatricesHeroArt } from '../batx2-zientziak-matrizeak/figures'
 import { gizarteMatrizeakChallenges, gizarteMatrizeakDiagnostic, gizarteMatrizeakExerciseBank, gizarteMatrizeakPractice } from './content'
+import { GizarteMatrizeakLaboratory } from './lab'
+import { gizarteMatrizeakLabChallengeIds, gizarteMatrizeakLabToolForTopic, gizarteMatrizeakLabTools } from './lab/labTools'
 import { gizarteMatrizeakStages, gizarteMatrizeakTopics } from './lessons'
 
 const matrizeakBatx2gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const matrizeakBatx2gUnit: UnitDefinition = {
     guidedPractice: gizarteMatrizeakPractice,
     exerciseBank: gizarteMatrizeakExerciseBank,
     challenges: gizarteMatrizeakChallenges,
+    lab: {
+        description: {
+            eu: `${gizarteMatrizeakLabTools.length} tresna, erronkekin: tiketa eta ekoizpen-katea, berriak; eta Zientzietako heinaren graduatzailea eta Gauss-Jordanen makina.`,
+            es: `${gizarteMatrizeakLabTools.length} herramientas con retos: el ticket y la cadena de producción, nuevas; y el deslizador del rango y la máquina de Gauss-Jordan de Ciencias.`,
+            en: `${gizarteMatrizeakLabTools.length} tools with challenges: the receipt and the production chain, new; and the rank slider and the Gauss–Jordan machine from Sciences.`,
+            ar: `${gizarteMatrizeakLabTools.length} أدوات مع تحديات: الفاتورة وسلسلة الإنتاج، وهما جديدتان؛ ومنزلقة الرتبة وآلة غاوس-جوردان من العلوم.`
+        },
+        progressIds: gizarteMatrizeakLabChallengeIds,
+        toolForTopic: gizarteMatrizeakLabToolForTopic,
+        render: (props) => <GizarteMatrizeakLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Matrize bat eskatzen bada, eskatzen den elementua bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si se pide una matriz, solo el elemento que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If a matrix is involved, only the entry that is asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كان المطلوب من مصفوفة فاكتب العنصر المطلوب فقط.' },
         defaultForm: 'any',
