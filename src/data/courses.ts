@@ -253,7 +253,7 @@ export const courses: Course[] = [
       { id: 'aplicaciones-derivada', name: 'Aplicaciones de la Derivada', nameEu: 'Deribatuaren Aplikazioak', nameAr: 'تطبيقات المشتقة', nameEn: 'Applications of the Derivative', icon: '⛰️' },
       { id: 'representacion-funciones', name: 'Representación de Funciones', nameEu: 'Funtzioen Adierazpen Grafikoa', nameAr: 'التمثيل البياني للدوال', nameEn: 'Curve Sketching', icon: '📈' },
       { id: 'integrales', name: 'Integrales', nameEu: 'Integralak', nameAr: 'التكاملات', nameEn: 'Integrals', icon: '∫' },
-      { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲' },
+      { id: 'probabilidad', name: 'Probabilidad', nameEu: 'Probabilitatea', nameAr: 'الاحتمالات', nameEn: 'Probability', icon: '🎲', active: true },
       { id: 'binomial-normal', name: 'Distribuciones Binomial y Normal', nameEu: 'Banaketa Binomiala eta Normala', nameAr: 'التوزيع الثنائي والتوزيع الطبيعي', nameEn: 'Binomial and Normal Distributions', icon: '🔔' },
       { id: 'muestreo', name: 'Muestras Estadísticas', nameEu: 'Lagin Estatistikoak', nameAr: 'العينات الإحصائية', nameEn: 'Statistical Samples', icon: '🧪' },
       { id: 'inferencia', name: 'Inferencia Estadística: Estimación', nameEu: 'Inferentzia Estatistikoa: Estimazioa', nameAr: 'الاستدلال الإحصائي: التقدير', nameEn: 'Statistical Inference: Estimation', icon: '🎯' },

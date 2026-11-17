@@ -33,13 +33,12 @@ const allTexts = (): LocalizedText[] => [
     ...probabilityBatx2ExerciseBank.flatMap((section) => [section.title, ...section.items.flatMap((item) => [item.question, item.solution])])
 ]
 
-test('probabilitatea batx2 z: the unit is active and routed, and only in Ciencias', () => {
+test('probabilitatea batx2 z: the unit is active and routed', () => {
     const course = courses.find((item) => item.id === 'batx2-zientziak')!
     assert.ok(course.topics.find((topic) => topic.id === 'probabilidad')!.active)
     assert.ok(isUnitV2Path('/matematika/batx2-zientziak/probabilidad'))
     assert.ok(isUnitV2Path('/matematika/batx2-zientziak/probabilidad/ariketak'))
-    const social = courses.find((item) => item.id === 'batx2-gizarte')
-    if (social) assert.ok(!social.topics.find((topic) => topic.id === 'probabilidad')?.active)
+    // 2.º Sociales has its own Probabilidad (batx2-gizarte-probabilitatea), with its own test
 })
 
 test('probabilitatea batx2 z: diagnostic, practice, challenges and bank are consistent', () => {
