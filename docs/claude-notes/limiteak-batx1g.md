@@ -29,6 +29,13 @@ Tercer tema del bloque Funciones de 1.º Sociales: curso `batx1-gizarte`, tema `
 - Test: `tests/limiteak-batx1g-content.test.ts`.
 - Trucos: el «Compruébalo» con una sola fórmula en el enunciado y otra en la respuesta lo evalúa `lesson-checks` (una asíntota y = 4 frente a f(x) falla): añade una segunda fórmula al enunciado. Las figuras con `figureAfterSteps` solo aparecen tras pulsar los pasos: el barrido a 375 px pulsa `.lesson-steps-next-actions button`.
 
+## Fase 3: laboratorio
+
+- 5 herramientas. Propias: `long-run` «A largo plazo» (f(t) = (At + B)/(t + C): empieza en B/C y tiende a A; predicción: el largo plazo frente al comienzo; ▶ y tabla f(1)…f(1000); retos 135101–135105) y `tariff` «La tarifa que no salta» (p₁x hasta L y p₂x + k después; predicción: dónde empieza el segundo trozo frente a dónde acaba el primero; ▶; retos 135201–135205).
+- Prestadas de Ciencias con sus ids: `degrees`, `lens`, `hole` (etapas y lecciones de esta unidad).
+- Test: `tests/limiteak-batx1g-lab.test.ts`.
+- Truco: una fila con cuatro fórmulas no cabe a 375 px; la tabla va en dos filas.
+
 ## En curso
 
-- Fases 1–2 hechas. Siguiente: fase 3, laboratorio (L1 «A largo plazo», L2 «La tarifa que no salta», y lupa, agujero y grados de Ciencias).
+- Fases 1–3 hechas. Siguiente: fase 4, juegos (J1 «¿Y a la larga?», J2 «Empalma los trozos», detective, carrera, memoria e indeterminaciones, asíntotas y discontinuidades de Ciencias).

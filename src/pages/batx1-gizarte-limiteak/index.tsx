@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { socLimitsChallenges, socLimitsDiagnostic, socLimitsExerciseBank, socLimitsPractice } from './content'
 import { SocLimitsHeroArt } from './figures'
+import { SocLimitsLaboratory } from './lab'
+import { socLimitsLabChallengeIds, socLimitsLabToolForTopic, socLimitsLabTools } from './lab/labTools'
 import { socLimitsStages, socLimitsTopics } from './lessons'
 
 const limiteakBatx1gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const limiteakBatx1gUnit: UnitDefinition = {
     guidedPractice: socLimitsPractice,
     exerciseBank: socLimitsExerciseBank,
     challenges: socLimitsChallenges,
+    lab: {
+        description: {
+            eu: `${socLimitsLabTools.length} tresna, erronkekin: epe luzera eta jauzirik gabeko tarifa, berriak; eta Zientzietako maila handienak irabazten du, limitearen lupa eta 0/0 zuloa.`,
+            es: `${socLimitsLabTools.length} herramientas con retos: a largo plazo y la tarifa que no salta, nuevas; y de Ciencias, gana el de mayor grado, la lupa del límite y el agujero del 0/0.`,
+            en: `${socLimitsLabTools.length} tools with challenges: in the long run and the tariff that does not jump, new; and from Sciences, the highest degree wins, the lens of the limit and the hole of 0/0.`,
+            ar: `${socLimitsLabTools.length} أدوات مع تحديات: على المدى البعيد والتعرفة التي لا تقفز، وهما جديدتان؛ ومن العلوم: تفوز الدرجة الأكبر وعدسة النهاية وثقب 0/0.`
+        },
+        progressIds: socLimitsLabChallengeIds,
+        toolForTopic: socLimitsLabToolForTopic,
+        render: (props) => <SocLimitsLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 2,5 edo 5/6.', es: 'Escribe un número: 5, −3, 2,5 o 5/6.', en: 'Write a number: 5, −3, 2.5 or 5/6.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 2.5 أو 5/6.' },
         defaultForm: 'any',
