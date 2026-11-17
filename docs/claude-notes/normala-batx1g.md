@@ -26,6 +26,15 @@ Anaya 1.º Bach MACS, Suma Piezas U10 «Distribuciones de probabilidad de variab
 - **Trucos:** en las plantillas, la z va como constante `Z = '{z}'`; un script de shell con `${...}` lo para la comprobación de seguridad: usar el editor. `const P` o `const T` en `lessons.tsx` rompen react-refresh (parecen componentes): se llaman `tableBelow`, `tableOf`. En euskera, «% 20k» y «% 50ek» pegan sufijo: se reescriben («etxeen % 20 da…», «herritarren erdiak…»).
 - Revisado a 375 px en eu, es y ar: los 15 dibujos medidos con `getBBox` y ninguna fórmula se sale.
 
+## Fase 2 · laboratorio
+
+- **Herramientas propias (3):** `histogram` (Histogramatik kanpaira: estaturas N(170; 10) con semilla, +100/+1000 datos, clases de 10, 5 o 2,5 cm dibujadas como densidad, la campana encima; la clase tocada da su parte frente a la probabilidad de la tabla —todos los bordes son z con dos decimales—; predicción: qué parte cae en 160–180), `density` (Eraiki dentsitate bat: rectángulo, rampa que sube o que baja, bases 2, 4, 5, 10, altura en centésimas; área total y P(a ≤ X ≤ b) exactas en diezmilésimas; predicción: área menor, igual o mayor que 1), `fitNormal` (Doitu normal batera: 80 estaturas, 100 esperas y 144 notas; μ y σ de 0,5 en 0,5 o el botón x̄, s; esperados con Φ y clases extremas abiertas; regla del 5 %; las esperas, torcidas, nunca se aceptan).
+- **Prestadas:** `score` (1.º Ciencias Estadística) y `lookup`, `bell`, `approx` (Banaketak), con sus ids.
+- **Ids:** 140101–140103 (histogram), 140111–140113 (density), 140121–140123 (fitNormal); retos sin fin en las tres.
+- **Tests:** `tests/normala-batx1g-lab.test.ts`.
+- **Aviso (pieza prestada, sin tocar):** en «Bajo la campana» los ejes x y z se dibujan uno encima del otro para la animación ▶ (el medidor de solapes lo marca en eu, es y ar). Es así también en 2.º Ciencias.
+- Revisado a 375 px en eu, es y ar: las 7 herramientas con la predicción hecha, sin textos fuera ni desbordes laterales.
+
 ## En curso
 
-- Fase 1 hecha. Siguiente: fase 2, laboratorio (L1 Del histograma a la campana, L2 Construye una densidad, L3 Ajusta a una normal; prestadas `bell`, `lookup`, `approx` de Banaketak y `score` de 1.º Ciencias), ids 140101–140399. Después, fase 3 (juegos, ids 140401–140899) y hoja de euskera.
+- Fases 1 (efa65b12) y 2 hechas. Siguiente: fase 3, juegos (J1 ¿Qué porcentaje?, J2 ¿Es una densidad?, J3 Nota de corte, J4 detective; prestados «¿Qué área es?» y «Busca en la tabla» de Banaketak, carrera de 5 circuitos y memoria), ids 140401–140899. Después, hoja de euskera y cierre.

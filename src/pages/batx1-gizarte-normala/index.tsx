@@ -3,6 +3,8 @@ import type { UnitDefinition } from '../../features/unit-v2/types'
 import { readStatisticsAnswer } from '../dbh2-estatistika-v2/answers'
 import { normalBatx1gChallenges, normalBatx1gDiagnostic, normalBatx1gExerciseBank, normalBatx1gPractice } from './content'
 import { NormalBatx1gHeroArt } from './figures'
+import { NormalBatx1gLaboratory } from './lab'
+import { normalBatx1gLabChallengeIds, normalBatx1gLabToolForTopic, normalBatx1gLabTools } from './lab/labTools'
 import { normalBatx1gStages, normalBatx1gTopics } from './lessons'
 
 const normalaBatx1gUnit: UnitDefinition = {
@@ -25,6 +27,17 @@ const normalaBatx1gUnit: UnitDefinition = {
     guidedPractice: normalBatx1gPractice,
     exerciseBank: normalBatx1gExerciseBank,
     challenges: normalBatx1gChallenges,
+    lab: {
+        description: {
+            eu: `${normalBatx1gLabTools.length} tresna, erronkekin: histogramatik kanpaira, eraiki dentsitate bat eta doitu normal batera, berriak; 1. Batxilergoko puntuazio tipikoa; eta 2. Batxilergoko kanpaiaren azpian, normalaren taula eta binomiala kanpaiaren azpian.`,
+            es: `${normalBatx1gLabTools.length} herramientas con retos: del histograma a la campana, construye una densidad y ajusta a una normal, nuevas; la puntuación típica de 1.º de Bachillerato; y bajo la campana, la tabla de la normal y la binomial bajo la campana, de 2.º de Bachillerato.`,
+            en: `${normalBatx1gLabTools.length} tools with challenges: from the histogram to the bell, build a density and fit a normal, new; the standard score from 1st Bachillerato; and under the bell, the normal table and the binomial under the bell, from 2nd Bachillerato.`,
+            ar: `${normalBatx1gLabTools.length} أدوات مع تحديات: من المدرج إلى الجرس، وابنِ كثافة، وطابق مع توزيع طبيعي، وهي جديدة؛ والدرجة المعيارية من البكالوريا الأولى؛ وتحت الجرس وجدول التوزيع الطبيعي والتوزيع الثنائي تحت الجرس من البكالوريا الثانية.`
+        },
+        progressIds: normalBatx1gLabChallengeIds,
+        toolForTopic: normalBatx1gLabToolForTopic,
+        render: (props) => <NormalBatx1gLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki zehatz bat edo zatiki bat: 0,8944, 3/8 edo 12. Normalaren probabilitateak, taulako lau hamartarrekin; ehunekoak, % ikurrik gabe.', es: 'Escribe un número exacto o una fracción: 0,8944, 3/8 o 12. Las probabilidades de la normal, con los cuatro decimales de la tabla; los porcentajes, sin el signo %.', en: 'Write an exact number or a fraction: 0.8944, 3/8 or 12. Normal probabilities with the four decimals of the table; percentages without the % sign.', ar: 'اكتب عددًا مضبوطًا أو كسرًا: 0.8944 أو 3/8 أو 12. احتمالات التوزيع الطبيعي بأربعة أرقام عشرية من الجدول، والنسب دون الرمز ٪.' },
         defaultForm: 'any',
