@@ -40,6 +40,8 @@ Quinto y último tema del bloque Análisis de 2.º Sociales (reparto en paralelo
 
 - `takeaway-notation` exige que las letras de la idea clave sean las de la lección: nada de `A=\int_a^b…` si la lección escribe `a`.
 
-## En curso
+## Cierre (2026-11-17)
 
-- Falta la revisión a 375 px en eu, es y ar. Siguiente paso: recargar el servidor y pasar el escaneo.
+- **Comprobado:** 3405 tests, lint y build en verde; inventario OK (2 juegos propios, 5 herramientas).
+- **375 px en eu, es y ar:** la portada y las 15 lecciones, las 5 herramientas (cada variante, antes y después de predecir y con los pasos al máximo), ¿qué primitiva es? y área con signo (las 6 rondas de los tres niveles), detective (6 rondas por nivel), carrera y memoria al empezar: sin problemas. Arreglo: 4 soluciones de práctica, retos y banco en filas; medidas con KaTeX a 22 px, ninguna pasa ya de 400 px.
+- **Al fusionar:** `paths.ts` es una sola línea; las líneas `active: true` de `courses.ts` están juntas.
