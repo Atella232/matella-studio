@@ -38,6 +38,8 @@ test('banaketak batx2 g games: the hub, its levels and progress ids', () => {
     for (const game of distributionsBatx2gGames) {
         for (const level of game.levels) assert.ok(['discrete', 'binomial', 'normal', 'approximation'].includes(level.stage), `${game.id}: ${level.stage}`)
         checkTexts([game.title, game.tagline, game.skills, ...game.levels.flatMap((level) => [level.title, level.description])])
+        // The hub and the level cards print these texts as they are, with no formulas
+        for (const text of [game.title, game.tagline, game.skills, ...game.levels.flatMap((level) => [level.title, level.description])]) for (const language of languages) assert.ok(!text[language].includes('$'), `${game.id}: ${text[language]}`)
         assert.equal(distributionsBatx2gGameModeForPath(`/x/jokuak/${distributionsBatx2gGameSlugs[game.id]}`), game.id)
     }
     // The race: circuit i here is circuit i + 1 of 2.º Ciencias

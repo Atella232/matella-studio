@@ -39,9 +39,9 @@ export const distributionsBatx2gGames: GameInfo<DistributionsBatx2gGameId>[] = [
         tagline: { eu: 'Nota desberdinak, eskala desberdinak: tipifikatu eta aukeratu nabarmenena.', es: 'Notas distintas, escalas distintas: tipifica y elige a quien más destaca.', en: 'Different marks, different scales: standardise and pick the one who stands out.', ar: 'درجات مختلفة ومقاييس مختلفة: وحّد واختر الأكثر تميزًا.' },
         skills: { eu: 'Puntuazio tipikoak', es: 'Puntuaciones tipificadas', en: 'Standard scores', ar: 'الدرجات المعيارية' },
         levels: [
-            { progressId: 151601, stage: 'normal', title: { eu: 'Bi pertsona', es: 'Dos personas', en: 'Two people', ar: 'شخصان' }, description: { eu: '$z$ handiena.', es: 'La $z$ mayor.', en: 'The biggest $z$.', ar: 'أكبر $z$.' } },
+            { progressId: 151601, stage: 'normal', title: { eu: 'Bi pertsona', es: 'Dos personas', en: 'Two people', ar: 'شخصان' }, description: { eu: 'z handiena.', es: 'La z mayor.', en: 'The biggest z.', ar: 'أكبر z.' } },
             { progressId: 151602, stage: 'normal', title: { eu: 'Ezohikoena', es: 'El más inusual', en: 'The most unusual', ar: 'الأكثر ندرة' }, description: { eu: 'Batez bestekotik urrunen.', es: 'El más lejos de la media.', en: 'The furthest from the mean.', ar: 'الأبعد عن المتوسط.' } },
-            { progressId: 151603, stage: 'normal', title: { eu: 'Hiru pertsona', es: 'Tres personas', en: 'Three people', ar: 'ثلاثة أشخاص' }, description: { eu: 'Hiru $z$ konparatu.', es: 'Compara tres $z$.', en: 'Compare three $z$.', ar: 'قارن ثلاث قيم $z$.' } }
+            { progressId: 151603, stage: 'normal', title: { eu: 'Hiru pertsona', es: 'Tres personas', en: 'Three people', ar: 'ثلاثة أشخاص' }, description: { eu: 'Hiru z konparatu.', es: 'Compara tres z.', en: 'Compare three z.', ar: 'قارن ثلاث قيم z.' } }
         ]
     },
     {
@@ -50,7 +50,7 @@ export const distributionsBatx2gGames: GameInfo<DistributionsBatx2gGameId>[] = [
         tagline: { eu: 'Ebazpen bakoitzean lerro bat gaizki dago: aurkitu eta esan zer akats den.', es: 'En cada resolución hay una línea mal: encuéntrala y di qué error es.', en: 'Each solution has one wrong line: find it and say what the mistake is.', ar: 'في كل حل سطر خاطئ: جده وقل ما الخطأ.' },
         skills: { eu: 'Binomiala, taula eta tarteak', es: 'Binomial, tabla e intervalos', en: 'Binomial, table and intervals', ar: 'الثنائي والجدول والفترات' },
         levels: [
-            { progressId: 151701, stage: 'binomial', title: { eu: 'Binomiala', es: 'Binomial', en: 'Binomial', ar: 'الثنائي' }, description: { eu: 'Ordenak, $\\sigma$ eta «gutxienez bat».', es: 'Órdenes, $\\sigma$ y «al menos uno».', en: 'Orders, $\\sigma$ and ‘at least one’.', ar: 'الترتيبات و$\\sigma$ و«واحد على الأقل».' } },
+            { progressId: 151701, stage: 'binomial', title: { eu: 'Binomiala', es: 'Binomial', en: 'Binomial', ar: 'الثنائي' }, description: { eu: 'Ordenak, σ eta «gutxienez bat».', es: 'Órdenes, σ y «al menos uno».', en: 'Orders, σ and ‘at least one’.', ar: 'الترتيبات وσ و«واحد على الأقل».' } },
             { progressId: 151702, stage: 'normal', title: { eu: 'Normala', es: 'Normal', en: 'Normal', ar: 'الطبيعي' }, description: { eu: 'Taula, tipifikazioa eta buztanak.', es: 'Tabla, tipificación y colas.', en: 'Table, standardising and tails.', ar: 'الجدول والتوحيد والذيول.' } },
             { progressId: 151703, stage: 'approximation', title: { eu: 'Tarteak', es: 'Intervalos', en: 'Intervals', ar: 'الفترات' }, description: { eu: 'Erradioa, balio kritikoa eta zuzenketa.', es: 'Radio, valor crítico y corrección.', en: 'Radius, critical value and correction.', ar: 'نصف القطر والقيمة الحرجة والتصحيح.' } }
         ]
