@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { gizAlgebraChallenges, gizAlgebraDiagnostic, gizAlgebraExerciseBank, gizAlgebraPractice } from './content'
 import { GizAlgebraHeroArt } from './figures'
+import { GizAlgebraGames } from './games'
+import { GIZ_ALGEBRA_GAME_RECORDS_KEY, gizAlgebraGameProgressIds } from './games/info'
 import { GizAlgebraLaboratory } from './lab'
 import { gizAlgebraLabChallengeIds, gizAlgebraLabToolForTopic, gizAlgebraLabTools } from './lab/labTools'
 import { gizAlgebraStages, gizAlgebraTopics } from './lessons'
@@ -36,6 +38,17 @@ const aljebraBatx1gUnit: UnitDefinition = {
         progressIds: gizAlgebraLabChallengeIds,
         toolForTopic: gizAlgebraLabToolForTopic,
         render: (props) => <GizAlgebraLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zortzi joko: lasterketa, koadratu leihatila, irabazi ala galdu, aljebraren detektibea eta memoria, berriak; eta 1. Zientziakoak: egin zeroa, baliozkoa ala faltsua, eta zeinuen taula.',
+            es: 'Ocho juegos: carrera, cuadra la taquilla, ¿gana o pierde?, detective del álgebra y memoria, nuevos; y de 1.º Ciencias, haz el cero, ¿válida o falsa? y la tabla de signos.',
+            en: 'Eight games: race, balance the box office, earn or lose, algebra detective and memory, new; and from 1st Sciences, make the zero, valid or false, and the sign table.',
+            ar: 'ثماني ألعاب: السباق ووازن شباك التذاكر وربح أم خسارة ومخبر الجبر والذاكرة، وهي جديدة؛ ومن الأول علوم: اصنع الصفر وصحيح أم زائف وجدول الإشارات.'
+        },
+        progressIds: gizAlgebraGameProgressIds,
+        recordsKey: GIZ_ALGEBRA_GAME_RECORDS_KEY,
+        render: (props) => <GizAlgebraGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2. Soluzio bat baino gehiago badago, eskatzen dena bakarrik.', es: 'Escribe un número: 5, −3, 1,5 o 3/2. Si hay varias soluciones, solo la que se pide.', en: 'Write a number: 5, −3, 1.5 or 3/2. If there are several solutions, only the one asked for.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2. وإذا كانت هناك عدة حلول فاكتب المطلوب فقط.' },

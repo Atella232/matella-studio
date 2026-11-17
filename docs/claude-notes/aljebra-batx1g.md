@@ -33,6 +33,13 @@ El dueño eligió las recomendadas: V1 (13 lecciones de 1.º Ciencias + 4 propia
 - **Prestadas (con sus ids):** ruffini, root-hunt, change-machine, radical, exponential, circle, gauss-machine, mixture, sign-table, half-plane, region. 14 herramientas en total.
 - **Trucos:** en la etapa `economy` el color de etapa es coral, así que `var(--stage)` sale rojo: las herramientas y los dibujos propios usan azul y rojo fijos, porque las leyendas nombran los colores. El título vasco largo «Errentagarritasun-atalasea» empujaba el botón «Ikusi ikasgaia» fuera de los 375 px: la herramienta se llama «Atalasea». La fórmula del beneficio va en tres líneas (I, C, B).
 
+## Fase 4 · juegos
+
+- **Propios:** J1 `box` «Cuadra la taquilla» (`boxOffice.ts`, 132501–132503: dos precios; tres precios con «el doble/triple»; tres precios con «tantas como las otras dos»; el generador comprueba que el determinante no es 0 y `solveBox` devuelve la solución), J2 `gain` «¿Gana o pierde?» (`gain.ts`, 132601–132603: veredicto con datos, con I(x) y C(x), y el punto muerto entre tres), J3 detective (`detective.ts`, 132701–132703, 12 errores en 3 niveles: ecuaciones, sistemas e inecuaciones, economía).
+- **Carrera** 132401–132405 (16 tipos, `race.ts`) y **memoria** 132801–132803 (raíces, exponenciales, puntos muertos).
+- **Reutilizados de Ciencias** con sus textos: `zero` (132811–132813, etapa systems), `valid` (132821–132823, equations), `signs` (132831–132833, inequalities). «Lee la última fila» no se usa: discute parámetros, que no están en el libro de Sociales.
+- **Trucos:** en la carrera, una opción equivocada que no sale entera no se ofrece (`wrongAs` devuelve `null`). Los beneficios se limitan a 450 unidades para que ningún número llegue a cinco cifras (el `written` de Ciencias no agrupa miles). Cambiar de idioma en los juegos vuelve a la lista: al revisar, cambia el idioma primero y abre el juego después.
+
 ## En curso
 
-- 2026-11-17: fases 1+2 y 3 hechas (tests, lint y build en verde; revisado a 375 px en eu/es/ar). **Siguiente:** juegos con J1 «Cuadra la taquilla», J2 «¿Gana o pierde?», J3 detective, carrera y memoria (ids 132401–132899), y los reutilizados de Ciencias desde 132811.
+- 2026-11-17: fases 1+2, 3 y 4 hechas (tests, lint y build en verde; revisado a 375 px en eu/es/ar; inventario OK: 5 juegos propios, 8 herramientas propias). **Siguiente:** hoja de revisión de euskera y cerrar la nota.
