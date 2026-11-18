@@ -238,13 +238,15 @@ El dueño eligió (2026-11-17):
 | Funciones | 5192 | `funciones` | `funtzioak` | 133000–133999 | `batx1-zientziak-funtzioak` | Publicado 2026-11-18 |
 | Funciones | 5192 | `funciones-exponenciales` | `esponentzialak` | 134000–134999 | `dbh4-akademikoak-esponentzialak`, `batx1-zientziak-funtzioak` | Publicado 2026-11-18 |
 | Funciones | 5192 | `limites-continuidad` | `limiteak` | 135000–135999 | `batx1-zientziak-limiteak` | Publicado 2026-11-18 |
-| Funciones | 5192 | `derivadas` | `deribatuak` | 136000–136999 | `batx1-zientziak-deribatuak`, `-aplikazioak` (un solo tema) | Terminado en `feat/deribatuak-batx1g`, sin publicar |
+| Funciones | 5192 | `derivadas` | `deribatuak` | 136000–136999 | `batx1-zientziak-deribatuak`, `-aplikazioak` (un solo tema) | Publicado 2026-11-18 |
 | Estadística | 5193 | `estadistica` | `estatistika` | 137000–137999 | `batx1-zientziak-estatistika` | Publicado 2026-11-18 |
 | Estadística | 5193 | `estadistica-bidimensional` | `bidimentsionala` | 138000–138999 | `batx1-zientziak-bidimentsionala` | Publicado 2026-11-18 |
 | Probabilidad | 5194 | `distribuciones-discretas` | `diskretuak` | 139000–139999 | `dbh4-akademikoak-konbinatoria`, `-probabilitatea`, `batx2-zientziak-probabilitatea`, `-banaketak` | Publicado 2026-11-18 |
 | Probabilidad | 5194 | `distribucion-normal` | `normala` | 140000–140999 | `batx2-zientziak-banaketak` | Publicado 2026-11-18 |
 
 **2026-11-18: primera tanda de 1.º Sociales publicada** (`main` 7f7d96e, bundle `index-D8IDgBC7.js`), con el «Sí, los 10» del dueño: Números reales, Aritmética mercantil, Álgebra, Funciones elementales, Exponenciales, Límites y continuidad, Estadística unidimensional, Estadística bidimensional, Distribuciones discretas y Normal (10 de 11). Se fusionaron las ramas finales `feat/aljebra-`, `feat/limiteak-`, `feat/bidimentsionala-` y `feat/normala-batx1g` en `feat/batx1g-tanda1`, encima de la tanda de 2.º Sociales (`f3caf5a`). Conflictos solo en `paths.ts` (unir las listas), `courses.ts` (líneas `active: true` vecinas: quedarse con la activa) y el router (dos bloques de rutas: poner los dos). 3920 tests, lint, build e inventario en verde. Falta Derivadas (terminada después, en `feat/deribatuak-batx1g`). Pieza prestada con un detalle conocido: en «Adivina la correlación» (`CloudGame` de 4.º) la «y» del eje se sale unos píxeles, también en 4.º y 1.º Ciencias.
+
+**2026-11-18: Derivadas publicado** (`main` 38202d3, bundle `index-DKihXm7d.js`), con el «Sí, publícalo» del dueño. **1.º Sociales completo, con sus 11 temas en la web.** 3952 tests, lint, build e inventario en verde; 21 vistas en vivo a 375 px en eu/es/ar sin desbordes. Queda una pregunta abierta en la sesión de Funciones: el juego de indeterminaciones de Límites (ya publicado) pregunta en su nivel 2 por ∞−∞ y 0·∞ y nombra 1^∞, que las lecciones de Sociales no explican.
 
 ## Reparto en paralelo de 2.º Sociales (2026-11-17)
 

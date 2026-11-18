@@ -106,3 +106,4 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [Estatistika bidimentsionala · 1.º Bachillerato Sociales](bidimentsionala-batx1g.md) — tema de 1.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 7f7d96e, bundle `index-D8IDgBC7.js`)
 - [Probabilitate-banaketa diskretuak · 1.º Bachillerato Sociales](diskretuak-batx1g.md) — tema de 1.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 7f7d96e, bundle `index-D8IDgBC7.js`)
 - [Banaketa normala · 1.º Bachillerato Sociales](normala-batx1g.md) — tema de 1.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 7f7d96e, bundle `index-D8IDgBC7.js`)
+- [Deribatuak eta haien aplikazioak · 1.º Bachillerato Sociales](deribatuak-batx1g.md) — tema de 1.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 38202d3, bundle `index-DKihXm7d.js`)
