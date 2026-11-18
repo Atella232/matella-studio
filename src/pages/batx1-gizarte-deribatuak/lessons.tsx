@@ -125,7 +125,10 @@ const baseTopics: Omit<UnitTopic, 'explanation' | 'example'>[] = [
         stage: 'rules',
         title: say('Katea, esponentzialak eta logaritmoak', 'Cadena, exponenciales y logaritmos', 'السلسلة والأسيات واللوغاريتمات', 'Chain, exponentials and logarithms'),
         goal: say('$e^x$, $\\ln x$ eta funtzio konposatuak katearen erregelarekin deribatzea.', 'Derivar $e^x$, $\\ln x$ y funciones compuestas con la regla de la cadena.', 'اشتقاق $e^x$ و$\\ln x$ والدوال المركبة بقاعدة السلسلة.', 'Differentiate $e^x$, $\\ln x$ and composite functions with the chain rule.'),
-        needs: [{ unit: 'batx1-gizarte/funciones-exponenciales', topic: 'exp-graph', title: { eu: 'Funtzio esponentziala', es: 'La función exponencial', en: 'The exponential function', ar: 'الدالة الأسية' } }],
+        needs: [
+            { unit: 'batx1-gizarte/funciones-exponenciales', topic: 'exp-graph', title: { eu: 'Funtzio esponentziala', es: 'La función exponencial', en: 'The exponential function', ar: 'الدالة الأسية' } },
+            { unit: 'batx1-gizarte/funciones-exponenciales', topic: 'log-inverse', title: { eu: 'Logaritmoa, esponentzialaren alderantzizkoa', es: 'El logaritmo, inversa de la exponencial', en: 'The logarithm, inverse of the exponential', ar: 'اللوغاريتم، عكسية الأسية' } }
+        ],
         problem: say('Deribatu $f(x)=(2x+1)^3$, $g(x)=e^{2x}$ eta $h(x)=\\ln(x^2+1)$.', 'Deriva $f(x)=(2x+1)^3$, $g(x)=e^{2x}$ y $h(x)=\\ln(x^2+1)$.', 'اشتق $f(x)=(2x+1)^3$ و$g(x)=e^{2x}$ و$h(x)=\\ln(x^2+1)$.', 'Differentiate $f(x)=(2x+1)^3$, $g(x)=e^{2x}$ and $h(x)=\\ln(x^2+1)$.'),
         stepsKind: 'steps',
         steps: [

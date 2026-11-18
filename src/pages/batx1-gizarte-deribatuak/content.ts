@@ -47,10 +47,10 @@ export const socDerivDiagnostic: DiagnosticQuestion[] = [
     },
     {
         id: 136005,
-        prompt: say('Zenbat da $\\ln 1$?', '¿Cuánto vale $\\ln 1$?', 'كم تساوي $\\ln 1$؟', 'What is $\\ln 1$?'),
-        options: [same('$1$'), same('$e$'), same('$0$')],
+        prompt: say('Zenbat da $\\log 1$?', '¿Cuánto vale $\\log 1$?', 'كم تساوي $\\log 1$؟', 'What is $\\log 1$?'),
+        options: [same('$1$'), same('$10$'), same('$0$')],
         correctIndex: 2,
-        explanation: same('$e^0=1$'),
+        explanation: same('$10^0=1$'),
         topic: 'chain-exp-log'
     },
     {

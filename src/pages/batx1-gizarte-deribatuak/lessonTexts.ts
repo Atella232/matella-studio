@@ -105,6 +105,7 @@ export const socDerivLessonTexts: Record<SocDerivTopicId, LessonTexts> = {
     },
     'chain-exp-log': {
         definitions: [
+            { term: say('e zenbakia', 'El número e', 'العدد e', 'The number e'), meaning: say('$e\\approx 2{,}718$ zenbakia; $\\ln x$ logaritmoa $e$ oinarrian da, kalkulagailuko «ln» tekla.', 'El número $e\\approx 2{,}718$; $\\ln x$ es el logaritmo en base $e$, la tecla «ln» de la calculadora.', 'العدد $e\\approx 2{,}718$؛ و$\\ln x$ هو اللوغاريتم ذو الأساس $e$، زر «ln» في الآلة الحاسبة.', 'The number $e\\approx 2{,}718$; $\\ln x$ is the logarithm with base $e$, the «ln» key on the calculator.') },
             { term: say('Katearen erregela', 'Regla de la cadena', 'قاعدة السلسلة', 'Chain rule'), meaning: say('$f(g(x))$ deribatzeko: kanpokoaren deribatua, barrukoa ukitu gabe, bider barrukoaren deribatua.', 'Para derivar $f(g(x))$: derivada de fuera, con lo de dentro sin tocar, por la derivada de dentro.', 'لاشتقاق $f(g(x))$: مشتقة الخارج مع ترك الداخل كما هو، في مشتقة الداخل.', 'To differentiate $f(g(x))$: the derivative of the outside, leaving the inside as it is, times the derivative of the inside.') }
         ],
         vocabulary: [

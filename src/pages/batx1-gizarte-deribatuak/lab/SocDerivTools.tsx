@@ -120,9 +120,10 @@ export function ProfitTool(props: LabToolProps) {
     const c = profitCurveOf(state)
     const best = bestX(state)
     const values = [0, 10, 20, 30].map((x) => profitAt(state, x)).concat(best >= 0 && best <= PROFIT_X ? [profitAt(state, best)] : [])
-    // A window around the top of the profit: as far below 0 as above it, so the hill is always seen
+    // A window around the top of the profit: as far below 0 as above it (further if the top itself is a loss), so the hill is always seen
     const top = Math.max(50, Math.ceil((Math.max(...values) * 1.25) / 50) * 50)
-    const bottom = -top
+    const lowest = profitAt(state, Math.min(PROFIT_X, Math.max(0, best)))
+    const bottom = Math.min(-top, Math.floor((1.25 * lowest) / 50) * 50)
     const X = (x: number) => 46 + x * 10
     const Y = (y: number) => 262 - ((y - bottom) / (top - bottom)) * 226
     const walker = PROFIT_X * progress
@@ -146,7 +147,7 @@ export function ProfitTool(props: LabToolProps) {
             onChoose={(prediction) => setState((s) => setPrediction(s, prediction))}
         >
             <Readout
-                latex={[`B(x)=${state.p}x-(${c === 1 ? '' : t(c)}x^2+${state.v}x+${state.F})`, `B'(${state.x})=${t(profitSlope(state, state.x))}`, `x=\\frac{p-v}{2c}=${t(best)}`]}
+                latex={[`B(x)=${state.p}x-(${c === 1 ? '' : t(c)}x^2+${state.v}x+${state.F})`, `B'(${state.x})=${t(profitSlope(state, state.x))}`, best >= 0 ? `x=\\frac{p-v}{2c}=${t(best)}` : `p-v=${state.p - state.v}<0`]}
                 note={l(say('Urdina: diru-sarrera. Gorria: kostua. Berdea: mozkina.', 'Azul: ingreso. Rojo: coste. Verde: beneficio.', 'الأزرق: الإيراد. والأحمر: التكلفة. والأخضر: الربح.', 'Blue: revenue. Red: cost. Green: profit.'))}
             />
         </Predict>
