@@ -1,0 +1,6 @@
+.soc-statement { margin: 0 0 12px; font-size: 0.95rem; line-height: 1.45; }
+.soc-statement ol { margin: 6px 0 0; padding-inline-start: 22px; }
+.soc-statement li { margin: 4px 0; padding: 2px 6px; border-radius: 8px; }
+.soc-statement-active { background: var(--stage-tint, #dde7f7); }
+.soc-statement-ok { color: var(--success, #267b53); }
+.soc-statement-no { color: var(--muted, #58616e); }

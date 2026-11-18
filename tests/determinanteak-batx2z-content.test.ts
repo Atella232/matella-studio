@@ -74,7 +74,6 @@ const exerciseTexts = (): Record<string, string> => ({
 test('determinanteak batx2 z: the unit is active and routed', () => {
     const course = courses.find((item) => item.id === 'batx2-zientziak')!
     assert.ok(course.topics.find((topic) => topic.id === 'determinantes')!.active)
-    assert.ok(!courses.find((item) => item.id === 'batx2-gizarte')!.topics.find((topic) => topic.id === 'determinantes')!.active, 'only the Ciencias course')
     assert.ok(isUnitV2Path('/matematika/batx2-zientziak/determinantes'))
     assert.ok(isUnitV2Path('/matematika/batx2-zientziak/determinantes/ariketak'))
 })

@@ -66,8 +66,11 @@ for (const { unit, lessons, files } of units) {
     test(`${unit}: the Basque texts of its lessons glue no suffix to a number`, () => {
         const algebra = algebraInWords[unit] ?? []
         const found = files.flatMap((name) => {
-            const texts = basqueTexts(readFileSync(new URL(`${unit}/${name}`, pages), 'utf8'))
-            assert.ok(texts.length > (name === lessons ? 20 : 0), `${unit}: only ${texts.length} Basque texts found in ${name}`)
+            const source = readFileSync(new URL(`${unit}/${name}`, pages), 'utf8')
+            const texts = basqueTexts(source)
+            // A unit that borrows most of its lessons from a twin (2.º Sociales from 2.º Ciencias) has few of its own
+            const borrows = /import \{[^}]*Topics[^}]*\} from '\.\.\/[^']+\/lessons'/.test(source)
+            assert.ok(texts.length > (name === lessons ? (borrows ? 4 : 20) : 0), `${unit}: only ${texts.length} Basque texts found in ${name}`)
             return texts.flatMap(({ line, text }) => glued(algebra.reduce((rest, term) => rest.split(term).join(' '), text)).map((word) => `${name}:${line}: «${word}» in «${text}»`))
         })
         assert.deepEqual(found, [])
