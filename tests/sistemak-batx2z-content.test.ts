@@ -150,7 +150,6 @@ const claims: Record<string, { claim: Claim; answer?: string; parameters?: Recor
 test('sistemak batx2 z: the unit is active and routed', () => {
     const course = courses.find((item) => item.id === 'batx2-zientziak')!
     assert.ok(course.topics.find((topic) => topic.id === 'sistemas')!.active)
-    assert.ok(!courses.find((item) => item.id === 'batx2-gizarte')!.topics.find((topic) => topic.id === 'sistemas')!.active, 'only the Ciencias course')
     assert.ok(isUnitV2Path('/matematika/batx2-zientziak/sistemas'))
     assert.ok(isUnitV2Path('/matematika/batx2-zientziak/sistemas/ariketak'))
 })
