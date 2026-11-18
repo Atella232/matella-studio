@@ -274,6 +274,12 @@
     white-space: nowrap;
 }
 
+/* Long course names («2.º Bachillerato · Ciencias Sociales · Matemáticas») wrap instead of widening the page at 375 px */
+.fraction-v2-hero-copy .fraction-v2-chip {
+    max-width: 100%;
+    white-space: normal;
+}
+
 .fraction-v2-chip-coral {
     border-color: transparent;
     color: var(--coral-ink);
