@@ -44,3 +44,7 @@ Tercer tema del bloque Análisis de 2.º Sociales (reparto en paralelo del 2026-
 - **Comprobado:** 3341 tests, lint y build en verde; inventario OK (2 juegos propios, 6 herramientas).
 - **375 px en eu, es y ar:** las 15 lecciones y la portada, las 6 herramientas (cada variante, antes y después de predecir y con el paso al máximo), ¿máximo, mínimo o nada? y optimiza la empresa (las 6 rondas de los tres niveles), detective (6 rondas por nivel), carrera y memoria al empezar. Arreglos: cuatro fórmulas de lecciones en `gathered` (`intervals`, `max-profit`, ejemplos de `min-average` y `max-income`), dos líneas del detective acortadas (`ends`, `rise-for-price`), el hueco del beneficio en mostaza (el verde era el color de la etapa) y 13 fórmulas de práctica, retos y banco en filas: medidas con KaTeX a 22 px, ninguna pasa ya de 400 px.
 - **Al fusionar:** `paths.ts` es una sola línea; las líneas `active: true` de `courses.ts` están juntas.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la primera tanda de 2.º Sociales (`main` 2bbfdde, bundle `index-4g-iHeeL.js`). Comprobada en vivo a 375 px en eu, es y ar.

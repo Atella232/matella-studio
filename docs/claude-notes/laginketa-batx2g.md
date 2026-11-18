@@ -17,3 +17,7 @@ Fuentes: Anaya 2.º Sociales U11 (muestreo), el principio de Santillana U11 (pob
 - Juegos (`games/`): propios **¿Hay sesgo?** (`bias.ts`: 6 estudios con un plan bueno y dos sesgados; niveles «buena o sesgada», «elige la buena», «qué muestreo es»; 152501–152503) y **Reparte la muestra** (`allocate.ts`: exacta, mayores restos, al revés; 152601–152603); **detective** con errores de este tema (`detective.ts`, 152701–152703); **carrera** propia de 5 circuitos (`race.ts`, 152401–152405) y **memoria** propia (`boards.ts`: N y n ↔ h, σ y n ↔ σ/√n, p y n ↔ √(pq/n); 152801–152803).
 - Tests `tests/laginketa-batx2g-lab.test.ts` y `tests/laginketa-batx2g-games.test.ts`. Inventario OK (2+2). Revisado a 375 px en eu, es y ar (lecciones, ejercicios, laboratorio y juegos). Hoja de euskera: `~/Documents/Matella-fuentes/batx2g-probabilidad/hoja-euskera-laginketa.html`.
 - Trucos: las etiquetas de los botones con listas (`{2, 4, 6}`) se invierten en árabe: envolverlas con LRI/PDI (`\u2066…\u2069`). Un `node -e '…'` con comillas simples dentro del texto rompe el shell: escribir el script en un archivo del scratchpad.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la primera tanda de 2.º Sociales (`main` 2bbfdde, bundle `index-4g-iHeeL.js`). Comprobada en vivo a 375 px en eu, es y ar.

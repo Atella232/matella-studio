@@ -51,3 +51,7 @@ Segundo tema del bloque Análisis de 2.º Sociales (reparto en paralelo del 2026
 - **375 px en eu, es y ar:** las 15 lecciones y el resumen, las 6 herramientas (antes y después de predecir), ¿cuánto cuesta la siguiente? y une f con f′ (todas las rondas de los tres niveles), detective (6 rondas por nivel). Arreglos: notas del eje de la figura `marginal` (ox 54), lecturas largas de `next-unit` e `instant` en dos líneas, la lectura de `smooth-tariff` sin «:» (MathText lo dibuja como ÷), dos soluciones del banco en `gathered`. Las fórmulas de práctica, retos y banco se midieron con KaTeX a 22 px: ninguna pasa de 400 px.
 - **Al fusionar:** `paths.ts` es una sola línea; las líneas `active: true` de `courses.ts` están juntas.
 - **Excepción conocida (2026-11-17):** la herramienta prestada `slope-graph` (Derivadas 1.º) trae, entre sus cuatro funciones, $\sin x$ y un reto con $\cos 0$, aunque la trigonometría quedó fuera (V3 no elegida). No se puede editar la de 1.º; quitarla dejaría la etapa `rules` sin herramienta. Pendiente de que el dueño decida: dejarla o cambiarla por una propia.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la primera tanda de 2.º Sociales (`main` 2bbfdde, bundle `index-4g-iHeeL.js`). Comprobada en vivo a 375 px en eu, es y ar.

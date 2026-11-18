@@ -28,3 +28,7 @@ Tema 11 de 2.º Sociales (`binomial-normal`), segundo del bloque «Probabilidad 
 - 3309 tests, lint y build en verde; inventario OK.
 - Revisado a 375 px en eu, es y ar: las 14 lecciones con todos los pasos (textos de los dibujos medidos), las dos herramientas propias con la predicción hecha y el ▶, y los juegos propios respondiendo una ronda (dos líneas del detective que se salían, acortadas).
 - Hoja de euskera: `~/Documents/Matella-fuentes/batx2g-probabilidad/hoja-euskera-banaketak.html`.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la primera tanda de 2.º Sociales (`main` 2bbfdde, bundle `index-4g-iHeeL.js`). Comprobada en vivo a 375 px en eu, es y ar.

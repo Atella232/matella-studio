@@ -58,3 +58,7 @@ Los cuatro temas en un solo mensaje, con letras por tema (P-, B-, M-, I-) y una 
 - Revisado a 375 px en eu, es y ar: las 15 lecciones con todos los pasos abiertos (textos de los dibujos medidos con `getBBox`, sin desbordes), el banco de ejercicios, las dos herramientas propias con la predicción hecha y los juegos propios respondiendo una ronda.
 - Hoja de euskera: `~/Documents/Matella-fuentes/batx2g-probabilidad/hoja-euskera-probabilitatea.html` (fuera del repositorio).
 - **Al fusionar:** comparte con las otras sesiones solo las líneas de registro (`courses.ts`, router, `paths.ts`) y una línea de `tests/probabilitatea-batx2z-content.test.ts`.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la primera tanda de 2.º Sociales (`main` 2bbfdde, bundle `index-4g-iHeeL.js`). Comprobada en vivo a 375 px en eu, es y ar.

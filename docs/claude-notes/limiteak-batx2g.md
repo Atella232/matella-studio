@@ -63,3 +63,7 @@ Primer tema del bloque Análisis de 2.º Sociales (reparto en paralelo del 2026-
 - **Hoja de euskera:** `limiteak-batx2g-euskera.html` en la carpeta de notas compartidas.
 - **Al fusionar:** `paths.ts` es una sola línea que tocan varias sesiones; las líneas `active: true` de `courses.ts` están juntas.
 - **Siguiente tema:** propuestas de Derivadas, Aplicaciones, Representación e Integrales en `analisis-batx2g-propuestas.md` (carpeta compartida), esperando la elección del dueño.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la primera tanda de 2.º Sociales (`main` 2bbfdde, bundle `index-4g-iHeeL.js`). Comprobada en vivo a 375 px en eu, es y ar.

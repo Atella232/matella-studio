@@ -259,16 +259,20 @@ El dueño pidió empezar 2.º Sociales a la vez que 1.º Sociales («Sí, arrán
 
 | Bloque | Puerto | Tema (`id` del curso) | Nombre | Bloque de ids | Reutilizar de | Estado |
 |---|---|---|---|---|---|---|
-| Álgebra | 5201 | `matrices` | `matrizeak` | 141000–141999 | `batx2-zientziak-matrizeak` | Por hacer |
-| Álgebra | 5201 | `determinantes` | `determinanteak` | 142000–142999 | `batx2-zientziak-determinanteak` | Por hacer |
+| Álgebra | 5201 | `matrices` | `matrizeak` | 141000–141999 | `batx2-zientziak-matrizeak` | Publicado 2026-11-18 |
+| Álgebra | 5201 | `determinantes` | `determinanteak` | 142000–142999 | `batx2-zientziak-determinanteak` | Hecho, sin publicar |
 | Álgebra | 5201 | `sistemas` | `sistemak` | 143000–143999 | `batx2-zientziak-sistemak`, `batx1-zientziak-sistemak` | Por hacer |
 | Álgebra | 5201 | `programacion-lineal` | `programazioa` | 144000–144999 | nuevo (inecuaciones 2D de `dbh4-akademikoak-sistemak`) | Por hacer |
-| Análisis | 5202 | `limites-continuidad` | `limiteak` | 145000–145999 | `batx2-zientziak-limiteak` | Por hacer |
-| Análisis | 5202 | `derivadas` | `deribatuak` | 146000–146999 | `batx2-zientziak-deribatuak` | Por hacer |
-| Análisis | 5202 | `aplicaciones-derivada` | `aplikazioak` | 147000–147999 | `batx2-zientziak-aplikazioak` (optimización con economía) | Por hacer |
-| Análisis | 5202 | `representacion-funciones` | `adierazpena` | 148000–148999 | `batx2-zientziak-adierazpena` | Por hacer |
-| Análisis | 5202 | `integrales` | `integralak` | 149000–149999 | `batx2-zientziak-mugagabeak`, `-mugatua` (un solo tema) | Por hacer |
-| Probabilidad e inferencia | 5203 | `probabilidad` | `probabilitatea` | 150000–150999 | `batx2-zientziak-probabilitatea` | Por hacer |
-| Probabilidad e inferencia | 5203 | `binomial-normal` | `banaketak` | 151000–151999 | `batx2-zientziak-banaketak` | Por hacer |
-| Probabilidad e inferencia | 5203 | `muestreo` | `laginketa` | 152000–152999 | nuevo (`banaketak`, `dbh4-akademikoak-estatistika`) | Por hacer |
-| Probabilidad e inferencia | 5203 | `inferencia` | `inferentzia` | 153000–153999 | nuevo (`laginketa`, `banaketak`) | Por hacer |
+| Análisis | 5202 | `limites-continuidad` | `limiteak` | 145000–145999 | `batx2-zientziak-limiteak` | Publicado 2026-11-18 |
+| Análisis | 5202 | `derivadas` | `deribatuak` | 146000–146999 | `batx2-zientziak-deribatuak` | Publicado 2026-11-18 |
+| Análisis | 5202 | `aplicaciones-derivada` | `aplikazioak` | 147000–147999 | `batx2-zientziak-aplikazioak` (optimización con economía) | Publicado 2026-11-18 |
+| Análisis | 5202 | `representacion-funciones` | `adierazpena` | 148000–148999 | `batx2-zientziak-adierazpena` | Publicado 2026-11-18 |
+| Análisis | 5202 | `integrales` | `integralak` | 149000–149999 | `batx2-zientziak-mugagabeak`, `-mugatua` (un solo tema) | Publicado 2026-11-18 |
+| Probabilidad e inferencia | 5203 | `probabilidad` | `probabilitatea` | 150000–150999 | `batx2-zientziak-probabilitatea` | Publicado 2026-11-18 |
+| Probabilidad e inferencia | 5203 | `binomial-normal` | `banaketak` | 151000–151999 | `batx2-zientziak-banaketak` | Publicado 2026-11-18 |
+| Probabilidad e inferencia | 5203 | `muestreo` | `laginketa` | 152000–152999 | nuevo (`banaketak`, `dbh4-akademikoak-estatistika`) | Publicado 2026-11-18 |
+| Probabilidad e inferencia | 5203 | `inferencia` | `inferentzia` | 153000–153999 | nuevo (`laginketa`, `banaketak`) | Publicado 2026-11-18 |
+
+**2026-11-18: primera tanda de 2.º Sociales publicada** (`main` 2bbfdde, bundle `index-4g-iHeeL.js`) tras el «Sí, publícalos» del dueño: Matrices, Límites, Derivadas, Aplicaciones de la derivada, Representación de funciones, Integrales, Probabilidad, Binomial y normal, Muestreo e Inferencia (10 de 13). Rama de unión `feat/batx2g-tanda1` con `feat/integralak-`, `feat/inferentzia-` y `feat/matrizeak-batx2g`. Conflictos solo en `courses.ts` (líneas `active: true` vecinas: se queda la que lo tiene) y `paths.ts` (unión de las listas). 3578 tests, lint, build e inventario en verde; en vivo a 375 px en eu/es/ar, los 10 cargan.
+- Determinantes quedó fuera: se terminó después del visto bueno (`feat/determinanteak-batx2g`, sin publicar). Faltan Sistemas (espera la elección del dueño) y Programación lineal.
+- Pendiente pequeño: en castellano el chip «2.º Bachillerato · Ciencias Sociales» de la cabecera desborda 1 px a 375 px (`scrollWidth` 376). En eu y ar no pasa.
