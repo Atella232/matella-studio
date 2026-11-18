@@ -266,7 +266,7 @@ El dueño pidió empezar 2.º Sociales a la vez que 1.º Sociales («Sí, arrán
 | Álgebra | 5201 | `matrices` | `matrizeak` | 141000–141999 | `batx2-zientziak-matrizeak` | Publicado 2026-11-18 |
 | Álgebra | 5201 | `determinantes` | `determinanteak` | 142000–142999 | `batx2-zientziak-determinanteak` | Publicado 2026-11-18 |
 | Álgebra | 5201 | `sistemas` | `sistemak` | 143000–143999 | `batx2-zientziak-sistemak`, `batx1-zientziak-sistemak` | Publicado 2026-11-18 |
-| Álgebra | 5201 | `programacion-lineal` | `programazioa` | 144000–144999 | nuevo (inecuaciones 2D de `dbh4-akademikoak-sistemak`) | Hecho, sin publicar |
+| Álgebra | 5201 | `programacion-lineal` | `programazioa` | 144000–144999 | nuevo (inecuaciones 2D de `dbh4-akademikoak-sistemak`) | Publicado 2026-11-18 |
 | Análisis | 5202 | `limites-continuidad` | `limiteak` | 145000–145999 | `batx2-zientziak-limiteak` | Publicado 2026-11-18 |
 | Análisis | 5202 | `derivadas` | `deribatuak` | 146000–146999 | `batx2-zientziak-deribatuak` | Publicado 2026-11-18 |
 | Análisis | 5202 | `aplicaciones-derivada` | `aplikazioak` | 147000–147999 | `batx2-zientziak-aplikazioak` (optimización con economía) | Publicado 2026-11-18 |
@@ -283,3 +283,5 @@ El dueño pidió empezar 2.º Sociales a la vez que 1.º Sociales («Sí, arrán
 
 **2026-11-18: segunda tanda de 2.º Sociales publicada** (`main` 99b1569, bundle `index-FB15mWyL.js`) tras el «Sí, publícalos» del dueño: Determinantes y Sistemas (12 de 13), más el arreglo del chip de la cabecera (`feat/header-chip-overflow`: `.fraction-v2-hero-copy .fraction-v2-chip` pasa a dos líneas si no cabe). Unión `feat/batx2g-tanda2` sobre el `main` de 1.º Sociales (2255f6a); conflicto solo en `paths.ts` (unión de listas). 4024 tests, lint, build e inventario en verde; en vivo a 375 px en eu/es/ar sin desborde.
 - Programación lineal se terminó después del visto bueno (`feat/programazioa-batx2g`, 1b8a5400, sin publicar): es el último tema de 2.º Sociales.
+
+**2026-11-18: tercera tanda, 2.º Sociales completo (13 de 13)** (`main` e1561e6, bundle `index-BLkYk7zF.js`) tras el «Sí, publícalo» del dueño: Programación lineal. Unión `feat/batx2g-tanda3` sobre 6d57b96; conflictos en `courses.ts` (línea con `active: true`) y `paths.ts` (unión de listas). 4060 tests, lint, build e inventario (3 juegos y 3 herramientas propias) en verde; en vivo a 375 px en eu/es/ar sin desborde, laboratorio abre, sin errores en consola. **Con esto están todos los cursos de ESO y Bachillerato.**

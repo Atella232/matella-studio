@@ -42,3 +42,7 @@ Cuarto y último tema del bloque «Álgebra» de 2.º Sociales (curso `batx2-giz
 ## Cierre (2026-11-18)
 
 3385 tests, lint y build en verde. Inventario: 5 juegos propios; 4 herramientas, 2 propias. Revisado a 375 px en eu, es y ar: las nueve lecciones propias (sin desbordes; en los ejes que llegan a 100 se rotula uno de cada dos), las dos herramientas propias y los juegos propios. Hoja de euskera en `~/Documents/Matella-fuentes/batx2g-algebra/hojas/programazioa-batx2g.html`, mandada al dueño. Sin publicar ni fusionar. Con esto termina el bloque de Álgebra de 2.º Sociales.
+
+## Publicación
+
+Publicada el 2026-11-18 con el visto bueno del dueño (`main` e1561e6, unión `feat/batx2g-tanda3`, bundle `index-BLkYk7zF.js`). Comprobada en vivo a 375 px en eu, es y ar: carga, sin desborde, el laboratorio abre y no hay errores en consola.

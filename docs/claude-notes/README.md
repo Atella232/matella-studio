@@ -109,3 +109,4 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [Deribatuak eta haien aplikazioak · 1.º Bachillerato Sociales](deribatuak-batx1g.md) — tema de 1.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 38202d3, bundle `index-DKihXm7d.js`)
 - [Determinanteak · 2.º Bachillerato Sociales](determinanteak-batx2g.md) — tema de 2.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 99b1569, bundle `index-FB15mWyL.js`)
 - [Ekuazio-sistemak · 2.º Bachillerato Sociales](sistemak-batx2g.md) — tema de 2.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 99b1569, bundle `index-FB15mWyL.js`)
+- [Programazio lineala · 2.º Bachillerato Sociales](programazioa-batx2g.md) — último tema de 2.º Sociales, hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` e1561e6, bundle `index-BLkYk7zF.js`)
