@@ -32,8 +32,16 @@ Cuarto y último tema del bloque Funciones de 1.º Sociales: curso `batx1-gizart
 - Figuras propias con `PlotFigure`; secantes y tangentes van como curvas (siguen las unidades de los ejes; `obliques` va en cuadros de la cuadrícula).
 - Diagnóstico 136001–136008; práctica 1–20; retos 101–115; banco 1–50.
 - Test: `tests/deribatuak-batx1g-content.test.ts`.
-- Cambio respecto al menú: «Monta la gráfica» de Ciencias trae la capa de curvatura (∪ ∩), que no está en el libro; en su lugar irá la tasa de variación de 4.º (`rate`).
+- Cambio respecto al menú: «Monta la gráfica» de Ciencias trae la capa de curvatura (∪ ∩), que no está en el libro; en su lugar va la tasa de variación de 4.º aplicadas (`rate`).
+
+## Fase 3: laboratorio
+
+- 5 herramientas. Propias: `marginal` «El coste marginal» (C = ax² + bx + F; predicción: la unidad siguiente frente a C′(x), la diferencia es justo a; ▶ encoge el paso y la secante se vuelve tangente; retos 136101–136105) y `profit` «Beneficio máximo» (I = px, C = cx² + vx + F; predicción: una unidad más sube, deja igual o baja el beneficio; ▶ recorre la producción; ventana simétrica alrededor del máximo; retos 136201–136205).
+- Prestadas: `rate` (4.º aplicadas), `sign` y `box` (Ciencias, aplicaciones).
+- Fuera respecto al menú: `secant` y `slope-graph` de Ciencias traen sin x (el dueño quitó la trigonometría).
+- Test: `tests/deribatuak-batx1g-lab.test.ts`.
+- Aviso (pieza prestada): en árabe, el barrido marca los números del eje de `rate` como salidos de la caja; es la altura de la fuente Noto Sans Arabic, no un corte visible.
 
 ## En curso
 
-- Fases 1–2 hechas. Siguiente: fase 3, laboratorio (L1 «El coste marginal», L2 «Beneficio máximo», y secante, gráfica de f′, semáforo, caja y tasa).
+- Fases 1–3 hechas. Siguiente: fase 4, juegos (J1 «¿Cuánto producir?», J2 «¿Media o instantánea?», detective, carrera, memoria y ¿qué pendiente?, empareja f y f′, sube o baja, caza los extremos).

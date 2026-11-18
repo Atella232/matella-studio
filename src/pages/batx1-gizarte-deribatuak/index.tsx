@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { socDerivChallenges, socDerivDiagnostic, socDerivExerciseBank, socDerivPractice } from './content'
 import { SocDerivHeroArt } from './figures'
+import { SocDerivLaboratory } from './lab'
+import { socDerivLabChallengeIds, socDerivLabToolForTopic, socDerivLabTools } from './lab/labTools'
 import { socDerivStages, socDerivTopics } from './lessons'
 
 const deribatuakBatx1gUnit: UnitDefinition = {
@@ -24,6 +26,17 @@ const deribatuakBatx1gUnit: UnitDefinition = {
     guidedPractice: socDerivPractice,
     exerciseBank: socDerivExerciseBank,
     challenges: socDerivChallenges,
+    lab: {
+        description: {
+            eu: `${socDerivLabTools.length} tresna, erronkekin: kostu marjinala eta mozkin maximoa, berriak; 4. DBHko batez besteko aldakuntza-tasa; eta Zientzietako f′ deribatuaren semaforoa eta tapa gabeko kutxa.`,
+            es: `${socDerivLabTools.length} herramientas con retos: el coste marginal y el beneficio máximo, nuevas; la tasa de variación media de 4.º ESO; y de Ciencias, el semáforo de f′ y la caja sin tapa.`,
+            en: `${socDerivLabTools.length} tools with challenges: the marginal cost and the greatest profit, new; the average rate of change from 4th ESO; and from Sciences, the traffic light of f′ and the open box.`,
+            ar: `${socDerivLabTools.length} أدوات مع تحديات: التكلفة الحدية والربح الأعظم، وهما جديدتان؛ ومعدل التغير المتوسط من الصف الرابع؛ ومن العلوم: إشارة f′ الضوئية والصندوق دون غطاء.`
+        },
+        progressIds: socDerivLabChallengeIds,
+        toolForTopic: socDerivLabToolForTopic,
+        render: (props) => <SocDerivLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 2,5 edo 2/3.', es: 'Escribe un número: 5, −3, 2,5 o 2/3.', en: 'Write a number: 5, −3, 2.5 or 2/3.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 2.5 أو 2/3.' },
         defaultForm: 'any',
