@@ -46,3 +46,7 @@ Segundo tema de 2.º Sociales (curso `batx2-gizarte`, tema `determinantes`), seg
 ## Cierre (2026-11-17)
 
 3314 tests, lint y build en verde. Inventario: 3 juegos propios (J1, J2 y el detective) más «¿Qué le pasa al determinante?», carrera y memoria de Ciencias; 4 herramientas, 2 propias. Revisado a 375 px en eu, es y ar con `getBBox` y el ancho de la página: la lección propia (en el dibujo se agrandaron los textos, que quedaban pequeños en el móvil), las dos herramientas propias y los juegos propios. Hoja de euskera en `~/Documents/Matella-fuentes/batx2g-algebra/hojas/determinanteak-batx2g.html` (sale de `sheet.py`, que lee los `say(...)` de la carpeta), mandada al dueño. Sin publicar ni fusionar.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la segunda tanda de 2.º Sociales (`main` 99b1569, bundle `index-FB15mWyL.js`). Comprobada en vivo a 375 px en eu, es y ar.

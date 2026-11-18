@@ -36,3 +36,7 @@ Tercer tema de 2.º Sociales (curso `batx2-gizarte`, tema `sistemas`), tercero d
 ## Cierre (2026-11-18)
 
 3349 tests, lint y build en verde. Inventario: 3 juegos propios (J1, J2 y el detective) más «Rouché exprés», «Cramer, columna a columna», carrera y memoria de Ciencias; 4 herramientas, 2 propias. Revisado a 375 px en eu, es y ar con `getBBox` y el ancho de la página: las dos lecciones propias (en los dibujos se agrandaron los textos), las dos herramientas propias (en «Del enunciado a la ecuación» las incógnitas iban una por línea: ahora `MathText inline`) y los juegos propios. Hoja de euskera en `~/Documents/Matella-fuentes/batx2g-algebra/hojas/sistemak-batx2g.html`, mandada al dueño. Sin publicar ni fusionar. Siguiente: `programazioa`.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la segunda tanda de 2.º Sociales (`main` 99b1569, bundle `index-FB15mWyL.js`). Comprobada en vivo a 375 px en eu, es y ar.

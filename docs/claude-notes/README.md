@@ -107,3 +107,5 @@ Historial por unidad (ids, reutilización, fases, trucos). Copiadas de la memori
 - [Probabilitate-banaketa diskretuak · 1.º Bachillerato Sociales](diskretuak-batx1g.md) — tema de 1.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 7f7d96e, bundle `index-D8IDgBC7.js`)
 - [Banaketa normala · 1.º Bachillerato Sociales](normala-batx1g.md) — tema de 1.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 7f7d96e, bundle `index-D8IDgBC7.js`)
 - [Deribatuak eta haien aplikazioak · 1.º Bachillerato Sociales](deribatuak-batx1g.md) — tema de 1.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 38202d3, bundle `index-DKihXm7d.js`)
+- [Determinanteak · 2.º Bachillerato Sociales](determinanteak-batx2g.md) — tema de 2.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 99b1569, bundle `index-FB15mWyL.js`)
+- [Ekuazio-sistemak · 2.º Bachillerato Sociales](sistemak-batx2g.md) — tema de 2.º Sociales hecho en una sesión en paralelo; publicada el 2026-11-18 (`main` 99b1569, bundle `index-FB15mWyL.js`)
