@@ -20,3 +20,7 @@ Convención aprobada: valores críticos de la tabla, el más cercano y el punto 
 - Tests `tests/inferentzia-batx2g-lab.test.ts` y `tests/inferentzia-batx2g-games.test.ts`. Inventario OK. Revisado a 375 px en eu, es y ar. Hoja de euskera: `~/Documents/Matella-fuentes/batx2g-probabilidad/hoja-euskera-inferentzia.html`.
 - Trucos: la herramienta Write deja `\u00a0` como espacio no separable real dentro de las plantillas y el lint lo rechaza: pasar el archivo por un script que lo vuelva a escribir como `\\u00a0`.
 - Revisión final (068e3574): en los juegos, los títulos, descripciones y «skills» de los niveles se pintan tal cual, sin KaTeX: nada de `$…$` ahí (σ, p̂, √n, x̄ en texto). Arreglado también en Banaketak (3c3e9f1d) y Laginketa (0a8c6992), con un test en los tres `*-games.test.ts`. Revisión interactiva a 375 px (laboratorio tras predecir y ▶, rondas de los tres niveles de cada juego, memoria y una pregunta de carrera) en eu, es y ar para Laginketa e Inferentzia; dos líneas del detective acortadas.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la primera tanda de 2.º Sociales (`main` 2bbfdde, bundle `index-4g-iHeeL.js`). Comprobada en vivo a 375 px en eu, es y ar.

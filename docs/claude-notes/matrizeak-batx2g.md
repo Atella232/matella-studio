@@ -64,3 +64,7 @@ Fuera: `what-is-a-matrix` (la sustituye `data-tables`), `matrix-applications` (l
 **Cierre (2026-11-17):** 3277 tests, lint y build en verde; inventario OK (3 juegos propios más el detective, 4 herramientas, 2 de ellas propias). Revisado a 375 px en eu, es y ar con `getBBox` y medidas de la página: laboratorio, los seis juegos (en el nivel 3 del ticket escondido, $Q[V-C]$ no cabía: clase `soc-hidden-wide`, más pequeña y en una línea) y las lecciones propias. Hoja de euskera en `~/Documents/Matella-fuentes/batx2g-algebra/hojas/matrizeak-batx2g.html`, mandada al dueño.
 
 **Al fusionar:** cambiar el «Antes de empezar» de `data-tables` y `matrix-form-system` a 1.º Sociales «Álgebra» si ya está en `main`.
+
+## Publicación
+
+- 2026-11-18: publicada en matella.net con la primera tanda de 2.º Sociales (`main` 2bbfdde, bundle `index-4g-iHeeL.js`). Comprobada en vivo a 375 px en eu, es y ar.
