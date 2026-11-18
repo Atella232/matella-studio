@@ -24,6 +24,13 @@ Cuarto y último tema del bloque «Álgebra» de 2.º Sociales (curso `batx2-giz
 - **Contenido** (`content.ts`): 144001 = 113008 de 1.º, 144002–144008 propios. Práctica 1–4, retos 101–103 y banco 1–10 son de 1.º (desigualdades). El resto se construye con plantillas que calculan con `lp.ts`: `cross` (corte de dos rectas), `count` (puntos enteros por columnas), `valueAt`, `best` (método de los vértices, la explicación lista $F$ en cada vértice) y `problem` (enunciado con contexto).
 - **Tests:** `tests/programazioa-batx2g-content.test.ts` (también comprueba que cada máximo o mínimo pedido es el mayor o menor de los valores listados).
 
+## Fase 3: laboratorio
+
+- **L1 «La recta de nivel»** (`lab/levelLine.ts`, `level-line`, retos 144101–144105): beneficio (máximo en un vértice), coste (mínimo en región abierta) y empate (todo un lado). Se mueve k y se predice dónde está el óptimo (tres respuestas por ejemplo, la del empate es «todo el lado»). Infinito: poner la recta por un vértice dado.
+- **L2 «Construye la región»** (`lab/buildRegion.ts`, `build-region`, retos 144151–144155): tres restricciones con a, b de 0 a 4, c de 0 a 20 y ≤/≥ (a = b = 0 la apaga). Dice si la región es cerrada, abierta o vacía (`buildShape`, con una caja de ±1000) y sus vértices. Retos: triángulo, cinco vértices, vacía, abierta, (3, 2) como vértice; infinito: un punto dado como vértice.
+- **De 4.º académicas, tal cual:** `half-plane` y `shopping` («Comprar con un presupuesto»), con sus ids.
+- **Truco:** el «Qué observar» del laboratorio no dibuja fórmulas: va en texto plano (F = k, ≥). Lo mismo se corrigió en `batx2-gizarte-sistemak/lab/labTools.ts` en esta rama (en la rama de Sistemas sigue con `$…$`).
+
 ## En curso
 
-- Fase 1+2 hecha (commit siguiente). Falta: fase 3 laboratorio (L1 recta de nivel y L2 construye la región, 144101–144399; semiplano y compras de 4.º), fase 4 juegos (J1–J5 propios, 144401–144899) y cierre.
+- Fases 1+2 (9233111) y 3 hechas. Falta: fase 4 juegos (J1 «¿Qué vértice gana?», J2 «Restricción exprés», J3 «¿Única, múltiple o ninguna?», J4 detective, J5 memoria, 144401–144899) y cierre (375 px, inventario, hoja en euskera).

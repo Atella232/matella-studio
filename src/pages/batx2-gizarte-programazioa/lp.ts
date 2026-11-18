@@ -21,7 +21,7 @@ export interface Objective {
 
 const near = (a: number, b: number) => Math.abs(a - b) < 1e-9
 const samePoint = (p: Point, q: Point) => near(p[0], q[0]) && near(p[1], q[1])
-const clean = (value: number) => (near(value, Math.round(value)) ? Math.round(value) : value)
+const clean = (value: number) => (near(value, Math.round(value)) ? Math.round(value) + 0 : value)
 
 /** The constraints with x ≥ 0 and y ≥ 0 added */
 export const withSigns = (constraints: HalfPlane[]): HalfPlane[] => [...constraints, { a: 1, b: 0, c: 0, sense: '≥' }, { a: 0, b: 1, c: 0, sense: '≥' }]

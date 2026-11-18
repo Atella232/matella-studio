@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { programazioaChallenges, programazioaDiagnostic, programazioaExerciseBank, programazioaPractice } from './content'
 import { ProgrammingHeroArt } from './HeroArt'
+import { ProgramazioaLaboratory } from './lab'
+import { programazioaLabChallengeIds, programazioaLabToolForTopic, programazioaLabTools } from './lab/labTools'
 import { programazioaTopics } from './lessons'
 import { programazioaStages } from './stages'
 
@@ -25,6 +27,17 @@ const programazioaBatx2gUnit: UnitDefinition = {
     guidedPractice: programazioaPractice,
     exerciseBank: programazioaExerciseBank,
     challenges: programazioaChallenges,
+    lab: {
+        description: {
+            eu: `${programazioaLabTools.length} tresna, erronkekin: eraiki eskualdea eta maila-zuzena, berriak; eta 4. DBHko erdiplanoa eta aurrekontuarekin erostea.`,
+            es: `${programazioaLabTools.length} herramientas con retos: construye la región y la recta de nivel, nuevas; y el semiplano y comprar con un presupuesto de 4.º de ESO.`,
+            en: `${programazioaLabTools.length} tools with challenges: build the region and the level line, new; and the half-plane and shopping on a budget from 4th of ESO.`,
+            ar: `${programazioaLabTools.length} أدوات مع تحديات: ابنِ المنطقة ومستقيم المستوى، وهما جديدتان؛ ونصف المستوى والشراء بميزانية من الصف الرابع.`
+        },
+        progressIds: programazioaLabChallengeIds,
+        toolForTopic: programazioaLabToolForTopic,
+        render: (props) => <ProgramazioaLaboratory {...props} />
+    },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },
         defaultForm: 'any',
