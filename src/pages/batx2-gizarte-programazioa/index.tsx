@@ -1,6 +1,8 @@
 import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { programazioaChallenges, programazioaDiagnostic, programazioaExerciseBank, programazioaPractice } from './content'
+import { ProgramazioaGames } from './games'
+import { PROGRAMAZIOA_GAME_RECORDS_KEY, programazioaGameProgressIds } from './games/info'
 import { ProgrammingHeroArt } from './HeroArt'
 import { ProgramazioaLaboratory } from './lab'
 import { programazioaLabChallengeIds, programazioaLabToolForTopic, programazioaLabTools } from './lab/labTools'
@@ -37,6 +39,17 @@ const programazioaBatx2gUnit: UnitDefinition = {
         progressIds: programazioaLabChallengeIds,
         toolForTopic: programazioaLabToolForTopic,
         render: (props) => <ProgramazioaLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bost joko: zein erpinek irabazten du?, murrizketa azkarra, bakarra, anitza ala bat ere ez?, programazio linealaren detektibea eta memoria.',
+            es: 'Cinco juegos: ¿qué vértice gana?, restricción exprés, ¿única, múltiple o ninguna?, detective de programación lineal y memoria.',
+            en: 'Five games: which vertex wins?, constraint express, unique, multiple or none?, linear programming detective and memory.',
+            ar: 'خمس ألعاب: أي رأس يفوز؟ والقيد السريع ووحيد أم متعدد أم لا شيء؟ ومخبر البرمجة الخطية والذاكرة.'
+        },
+        progressIds: programazioaGameProgressIds,
+        recordsKey: PROGRAMAZIOA_GAME_RECORDS_KEY,
+        render: (props) => <ProgramazioaGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },

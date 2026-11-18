@@ -31,6 +31,14 @@ Cuarto y último tema del bloque «Álgebra» de 2.º Sociales (curso `batx2-giz
 - **De 4.º académicas, tal cual:** `half-plane` y `shopping` («Comprar con un presupuesto»), con sus ids.
 - **Truco:** el «Qué observar» del laboratorio no dibuja fórmulas: va en texto plano (F = k, ≥). Lo mismo se corrigió en `batx2-gizarte-sistemak/lab/labTools.ts` en esta rama (en la rama de Sistemas sigue con `$…$`).
 
-## En curso
+## Fase 4: juegos
 
-- Fases 1+2 (9233111) y 3 hechas. Falta: fase 4 juegos (J1 «¿Qué vértice gana?», J2 «Restricción exprés», J3 «¿Única, múltiple o ninguna?», J4 detective, J5 memoria, 144401–144899) y cierre (375 px, inventario, hoja en euskera).
+- **J1 «¿Qué vértice gana?»** (`games/rounds.ts` `createVertexRounds`, slug `zein-erpin`, 144401–144403): dos restricciones por un punto entero; máximo con ≤, mínimo con ≥ (con la trampa (0, 0), que no está en la región) y tres restricciones. Óptimo único siempre.
+- **J2 «Restricción exprés»** (`createExpressRounds`, `murrizketa-azkarra`, 144501–144503): plantillas de frase → inecuación; el test comprueba en una cuadrícula que cada opción mala se separa de la buena en algún punto.
+- **J3 «¿Única, múltiple o ninguna?»** (`createKindRounds`, `soluzio-mota`, 144601–144603): seis rondas con los cuatro tipos desde el nivel 2; el tipo lo da `optimum`.
+- **J4 detective** (`games/detective.ts`, 144801–144803) y **J5 memoria** (`games/boards.ts`, 144851–144853: F en un punto ↔ valor, dos rectas ↔ corte, rectángulo ↔ puntos enteros). Sin carrera.
+- Tests en `tests/programazioa-batx2g-games.test.ts`.
+
+## Cierre (2026-11-18)
+
+3385 tests, lint y build en verde. Inventario: 5 juegos propios; 4 herramientas, 2 propias. Revisado a 375 px en eu, es y ar: las nueve lecciones propias (sin desbordes; en los ejes que llegan a 100 se rotula uno de cada dos), las dos herramientas propias y los juegos propios. Hoja de euskera en `~/Documents/Matella-fuentes/batx2g-algebra/hojas/programazioa-batx2g.html`, mandada al dueño. Sin publicar ni fusionar. Con esto termina el bloque de Álgebra de 2.º Sociales.

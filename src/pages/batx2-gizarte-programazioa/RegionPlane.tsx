@@ -51,7 +51,7 @@ export function RegionPlane({ label, constraints, size, unit = 1, vertices = [],
     const scale = ([x, y]: Point): Point => [x / unit, y / unit]
     const polygon = region({ xMin: 0, xMax: size, yMin: 0, yMax: size }, withSigns(constraints)).map(scale)
     return (
-        <Plane box={box} cell={cell} label={label} labelStep={cells > 10 ? 2 : 1} xUnit={unit} yUnit={unit} xName={xName} yName={yName} onPick={onPick ? ([x, y]) => onPick([x * unit, y * unit]) : undefined}>
+        <Plane box={box} cell={cell} label={label} labelStep={cells > 10 || unit >= 10 ? 2 : 1} xUnit={unit} yUnit={unit} xName={xName} yName={yName} onPick={onPick ? ([x, y]) => onPick([x * unit, y * unit]) : undefined}>
             {(map, clip) => (
                 <g>
                     {polygon.length > 2 && <polygon points={polygon.map(([x, y]) => `${map.x(x)},${map.y(y)}`).join(' ')} fill={REGION} stroke={GREEN} strokeWidth={1.5} />}
