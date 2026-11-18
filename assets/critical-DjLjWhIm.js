@@ -1,1 +1,0 @@
-import{T as s,d as r}from"./GameArt-BKoXDJ-c.js";function c(n){let e=[],t=1/0;for(let a=0;a<=Math.round(s*100);a+=1){const i=Math.abs(r(a/100)-n);i<t?(e=[a],t=i):i===t&&e.push(a)}return(e[0]+e[e.length-1])/200}const l=n=>c(1e4-(1e4-n*100)/2);function d(n){const e=Math.round(n*1e3)/1e3,t=String(e);return t.includes(".")?t.replace(".","{,}"):t}export{l as c,d,c as i};
