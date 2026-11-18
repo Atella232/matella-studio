@@ -42,6 +42,18 @@ Cuarto y último tema del bloque Funciones de 1.º Sociales: curso `batx1-gizart
 - Test: `tests/deribatuak-batx1g-lab.test.ts`.
 - Aviso (pieza prestada): en árabe, el barrido marca los números del eje de `rate` como salidos de la caja; es la altura de la fuente Noto Sans Arabic, no un corte visible.
 
+## Fase 4: juegos
+
+- 9 juegos. Propios:
+  - `produce` «¿Cuánto producir?» (`ekoiztu`): botones −5 −1 +1 +5 y dos barras, I′(x) y C′(x); hay que igualarlas. Niveles: precio fijo y c = 1; c = 0,5, 1 o 2; precio que baja, I = (P − d·x)·x. 136501–136503.
+  - `rates` «¿Media o instantánea?» (`tasak`): T.V.M. en un intervalo; velocidad y coste marginal; el instante en que la tasa instantánea iguala a la media (punto medio en una parábola). 136551–136553.
+  - `detective` (12 errores de este tema): 136701–136703.
+- Carrera 136401–136405 (15 tipos) y memoria 136801–136803.
+- Prestados de Ciencias: `slopes` 136811–136813; `match` solo niveles 1–2 (el 3 trae seno y coseno) 136821–136822; `updown` 136831–136833; `extrema` 136841–136843.
+- Test: `tests/deribatuak-batx1g-games.test.ts`.
+- Truco: el barrido de 9 juegos con todos sus niveles pasa de 45 s; se hace en dos o tres tandas.
+- Aviso (piezas prestadas): en árabe, el barrido marca la «y» de los ejes de los juegos de Ciencias (altura de Noto Sans Arabic).
+
 ## En curso
 
-- Fases 1–3 hechas. Siguiente: fase 4, juegos (J1 «¿Cuánto producir?», J2 «¿Media o instantánea?», detective, carrera, memoria y ¿qué pendiente?, empareja f y f′, sube o baja, caza los extremos).
+- Fases 1–4 hechas. Falta el cierre: portada, diagnóstico y ejercicios a 375 px, hoja de euskera y nota final.

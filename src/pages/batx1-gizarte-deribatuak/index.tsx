@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { socDerivChallenges, socDerivDiagnostic, socDerivExerciseBank, socDerivPractice } from './content'
 import { SocDerivHeroArt } from './figures'
+import { SocDerivGames } from './games'
+import { SOC_DERIV_GAME_RECORDS_KEY, socDerivGameProgressIds } from './games/info'
 import { SocDerivLaboratory } from './lab'
 import { socDerivLabChallengeIds, socDerivLabToolForTopic, socDerivLabTools } from './lab/labTools'
 import { socDerivStages, socDerivTopics } from './lessons'
@@ -36,6 +38,17 @@ const deribatuakBatx1gUnit: UnitDefinition = {
         progressIds: socDerivLabChallengeIds,
         toolForTopic: socDerivLabToolForTopic,
         render: (props) => <SocDerivLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Bederatzi joko: lasterketa, zenbat ekoiztu?, batez bestekoa ala berehalakoa?, deribatuen detektibea eta memoria, berriak; eta Zientzietako zer malda?, lotu f eta f′, gora ala behera? eta ehizatu muturrak.',
+            es: 'Nueve juegos: carrera, ¿cuánto producir?, ¿media o instantánea?, detective de derivadas y memoria, nuevos; y de Ciencias, ¿qué pendiente?, empareja f y f′, ¿sube o baja? y caza los extremos.',
+            en: 'Nine games: race, how much to produce?, average or instantaneous?, derivatives detective and memory, new; and from Sciences, which slope?, match f and f′, up or down? and hunt the extremes.',
+            ar: 'تسع ألعاب: السباق وكم ننتج؟ ومتوسط أم لحظي؟ ومخبر المشتقات والذاكرة، وهي جديدة؛ ومن العلوم: أي ميل؟ وطابق f وf′ وتصعد أم تنزل؟ واصطد القيم القصوى.'
+        },
+        progressIds: socDerivGameProgressIds,
+        recordsKey: SOC_DERIV_GAME_RECORDS_KEY,
+        render: (props) => <SocDerivGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 2,5 edo 2/3.', es: 'Escribe un número: 5, −3, 2,5 o 2/3.', en: 'Write a number: 5, −3, 2.5 or 2/3.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 2.5 أو 2/3.' },

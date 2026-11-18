@@ -1,0 +1,19 @@
+/* ¿Cuánto producir? and ¿Media o instantánea? (1.º Sociales · derivadas) */
+.fraction-v2-games-card[data-game="produce"] { --game-tint: var(--success-tint, #d9efe2); }
+.fraction-v2-games-card[data-game="rates"] { --game-tint: var(--blue-tint, #dde7f7); }
+
+.soc-der-stepper { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 10px 0; flex-wrap: wrap; }
+.soc-der-stepper button { min-width: 44px; min-height: 44px; border: 2px solid var(--ink); border-radius: 10px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; font-weight: 700; color: var(--ink); cursor: pointer; }
+.soc-der-stepper button:disabled { opacity: 0.45; cursor: default; }
+.soc-der-value { min-width: 76px; text-align: center; font-size: 20px; }
+.soc-der-bars { display: grid; gap: 8px; margin: 8px 0 12px; }
+.soc-der-bar-row { display: grid; grid-template-columns: 112px 1fr; align-items: center; gap: 8px; direction: ltr; }
+.soc-der-bar-label { font-size: 15px; }
+.soc-der-bar-track { display: block; height: 18px; border: 2px solid var(--ink); border-radius: 9px; background: var(--card); overflow: hidden; }
+.soc-der-bar { display: block; height: 100%; transition: width 0.25s ease; }
+.soc-der-bar.income { background: var(--blue, #2f6fdb); }
+.soc-der-bar.cost { background: var(--coral, #c4432a); }
+.soc-der-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 10px 0; }
+.soc-der-choice { min-height: 48px; padding: 6px 10px; border: 2px solid var(--ink); border-radius: 12px; background: var(--card); box-shadow: 0 2px 0 var(--ink); font: inherit; font-size: 18px; font-weight: 700; color: var(--ink); cursor: pointer; }
+.soc-der-choice.chosen { background: var(--mustard-tint, #fbebc0); }
+.soc-der-choice:disabled { cursor: default; }
