@@ -60,6 +60,7 @@ const MatrizeakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-matrizea
 const MatrizeakBatx2gPage = lazy(() => import('../pages/batx2-gizarte-matrizeak').then((module) => ({ default: module.MatrizeakBatx2gIntroPage })))
 const DeterminanteakBatx2gPage = lazy(() => import('../pages/batx2-gizarte-determinanteak').then((module) => ({ default: module.DeterminanteakBatx2gIntroPage })))
 const SistemakBatx2gPage = lazy(() => import('../pages/batx2-gizarte-sistemak').then((module) => ({ default: module.SistemakBatx2gIntroPage })))
+const ProgramazioaBatx2gPage = lazy(() => import('../pages/batx2-gizarte-programazioa').then((module) => ({ default: module.ProgramazioaBatx2gIntroPage })))
 const DeterminanteakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-determinanteak').then((module) => ({ default: module.DeterminanteakBatx2zIntroPage })))
 const SistemakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-sistemak').then((module) => ({ default: module.SistemakBatx2zIntroPage })))
 const BektoreakBatx2zPage = lazy(() => import('../pages/batx2-zientziak-bektoreak').then((module) => ({ default: module.BektoreakBatx2zIntroPage })))
@@ -513,6 +514,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx2-gizarte/sistemas/*',
                         element: <SistemakBatx2gPage />,
+                    },
+                    // Programación lineal de 2.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx2-gizarte/programacion-lineal/*',
+                        element: <ProgramazioaBatx2gPage />,
                     },
                     // Matrices de 2.º Bachillerato (Ciencias): unidad V2
                     {
