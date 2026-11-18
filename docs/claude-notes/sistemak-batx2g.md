@@ -25,6 +25,14 @@ Tercer tema de 2.º Sociales (curso `batx2-gizarte`, tema `sistemas`), tercero d
 - **Laboratorio:** L1 `prices-count` (`lab/pricesCount.ts`, 143101–143105: frutería con precios únicos, papelería con datos que no cuadran, panadería con infinitos; se predice ninguno/uno/infinitos y se ven los rangos) y L2 `statement` (`lab/statement.ts`, 143151–143155: fondos, examen y tienda; cada frase se escribe con pasos de −3 a 3 y la derecha; vale cualquier múltiplo). De Ciencias, tal cual: `gauss-machine` (1.º) y `discussion-map` (2.º).
 - **Trucos:** el test de euskera de las lecciones pide que cada palabra del vocabulario salga en el texto de esa lengua (por eso la explicación en euskera nombra «bateragarri determinatua» e «indeterminatua»). Una fórmula que empieza por `$z=` en euskera la toma el test de sufijos por «$z»: se escribe `$\frac{|A_z|}{|A|}…$`.
 
-## En curso
+## Fase 4: juegos
 
-- Fases 1–3 hechas (commit siguiente). Falta: fase 4 juegos (J1, J2, J3 propios; «Rouché exprés», «Columnas de Cramer», carrera y memoria de 2.º renumerados, 143401–143899) y cierre (375 px eu/es/ar, inventario, hoja en euskera).
+- **J1 «¿Cuántas soluciones tiene el negocio?»** (`games/business.ts`, slug `negozioa`, 143501–143503): la $A^*$ de tres lotes de dos y de tres productos; ninguno / uno / infinitos, dos rondas de cada tipo. Nivel 3: el lote 3 es la suma de los otros dos y hay que dar el precio que cuadra (la $B$ del lote 3 sale como `\boxed{?}`).
+- **J2 «Traduce la frase»** (`games/translate.ts`, `itzuli-esaldia`, 143601–143603): una frase y cuatro ecuaciones (total, k veces, más que; menos que, la mitad, supera; razón, puntos de examen, porcentaje). Cada plantilla lleva valores de muestra que cumplen la frase: el test comprueba que solo la ecuación correcta se cumple con ellos.
+- **J3 detective** (`games/detective.ts`, 143801–143803): un solo lado, $0z=k$ leído como infinitas, contar ecuaciones; $\operatorname{rg}(A^*)$ igual que $\operatorname{rg}(A)$, $B$ en otra columna, Cramer al revés; dividir entre $a-1$, «el doble» al revés, «menos que» al revés.
+- **De 2.º Ciencias, renumerados:** «Rouché exprés» (143701–143703), «Cramer, columna a columna» (143751–143753) y memoria (143851–143853); la etapa `homogeneous` de Ciencias pasa a `cramer` (`stageHere` en `games/info.ts`). **Carrera** (143401–143405): sin el tipo `concurrent` (tres rectas); tipos propios `third-bundle` (circuito 1) e `invest` (circuito 5).
+- **Truco:** en euskera, una fórmula que empieza por `$z` dispara el test de sufijos; las letras se escriben `$x,\ y,\ z$`.
+
+## Cierre (2026-11-18)
+
+3349 tests, lint y build en verde. Inventario: 3 juegos propios (J1, J2 y el detective) más «Rouché exprés», «Cramer, columna a columna», carrera y memoria de Ciencias; 4 herramientas, 2 propias. Revisado a 375 px en eu, es y ar con `getBBox` y el ancho de la página: las dos lecciones propias (en los dibujos se agrandaron los textos), las dos herramientas propias (en «Del enunciado a la ecuación» las incógnitas iban una por línea: ahora `MathText inline`) y los juegos propios. Hoja de euskera en `~/Documents/Matella-fuentes/batx2g-algebra/hojas/sistemak-batx2g.html`, mandada al dueño. Sin publicar ni fusionar. Siguiente: `programazioa`.

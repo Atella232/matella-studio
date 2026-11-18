@@ -139,11 +139,11 @@ export function StatementTool(props: LabToolProps) {
     return (
         <ToolFrame {...props} controls={controls} readout={readout} challenges={statementChallenges} extraChallenges={statementExtra} state={state}>
             <div className="soc-statement">
-                <p><MathText text={l(say('Ezezagunak:', 'Incógnitas:', 'المجاهيل:', 'Unknowns:'))} /> {scenario.unknowns.map((unknown) => <span key={unknown.letter}><MathText text={`$${unknown.letter}$`} /> {l(unknown.meaning)}. </span>)}</p>
+                <p>{l(say('Ezezagunak:', 'Incógnitas:', 'المجاهيل:', 'Unknowns:'))} {scenario.unknowns.map((unknown) => <span key={unknown.letter}><MathText text={`$${unknown.letter}$`} inline />: {l(unknown.meaning)}. </span>)}</p>
                 <ol>
                     {scenario.sentences.map((sentence, index) => (
                         <li key={index} className={index === state.sentence ? 'soc-statement-active' : undefined}>
-                            <MathText text={l(sentence)} /> <strong className={right[index] ? 'soc-statement-ok' : 'soc-statement-no'}>{right[index] ? '✓' : '·'}</strong>
+                            <MathText text={l(sentence)} inline /> <strong className={right[index] ? 'soc-statement-ok' : 'soc-statement-no'}>{right[index] ? '✓' : '·'}</strong>
                         </li>
                     ))}
                 </ol>

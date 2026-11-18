@@ -2,6 +2,8 @@ import { UnitPage } from '../../features/unit-v2/UnitPage'
 import type { UnitDefinition } from '../../features/unit-v2/types'
 import { SystemsHeroArt } from '../batx2-zientziak-sistemak/figures'
 import { gizarteSistemakChallenges, gizarteSistemakDiagnostic, gizarteSistemakExerciseBank, gizarteSistemakPractice } from './content'
+import { GizarteSistemakGames } from './games'
+import { GIZARTE_SISTEMAK_GAME_RECORDS_KEY, gizarteSistemakGameProgressIds } from './games/info'
 import { GizarteSistemakLaboratory } from './lab'
 import { gizarteSistemakLabChallengeIds, gizarteSistemakLabToolForTopic, gizarteSistemakLabTools } from './lab/labTools'
 import { gizarteSistemakTopics } from './lessons'
@@ -37,6 +39,17 @@ const sistemakBatx2gUnit: UnitDefinition = {
         progressIds: gizarteSistemakLabChallengeIds,
         toolForTopic: gizarteSistemakLabToolForTopic,
         render: (props) => <GizarteSistemakLaboratory {...props} />
+    },
+    games: {
+        description: {
+            eu: 'Zazpi joko: lasterketa, zenbat soluzio ditu negozioak?, itzuli esaldia, Rouché espresa, Cramer zutabez zutabe, sistemen detektibea eta memoria.',
+            es: 'Siete juegos: carrera, ¿cuántas soluciones tiene el negocio?, traduce la frase, Rouché exprés, Cramer columna a columna, detective de sistemas y memoria.',
+            en: 'Seven games: race, how many solutions does the business have?, translate the sentence, Rouché express, Cramer column by column, systems detective and memory.',
+            ar: 'سبع ألعاب: السباق وكم حلًّا للتجارة؟ وترجم الجملة وروشيه السريع وكرامر عمودًا عمودًا ومخبر الأنظمة والذاكرة.'
+        },
+        progressIds: gizarteSistemakGameProgressIds,
+        recordsKey: GIZARTE_SISTEMAK_GAME_RECORDS_KEY,
+        render: (props) => <GizarteSistemakGames {...props} />
     },
     answers: {
         note: { eu: 'Idatzi zenbaki bat: 5, −3, 1,5 edo 3/2.', es: 'Escribe un número: 5, −3, 1,5 o 3/2.', en: 'Write a number: 5, −3, 1.5 or 3/2.', ar: 'اكتب عددًا: 5 أو ⁦−3⁩ أو 1.5 أو 3/2.' },

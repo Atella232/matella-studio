@@ -45,12 +45,12 @@ export function PricesCountFigure({ language }: { language: UnitLanguage }) {
             {cards.map((card, index) => (
                 <g key={index}>
                     <rect x={14 + index * 236} y={34} width={220} height={220} rx={16} fill={card.tint} stroke={INK} strokeWidth={1.8} />
-                    <F x={124 + index * 236} y={112} size={24} color={INK}>{card.ranks[0]}</F>
-                    <F x={124 + index * 236} y={150} size={24} color={INK}>{card.ranks[1]}</F>
-                    <Label x={124 + index * 236} y={218} textAnchor="middle" fontSize={24} fill={card.color}>{t(card.verdict)}</Label>
+                    <F x={124 + index * 236} y={112} size={30} color={INK}>{card.ranks[0]}</F>
+                    <F x={124 + index * 236} y={150} size={30} color={INK}>{card.ranks[1]}</F>
+                    <Label x={124 + index * 236} y={218} textAnchor="middle" fontSize={26} fill={card.color}>{t(card.verdict)}</Label>
                 </g>
             ))}
-            <Label x={360} y={306} textAnchor="middle" fontSize={22} fill={MUTED}>{t(say('Errenkada bat sorta bakoitzeko; B zutabean, haren prezioa', 'Una fila por lote; en la columna B, lo que cuesta', 'صف لكل مجموعة؛ وفي العمود B ثمنها', 'One row per bundle; in the column B, what it costs'))}</Label>
+            <Label x={360} y={306} textAnchor="middle" fontSize={25} fill={MUTED}>{t(say('Errenkada bat sorta bakoitzeko; B zutabean, haren prezioa', 'Una fila por lote; en la columna B, lo que cuesta', 'صف لكل مجموعة؛ وفي العمود B ثمنها', 'One row per bundle; in the column B, what it costs'))}</Label>
         </Figure>
     )
 }
@@ -74,14 +74,14 @@ export function StatementFigure({ language }: { language: UnitLanguage }) {
             {rows.map((row, index) => (
                 <g key={row.equation}>
                     <rect x={20} y={28 + index * 84} width={300} height={62} rx={12} fill={PAPER} stroke={INK} strokeWidth={1.6} />
-                    <Label x={170} y={67 + index * 84} textAnchor="middle" fontSize={23} fill={INK}>{t(row.sentence)}</Label>
+                    <Label x={170} y={67 + index * 84} textAnchor="middle" fontSize={28} fill={INK}>{t(row.sentence)}</Label>
                     <line x1={330} x2={392} y1={59 + index * 84} y2={59 + index * 84} stroke={MUTED} strokeWidth={2.4} />
                     <polygon points={`402,${59 + index * 84} 390,${53 + index * 84} 390,${65 + index * 84}`} fill={MUTED} />
                     <rect x={410} y={28 + index * 84} width={290} height={62} rx={12} fill={GREEN_TINT} stroke={INK} strokeWidth={1.6} />
-                    <F x={555} y={68 + index * 84} size={25} color={GREEN}>{row.equation}</F>
+                    <F x={555} y={68 + index * 84} size={31} color={GREEN}>{row.equation}</F>
                 </g>
             ))}
-            <Label x={360} y={300} textAnchor="middle" fontSize={21} fill={MUTED}>{t(say('x, y, z: A, B eta C fondoetako milaka euro', 'x, y, z: miles de euros en los fondos A, B y C', 'x وy وz: آلاف اليوروهات في الصناديق A وB وC', 'x, y, z: thousands of euros in funds A, B and C'))}</Label>
+            <Label x={360} y={300} textAnchor="middle" fontSize={25} fill={MUTED}>{t(say('x, y, z: A, B eta C fondoetako milaka euro', 'x, y, z: miles de euros en los fondos A, B y C', 'x وy وz: آلاف اليوروهات في الصناديق A وB وC', 'x, y, z: thousands of euros in funds A, B and C'))}</Label>
         </Figure>
     )
 }
