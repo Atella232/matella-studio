@@ -46,6 +46,7 @@ const BektoreakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-bektorea
 const GeometriaBatx1zPage = lazy(() => import('../pages/batx1-zientziak-geometria').then((module) => ({ default: module.GeometriaBatx1zIntroPage })))
 const EsponentzialakBatx1gPage = lazy(() => import('../pages/batx1-gizarte-esponentzialak').then((module) => ({ default: module.EsponentzialakBatx1gIntroPage })))
 const LimiteakBatx1gPage = lazy(() => import('../pages/batx1-gizarte-limiteak').then((module) => ({ default: module.LimiteakBatx1gIntroPage })))
+const DeribatuakBatx1gPage = lazy(() => import('../pages/batx1-gizarte-deribatuak').then((module) => ({ default: module.DeribatuakBatx1gIntroPage })))
 const FuntzioakBatx1gPage = lazy(() => import('../pages/batx1-gizarte-funtzioak').then((module) => ({ default: module.FuntzioakBatx1gIntroPage })))
 const FuntzioakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-funtzioak').then((module) => ({ default: module.FuntzioakBatx1zIntroPage })))
 const LimiteakBatx1zPage = lazy(() => import('../pages/batx1-zientziak-limiteak').then((module) => ({ default: module.LimiteakBatx1zIntroPage })))
@@ -458,6 +459,11 @@ export const router = createHashRouter([
                     {
                         path: 'matematika/batx1-gizarte/limites-continuidad/*',
                         element: <LimiteakBatx1gPage />,
+                    },
+                    // Derivadas y sus aplicaciones de 1.º Bachillerato (Ciencias Sociales): unidad V2
+                    {
+                        path: 'matematika/batx1-gizarte/derivadas/*',
+                        element: <DeribatuakBatx1gPage />,
                     },
                     // Límites y continuidad de 1.º Bachillerato (Ciencias): unidad V2
                     {

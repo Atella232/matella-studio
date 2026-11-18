@@ -19,6 +19,21 @@ Cuarto y último tema del bloque Funciones de 1.º Sociales: curso `batx1-gizart
 - `batx1-zientziak-aplikazioak`: herramientas `sign` «El semáforo de f′», `box` «La caja sin tapa», `layers` «Monta la gráfica»; juegos `updown` «Sube o baja», `extrema` «Caza los extremos».
 - Figuras: `PlotFigure` de `batx1-zientziak-limiteak/figures`.
 
+## Diseño elegido (2026-11-18: «Las recomendadas»)
+
+- V1 lecciones propias con ejemplos de economía; A1 sin derivadas trigonométricas.
+- L1 «El coste marginal», L2 «Beneficio máximo» (propias); M: secante → tangente, gráfica de f′, semáforo de f′, caja sin tapa, monta la gráfica (Ciencias).
+- J1 «¿Cuánto producir?», J2 «¿Media o instantánea?», J3 detective (propios); J4 carrera, memoria y ¿qué pendiente?, empareja f y f′, sube o baja, caza los extremos (Ciencias, sin niveles de trigonometría ni f″).
+
+## Fases 1–2: lecciones y contenido
+
+- Etapas: `rate`, `rules`, `monotony`, `optimization`, `graphs`.
+- Lecciones: average-rate, derivative-point, tangent · derivative-function, product-quotient, chain-exp-log · sign-intervals, singular-points, extreme-coefficients · max-profit, optimize, interval-extremes · polynomial-graph, rational-graph, derivative-graph.
+- Figuras propias con `PlotFigure`; secantes y tangentes van como curvas (siguen las unidades de los ejes; `obliques` va en cuadros de la cuadrícula).
+- Diagnóstico 136001–136008; práctica 1–20; retos 101–115; banco 1–50.
+- Test: `tests/deribatuak-batx1g-content.test.ts`.
+- Cambio respecto al menú: «Monta la gráfica» de Ciencias trae la capa de curvatura (∪ ∩), que no está en el libro; en su lugar irá la tasa de variación de 4.º (`rate`).
+
 ## En curso
 
-- Propuesta de diseño enviada al dueño; **esperando su elección**. No hay código todavía.
+- Fases 1–2 hechas. Siguiente: fase 3, laboratorio (L1 «El coste marginal», L2 «Beneficio máximo», y secante, gráfica de f′, semáforo, caja y tasa).
