@@ -54,6 +54,10 @@ Cuarto y último tema del bloque Funciones de 1.º Sociales: curso `batx1-gizart
 - Truco: el barrido de 9 juegos con todos sus niveles pasa de 45 s; se hace en dos o tres tandas.
 - Aviso (piezas prestadas): en árabe, el barrido marca la «y» de los ejes de los juegos de Ciencias (altura de Noto Sans Arabic).
 
-## En curso
+## Cierre
 
-- Fases 1–4 hechas. Falta el cierre: portada, diagnóstico y ejercicios a 375 px, hoja de euskera y nota final.
+- **2026-11-18:** 3372 tests, lint y build en verde; inventario OK (de verdad: 2 herramientas y 2 juegos propios más el detective, lo que eligió el dueño).
+- **Revisión a 375 px (eu, es, ar), con barridos de JS y capturas:** portada, las 15 lecciones con sus pasos abiertos, diagnóstico, práctica, retos, ejercicios con soluciones abiertas, las 5 herramientas antes y después de predecir, y los 9 juegos en cada nivel con una elección hecha. La carrera solo se vio al empezar.
+- **Hoja de euskera:** `hoja-revision.mjs batx1-gizarte-deribatuak … --herramientas marginal,profit --juegos produce,rates,detective,race,memory`, en la carpeta de notas compartidas (`hoja-euskera-deribatuak-batx1g.html`).
+- **Cambios respecto al menú elegido** (por quitar la trigonometría y por no haber curvatura en el libro): fuera «Monta la gráfica», «De la secante a la tangente» y «La gráfica de f′» de Ciencias; dentro la tasa de variación de 4.º aplicadas. «Empareja f y f′» va sin su tercer nivel.
+- **Para fusionar:** registro en `courses.ts` (línea de `derivadas` de `batx1-gizarte`), router y `paths.ts`.
